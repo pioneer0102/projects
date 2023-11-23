@@ -71,7 +71,7 @@ function SignInPage() {
           <img className="w-48" src="assets/images/logo/logo.svg" alt="logo" />
 
           <Typography className="mt-32 text-4xl font-extrabold tracking-tight leading-tight">
-            Sign in
+            Bag
           </Typography>
           <div className="flex items-baseline mt-2 font-medium">
             <Typography>Don't have an account?</Typography>
