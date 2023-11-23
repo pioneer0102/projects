@@ -32,22 +32,19 @@ const navigationConfig = [
   {
     id: 'Insights',
     title: 'Insights',
-    // subtitle: 'Insights',
     type: 'collapse',
     icon: 'heroicons-outline:check-circle',
     children: [
       {
         id: 'Insights.Channels',
         title: 'Channels',
-        type: 'item',
-        
+        type: 'item',        
         url: 'insights/channels',
       },
       {
         id: 'Insights.Categories',
         title: 'Categories',
-        type: 'item',
-        
+        type: 'item',        
         url: 'insights/categories',
       }
     ]
@@ -55,7 +52,6 @@ const navigationConfig = [
   {
     id: 'Settings',
     title: 'Settings',
-    // subtitle: 'Settings',
     translate: 'Settings',
     type: 'collapse',
     icon: 'heroicons-outline:check-circle',
@@ -64,26 +60,16 @@ const navigationConfig = [
         id: 'Settings.User Management',
         title: 'User Management',
         type: 'item',
-        icon: 'heroicons-outline:menu-alt-2',
         url: 'settings/userManagement',
       },
       {
         id: 'Insights.Categories',
         title: 'Categories',
         type: 'item',
-        icon: 'heroicons-outline:menu-alt-2',
         url: 'settings/categories',
       }
     ]
-  },
-  {
-    id: 'Admin',
-    title: 'Admin',
-    translate: 'Admin',
-    type: 'item',
-    icon: 'heroicons-outline:check-circle',
-    url: 'admin',
-  },
+  }
 ];
 
 export default navigationConfig;

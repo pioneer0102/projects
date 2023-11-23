@@ -14,13 +14,13 @@ const InsightsConfig = {
         {
             path: 'insights',
             element: <InsightsApp />,
-            childrean: [
+            children: [
                 {
                     path: 'channels',
                     element: <Channels />
                 },
                 {
-                    path: '/categories',
+                    path: 'categories',
                     element: <Categories />
                 }
             ]

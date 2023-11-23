@@ -12,7 +12,7 @@ const SettingsConfig = {
         {
             path: 'settings',
             element: <SettingsApp />,
-            childrean: [
+            children: [
                 {
                     path: 'userManagement',
                     element: <SettingsApp />

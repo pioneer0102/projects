@@ -42,11 +42,9 @@ function PartnersApp(props) {
                             className="flex flex-1 px-16"
                             disableUnderline
                             fullWidth
-                            // value={searchText}
                             inputProps={{
                                 'aria-label': 'Search',
                             }}
-                        // onChange={(ev) => dispatch(setContactsSearchText(ev))}
                         />
                     </Box>
                 </div>
