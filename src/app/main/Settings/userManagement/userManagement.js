@@ -10,8 +10,9 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Button from "@mui/material/Button";
 
-function Channels(props) {
+function UserManagement(props) {
     const headers = [
         {
             id: 'id',
@@ -21,31 +22,31 @@ function Channels(props) {
             sort: false,
         },
         {
-            id: 'channel',
+            id: 'customer',
             align: 'center',
             disablePadding: false,
-            label: 'Channel',
+            label: 'Customer',
             sort: true,
         },
         {
-            id: 'sale',
+            id: 'email',
             align: 'center',
             disablePadding: false,
-            label: 'Sale',
+            label: 'Email',
             sort: true,
         },
         {
-            id: 'order',
+            id: 'role',
             align: 'center',
             disablePadding: false,
-            label: 'Order',
+            label: 'Role',
             sort: true,
         },
         {
-            id: 'graphic',
+            id: 'action',
             align: 'center',
             disablePadding: false,
-            label: 'Graphic',
+            label: 'Action',
             sort: true,
         }
     ];
@@ -101,7 +102,28 @@ function Channels(props) {
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
             >
-                <Table className="simple w-full min-w-full">
+                <Button
+                    className="mx-8"
+                    variant="contained"
+                    color="secondary"
+                    sx={{ alignSelf: 'flex-end' }}
+                >
+                    Add User
+                </Button>
+                {/* <div className="flex">
+                    <div className="w-full">
+
+                    </div>
+                    <Button
+                        className="mx-8"
+                        variant="contained"
+                        color="secondary"
+                        sx = {{ flexShrink: 0}}
+                    >
+                        Add User
+                    </Button>
+                </div> */}
+                <Table className="simple w-full mt-16">
                     <TableHead>
                         <TableRow>
                             {headers.map((item, index) => (
@@ -128,4 +150,4 @@ function Channels(props) {
     )
 }
 
-export default Channels;
+export default UserManagement;

@@ -1,6 +1,5 @@
-import { lazy } from 'react';
-
-const SettingsApp = lazy(() => import('./SettingsApp'));
+import UserManagement from './userManagement/userManagement';
+import PosSettings from './posSettings/posSettings';
 
 const SettingsConfig = {
     settings: {
@@ -10,18 +9,12 @@ const SettingsConfig = {
     },
     routes: [
         {
-            path: 'settings',
-            element: <SettingsApp />,
-            childrean: [
-                {
-                    path: 'userManagement',
-                    element: <SettingsApp />
-                },
-                {
-                    path: 'categories',
-                    element: <SettingsApp />
-                }
-            ]
+            path: 'settings/userManagement',
+            element: <UserManagement />
+        },
+        {
+            path: 'settings/posSettings',
+            element: <PosSettings />
         }
     ]
 };

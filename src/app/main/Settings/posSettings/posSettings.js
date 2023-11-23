@@ -11,7 +11,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-function Channels(props) {
+function PosSettings(props) {
     const headers = [
         {
             id: 'id',
@@ -21,10 +21,10 @@ function Channels(props) {
             sort: false,
         },
         {
-            id: 'channel',
+            id: 'store',
             align: 'center',
             disablePadding: false,
-            label: 'Channel',
+            label: 'Store',
             sort: true,
         },
         {
@@ -35,17 +35,17 @@ function Channels(props) {
             sort: true,
         },
         {
-            id: 'order',
+            id: 'position',
             align: 'center',
             disablePadding: false,
-            label: 'Order',
+            label: 'Position',
             sort: true,
         },
         {
-            id: 'graphic',
+            id: 'hour',
             align: 'center',
             disablePadding: false,
-            label: 'Graphic',
+            label: 'Hour',
             sort: true,
         }
     ];
@@ -101,31 +101,31 @@ function Channels(props) {
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
             >
-                <Table className="simple w-full min-w-full">
-                    <TableHead>
-                        <TableRow>
-                            {headers.map((item, index) => (
-                                <TableCell
-                                    key={index}
-                                    align={item.align}
-                                    padding={item.disablePadding ? 'none' : 'normal'}
-                                >
-                                    <Typography
-                                        color="text.secondary"
-                                        className="font-semibold text-12 whitespace-nowrap"
+                    <Table className="simple w-full min-w-full">
+                        <TableHead>
+                            <TableRow>
+                                {headers.map((item, index) => (
+                                    <TableCell
+                                        key={index}
+                                        align={item.align}
+                                        padding={item.disablePadding ? 'none' : 'normal'}
                                     >
-                                        {item.label}
-                                    </Typography>
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
+                                        <Typography
+                                            color="text.secondary"
+                                            className="font-semibold text-12 whitespace-nowrap"
+                                        >
+                                            {item.label}
+                                        </Typography>
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
 
-                    <TableBody></TableBody>
-                </Table>
+                        <TableBody></TableBody>
+                    </Table>
             </Paper>
         </>
     )
 }
 
-export default Channels;
+export default PosSettings;

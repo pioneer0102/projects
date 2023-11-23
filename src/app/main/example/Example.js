@@ -2,7 +2,6 @@ import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import FusePageSimple from '@fuse/core/FusePageSimple';
 import DemoContent from '@fuse/core/DemoContent';
-import { useSelector } from 'react-redux';
 
 const Root = styled(FusePageSimple)(({ theme }) => ({
   '& .FusePageSimple-header': {
@@ -20,9 +19,6 @@ const Root = styled(FusePageSimple)(({ theme }) => ({
 function ExamplePage(props) {
   const { t } = useTranslation('examplePage');
 
-  const test = useSelector(({notificationPanel}) => notificationPanel.data.test);
-  console.log(test);
-
   return (
     <Root
       header={
@@ -34,12 +30,7 @@ function ExamplePage(props) {
         <div className="p-24">
           <h4>Content</h4>
           <br />
-          {
-            test ?
-            <p>loading</p>
-            :
-            <DemoContent />
-          }          
+          <DemoContent />
         </div>
       }
       scroll="content"

@@ -40,14 +40,12 @@ const navigationConfig = [
         id: 'Insights.Channels',
         title: 'Channels',
         type: 'item',
-        
         url: 'insights/channels',
       },
       {
         id: 'Insights.Categories',
         title: 'Categories',
         type: 'item',
-        
         url: 'insights/categories',
       }
     ]
@@ -64,15 +62,13 @@ const navigationConfig = [
         id: 'Settings.User Management',
         title: 'User Management',
         type: 'item',
-        icon: 'heroicons-outline:menu-alt-2',
         url: 'settings/userManagement',
       },
       {
-        id: 'Insights.Categories',
-        title: 'Categories',
+        id: 'Insights.posSettings',
+        title: 'POS Settings',
         type: 'item',
-        icon: 'heroicons-outline:menu-alt-2',
-        url: 'settings/categories',
+        url: 'settings/posSettings',
       }
     ]
   },
