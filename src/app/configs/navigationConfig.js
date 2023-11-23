@@ -12,28 +12,28 @@ const navigationConfig = [
     id: 'Partners',
     title: 'Partners',
     type: 'item',
-    icon: 'heroicons-outline:check-circle',
+    icon: 'heroicons-outline:user-group',
     url: 'partners',
   },
   {
     id: 'Inventory Manager',
     title: 'Inventory Manager',
     type: 'item',
-    icon: 'heroicons-outline:check-circle',
+    icon: 'heroicons-outline:shopping-cart',
     url: 'inventoryManager',
   },
   {
     id: 'Orders',
     title: 'Orders',
     type: 'item',
-    icon: 'heroicons-outline:check-circle',
+    icon: 'heroicons-outline:truck',
     url: '/orders',
   },
   {
     id: 'Insights',
     title: 'Insights',
     type: 'collapse',
-    icon: 'heroicons-outline:check-circle',
+    icon: 'heroicons-outline:chart-bar',
     children: [
       {
         id: 'Insights.Channels',
@@ -52,9 +52,8 @@ const navigationConfig = [
   {
     id: 'Settings',
     title: 'Settings',
-    translate: 'Settings',
     type: 'collapse',
-    icon: 'heroicons-outline:check-circle',
+    icon: 'heroicons-outline:cog',
     children: [
       {
         id: 'Settings.User Management',
