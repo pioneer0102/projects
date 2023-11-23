@@ -34,7 +34,9 @@ export const addNotification = createAsyncThunk(
 
 const notificationsAdapter = createEntityAdapter({});
 
-const initialState = notificationsAdapter.upsertMany(notificationsAdapter.getInitialState(), []);
+const initialState = notificationsAdapter.upsertMany(notificationsAdapter.getInitialState({
+  test: false
+}), []);
 
 export const { selectAll: selectNotifications, selectById: selectNotificationsById } =
   notificationsAdapter.getSelectors((state) => state.notificationPanel.data);
@@ -44,11 +46,16 @@ const dataSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
+    [getNotifications.pending]: (state, action) => {
+      state.test = true;
+    },
     [dismissItem.fulfilled]: (state, action) =>
       notificationsAdapter.removeOne(state, action.payload),
     [dismissAll.fulfilled]: (state, action) => notificationsAdapter.removeAll(state),
-    [getNotifications.fulfilled]: (state, action) =>
-      notificationsAdapter.addMany(state, action.payload),
+    [getNotifications.fulfilled]: (state, action) => {
+      state.test = false;
+      notificationsAdapter.addMany(state, action.payload);
+    },      
     [addNotification.fulfilled]: (state, action) =>
       notificationsAdapter.addOne(state, action.payload),
   },

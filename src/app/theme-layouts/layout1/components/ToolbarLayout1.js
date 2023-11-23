@@ -58,13 +58,13 @@ function ToolbarLayout1(props) {
               </>
             )}
 
-            <Hidden lgDown>
+            {/* <Hidden lgDown>
               <NavigationShortcuts />
-            </Hidden>
+            </Hidden> */}
           </div>
 
           <div className="flex items-center px-8 h-full overflow-x-auto">
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher />
 
             <AdjustFontSize />
 
@@ -78,7 +78,7 @@ function ToolbarLayout1(props) {
 
             <QuickPanelToggleButton />
 
-            <NotificationPanelToggleButton />
+            <NotificationPanelToggleButton /> */}
 
             <UserMenu />
           </div>

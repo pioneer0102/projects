@@ -47,13 +47,13 @@ function NavbarStyle1Content(props) {
         className="flex flex-1 flex-col min-h-0"
         option={{ suppressScrollX: true, wheelPropagation: false }}
       >
-        <UserNavbarHeader />
+        {/* <UserNavbarHeader /> */}
 
         <Navigation layout="vertical" />
 
-        <div className="flex flex-0 items-center justify-center py-48 opacity-10">
+        {/* <div className="flex flex-0 items-center justify-center py-48 opacity-10">
           <img className="w-full max-w-64" src="assets/images/logo/logo.svg" alt="footer logo" />
-        </div>
+        </div> */}
       </StyledContent>
     </Root>
   );

@@ -10,7 +10,7 @@ i18next.addResourceBundle('tr', 'examplePage', tr);
 i18next.addResourceBundle('ar', 'examplePage', ar);
 
 const ExampleConfig = {
-  settings: {
+settings: {
     layout: {
       config: {},
     },

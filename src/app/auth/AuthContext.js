@@ -10,7 +10,7 @@ const AuthContext = React.createContext();
 
 function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(undefined);
-  const [waitAuthCheck, setWaitAuthCheck] = useState(true);
+  const [waitAuthCheck, setWaitAuthCheck] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function AuthProvider({ children }) {
 
     function success(user, message) {
       if (message) {
-        dispatch(showMessage({ message }));
+        dispatch(showMessage({ message, variant: "success" }));
       }
 
       Promise.all([
@@ -68,7 +68,7 @@ function AuthProvider({ children }) {
 
     function pass(message) {
       if (message) {
-        dispatch(showMessage({ message }));
+        dispatch(showMessage({ message, variant: "success" }));
       }
 
       setWaitAuthCheck(false);
