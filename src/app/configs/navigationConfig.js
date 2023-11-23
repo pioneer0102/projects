@@ -32,14 +32,13 @@ const navigationConfig = [
   {
     id: 'Insights',
     title: 'Insights',
-    // subtitle: 'Insights',
     type: 'collapse',
     icon: 'heroicons-outline:check-circle',
     children: [
       {
         id: 'Insights.Channels',
         title: 'Channels',
-        type: 'item',
+        type: 'item',        
         url: 'insights/channels',
       },
       {
@@ -53,7 +52,6 @@ const navigationConfig = [
   {
     id: 'Settings',
     title: 'Settings',
-    // subtitle: 'Settings',
     translate: 'Settings',
     type: 'collapse',
     icon: 'heroicons-outline:check-circle',
@@ -71,15 +69,7 @@ const navigationConfig = [
         url: 'settings/posSettings',
       }
     ]
-  },
-  {
-    id: 'Admin',
-    title: 'Admin',
-    translate: 'Admin',
-    type: 'item',
-    icon: 'heroicons-outline:check-circle',
-    url: 'admin',
-  },
+  }
 ];
 
 export default navigationConfig;

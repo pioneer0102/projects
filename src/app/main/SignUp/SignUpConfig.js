@@ -1,16 +1,15 @@
-import { lazy } from 'react';
+import SignUpPage from './SignUpPage';
+import authRoles from '../../auth/authRoles';
 
-const PartnersApp = lazy(() => import('./PartnersApp'));
-
-const PartnersConfig = {
+const SignUpConfig = {
     settings: {
         layout: {
             config: {
                 navbar: {
-                    display: true,
+                    display: false,
                 },
                 toolbar: {
-                    display: true,
+                    display: false,
                 },
                 footer: {
                     display: false,
@@ -24,12 +23,13 @@ const PartnersConfig = {
             },
         },
     },
+    auth: authRoles.onlyGuest,
     routes: [
         {
-            path: 'partners',
-            element: <PartnersApp />
-        }
-    ]
+            path: 'sign-up',
+            element: <SignUpPage />,
+        },
+    ],
 };
 
-export default PartnersConfig;
+export default SignUpConfig;

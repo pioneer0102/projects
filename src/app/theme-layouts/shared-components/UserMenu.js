@@ -6,12 +6,14 @@ import MenuItem from '@mui/material/MenuItem';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { selectUser } from 'app/store/userSlice';
+import JwtService from 'src/app/auth/services/jwtService';
 
 function UserMenu(props) {
+  const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
   const [userMenu, setUserMenu] = useState(null);
@@ -95,8 +97,8 @@ function UserMenu(props) {
             </MenuItem>
             <MenuItem
               component={NavLink}
-              to="/sign-out"
               onClick={() => {
+                JwtService.logout();
                 userMenuClose();
               }}
             >
