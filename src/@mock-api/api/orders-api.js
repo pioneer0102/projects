@@ -33,7 +33,6 @@ mock.onPost('/api/getorders').reply(({ data }) => {
     }
     else {
         const filteredData = ordersDB.filter((item) => {
-            console.log(priceRange[subtotal].min);
             return (
                 (searchText === '' || item.customer.toLowerCase().startsWith(searchText.toLowerCase())) &&
                 (subtotal === '' || ((priceRange[subtotal].min <= item.subtotal) && (item.subtotal <= priceRange[subtotal].max))) &&

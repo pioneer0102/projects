@@ -36,7 +36,16 @@ function OrdersSearchFilter(props) {
 
     useEffect(() => {
         dispatch(getOrders());
-    }, [subtotal, searchText, channel, status]);
+    }, [subtotal]);
+    useEffect(() => {
+        dispatch(getOrders());
+    }, [searchText]);
+    useEffect(() => {
+        dispatch(getOrders());
+    }, [channel]);
+    useEffect(() => {
+        dispatch(getOrders());
+    }, [status]);
 
     return (
         <>
