@@ -26,7 +26,7 @@ const navigationConfig = [
     id: 'Orders',
     title: 'Orders',
     type: 'item',
-    icon: 'heroicons-outline:truck',
+    icon: 'heroicons-outline:pencil-alt',
     url: '/orders',
   },
   {
