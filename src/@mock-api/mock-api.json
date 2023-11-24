@@ -29,7 +29,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "400",
             "channel": "DoorDash",
             "status": "completed"
           },
@@ -39,7 +39,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "10000",
             "channel": "DoorDash",
             "status": "pending"
           },
@@ -49,7 +49,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "3000",
             "channel": "DoorDash",
             "status": "rejected"
           },
@@ -59,7 +59,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "6000",
             "channel": "DoorDash",
             "status": "completed"
           },
@@ -79,7 +79,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "50",
             "channel": "DoorDash",
             "status": "pending"
           },
@@ -99,7 +99,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "20",
             "channel": "DoorDash",
             "status": "completed"
           },
@@ -119,7 +119,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "200",
             "channel": "Uber",
             "status": "pending"
           },
@@ -139,7 +139,7 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
+            "subtotal": "10000",
             "channel": "GrubHub",
             "status": "completed"
           }

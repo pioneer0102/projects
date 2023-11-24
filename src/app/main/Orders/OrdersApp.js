@@ -1,8 +1,8 @@
-import withReducer from "app/store/withReducer";
+import withReducer from 'app/store/withReducer';
 import { useDeepCompareEffect } from "@fuse/hooks";
-import { useDispatch } from "react-redux";
-import reducer from "./store";
-import { getOrders } from "./store/ordersSlice";
+import { useDispatch, useSelector } from "react-redux";
+import reducer from './store';
+import { getOrders, getAllSize } from "./store/ordersSlice";
 import OrdersTable from "./OrdersTable";
 import OrdersSearchFilter from "./OrdersSearchFilter";
 
@@ -11,6 +11,7 @@ function OrdersApp(props) {
 
     useDeepCompareEffect(() => {
         dispatch(getOrders());
+        dispatch(getAllSize());
     }, [dispatch]);
 
     return (

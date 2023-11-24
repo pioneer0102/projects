@@ -8,9 +8,11 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDeepCompareEffect } from "@fuse/hooks";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useDispatch, useSelector } from 'react-redux';
+import { getOrders } from "./store/ordersSlice";
 
 import { selectSearchText, selectSubtotal, selectChannel, selectStatus } from './store/ordersSlice';
 import { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText } from './store/ordersSlice';
@@ -18,26 +20,28 @@ import { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText }
 function OrdersSearchFilter(props) {
     const dispatch = useDispatch();
 
+    // useDeepCompareEffect(() => {
+    //     dispatch(getOrders());
+    // }, [dispatch]);
+
     const [date, setDate] = useState();
     const searchText = useSelector(selectSearchText);
     const subtotal = useSelector(selectSubtotal);
     const channel = useSelector(selectChannel);
     const status = useSelector(selectStatus);
 
-    console.log(subtotal);
-    if (subtotal == undefined) {
-        console.log(sdafasdfsafddfs);
-    }
-
     const handleSearchText = (event) => {
-        console.log(event.target.value)
         dispatch(setOrderSearchText(event.target.value));
     }
+
+    useEffect(() => {
+        dispatch(getOrders());
+    }, [subtotal, searchText, channel, status]);
 
     return (
         <>
             <Paper
-                className="p-24 sm:p-32 border-b-1 mt-32 mx-32"
+                className="px-48 py-32 border-b-1 mt-32 mx-32"
                 component={motion.div}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}

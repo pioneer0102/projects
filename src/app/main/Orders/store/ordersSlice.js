@@ -1,32 +1,47 @@
 import {
     createAsyncThunk,
     createEntityAdapter,
-    createSelector,
     createSlice,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const getOrders = createAsyncThunk(
     'ordersApp/orders/getOrders',
-    async () => {
-
+    async (params, {getState}) => {
+        const state = getState().ordersApp.orders;
         // console.log(searchData.pageNumber);
         const searchData = {
-            searchText: selectSearchText,
-            subtotal: selectSubtotal,
-            channel: selectChannel,
-            status: selectStatus,
-            pageNumber: selectPageNumber,
-            pageSize: selectPageSize,
+            searchText: state.searchText,
+            subtotal: state.subtotal,
+            channel: state.channel,
+            status: state.status,
+            pageNumber:  state.pageNumber,
+            pageSize: state.pageSize,
         };
-        // const response = await axios.get(`/api/getorders?pageNumber=${pageNumber}&search=${searchText}&subtotal=${subtotal}&channel=${channel}&status=${status}`);
+        
         const response = await axios.post('/api/getorders', searchData);
+        // const response = await axios.get(`/api/getorders?pageNumber=${pageNumber}&search=${searchText}&subtotal=${subtotal}&channel=${channel}&status=${status}`);
 
         const data = await response.data;
 
         return { data };
     }
 );
+
+export const getAllSize = createAsyncThunk(
+    'ordersApp/orders/getAllSize',
+    async (params, {getState}) => {
+
+        const response = await axios.get('/api/getsize');
+        // const response = await axios.get(`/api/getorders?pageNumber=${pageNumber}&search=${searchText}&subtotal=${subtotal}&channel=${channel}&status=${status}`);
+
+        const data = await response.data;
+
+        return data;
+    }
+)
+
+const ordersAdapter = createEntityAdapter({});
 
 export const selectSearchText = ({ ordersApp }) => ordersApp.orders.searchText;
 export const selectSubtotal = ({ ordersApp }) => ordersApp.orders.subtotal;
@@ -35,58 +50,57 @@ export const selectStatus = ({ ordersApp }) => ordersApp.orders.status;
 export const selectPageNumber = ({ ordersApp }) => ordersApp.orders.pageNumber;
 export const selectPageSize = ({ ordersApp }) => ordersApp.orders.pageSize;
 
-const ordersAdapter = createEntityAdapter({});
+export const selectDBsize = ({ ordersApp }) => ordersApp.orders.dbSize;
 
 export const {
     selectAll: selectOrders
 } = ordersAdapter.getSelectors((state) => state.ordersApp.orders);
 
+
 const ordersSlice = createSlice({
-    name: "ordersApp/orders",
+    name: 'ordersApp/orders',
     initialState: ordersAdapter.getInitialState({
         subtotal: '',
         channel: '',
         status: '',
         searchText: '',
         pageNumber: 0,
-        pageSize: 10
+        pageSize: 10,
+        dbSize: 0,
     }),
-    reduers: {
-        setOrderSubtotal: {
-            reducer: (state, action) => {
-                state.subtotal = action.payload;
-            }
+    reducers: {
+        setOrderSubtotal: (state, action) => {
+            state.subtotal = action.payload;
         },
-        setOrderChannel: {
-            reducer: (state, action) => {
-                state.channel = action.payload;
-            }
+        setOrderChannel: (state, action) => {
+            state.channel = action.payload;
+
         },
-        setOrderStatus: {
-            reducer: (state, action) => {
-                state.status = action.payload;
-            }
+        setOrderStatus: (state, action) => {
+            state.status = action.payload;
+
         },
         setOrderSearchText: (state, action) => {
             state.searchText = action.payload;
-            console.log(state.searchText)
         },
-        setPagenumber: {
-            reducer: (state, action) => {
-                state.pageNumber = action.payload;
-            }
+        setPagenumber: (state, action) => {
+            state.pageNumber = action.payload;
+
         },
-        setPagesize: {
-            reducer: (state, action) => {
-                state.pageSize = action.payload;
-            }
+        setPagesize: (state, action) => {
+            state.pageSize = action.payload;
+
         }
     },
-    extraReducers: {
-        [getOrders.fulfilled]: (state, action) => {
+    extraReducers: (builder) => {
+        builder.addCase(getOrders.fulfilled, (state, action) => {
             const { data } = action.payload;
+            console.log(data);
             ordersAdapter.setAll(state, data);
-        }
+        });
+        builder.addCase(getAllSize.fulfilled, (state, action) => {
+            state.dbSize = action.payload;
+        })
     }
 });
 

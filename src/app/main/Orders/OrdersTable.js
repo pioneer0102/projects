@@ -13,14 +13,20 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import FuseSplashScreen from "@fuse/core/FuseSplashScreen";
 import { format } from "date-fns";
 import IconButton from '@mui/material/IconButton';
+import { Button } from "@mui/material";
 import { MoreHoriz } from "@mui/icons-material";
 import { TablePagination } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from 'clsx';
 import FuseScrollbars from "@fuse/core/FuseScrollbars";
 import { setPagenumber, setPagesize } from "./store/ordersSlice";
 import { useDispatch } from 'react-redux';
-import { selectPageSize, selectPageNumber } from "./store/ordersSlice";
+import { selectPageSize, selectPageNumber, selectDBsize } from "./store/ordersSlice";
+import { getOrders } from "./store/ordersSlice";
+import { Popover } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+
 
 const headerColor = red[500];
 
@@ -88,6 +94,12 @@ function OrdersTable(props) {
     const allOrders = useSelector(selectOrders);
     const page = useSelector(selectPageNumber);
     const rowsPerPage = useSelector(selectPageSize);
+    const dbSize = useSelector(selectDBsize);
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    useEffect(() => {
+        dispatch(getOrders());
+    }, [page, rowsPerPage]);
 
     const status = ["Completed", "Pending", "Rejected"];
 
@@ -113,10 +125,21 @@ function OrdersTable(props) {
         )
     }
 
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = anchorEl;
+    const id = open ? 'simple-popover' : undefined;
+
     return (
         <>
             <Paper
-                className="flex flex-col p-24 sm:p-32 border-b-1 my-32 mx-32"
+                className="flex flex-col p-8 border-b-1 my-32 mx-32"
                 component={motion.div}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
@@ -143,7 +166,7 @@ function OrdersTable(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {allOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            {allOrders
                                 .map((item, index) => {
                                     return (
                                         <TableRow key={index}>
@@ -205,20 +228,40 @@ function OrdersTable(props) {
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="center">
-                                                <IconButton>
+                                                <IconButton aria-describedby={id} onClick={handleClick}>
                                                     <MoreHoriz />
                                                 </IconButton>
+                                                <Popover
+                                                    id={id}
+                                                    open={open}
+                                                    anchorEl={anchorEl}
+                                                    onClose={handleClose}
+                                                    anchorOrigin={{
+                                                        vertical: 'bottom',
+                                                        horizontal: 'left',
+                                                    }}
+                                                >
+                                                    <Paper className="flex flex-col" sx={{p:1}}>
+                                                        <Button className = "text-blue-500" onClick = {handleClose} startIcon={<EditIcon />}>
+                                                            Replace
+                                                        </Button>
+                                                        <Button className = "text-blue-500" onClick = {handleClose} startIcon={<DeleteIcon />}>
+                                                            Cancel
+                                                        </Button>
+                                                    </Paper>
+                                                </Popover>
                                             </TableCell>
                                         </TableRow>
                                     )
-                                })}
+                                })
+                            }
                         </TableBody>
                     </Table>
                     <TablePagination
                         className="shrink-0 border-t-1"
                         component="div"
                         // count={filteredData.length}
-                        count={allOrders.length}
+                        count={dbSize}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         backIconButtonProps={{
@@ -227,8 +270,12 @@ function OrdersTable(props) {
                         nextIconButtonProps={{
                             'aria-label': 'Next Page',
                         }}
-                        onPageChange={(event) => dispatch(setPagesize(event.target.value))}
-                        onRowsPerPageChange={(event) => dispatch(setPagenumber(event.target.value))}
+                        onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
+                        onRowsPerPageChange={(event) => {
+                            dispatch(setPagesize(parseInt(event.target.value, 10)));
+                            dispatch(setPagenumber(0));
+                        }
+                        }
                     />
                 </FuseScrollbars>
             </Paper>
