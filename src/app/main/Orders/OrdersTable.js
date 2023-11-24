@@ -14,7 +14,7 @@ import FuseSplashScreen from "@fuse/core/FuseSplashScreen";
 import { format } from "date-fns";
 import IconButton from '@mui/material/IconButton';
 import { Button } from "@mui/material";
-import { MoreHoriz } from "@mui/icons-material";
+import { MoreHoriz, NoEncryption } from "@mui/icons-material";
 import { TablePagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import clsx from 'clsx';
@@ -23,12 +23,20 @@ import { setPagenumber, setPagesize } from "./store/ordersSlice";
 import { useDispatch } from 'react-redux';
 import { selectPageSize, selectPageNumber, selectDBsize } from "./store/ordersSlice";
 import { getOrders } from "./store/ordersSlice";
-import { Popover } from "@mui/material";
+import Popover from "@mui/material/Popover";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from "@mui/icons-material/Edit";
-
+import { makeStyles } from "@mui/styles";
+import {Box} from "@mui/material";
 
 const headerColor = red[500];
+
+const useStyles = makeStyles({
+    myCustomClass: {
+        boxShadow: 'none'
+    }
+
+})
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -96,12 +104,17 @@ function OrdersTable(props) {
     const rowsPerPage = useSelector(selectPageSize);
     const dbSize = useSelector(selectDBsize);
     const [anchorEl, setAnchorEl] = useState(null);
+    const classes = useStyles();
 
     useEffect(() => {
         dispatch(getOrders());
     }, [page, rowsPerPage]);
 
     const status = ["Completed", "Pending", "Rejected"];
+    
+    const popoverStyle = {
+        boxShadow: 'none',
+      };
 
     // const tableStyles = makeStyles({
     //     tableBody: {
@@ -133,7 +146,7 @@ function OrdersTable(props) {
         setAnchorEl(null);
     };
 
-    const open = anchorEl;
+    const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
     return (
@@ -231,7 +244,7 @@ function OrdersTable(props) {
                                                 <IconButton aria-describedby={id} onClick={handleClick}>
                                                     <MoreHoriz />
                                                 </IconButton>
-                                                <Popover
+                                                {/* <Popover
                                                     id={id}
                                                     open={open}
                                                     anchorEl={anchorEl}
@@ -240,16 +253,17 @@ function OrdersTable(props) {
                                                         vertical: 'bottom',
                                                         horizontal: 'left',
                                                     }}
+                                                    
                                                 >
-                                                    <Paper className="flex flex-col" sx={{p:1}}>
-                                                        <Button className = "text-blue-500" onClick = {handleClose} startIcon={<EditIcon />}>
+                                                    <Box className='flex flex-col' sx={{ p: 1 }}>
+                                                        <Button className="text-blue-500" onClick={handleClose} startIcon={<EditIcon />}>
                                                             Replace
                                                         </Button>
-                                                        <Button className = "text-blue-500" onClick = {handleClose} startIcon={<DeleteIcon />}>
+                                                        <Button className="text-blue-500" onClick={handleClose} startIcon={<DeleteIcon />}>
                                                             Cancel
                                                         </Button>
-                                                    </Paper>
-                                                </Popover>
+                                                    </Box>
+                                                </Popover> */}
                                             </TableCell>
                                         </TableRow>
                                     )
