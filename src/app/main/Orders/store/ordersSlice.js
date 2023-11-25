@@ -18,12 +18,8 @@ export const getOrders = createAsyncThunk(
             pageNumber:  state.pageNumber,
             pageSize: state.pageSize,
         };
-        
         const response = await axios.post('/api/getorders', searchData);
-        // const response = await axios.get(`/api/getorders?pageNumber=${pageNumber}&search=${searchText}&subtotal=${subtotal}&channel=${channel}&status=${status}`);
-
         const data = await response.data;
-
         return { data };
     }
 );
@@ -41,7 +37,17 @@ export const getAllSize = createAsyncThunk(
     }
 )
 
+export const getItem = createAsyncThunk(
+    'orderApp/orders/getItems',
+    async (items, {dispatch, get}) => {
+        const response = await axios.post('/api/getItem', items);
+        const data = await response.data;
+        return data;
+    }
+)
+
 const ordersAdapter = createEntityAdapter({});
+const itemsAdapter = createEntityAdapter({});
 
 export const selectSearchText = ({ ordersApp }) => ordersApp.orders.searchText;
 export const selectSubtotal = ({ ordersApp }) => ordersApp.orders.subtotal;
@@ -56,6 +62,7 @@ export const {
     selectAll: selectOrders
 } = ordersAdapter.getSelectors((state) => state.ordersApp.orders);
 
+export const selectItems = ({ ordersApp }) => ordersApp.orders.itemList;
 
 const ordersSlice = createSlice({
     name: 'ordersApp/orders',
@@ -67,6 +74,7 @@ const ordersSlice = createSlice({
         pageNumber: 0,
         pageSize: 10,
         dbSize: 0,
+        itemList: []
     }),
     reducers: {
         setOrderSubtotal: (state, action) => {
@@ -100,6 +108,9 @@ const ordersSlice = createSlice({
         });
         builder.addCase(getAllSize.fulfilled, (state, action) => {
             state.dbSize = action.payload;
+        });
+        builder.addCase(getItem.fulfilled, (state, action) => {
+            state.itemList = action.payload;
         })
     }
 });

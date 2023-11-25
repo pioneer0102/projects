@@ -4,6 +4,8 @@ import mockApi from '../mock-api.json';
 import mock from '../mock';
 
 const ordersDB = mockApi.database.examples.orders.value;
+const itemDB = mockApi.database.examples.items.value;
+
 const priceRange = [
     { min: 10, max: 100 },
     { min: 100, max: 500 },
@@ -22,8 +24,6 @@ mock.onPost('/api/getorders').reply(({ data }) => {
 
     const pagenumber = parseInt(pageNumber);
     const pagesize = parseInt(pageSize);
-
-    // const pagedData = ordersDB.slice(startIndex, endIndex);
 
     if (searchText === '' && subtotal === '' && channel === '' && status === '') {
         const startIndex = pagenumber * pagesize;
@@ -45,34 +45,15 @@ mock.onPost('/api/getorders').reply(({ data }) => {
         const pagedData = filteredData.slice(startIndex, endIndex);
         return [200, pagedData];
     }
-    // else{
-    //     const filteredData = data.filter(item => {
-    //         if (item.channel !== (channel || item.channel)) {
-    //             return false;
-    //         }
-    //         if (item.status !== (status || item.status)) {
-    //             return false;
-    //         }
-    //         if (item.subtotal !== (subtotal || item.subtotal)) {
-    //             return false;
-    //         }
-    //         if (item.customer.toLowerCase() !== (searchText || item.customer.toLowerCase())) {
-    //             return false;
-    //         }
-    //         return true;
-    //     });
-    //     // const filteredData = ordersDB.filter((item)=> item.channel == "DoorDash");
-    //     const pagedData = filteredData.slice(startIndex, endIndex);
-    //     return [200, pagedData];
-    // }
-    // const filteredData = data.filter((item) => {
-    //     return (
-    //         (searchText === '' || item.customer.toLowerCase().includes(searchText.toLowerCase())) &&
-    //         (subtotal === '' || item.subtotal === subtotal) &&
-    //         (channel === '' || item.channel === channel) &&
-    //         (status === '' || item.status === status)
-    //     );
-    // });
-    // const pagedData = filteredData.slice(startIndex, endIndex);
-    // return [200, pagedData];
+})
+
+mock.onPost('/api/getItem').reply(({data}) => {
+    const itemList = JSON.parse(data);
+    const resultArray = [];
+    itemList.map((item) => {
+        const oneItem = _.find(itemDB, {id: item.id});
+        oneItem.quantity = item.quantity;
+        oneItem && resultArray.push(oneItem);
+    })
+    return [200, resultArray];
 })

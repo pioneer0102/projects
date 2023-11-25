@@ -29,9 +29,23 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "400",
+            "subtotal": "3500",
             "channel": "DoorDash",
-            "status": "completed"
+            "status": "completed",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              }
+            ]
           },
           {
             "id": 2,
@@ -39,9 +53,19 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "10000",
+            "subtotal": "6000",
             "channel": "DoorDash",
-            "status": "pending"
+            "status": "pending",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
           },
           {
             "id": 3,
@@ -49,99 +73,66 @@
             "date": "March 6, 2022",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "3000",
+            "subtotal": "8500",
             "channel": "DoorDash",
-            "status": "rejected"
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          }
+        ]
+      },
+      "items": {
+        "value": [
+          {
+            "id": "1",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Handphone",
+            "price": "200",
+            "category": "Electronic"
           },
           {
-            "id": 4,
-            "customer": "Bree Kilday",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "6000",
-            "channel": "DoorDash",
-            "status": "completed"
+            "id": "2",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Laptop",
+            "price": "100",
+            "category": "Electronic"
           },
           {
-            "id": 5,
-            "customer": "John Doe",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
-            "channel": "DoorDash",
-            "status": "completed"
+            "id": "3",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Coat",
+            "price": "400",
+            "category": "Clothes"
           },
           {
-            "id": 6,
-            "customer": "Brokle Myles",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "50",
-            "channel": "DoorDash",
-            "status": "pending"
+            "id": "4",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Watch",
+            "price": "1000",
+            "category": "Accessory"
           },
           {
-            "id": 7,
-            "customer": "Bertha Biner",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
-            "channel": "DoorDash",
-            "status": "rejected"
-          },
-          {
-            "id": 8,
-            "customer": "Bree Kilday",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "20",
-            "channel": "DoorDash",
-            "status": "completed"
-          },
-          {
-            "id": 9,
-            "customer": "John Doe",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "5000",
-            "channel": "GrubHub",
-            "status": "completed"
-          },
-          {
-            "id": 10,
-            "customer": "Brokle Myles",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "200",
-            "channel": "Uber",
-            "status": "pending"
-          },
-          {
-            "id": 11,
-            "customer": "Bertha Biner",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "1000",
-            "channel": "DoorDash",
-            "status": "rejected"
-          },
-          {
-            "id": 12,
-            "customer": "Bree Kilday",
-            "date": "March 6, 2022",
-            "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "10000",
-            "channel": "GrubHub",
-            "status": "completed"
+            "id": "5",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Jacket",
+            "price": "500",
+            "category": "Clothes"
           }
         ]
       }
