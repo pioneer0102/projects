@@ -125,7 +125,7 @@ function PosSettings(props) {
                     </Table>
             </Paper>
         </>
-    )
+    );
 }
 
 export default PosSettings;

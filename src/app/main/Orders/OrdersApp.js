@@ -26,7 +26,7 @@ function OrdersApp(props) {
                 <OrdersTable />
             </QueryClientProvider >
         </>
-    )
+    );
 }
 
 export default withReducer('ordersApp', reducer)(OrdersApp);

@@ -26,12 +26,12 @@ export const getOrders = createAsyncThunk(
 
 export const getItem = createAsyncThunk(
     'orderApp/orders/getItems',
-    async (item, {dispatch, get}) => {
-        const response = await axios.post('/api/getItem', item);
+    async (id, {dispatch, get}) => {
+        const response = await axios.get('/api/getItem', {id: id});
         const data = await response.data;
         return data;
     }
-)
+);
 
 const ordersAdapter = createEntityAdapter({});
 const itemsAdapter = createEntityAdapter({});
@@ -98,7 +98,7 @@ const ordersSlice = createSlice({
         builder.addCase(getItem.fulfilled, (state, action) => {
             state.detail = action.payload.detail;
             state.customer = action.payload.customer;
-        })
+        });
     }
 });
 

@@ -47,7 +47,7 @@ const headerCustomer = [
         label: 'Status',
         sort: true,
     },
-]
+];
 
 const headers = [
     // {
@@ -103,7 +103,7 @@ function OrderDetail(props) {
                 variant="contained"
                 color="secondary"
                 sx={{ alignSelf: 'flex-end', borderRadius: 1, display: 'inline' }}
-                onClick={() => { history.push('/orders') }}
+                onClick={() => { history.push('/orders'); }}
             >
                 Back
             </Button>
@@ -291,7 +291,7 @@ function OrderDetail(props) {
 
                                                 </TableCell>
                                             </TableRow>
-                                        )
+                                        );
                                     })}
                                 <TableRow>
                                     <TableCell align="left">
@@ -321,7 +321,7 @@ function OrderDetail(props) {
             </div >
 
         </>
-    )
+    );
 }
 
 export default OrderDetail;

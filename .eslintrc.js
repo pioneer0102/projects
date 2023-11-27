@@ -29,5 +29,11 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "semi": ["error", "always"],
+        "no-console": "warn",
+        "no-unsed-vars": "error",
+        "prefer-const": "error",
+        "eqeqeq": "off",
+        "curly": "error",
     }
 }

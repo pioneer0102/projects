@@ -50,7 +50,7 @@ function PartnersApp(props) {
                 </div>
             </Paper>
         </>
-    )
+    );
 }
 
 export default PartnersApp;

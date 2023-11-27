@@ -3,7 +3,7 @@ function SettingsApp(props) {
         <>
             <p>SettingsApp</p>
         </>
-    )
+    );
 }
 
 export default SettingsApp;

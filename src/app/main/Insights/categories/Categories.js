@@ -125,7 +125,7 @@ function Categories(props) {
                 </Table>
             </Paper>
         </>
-    )
+    );
 }
 
 export default Categories;

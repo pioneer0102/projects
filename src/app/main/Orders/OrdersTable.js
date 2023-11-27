@@ -24,6 +24,7 @@ import { selectOrders, selectPageSize, selectPageNumber, selectDBsize, selectIte
 import { getOrders, getItem } from "./store/ordersSlice";
 import Popover from "@mui/material/Popover";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ArrowBack } from "@mui/icons-material";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from '@mui/icons-material/Close';
 import { makeStyles } from "@mui/styles";
@@ -114,7 +115,7 @@ const fetchMyData = async (searchData) => {
     const response = await axios.post('/api/getorders', searchData);
     // const data = await response.json();
     return response.data;
-}
+};
 
 function OrdersTable(props) {
     const dispatch = useDispatch();
@@ -147,16 +148,16 @@ function OrdersTable(props) {
     const [open, setOpen] = useState(false);
 
     const handleDialogOpen = (item) => {
-        dispatch(getItem(item));
+        dispatch(getItem(item.id));
         const url = item.id;
-        history.push('/orders/${url}')
-    }
+        history.push('/orders/${url}');
+    };
 
     const handleDialogClose = () => {
         setOpen(false);
-    }
+    };
 
-    const descriptionElementRef = useRef(null)
+    const descriptionElementRef = useRef(null);
 
     useEffect(() => {
         if (open) {
@@ -165,7 +166,7 @@ function OrdersTable(props) {
                 descriptionElement.focus();
             }
         }
-    })
+    });
 
     // useEffect(() => {
     //     const searchData = {
@@ -187,7 +188,7 @@ function OrdersTable(props) {
 
     // case: empty Orders
     if (allOrders == null) {
-        return <FuseSplashScreen />
+        return <FuseSplashScreen />;
     }
 
     if (allOrders.pagedData.length === 0) {
@@ -197,7 +198,7 @@ function OrdersTable(props) {
                     There are no Orders!
                 </Typography>
             </div>
-        )
+        );
     }
 
     // Popover constants
@@ -353,14 +354,14 @@ function OrdersTable(props) {
                                                                 event.stopPropagation();
                                                                 handleClose();
                                                             }}
-                                                            startIcon={<DeleteIcon />}>
+                                                            startIcon={<ArrowBack />}>
                                                             Cancel
                                                         </Button>
                                                     </Box>
                                                 </Popover>
                                             </TableCell>
                                         </TableRow>
-                                    )
+                                    );
                                 })
                             }
                         </TableBody>
@@ -400,7 +401,7 @@ function OrdersTable(props) {
                 </FuseScrollbars>
             </Paper>
         </>
-    )
+    );
 }
 
 export default OrdersTable;

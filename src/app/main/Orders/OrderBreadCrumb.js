@@ -3,11 +3,11 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 
-function OrderBreadcrumb(props) {
-    const { id, subtotal } = props;
+function OrderBreadcrumb({ id, subtotal }) {
+    // const { id, subtotal } = props;
     var flag = false;
-    if (id === (null || undefined) && subtotal === (null || undefined)) flag = false;
-    else flag = true;
+    if (id === (null || undefined) && subtotal === (null || undefined)) {flag = false;}
+    else {flag = true;}
     return (
         <>
             {!flag &&

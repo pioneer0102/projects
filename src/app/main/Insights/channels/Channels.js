@@ -125,7 +125,7 @@ function Channels(props) {
                 </Table>
             </Paper>
         </>
-    )
+    );
 }
 
 export default Channels;

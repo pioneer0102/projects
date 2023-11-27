@@ -30,7 +30,7 @@ mock.onPost('/api/getorders').reply(({ data }) => {
             pagedData: pagedData,
             dbSize: dbSize,
             filterSize: dbSize
-        }
+        };
         return [200, data];
     }
     else {
@@ -49,28 +49,30 @@ mock.onPost('/api/getorders').reply(({ data }) => {
             pagedData: pagedData,
             dbSize: dbSize,
             filterSize: filteredData.length
-        }
+        };
         return [200, data];
     }
-})
+});
 
-mock.onPost('/api/getItem').reply(({ data }) => {
-    const {customer, channel, date, status, subtotal, items} = JSON.parse(data);
-    var resultArray =[];
-    items.map((item) => {
-        const oneItem = _.find(itemDB, {id: item.id});
-        oneItem.quantity = item.quantity;
-        oneItem && resultArray.push(oneItem);
-    })
-    const result = {
-        customer: {
-            customer: customer,
-            channel: channel,
-            date: date,
-            status: status,
-            subtotal: subtotal
-        },
-        detail: resultArray
-    }
-    return [200, result];
-})
+mock.onGet('/api/getItem').reply(config => {
+    const {id} = config;
+    console.log(id);
+    // const {customer, channel, date, status, subtotal, items} = JSON.parse(data);
+    // var resultArray =[];
+    // items.map((item) => {
+    //     const oneItem = _.find(itemDB, {id: item.id});
+    //     oneItem.quantity = item.quantity;
+    //     oneItem && resultArray.push(oneItem);
+    // })
+    // const result = {
+    //     customer: {
+    //         customer: customer,
+    //         channel: channel,
+    //         date: date,
+    //         status: status,
+    //         subtotal: subtotal
+    //     },
+    //     detail: resultArray
+    // }
+    // return [200, result];
+});

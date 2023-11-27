@@ -49,7 +49,7 @@ function OrdersSearchFilter(props) {
 
     const handleSearchText = (event) => {
         dispatch(setOrderSearchText(event.target.value));
-    }
+    };
 
     // useEffect(() => {
     //     dispatch(getOrders());
@@ -99,7 +99,7 @@ function OrdersSearchFilter(props) {
                                 'aria-label': 'Search',
                             }}
                             value={searchText}
-                            onChange={(event) => { handleSearchText(event) }}
+                            onChange={(event) => { handleSearchText(event); }}
                         />
                     </Box>
                     {/* Datepicker Select Component */}
@@ -182,7 +182,7 @@ function OrdersSearchFilter(props) {
                                 },
                             }}
                             onChange={(event) => {
-                                dispatch(setOrderChannel(event.target.value))
+                                dispatch(setOrderChannel(event.target.value));
                                 dispatch(setPagenumber(0));
                             }
                             }
@@ -223,7 +223,7 @@ function OrdersSearchFilter(props) {
                                 },
                             }}
                             onChange={(event) => {
-                                dispatch(setOrderStatus(event.target.value))
+                                dispatch(setOrderStatus(event.target.value));
                                 dispatch(setPagenumber(0));
                             }
                             }
@@ -239,7 +239,7 @@ function OrdersSearchFilter(props) {
                 </div>
             </Paper>
         </>
-    )
+    );
 }
 
 export default OrdersSearchFilter;

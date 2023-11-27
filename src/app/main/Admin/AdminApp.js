@@ -50,7 +50,7 @@ function AdminApp(props) {
                 </div>
             </Paper>
         </>
-    )
+    );
 }
 
 export default AdminApp;

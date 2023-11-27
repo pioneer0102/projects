@@ -50,7 +50,7 @@ function InvManApp(props) {
                 </div>
             </Paper>
         </>
-    )
+    );
 }
 
 export default InvManApp;
