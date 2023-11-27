@@ -63,7 +63,6 @@ const OrdersSearchFilter = () => {
         dispatch(actionCreator(value));
         dispatch(setPagenumber(0));
     };
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
 
     return (
         <>
@@ -81,11 +80,7 @@ const OrdersSearchFilter = () => {
                             disableUnderline
                             fullWidth
                             value={searchText}
-<<<<<<< HEAD
-                            onChange={(event) => { handleSearchText(event); }}
-=======
                             onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
                         />
                     </Box>
                     <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
@@ -156,16 +151,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-<<<<<<< HEAD
-                            onChange={(event) => {
-                                dispatch(setOrderChannel(event.target.value));
-                                dispatch(setPagenumber(0));
-                            }
-                            }
-                        >
-=======
                             onChange={(event) => handleChange(setOrderChannel, event.target.value)}>
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
                             <MenuItem value="">
                                 { t('none') }
                             </MenuItem>
@@ -206,16 +192,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-<<<<<<< HEAD
-                            onChange={(event) => {
-                                dispatch(setOrderStatus(event.target.value));
-                                dispatch(setPagenumber(0));
-                            }
-                            }
-                        >
-=======
                             onChange={(event) => handleChange(setOrderStatus, event.target.value)}>
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
                             <MenuItem value="">
                                 { t('none') }
                             </MenuItem>
@@ -234,6 +211,6 @@ const OrdersSearchFilter = () => {
             </Paper>
         </>
     );
-}
+};
 
 export default OrdersSearchFilter;

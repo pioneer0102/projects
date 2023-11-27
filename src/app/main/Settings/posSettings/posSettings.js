@@ -11,7 +11,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
-function PosSettings(props) {
+function PosSettings() {
     const headers = [
         {
             id: 'id',
