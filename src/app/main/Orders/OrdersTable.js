@@ -33,8 +33,11 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import TableContainer from '@mui/material/TableContainer';
 import { Divider } from "@mui/material";
+import { useQuery } from "react-query";
+import axios from 'axios';
 
 const headerColor = red[500];
 
@@ -113,24 +116,30 @@ const headers = [
     },
 ];
 
+const fetchMyData = async () => {
+    const response = await axios.post('/api/getorders', searchData);
+    const data = await response.json();
+    return data;
+}
+
 function OrdersTable(props) {
     const dispatch = useDispatch();
-    const allOrders = useSelector(selectOrders);
+    // const allOrders = useSelector(selectOrders);
     const page = useSelector(selectPageNumber);
     const rowsPerPage = useSelector(selectPageSize);
     const dbSize = useSelector(selectDBsize);
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const itemsInfo = useSelector(selectItems);
-    const [total, setTotal] = useState(0);
+    const {data, isLoading, error} = useQuery('myData', fetchMyData);
+    const allOrders = data;
+    console.log(allOrders);
 
     // Dialog constants
     const [open, setOpen] = useState(false);
 
     const handleDialogOpen = (item) => {
-        setOpen(true);
-        dispatch(getItem(item.items));
-        setTotal(item.subtotal);
+        dispatch(getItem(item));
     }
 
     const handleDialogClose = () => {
@@ -148,9 +157,9 @@ function OrdersTable(props) {
     })
 
     // dispatch -> getOrders()
-    useEffect(() => {
-        dispatch(getOrders());
-    }, [page, rowsPerPage]);
+    // useEffect(() => {
+    //     dispatch(getOrders());
+    // }, [page, rowsPerPage]);
 
     // case: empty Orders
     if (allOrders == null) {
@@ -180,56 +189,25 @@ function OrdersTable(props) {
     const popOpen = Boolean(anchorEl);
     const id = popOpen ? 'simple-popover' : undefined;
 
-    // Detail Component
-    const Detail = () => {
-        return (
-            <Table aria-label="spanning table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="center">Image</TableCell>
-                        <TableCell align="center">Product Name</TableCell>
-                        <TableCell align="center">Price</TableCell>
-                        <TableCell align="center">Quantity</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {itemsInfo.map((item, index) => {
-                        return ( itemsInfo && 
-                            <TableRow key = {index}>
-                                <TableCell align="center">image</TableCell>
-                                <TableCell align="center">{item.productname}</TableCell>
-                                <TableCell align="center">{item.price}</TableCell>
-                                <TableCell align="center">{item.quantity}</TableCell>
-                            </TableRow>
-                        )
-                    })}
-                    {/* <Divider 
-                    variant = "middle"
-                    className = "w-96"
-                    sx = {{
-                        borderTopWidth: 2,
-                        borderTopColor: 'text.secondary'
-                    }} /> */}
-                    <TableRow>
-                        <TableCell align = "center">Subtotal</TableCell>
-                        <TableCell colspan = {2}></TableCell>
-                        <TableCell align="center">{total}</TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
-
-        )
-    }
-
     return (
         <>
             <Paper
-                className="flex flex-col px-16 py-24 border-b-10 my-32 mx-32"
+                className="flex flex-col px-8 py-24 border-b-10 my-32 mx-32"
                 component={motion.div}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                sx={{ boxShadow: 'none', borderRadius: 1 }}
             >
-                <FuseScrollbars className="grow overflow-x-auto mx-16 ">
+                <div className="mx-24">
+                    <Typography
+                        className="inline text-16 text-center font-medium"
+                        color="text.secondary"
+                    >
+                        Total Orders : {dbSize}
+                    </Typography>
+
+                </div>
+                <FuseScrollbars className="grow overflow-x-auto mx-24 mt-16">
                     <Table className="simple">
                         <TableHead>
                             <TableRow>
@@ -237,7 +215,6 @@ function OrdersTable(props) {
                                     <TableCell
                                         key={index}
                                         align={item.align}
-                                        padding='none'
                                     >
                                         <Typography
                                             color="text.secondary"
@@ -254,7 +231,13 @@ function OrdersTable(props) {
                             {allOrders
                                 .map((item, index) => {
                                     return (allOrders &&
-                                        <TableRow key={index} onClick={() => handleDialogOpen(item)}>
+                                        <TableRow
+                                            key={index}
+                                            role="button"
+                                            onClick={() => handleDialogOpen(item)}
+                                            component={NavLinkAdapter}
+                                            to={`${item.id}`}
+                                        >
                                             {/* <TableCell align="center">
                                                 <Typography
                                                     color="text.secondary"
@@ -266,7 +249,7 @@ function OrdersTable(props) {
                                             <TableCell align="left">
                                                 <Typography
                                                     color="text.secondary"
-                                                    className="font-semibold text-14"
+                                                    className="font-semibold text-14 ml-8"
                                                 >
                                                     {item.customer}
                                                 </Typography>
@@ -275,7 +258,7 @@ function OrdersTable(props) {
                                             <TableCell align="left">
                                                 <Typography
                                                     color="text.secondary"
-                                                    className="font-semibold text-14"
+                                                    className="font-semibold text-14 -ml-8"
                                                 >
                                                     {format(new Date(item.date), 'MMMM d,y')}
                                                 </Typography>
@@ -286,7 +269,7 @@ function OrdersTable(props) {
                                                     color="text.secondary"
                                                     className="font-semibold text-14"
                                                 >
-                                                    ${item.subtotal}
+                                                    $ {item.subtotal}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="left">
@@ -300,7 +283,7 @@ function OrdersTable(props) {
                                             <TableCell align="left">
                                                 <Typography
                                                     className={clsx(
-                                                        'inline-flex items-center font-bold text-12 px-10 py-2 rounded-full tracking-wide uppercase',
+                                                        'inline-flex items-center font-bold text-12 px-10 py-2 tracking-wide uppercase',
                                                         item.status === "completed" &&
                                                         'bg-green-100 text-green-800 dark:bg-green-600 dark:text-green-50',
                                                         item.status === "pending" &&
@@ -308,6 +291,9 @@ function OrdersTable(props) {
                                                         item.status === "rejected" &&
                                                         'bg-red-100 text-red-800 dark:bg-red-600 dark:text-red-50',
                                                     )}
+                                                    sx={{
+                                                        borderRadius: "3px"
+                                                    }}
                                                 >
                                                     {item.status}
                                                 </Typography>
@@ -343,67 +329,32 @@ function OrdersTable(props) {
                             }
                         </TableBody>
                     </Table>
-                    <TablePagination
-                        className="shrink-0 border-t-1"
-                        component="div"
-                        // count={filteredData.length}
-                        count={dbSize}
-                        rowsPerPage={rowsPerPage}
-                        page={page}
-                        backIconButtonProps={{
-                            'aria-label': 'Previous Page',
-                        }}
-                        nextIconButtonProps={{
-                            'aria-label': 'Next Page',
-                        }}
-                        onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
-                        onRowsPerPageChange={(event) => {
-                            dispatch(setPagesize(parseInt(event.target.value, 10)));
-                            dispatch(setPagenumber(0));
-                        }
-                        }
-                    />
+                    <>
+
+                        <TablePagination
+                            className="border-t-1"
+                            component="div"
+                            // count={filteredData.length}
+                            count={dbSize}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            backIconButtonProps={{
+                                'aria-label': 'Previous Page',
+                            }}
+                            nextIconButtonProps={{
+                                'aria-label': 'Next Page',
+                            }}
+                            onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
+                            onRowsPerPageChange={(event) => {
+                                dispatch(setPagesize(parseInt(event.target.value, 10)));
+                                dispatch(setPagenumber(0));
+                            }
+                            }
+                        />
+
+                    </>
                 </FuseScrollbars>
             </Paper>
-            <OrderDialog
-                open={open}
-                onClose={handleDialogClose}
-                scroll="paper"
-                aria-labelledby="order-dialog-title"
-                aria-describedby="order-dialog-description"
-            >
-                <DialogTitle
-                    id="scroll-dialog-title"
-                    sx={{ m: 0, p: 4 }}
-                >
-                    Order Detail Information
-                    <IconButton
-                        aria-label="close"
-                        onClick={handleDialogClose}
-                        sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: (theme) => theme.palette.grey[500]
-                        }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                </DialogTitle>
-                <DialogContent dividers={scroll === 'paper'}>
-                    <DialogContentText
-                        id="scroll-dialog-description"
-                        ref={descriptionElementRef}
-                        tabIndex={-1}
-                    >
-                        <Detail />
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleDialogClose}>Cancel</Button>
-                    <Button onClick={handleDialogClose}>Subscribe</Button>
-                </DialogActions>
-            </OrderDialog>
         </>
     )
 }

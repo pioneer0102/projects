@@ -24,23 +24,10 @@ export const getOrders = createAsyncThunk(
     }
 );
 
-export const getAllSize = createAsyncThunk(
-    'ordersApp/orders/getAllSize',
-    async (params, {getState}) => {
-
-        const response = await axios.get('/api/getsize');
-        // const response = await axios.get(`/api/getorders?pageNumber=${pageNumber}&search=${searchText}&subtotal=${subtotal}&channel=${channel}&status=${status}`);
-
-        const data = await response.data;
-
-        return data;
-    }
-)
-
 export const getItem = createAsyncThunk(
     'orderApp/orders/getItems',
-    async (items, {dispatch, get}) => {
-        const response = await axios.post('/api/getItem', items);
+    async (item, {dispatch, get}) => {
+        const response = await axios.post('/api/getItem', item);
         const data = await response.data;
         return data;
     }
@@ -62,7 +49,8 @@ export const {
     selectAll: selectOrders
 } = ordersAdapter.getSelectors((state) => state.ordersApp.orders);
 
-export const selectItems = ({ ordersApp }) => ordersApp.orders.itemList;
+export const selectItems = ({ ordersApp }) => ordersApp.orders.detail;
+export const selectCustomer = ({ ordersApp }) => ordersApp.orders.customer;
 
 const ordersSlice = createSlice({
     name: 'ordersApp/orders',
@@ -74,7 +62,8 @@ const ordersSlice = createSlice({
         pageNumber: 0,
         pageSize: 10,
         dbSize: 0,
-        itemList: []
+        detail: [],
+        customer: {}
     }),
     reducers: {
         setOrderSubtotal: (state, action) => {
@@ -103,14 +92,12 @@ const ordersSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getOrders.fulfilled, (state, action) => {
             const { data } = action.payload;
-            console.log(data);
-            ordersAdapter.setAll(state, data);
-        });
-        builder.addCase(getAllSize.fulfilled, (state, action) => {
-            state.dbSize = action.payload;
+            state.dbSize = data.dbSize;
+            ordersAdapter.setAll(state, data.pagedData);
         });
         builder.addCase(getItem.fulfilled, (state, action) => {
-            state.itemList = action.payload;
+            state.detail = action.payload.detail;
+            state.customer = action.payload.customer;
         })
     }
 });

@@ -50,12 +50,13 @@ function OrdersSearchFilter(props) {
     return (
         <>
             <Paper
-                className="px-48 py-32 border-b-1 mt-32 mx-32"
+                className="px-24 py-8 border-b-1 mt-32 mx-32"
                 component={motion.div}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                sx={{ boxShadow: 'none', borderRadius: 1 }}
             >
-                <div className="flex flex-col items-center sm:items-start">
+                {/* <div className="flex flex-col items-center sm:items-start">
                     <Typography
                         className="inline text-20 text-center font-bold"
                         variant="body2"
@@ -63,10 +64,11 @@ function OrdersSearchFilter(props) {
                     >
                         Search Filters
                     </Typography>
-                </div>
-                <div className="flex flex-col sm:flex-row sm:space-y-0 mt-16 -mx-8">
+                </div> */}
+                <div className="flex flex-col sm:flex-row sm:space-y-0 mt-8 -mx-8">
                     <Box
-                        className="flex w-full items-center px-16 mx-8 mb-8 border-1 rounded-full"
+                        className="flex w-full items-center px-16 mx-8 mb-8 border-1"
+                        sx={{ borderRadius: 1 }}
                     >
                         <FuseSvgIcon color="action" size={20}>
                             heroicons-outline:search
@@ -95,13 +97,31 @@ function OrdersSearchFilter(props) {
 
                     {/* Subtotal Select Component */}
                     <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
-                        <InputLabel id="select-small-label">Subtotal</InputLabel>
+                        <InputLabel
+                            id="select-small-label"
+                            sx={{
+                                '&.Mui-focused': {
+                                    color: 'grey.600'
+                                }
+                            }}
+                        >Subtotal</InputLabel>
                         <Select
                             labelId="select-small-label"
                             id="select-small"
                             value={subtotal}
                             label="Subtotal"
-                            className="rounded-full"
+                            className=""
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                            }}
                             onChange={(event) => dispatch(setOrderSubtotal(event.target.value))}
                         >
                             <MenuItem value="">
@@ -116,13 +136,31 @@ function OrdersSearchFilter(props) {
                     </FormControl>
                     {/* Channel Select Component */}
                     <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
-                        <InputLabel id="demo-select-small-label">Channel</InputLabel>
+                        <InputLabel
+                            id="demo-select-small-label"
+                            sx={{
+                                '&.Mui-focused': {
+                                    color: 'grey.600'
+                                }
+                            }}
+                        >Channel</InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
                             value={channel}
                             label="Channel"
-                            className="rounded-full"
+                            className=""
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                            }}
                             onChange={(event) => dispatch(setOrderChannel(event.target.value))}
                         >
                             <MenuItem value="">
@@ -135,13 +173,31 @@ function OrdersSearchFilter(props) {
                     </FormControl>
                     {/* Status Select Component */}
                     <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
-                        <InputLabel id="demo-select-small-label">Status</InputLabel>
+                        <InputLabel
+                            id="demo-select-small-label"
+                            sx={{
+                                '&.Mui-focused': {
+                                    color: 'grey.600'
+                                }
+                            }}
+                        >Status</InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
                             value={status}
                             label="Status"
-                            className="rounded-full"
+                            className=""
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                            }}
                             onChange={(event) => dispatch(setOrderStatus(event.target.value))}
                         >
                             <MenuItem value="">

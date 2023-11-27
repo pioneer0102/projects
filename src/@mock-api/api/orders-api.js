@@ -14,13 +14,10 @@ const priceRange = [
     { min: 5000, max: 10000 },
 ];
 
-mock.onGet('/api/getsize').reply((config) => {
-    const dbSize = ordersDB.length;
-    return [200, dbSize];
-})
-
 mock.onPost('/api/getorders').reply(({ data }) => {
     const { searchText, subtotal, channel, status, pageNumber, pageSize } = JSON.parse(data);
+
+    const dbSize = ordersDB.length;
 
     const pagenumber = parseInt(pageNumber);
     const pagesize = parseInt(pageSize);
@@ -29,7 +26,11 @@ mock.onPost('/api/getorders').reply(({ data }) => {
         const startIndex = pagenumber * pagesize;
         const endIndex = (pagenumber * pagesize + pagesize);
         const pagedData = ordersDB.slice(startIndex, endIndex);
-        return [200, pagedData];
+        const data = {
+            pagedData: pagedData,
+            dbSize: dbSize
+        }
+        return [200, data];
     }
     else {
         const filteredData = ordersDB.filter((item) => {
@@ -43,17 +44,31 @@ mock.onPost('/api/getorders').reply(({ data }) => {
         const startIndex = pagenumber * pagesize || 0;
         const endIndex = (pagenumber * pagesize + pagesize) || filteredData.length;
         const pagedData = filteredData.slice(startIndex, endIndex);
-        return [200, pagedData];
+        const data = {
+            pagedData: pagedData,
+            dbSize: dbSize
+        }
+        return [200, data];
     }
 })
 
-mock.onPost('/api/getItem').reply(({data}) => {
-    const itemList = JSON.parse(data);
-    const resultArray = [];
-    itemList.map((item) => {
+mock.onPost('/api/getItem').reply(({ data }) => {
+    const {customer, channel, date, status, subtotal, items} = JSON.parse(data);
+    var resultArray =[];
+    items.map((item) => {
         const oneItem = _.find(itemDB, {id: item.id});
         oneItem.quantity = item.quantity;
         oneItem && resultArray.push(oneItem);
     })
-    return [200, resultArray];
+    const result = {
+        customer: {
+            customer: customer,
+            channel: channel,
+            date: date,
+            status: status,
+            subtotal: subtotal
+        },
+        detail: resultArray
+    }
+    return [200, result];
 })
