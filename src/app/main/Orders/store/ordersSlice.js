@@ -10,24 +10,12 @@ export const getOrders = async (searchData) => {
     return response.data;
 };
 
-<<<<<<< HEAD
-export const getItem = createAsyncThunk(
-    'orderApp/orders/getItems',
-    async (id, {dispatch, get}) => {
-        const response = await axios.get('/api/getItem', {id: id});
-        const data = await response.data;
-        return data;
-    }
-);
-=======
 export const getItem = createAsyncThunk('orderApp/orders/getItems', async (itemId) => {
     const response = await axios.get(`/api/getItem`, {id: itemId});
     return response.data;
 });
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
 
 const ordersAdapter = createEntityAdapter({});
-const itemsAdapter = createEntityAdapter({});
 
 export const selectSearchText = ({ ordersApp }) => ordersApp.orders.searchText;
 export const selectSubtotal = ({ ordersApp }) => ordersApp.orders.subtotal;
