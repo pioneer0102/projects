@@ -1,22 +1,5 @@
-import Paper from "@mui/material/Paper";
-import { motion } from 'framer-motion';
-import { Typography } from "@mui/material";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { styled } from "@mui/material";
-import { red } from '@mui/material/colors';
-import { useSelector } from "react-redux/es/hooks/useSelector";
-import FuseSplashScreen from "@fuse/core/FuseSplashScreen";
-import { format } from "date-fns";
-import IconButton from '@mui/material/IconButton';
-import { Button } from "@mui/material";
-import { MoreHoriz, NoEncryption } from "@mui/icons-material";
-import { TablePagination } from "@mui/material";
-import { useEffect, useState, useRef } from "react";
 import clsx from 'clsx';
+<<<<<<< HEAD
 import FuseScrollbars from "@fuse/core/FuseScrollbars";
 import { selectSearchText, selectSubtotal, setPagenumber, setPagesize } from "./store/ordersSlice";
 import { useDispatch } from 'react-redux';
@@ -39,8 +22,47 @@ import { Divider } from "@mui/material";
 import { useQuery } from "react-query";
 import axios from 'axios';
 import styles from './style.module.scss';
+=======
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
 import history from '@history';
+import { useState } from "react";
+import { format } from "date-fns";
+import { Box } from "@mui/material";
+import { useQuery } from "react-query";
+import { Button } from "@mui/material";
+import { motion } from 'framer-motion';
+import Paper from "@mui/material/Paper";
+import Table from '@mui/material/Table';
+import { useDispatch } from 'react-redux';
+import { Typography } from "@mui/material";
+import Popover from "@mui/material/Popover";
+import TableRow from '@mui/material/TableRow';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import { MoreHoriz } from "@mui/icons-material";
+import { TablePagination } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FuseScrollbars from "@fuse/core/FuseScrollbars";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import {
+    selectSearchText,
+    selectSubtotal,
+    setPagenumber,
+    setPagesize,
+    selectPageSize,
+    selectPageNumber,
+    selectChannel,
+    selectStatus,
+    getOrders
+} from "./store/ordersSlice";
+import FuseLoading from '@fuse/core/FuseLoading';
+import { OrdersListHeader } from 'src/app/model/OrdersModel';
+import { useTranslation } from 'react-i18next';
 
+<<<<<<< HEAD
 const headerColor = red[500];
 
 const OrderDialog = styled(Dialog)(({ theme }) => ({
@@ -118,17 +140,19 @@ const fetchMyData = async (searchData) => {
 };
 
 function OrdersTable(props) {
+=======
+const OrdersTable = () => {
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
     const dispatch = useDispatch();
-    // const allOrders = useSelector(selectOrders);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const { t } = useTranslation();
+
     const searchText = useSelector(selectSearchText);
     const subtotal = useSelector(selectSubtotal);
     const channel = useSelector(selectChannel);
     const status = useSelector(selectStatus);
     const page = useSelector(selectPageNumber);
     const rowsPerPage = useSelector(selectPageSize);
-
-    const [anchorEl, setAnchorEl] = useState(null);
-    const itemsInfo = useSelector(selectItems);
 
     const searchData = {
         searchText: searchText,
@@ -139,14 +163,13 @@ function OrdersTable(props) {
         pageSize: rowsPerPage,
     };
 
-    const { data: allOrders, isLoading, error, refetch } = useQuery(['myData', searchData], () => fetchMyData(searchData));
-
+    const { data: allOrders, isLoading, isError } = useQuery(['ordersList', searchData], () => getOrders(searchData));
     const dbSize = allOrders && allOrders.dbSize;
     const filterSize = allOrders && allOrders.filterSize;
 
-    // Dialog constants
-    const [open, setOpen] = useState(false);
+    const showDetail = (item) => history.push(`/orders/${item.id}`);
 
+<<<<<<< HEAD
     const handleDialogOpen = (item) => {
         dispatch(getItem(item.id));
         const url = item.id;
@@ -189,24 +212,39 @@ function OrdersTable(props) {
     // case: empty Orders
     if (allOrders == null) {
         return <FuseSplashScreen />;
+=======
+    if (isLoading) {
+        return <FuseLoading />
+    }
+
+    if(isError) {
+        return (
+            <div className="flex flex-1 items-center justify-center h-full">
+                <Typography color="text.secondary" variant="h5">
+                    { t('orders.noData') }
+                </Typography>
+            </div>
+        )
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
     }
 
     if (allOrders.pagedData.length === 0) {
         return (
             <div className="flex flex-1 items-center justify-center h-full">
                 <Typography color="text.secondary" variant="h5">
-                    There are no Orders!
+                { t('orders.noData') }
                 </Typography>
             </div>
         );
     }
 
-    // Popover constants
-    const handleClick = (event) => {
+    const handleAction = (event) => {
+        event.stopPropagation();
         setAnchorEl(event.currentTarget);
-    };
+    }
 
-    const handleClose = () => {
+    const handleActionClose = (event) => {
+        event.stopPropagation();
         setAnchorEl(null);
     };
 
@@ -216,30 +254,26 @@ function OrdersTable(props) {
     return (
         <>
             <Paper
-                className="flex flex-col py-24 border-b-10 my-32 mx-32"
+                className="flex flex-col py-24 border-b-10 my-16 mx-32"
                 component={motion.div}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-                sx={{ boxShadow: 'none', borderRadius: 1 }}
-            >
-                <FuseScrollbars className="grow overflow-x-auto mx-24 mt-16">
+                sx={{ boxShadow: 'none', borderRadius: 1 }}>
+                <FuseScrollbars className="grow overflow-x-auto mx-24">
                     <Table>
                         <TableHead>
                             <TableRow>
-                                {headers.map((item, index) => (
+                                {OrdersListHeader.map((item, index) => (
                                     <TableCell
                                         className="border-b-1"
                                         key={index}
-                                        align={item.align}
-                                    >
+                                        align={item.align}>
                                         <Typography
                                             color="text.secondary"
-                                            className="font-bold text-16"
-                                        >
+                                            className="font-bold text-16">
                                             {item.label}
                                         </Typography>
                                     </TableCell>
-
                                 ))}
                             </TableRow>
                         </TableHead>
@@ -250,51 +284,32 @@ function OrdersTable(props) {
                                         <TableRow
                                             key={index}
                                             role="button"
-                                            onClick={(event) => {
-                                                    handleDialogOpen(item);
-                                            }
-                                            }
-                                        >
-                                            {/* <TableCell align="center">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-semibold text-14"
-                                                >
-                                                    {parseInt(index) + 1}
-                                                </Typography>
-                                            </TableCell> */}
+                                            onClick={() => { showDetail(item) }}>
                                             <TableCell align="left">
                                                 <Typography
-
                                                     color="text.secondary"
-                                                    className="font-semibold text-14 ml-8"
-                                                >
+                                                    className="font-semibold text-14 ml-8">
                                                     {item.customer}
                                                 </Typography>
-
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Typography
                                                     color="text.secondary"
-                                                    className="font-semibold text-14 -ml-8"
-                                                >
+                                                    className="font-semibold text-14 -ml-8">
                                                     {format(new Date(item.date), 'MMMM d,y')}
                                                 </Typography>
-
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Typography
                                                     color="text.secondary"
-                                                    className="font-semibold text-14"
-                                                >
+                                                    className="font-semibold text-14">
                                                     $ {item.subtotal}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="left">
                                                 <Typography
                                                     color="text.secondary"
-                                                    className="font-semibold text-14"
-                                                >
+                                                    className="font-semibold text-14">
                                                     {item.channel}
                                                 </Typography>
                                             </TableCell>
@@ -309,53 +324,44 @@ function OrdersTable(props) {
                                                         item.status === "rejected" &&
                                                         'bg-red-500 text-grey-100',
                                                     )}
-                                                    sx={{
-                                                        borderRadius: "3px"
-                                                    }}
-                                                >
+                                                    sx={{ borderRadius: "3px" }}>
                                                     {item.status}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="left">
-                                                <IconButton aria-describedby={id} onClick={(event) => {
-
-                                                    event.stopPropagation();
-                                                    handleClick(event);
-                                                    event.preventDefault();
-                                                }
-                                                }
-                                                >
+                                                <IconButton aria-describedby={id} onClick={handleAction}>
                                                     <MoreHoriz />
                                                 </IconButton>
                                                 <Popover
                                                     id={id}
                                                     open={popOpen}
                                                     anchorEl={anchorEl}
-                                                    onClose={handleClose}
+                                                    onClose={handleActionClose}
                                                     anchorOrigin={{
                                                         vertical: 'bottom',
                                                         horizontal: 'left',
-                                                    }}
-
-                                                >
+                                                    }}>
                                                     <Box className='flex flex-col' sx={{ p: 1 }}>
                                                         <Button
                                                             className="text-blue-500"
-                                                            onClick={(event) => {
-                                                                event.stopPropagation();
-                                                                handleClose();
-                                                            }}
+                                                            onClick={handleActionClose}
                                                             startIcon={<EditIcon />}>
-                                                            Replace
+                                                            { t('orders.replace') }
                                                         </Button>
                                                         <Button
                                                             className="text-blue-500"
+<<<<<<< HEAD
                                                             onClick={(event) => {
                                                                 event.stopPropagation();
                                                                 handleClose();
                                                             }}
                                                             startIcon={<ArrowBack />}>
                                                             Cancel
+=======
+                                                            onClick={handleActionClose}
+                                                            startIcon={<DeleteIcon />}>
+                                                            { t('orders.cancel') }
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
                                                         </Button>
                                                     </Box>
                                                 </Popover>
@@ -369,33 +375,22 @@ function OrdersTable(props) {
                     <div className="flex flex-row border-t-1">
                         <Typography
                             className="inline text-16 text-center font-medium mt-16 ml-24"
-                            color="text.secondary"
-                        // sx={{
-                        //     display: "inline",
-                        //     justifyContent: "space-between"
-                        // }}
-                        >
-                            Total Orders : {dbSize}
+                            color="text.secondary">
+                            { t('orders.total') } : {dbSize}
                         </Typography>
                         <TablePagination
                             className=" flex-auto"
                             component="div"
-                            // count={filteredData.length}
                             count={filterSize}
                             rowsPerPage={rowsPerPage}
                             page={page}
-                            backIconButtonProps={{
-                                'aria-label': 'Previous Page',
-                            }}
-                            nextIconButtonProps={{
-                                'aria-label': 'Next Page',
-                            }}
+                            backIconButtonProps={{ 'aria-label': 'Previous Page' }}
+                            nextIconButtonProps={{ 'aria-label': 'Next Page' }}
                             onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
                             onRowsPerPageChange={(event) => {
                                 dispatch(setPagesize(parseInt(event.target.value, 10)));
                                 dispatch(setPagenumber(0));
-                            }
-                            }
+                            }}
                         />
                     </div>
                 </FuseScrollbars>

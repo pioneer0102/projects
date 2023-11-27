@@ -1,23 +1,29 @@
-import Paper from "@mui/material/Paper";
+import clsx from 'clsx';
+import history from '@history';
 import { motion } from 'framer-motion';
-import { Breadcrumbs, Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import Table from '@mui/material/Table';
+import Button from "@mui/material/Button";
+import { Icon, Typography } from "@mui/material";
+import { useParams } from 'react-router-dom';
+import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useState } from "react";
-import { selectItems, selectCustomer } from "./store/ordersSlice";
 import FuseScrollbars from "@fuse/core/FuseScrollbars";
-import { useParams, useNavigate } from 'react-router-dom';
-import Button from "@mui/material/Button";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { selectItems, selectCustomer } from "./store/ordersSlice";
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getItem } from './store/ordersSlice';
+import reducer from './store';
+import withReducer from 'app/store/withReducer';
+import { OrderDetailContentHeader, OrderDetailCustomHeader } from 'src/app/model/OrdersModel';
+import { useTranslation } from 'react-i18next';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import OrderBreadcrumb from "./OrderBreadCrumb";
-import clsx from 'clsx';
-import { format } from "date-fns";
-import history from '@history';
 
+<<<<<<< HEAD
 const headerCustomer = [
     {
         id: 'customer',
@@ -91,12 +97,22 @@ const headers = [
 
 
 function OrderDetail(props) {
+=======
+const OrderDetail = ({props}) => {
+    const dispatch = useDispatch();
+    const { t } = useTranslation();
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
     const routeParams = useParams();
     const itemsInfo = useSelector(selectItems);
     const customerInfo = useSelector(selectCustomer);
 
+    useEffect(() => {
+        dispatch(getItem(routeParams.id));
+    }, [routeParams]);
+
     return (
         <>
+<<<<<<< HEAD
             <OrderBreadcrumb id={routeParams.id} subtotal={routeParams.subtotal} />
             <Button
                 className="mx-32"
@@ -107,36 +123,58 @@ function OrderDetail(props) {
             >
                 Back
             </Button>
+=======
+            <div className='flex items-center mx-32 mt-32 justify-between'>
+                <div role="presentation">
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Typography
+                            className="inline text-18 text-center font-medium"
+                            color="text.secondary"
+                            role="button"
+                            component={NavLinkAdapter}
+                            to={`../orders`}>
+                            { t('orders.orders') }
+                        </Typography>
+                        <Typography className="inline text-18 text-center font-medium text-pink-500">
+                            { t('orders.detail') }
+                        </Typography>
+                    </Breadcrumbs>
+                </div>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => { history.push('/orders') }}>
+                    <Icon>arrow_back</Icon>
+                    <span className='ml-8'>{ t('back') }</span>
+                </Button>
+            </div>
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
             <div className="flex flex-row">
                 <Paper
                     className="flex flex-col px-8 py-24 border-b-10 my-32 mx-32 w-1/2"
                     component={motion.div}
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-                    sx={{ boxShadow: 'none', borderRadius: 1 }}
-                >
+                    sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     <div className="flex flex-col sm:items-start mx-24">
                         <Typography
                             className="inline text-20 text-center font-medium"
-                            color="text.secondary"
-                        >
-                            Customer Information
+                            color="text.secondary">
+                            { t('orders.customerInfo') }
                         </Typography>
                     </div>
                     <FuseScrollbars className="grow overflow-x-auto mx-24 mt-16">
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    {headerCustomer.map((item, index) => (
+                                    {OrderDetailCustomHeader.map((item, index) => (
                                         <TableCell
                                             className="border-b-1"
                                             key={index}
-                                            align={item.align}
-                                        >
+                                            align={item.align}>
                                             <Typography
                                                 color="text.secondary"
-                                                className="font-bold text-16"
-                                            >
+                                                className="font-bold text-16">
                                                 {item.label}
                                             </Typography>
                                         </TableCell>
@@ -147,36 +185,24 @@ function OrderDetail(props) {
                             <TableBody>
                                 {customerInfo &&
                                     <TableRow>
-                                        {/* <TableCell align="left">
-                                            <Typography
-                                                color="text.secondary"
-                                                className="font-semibold text-14 ml-12"
-                                            >
-                                                {parseInt(index) + 1}
-                                            </Typography>
-                                        </TableCell> */}
                                         <TableCell align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="font-semibold text-14 ml-8"
-                                            >
+                                                className="font-semibold text-14 ml-8">
                                                 {customerInfo.customer}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="font-semibold text-14 -ml-8"
-                                            >
+                                                className="font-semibold text-14 -ml-8">
                                                 {customerInfo.date}
                                             </Typography>
-
                                         </TableCell>
                                         <TableCell align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="font-semibold text-14"
-                                            >
+                                                className="font-semibold text-14">
                                                 {customerInfo.channel}
                                             </Typography>
                                         </TableCell>
@@ -193,8 +219,7 @@ function OrderDetail(props) {
                                                 )}
                                                 sx={{
                                                     borderRadius: "3px"
-                                                }}
-                                            >
+                                                }}>
                                                 {customerInfo.status}
                                             </Typography>
                                         </TableCell>
@@ -209,30 +234,26 @@ function OrderDetail(props) {
                     component={motion.div}
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-                    sx={{ boxShadow: 'none', borderRadius: 1 }}
-                >
+                    sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     <div className="flex flex-col sm:items-start mx-24">
                         <Typography
                             className="inline text-20 text-center font-medium"
-                            color="text.secondary"
-                        >
-                            Detail Information
+                            color="text.secondary">
+                            { t('orders.detailInfo') }
                         </Typography>
                     </div>
                     <FuseScrollbars className="grow overflow-x-auto mx-24 mt-16">
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    {headers.map((item, index) => (
+                                    {OrderDetailContentHeader.map((item, index) => (
                                         <TableCell
                                             className="border-b-1"
                                             key={index}
-                                            align={item.align}
-                                        >
+                                            align={item.align}>
                                             <Typography
                                                 color="text.secondary"
-                                                className="font-bold text-16"
-                                            >
+                                                className="font-bold text-16">
                                                 {item.label}
                                             </Typography>
                                         </TableCell>
@@ -246,49 +267,34 @@ function OrderDetail(props) {
                                         return (itemsInfo &&
                                             <TableRow
                                                 key={index}
-                                                role="button"
-                                            >
-                                                {/* <TableCell align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-semibold text-14 ml-12"
-                                                >
-                                                    {parseInt(index) + 1}
-                                                </Typography>
-                                            </TableCell> */}
+                                                role="button">
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14 ml-8"
-                                                    >
+                                                        className="font-semibold text-14 ml-8">
                                                         image
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14 -ml-8"
-                                                    >
+                                                        className="font-semibold text-14 -ml-8">
                                                         {item.productname}
                                                     </Typography>
-
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14"
-                                                    >
+                                                        className="font-semibold text-14">
                                                         $ {item.price}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14"
-                                                    >
+                                                        className="font-semibold text-14">
                                                         {item.quantity}
                                                     </Typography>
-
                                                 </TableCell>
                                             </TableRow>
                                         );
@@ -297,8 +303,7 @@ function OrderDetail(props) {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-semibold text-16"
-                                        >
+                                            className="font-semibold text-16">
                                             subtotal
                                         </Typography>
 
@@ -307,11 +312,9 @@ function OrderDetail(props) {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-bold text-30"
-                                        >
+                                            className="font-bold text-30">
                                             $ {customerInfo.subtotal}
                                         </Typography>
-
                                     </TableCell>
                                 </TableRow>
                             </TableBody>
@@ -319,9 +322,9 @@ function OrderDetail(props) {
                     </FuseScrollbars>
                 </Paper>
             </div >
-
         </>
     );
 }
 
-export default OrderDetail;
+export default withReducer('ordersApp', reducer)(OrderDetail);
+

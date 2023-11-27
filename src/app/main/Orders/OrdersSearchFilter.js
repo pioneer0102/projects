@@ -1,41 +1,36 @@
-import Paper from "@mui/material/Paper";
-import Input from '@mui/material/Input';
 import { Box } from '@mui/system';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { motion } from 'framer-motion';
-import { Typography } from "@mui/material";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import { Paper } from '@mui/material';
+import Input from '@mui/material/Input';
+import styles from './style.module.scss';
 import Select from '@mui/material/Select';
-import { useEffect, useState } from "react";
-import { useDeepCompareEffect } from "@fuse/hooks";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import MenuItem from '@mui/material/MenuItem';
+import { useTranslation } from 'react-i18next';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from "./store/ordersSlice";
+import { Channels, Status, SubTotals } from 'src/app/model/OrdersModel';
+import { 
+    selectSearchText,
+    selectSubtotal,
+    selectChannel,
+    selectStatus,
+    setOrderSubtotal,
+    setOrderChannel,
+    setOrderStatus,
+    setOrderSearchText,
+    setPagenumber
+} from './store/ordersSlice';
 
-import { selectSearchText, selectSubtotal, selectChannel, selectStatus } from './store/ordersSlice';
-import { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText, setPagenumber } from './store/ordersSlice';
-
-// const fetchMyData = async (searchData) => {
-//     const response = await axios.post('/api/getorders', searchData);
-//     // const data = await response.json();
-//     return response.data;
-// }
-
-function OrdersSearchFilter(props) {
+const OrdersSearchFilter = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
-
-    // useDeepCompareEffect(() => {
-    //     dispatch(getOrders());
-    // }, [dispatch]);
-
-    const [date, setDate] = useState();
     const searchText = useSelector(selectSearchText);
     const subtotal = useSelector(selectSubtotal);
     const channel = useSelector(selectChannel);
     const status = useSelector(selectStatus);
 
+<<<<<<< HEAD
     // const searchData = {
     //     searchText: searchText,
     //     subtotal: subtotal,
@@ -63,56 +58,36 @@ function OrdersSearchFilter(props) {
     // useEffect(() => {
     //     dispatch(getOrders());
     // }, [status]);
+=======
+    const handleChange = (actionCreator, value) => {
+        dispatch(actionCreator(value));
+        dispatch(setPagenumber(0));
+    };
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
 
     return (
         <>
-            <Paper
-                className="px-16 py-8 border-b-1 mt-32 mx-32"
-                component={motion.div}
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
-                sx={{ boxShadow: 'none', borderRadius: 1 }}
-            >
-                {/* <div className="flex flex-col items-center sm:items-start">
-                    <Typography
-                        className="inline text-20 text-center font-bold"
-                        variant="body2"
-                        color="text.secondary"
-                    >
-                        Search Filters
-                    </Typography>
-                </div> */}
+            <Paper className={`px-16 py-8 border-b-1 mt-32 mx-32 ${styles.paper}`}>
                 <div className="flex flex-col sm:flex-row sm:space-y-0 mt-8 -mx-8">
                     <Box
                         className="flex w-full items-center px-16 mx-8 mb-8 border-1"
-                        sx={{ borderRadius: 1 }}
-                    >
+                        sx={{ borderRadius: 1 }}>
                         <FuseSvgIcon color="action" size={20}>
                             heroicons-outline:search
                         </FuseSvgIcon>
                         <Input
-                            placeholder="Search"
+                            placeholder={ t('search') }
                             className="flex flex-1 px-16"
                             disableUnderline
                             fullWidth
-                            inputProps={{
-                                'aria-label': 'Search',
-                            }}
                             value={searchText}
+<<<<<<< HEAD
                             onChange={(event) => { handleSearchText(event); }}
+=======
+                            onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
                         />
                     </Box>
-                    {/* Datepicker Select Component */}
-                    {/* 
-                    <DatePicker
-                        label="Date"
-                        size="small"
-                        value={new Date()}
-                        className="flex rounded-full"
-                        onChange={(newValue) => setDate(newValue)}
-                    /> */}
-
-                    {/* Subtotal Select Component */}
                     <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
                         <InputLabel
                             id="select-small-label"
@@ -121,7 +96,7 @@ function OrdersSearchFilter(props) {
                                     color: 'grey.600'
                                 }
                             }}
-                        >Subtotal</InputLabel>
+                        >{ t('orders.subTotal') }</InputLabel>
                         <Select
                             labelId="select-small-label"
                             id="select-small"
@@ -139,22 +114,22 @@ function OrdersSearchFilter(props) {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => {
-                                dispatch(setOrderSubtotal(event.target.value));
-                                dispatch(setPagenumber(0));
-                            }}
-                        >
+                            onChange={(event) => handleChange(setOrderSubtotal, event.target.value)}>
                             <MenuItem value="">
-                                <em>None</em>
+                                { t('none') }
                             </MenuItem>
-                            <MenuItem value='0'>$10 - $100</MenuItem>
-                            <MenuItem value='1'>$100 - $500</MenuItem>
-                            <MenuItem value='2'>$500 - $1000</MenuItem>
-                            <MenuItem value='3'>$1000 - $5000</MenuItem>
-                            <MenuItem value='4'>$5000 - $10000</MenuItem>
+                            {
+                                SubTotals.map((subTotal, index) => {
+                                    console.log(subTotal);
+                                    return (
+                                        <MenuItem key={index} value={index}>
+                                            { subTotal }
+                                        </MenuItem>
+                                    );                                    
+                                })
+                            }
                         </Select>
                     </FormControl>
-                    {/* Channel Select Component */}
                     <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
@@ -163,7 +138,7 @@ function OrdersSearchFilter(props) {
                                     color: 'grey.600'
                                 }
                             }}
-                        >Channel</InputLabel>
+                        >{ t('channel') }</InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
@@ -181,21 +156,30 @@ function OrdersSearchFilter(props) {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
+<<<<<<< HEAD
                             onChange={(event) => {
                                 dispatch(setOrderChannel(event.target.value));
                                 dispatch(setPagenumber(0));
                             }
                             }
                         >
+=======
+                            onChange={(event) => handleChange(setOrderChannel, event.target.value)}>
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
                             <MenuItem value="">
-                                <em>None</em>
+                                { t('none') }
                             </MenuItem>
-                            <MenuItem value="DoorDash">DoorDash</MenuItem>
-                            <MenuItem value="Uber">Uber</MenuItem>
-                            <MenuItem value="GrubHub">GrubHub</MenuItem>
+                            {
+                                Channels.map((channel, index) => {
+                                    return (
+                                        <MenuItem key={index} value={channel}>
+                                            { channel }
+                                        </MenuItem>
+                                    );                                    
+                                })
+                            }
                         </Select>
                     </FormControl>
-                    {/* Status Select Component */}
                     <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
@@ -204,7 +188,7 @@ function OrdersSearchFilter(props) {
                                     color: 'grey.600'
                                 }
                             }}
-                        >Status</InputLabel>
+                        >{ t('status') }</InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
@@ -222,18 +206,28 @@ function OrdersSearchFilter(props) {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
+<<<<<<< HEAD
                             onChange={(event) => {
                                 dispatch(setOrderStatus(event.target.value));
                                 dispatch(setPagenumber(0));
                             }
                             }
                         >
+=======
+                            onChange={(event) => handleChange(setOrderStatus, event.target.value)}>
+>>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
                             <MenuItem value="">
-                                <em>None</em>
+                                { t('none') }
                             </MenuItem>
-                            <MenuItem value="completed">Completed</MenuItem>
-                            <MenuItem value="pending">Pending</MenuItem>
-                            <MenuItem value="rejected">Rejected</MenuItem>
+                            {
+                                Status.map((status, index) => {
+                                    return (
+                                        <MenuItem key={index} value={status.toLowerCase()}>
+                                            { status }
+                                        </MenuItem>
+                                    );                                    
+                                })
+                            }
                         </Select>
                     </FormControl>
                 </div>
