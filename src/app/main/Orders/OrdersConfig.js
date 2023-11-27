@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import OrderDetail from './OrderDetail';
 
 const OrdersApp = lazy(() => import('./OrdersApp'));
 
@@ -12,6 +13,10 @@ const OrdersConfig = {
         {
             path: 'orders',
             element: <OrdersApp />
+        },
+        {
+            path: 'orders/:id',
+            element: <OrderDetail />
         }
     ]
 };

@@ -19,6 +19,369 @@
       "url": "http://localhost:3000/api"
     }
   ],
+  "database": {
+    "examples": {
+      "orders": {
+        "value": [
+          {
+            "id": 1,
+            "customer": "John Doe",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "3500",
+            "channel": "DoorDash",
+            "status": "completed",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "customer": "Brokle Myles",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "6000",
+            "channel": "DoorDash",
+            "status": "pending",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "customer": "Bertha Biner",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "8500",
+            "channel": "DoorDash",
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "customer": "John Doe",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "3500",
+            "channel": "DoorDash",
+            "status": "completed",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "customer": "Brokle Myles",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "6000",
+            "channel": "GrubHub",
+            "status": "pending",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "customer": "Bertha Biner",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "8500",
+            "channel": "GrubHub",
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "customer": "John Doe",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "3500",
+            "channel": "GrubHub",
+            "status": "completed",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "customer": "Brokle Myles",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "6000",
+            "channel": "DoorDash",
+            "status": "pending",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "customer": "Bertha Biner",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "8500",
+            "channel": "GrubHub",
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "customer": "John Doe",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "3500",
+            "channel": "Uber",
+            "status": "completed",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "customer": "Brokle Myles",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "6000",
+            "channel": "DoorDash",
+            "status": "pending",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "customer": "Bertha Biner",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "8500",
+            "channel": "DoorDash",
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 13,
+            "customer": "Bertha Biner",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "8500",
+            "channel": "Uber",
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          }
+        ]
+      },
+      "items": {
+        "value": [
+          {
+            "id": "1",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Handphone",
+            "price": "200",
+            "category": "Electronic"
+          },
+          {
+            "id": "2",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Laptop",
+            "price": "100",
+            "category": "Electronic"
+          },
+          {
+            "id": "3",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Coat",
+            "price": "400",
+            "category": "Clothes"
+          },
+          {
+            "id": "4",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Watch",
+            "price": "1000",
+            "category": "Accessory"
+          },
+          {
+            "id": "5",
+            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
+            "productname": "Jacket",
+            "price": "500",
+            "category": "Clothes"
+          }
+        ]
+      }
+    }
+  },
   "paths": {
     "/auth/user/update": {
       "parameters": [],
@@ -7900,6 +8263,50 @@
     },
     "securitySchemes": {},
     "examples": {
+      "orders": {
+        "value": [
+          {
+            "id": 1,
+            "customer": "John Doe",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "1000",
+            "channel": "DoorDash",
+            "status": 1
+          },
+          {
+            "id": 2,
+            "customer": "Brokle Myles",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "1000",
+            "channel": "DoorDash",
+            "status": 2
+          },
+          {
+            "id": 3,
+            "customer": "Bertha Biner",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "1000",
+            "channel": "DoorDash",
+            "status": 3
+          },
+          {
+            "id": 4,
+            "customer": "Bree Kilday",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "1000",
+            "channel": "DoorDash",
+            "status": 1
+          }
+        ]
+      },
       "contacts": {
         "value": [
           {
@@ -29873,43 +30280,43 @@
               "Amount",
               "Status"
             ],
-            "rows":[
-                    {
-                      "id": "528651571NT",
-                      "date": "2019-10-07T22:22:37.274Z",
-                      "name": "Morgan Page",
-                      "amount": 1358.75,
-                      "status": "completed"
-                    },
-                    {
-                      "id": "421436904YT",
-                      "date": "2019-12-18T14:51:24.461Z",
-                      "name": "Nita Hebert",
-                      "amount": -1042.82,
-                      "status": "completed"
-                    },
-                    {
-                      "id": "685377421YT",
-                      "date": "2019-12-25T17:52:14.304Z",
-                      "name": "Marsha Chambers",
-                      "amount": 1828.16,
-                      "status": "pending"
-                    },
-                    {
-                      "id": "884960091RT",
-                      "date": "2019-11-29T06:32:16.111Z",
-                      "name": "Charmaine Jackson",
-                      "amount": 1647.55,
-                      "status": "completed"
-                    },
-                    {
-                      "id": "361402213NT",
-                      "date": "2019-11-24T12:13:23.064Z",
-                      "name": "Maura Carey",
-                      "amount": -927.43,
-                      "status": "completed"
-                    }
-                  ]
+            "rows": [
+              {
+                "id": "528651571NT",
+                "date": "2019-10-07T22:22:37.274Z",
+                "name": "Morgan Page",
+                "amount": 1358.75,
+                "status": "completed"
+              },
+              {
+                "id": "421436904YT",
+                "date": "2019-12-18T14:51:24.461Z",
+                "name": "Nita Hebert",
+                "amount": -1042.82,
+                "status": "completed"
+              },
+              {
+                "id": "685377421YT",
+                "date": "2019-12-25T17:52:14.304Z",
+                "name": "Marsha Chambers",
+                "amount": 1828.16,
+                "status": "pending"
+              },
+              {
+                "id": "884960091RT",
+                "date": "2019-11-29T06:32:16.111Z",
+                "name": "Charmaine Jackson",
+                "amount": 1647.55,
+                "status": "completed"
+              },
+              {
+                "id": "361402213NT",
+                "date": "2019-11-24T12:13:23.064Z",
+                "name": "Maura Carey",
+                "amount": -927.43,
+                "status": "completed"
+              }
+            ]
           }
         }
       },
