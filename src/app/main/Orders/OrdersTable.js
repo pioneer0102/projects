@@ -18,9 +18,9 @@ import { TablePagination } from "@mui/material";
 import { useEffect, useState, useRef } from "react";
 import clsx from 'clsx';
 import FuseScrollbars from "@fuse/core/FuseScrollbars";
-import { setPagenumber, setPagesize } from "./store/ordersSlice";
+import { selectSearchText, selectSubtotal, setPagenumber, setPagesize } from "./store/ordersSlice";
 import { useDispatch } from 'react-redux';
-import { selectOrders, selectPageSize, selectPageNumber, selectDBsize, selectItems } from "./store/ordersSlice";
+import { selectOrders, selectPageSize, selectPageNumber, selectDBsize, selectItems, selectChannel, selectStatus } from "./store/ordersSlice";
 import { getOrders, getItem } from "./store/ordersSlice";
 import Popover from "@mui/material/Popover";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -116,22 +116,36 @@ const headers = [
     },
 ];
 
-const fetchMyData = async () => {
+const fetchMyData = async (searchData) => {
     const response = await axios.post('/api/getorders', searchData);
-    const data = await response.json();
-    return data;
+    // const data = await response.json();
+    return response.data;
 }
 
 function OrdersTable(props) {
     const dispatch = useDispatch();
     // const allOrders = useSelector(selectOrders);
+    const searchText = useSelector(selectSearchText);
+    const subtotal = useSelector(selectSubtotal);
+    const channel = useSelector(selectChannel);
+    const status = useSelector(selectStatus);
     const page = useSelector(selectPageNumber);
     const rowsPerPage = useSelector(selectPageSize);
     const dbSize = useSelector(selectDBsize);
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const itemsInfo = useSelector(selectItems);
-    const {data, isLoading, error} = useQuery('myData', fetchMyData);
+
+    const searchData = {
+        searchText: searchText,
+        subtotal: subtotal,
+        channel: channel,
+        status: status,
+        pageNumber: page,
+        pageSize: rowsPerPage,
+    };
+
+    const {data, isLoading, error, refetch} = useQuery(['myData', searchData], () => fetchMyData(searchData));
     const allOrders = data;
     console.log(allOrders);
 
@@ -146,7 +160,21 @@ function OrdersTable(props) {
         setOpen(false);
     }
 
+    const handlePageChange = () => {
+        const updatedSearchData = {
+            searchText: searchText,
+            subtotal: subtotal,
+            channel: channel,
+            status: status,
+            pageNumber: 10,
+            pageSize: rowsPerPage,
+        };
+
+        refetch(updatedSearchData);
+    }
+
     const descriptionElementRef = useRef(null);
+
     useEffect(() => {
         if (open) {
             const { current: descriptionElement } = descriptionElementRef;
@@ -155,6 +183,19 @@ function OrdersTable(props) {
             }
         }
     })
+
+    useEffect(() => {
+        const searchData = {
+            searchText: searchText,
+            subtotal: subtotal,
+            channel: channel,
+            status: status,
+            pageNumber:  page,
+            pageSize: rowsPerPage,
+        };
+
+
+    }, [searchText])
 
     // dispatch -> getOrders()
     // useEffect(() => {
@@ -228,7 +269,7 @@ function OrdersTable(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {allOrders
+                            {allOrders.pagedData
                                 .map((item, index) => {
                                     return (allOrders &&
                                         <TableRow
@@ -344,7 +385,8 @@ function OrdersTable(props) {
                             nextIconButtonProps={{
                                 'aria-label': 'Next Page',
                             }}
-                            onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
+                            // onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
+                            onPageChange={() => { handlePageChange() }}
                             onRowsPerPageChange={(event) => {
                                 dispatch(setPagesize(parseInt(event.target.value, 10)));
                                 dispatch(setPagenumber(0));
