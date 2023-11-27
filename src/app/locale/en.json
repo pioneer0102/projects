@@ -1,0 +1,18 @@
+{
+    "back": "Back",
+    "none": "None",
+    "search": "Search",
+    "status": "Status",
+    "channel": "Channel",
+    "orders": {
+        "orders": "Orders",
+        "detail": "Detail",
+        "subTotal": "SubTotal",
+        "noData": "There are no Orders!",
+        "replace": "Replace",
+        "cancel": "Cancel",
+        "total": "Total Orders",
+        "customerInfo": "Customer Information",
+        "detailInfo": "Detail Information"
+    }
+}

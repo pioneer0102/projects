@@ -54,21 +54,22 @@ mock.onPost('/api/getorders').reply(({ data }) => {
     }
 })
 
-mock.onPost('/api/getItem').reply(({ data }) => {
-    const {customer, channel, date, status, subtotal, items} = JSON.parse(data);
+mock.onGet('/api/getItem').reply((data) => {
+    const { id } = data;
+    const order = _.find(ordersDB, { id: parseInt(id) });
     var resultArray =[];
-    items.map((item) => {
+    order.items.map((item) => {
         const oneItem = _.find(itemDB, {id: item.id});
         oneItem.quantity = item.quantity;
         oneItem && resultArray.push(oneItem);
     })
     const result = {
         customer: {
-            customer: customer,
-            channel: channel,
-            date: date,
-            status: status,
-            subtotal: subtotal
+            customer: order.customer,
+            channel: order.channel,
+            date: order.date,
+            status: order.status,
+            subtotal: order.subtotal
         },
         detail: resultArray
     }

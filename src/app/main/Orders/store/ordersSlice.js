@@ -5,33 +5,15 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getOrders = createAsyncThunk(
-    'ordersApp/orders/getOrders',
-    async (params, {getState}) => {
-        const state = getState().ordersApp.orders;
-        // console.log(searchData.pageNumber);
-        const searchData = {
-            searchText: state.searchText,
-            subtotal: state.subtotal,
-            channel: state.channel,
-            status: state.status,
-            pageNumber:  state.pageNumber,
-            pageSize: state.pageSize,
-        };
-        const response = await axios.post('/api/getorders', searchData);
-        const data = await response.data;
-        return { data };
-    }
-);
+export const getOrders = async (searchData) => {
+    const response = await axios.post('/api/getorders', searchData);
+    return response.data;
+};
 
-export const getItem = createAsyncThunk(
-    'orderApp/orders/getItems',
-    async (item, {dispatch, get}) => {
-        const response = await axios.post('/api/getItem', item);
-        const data = await response.data;
-        return data;
-    }
-)
+export const getItem = createAsyncThunk('orderApp/orders/getItems', async (itemId) => {
+    const response = await axios.get(`/api/getItem`, {id: itemId});
+    return response.data;
+});
 
 const ordersAdapter = createEntityAdapter({});
 const itemsAdapter = createEntityAdapter({});
@@ -90,11 +72,6 @@ const ordersSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getOrders.fulfilled, (state, action) => {
-            const { data } = action.payload;
-            state.dbSize = data.dbSize;
-            ordersAdapter.setAll(state, data.pagedData);
-        });
         builder.addCase(getItem.fulfilled, (state, action) => {
             state.detail = action.payload.detail;
             state.customer = action.payload.customer;
