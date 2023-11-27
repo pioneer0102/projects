@@ -7,7 +7,7 @@ function FuseSplashScreen() {
       {/* <div className="logo">
         <img width="128" src="assets/images/logo/logo.svg" alt="logo" />
       </div> */}
-      <div class='logo'>
+      <div className='logo'>
         <img width='128' src='assets/images/logo/logo.png' alt='logo' />
       </div>
       <Box

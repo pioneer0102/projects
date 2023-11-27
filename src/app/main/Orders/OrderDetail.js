@@ -16,6 +16,7 @@ import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import OrderBreadcrumb from "./OrderBreadCrumb";
 import clsx from 'clsx';
 import { format } from "date-fns";
+import history from '@history';
 
 const headerCustomer = [
     {
@@ -102,8 +103,7 @@ function OrderDetail(props) {
                 variant="contained"
                 color="secondary"
                 sx={{ alignSelf: 'flex-end', borderRadius: 1, display: 'inline' }}
-                component={NavLinkAdapter}
-                to={`../orders`}
+                onClick={() => { history.push('/orders') }}
             >
                 Back
             </Button>
@@ -124,11 +124,12 @@ function OrderDetail(props) {
                         </Typography>
                     </div>
                     <FuseScrollbars className="grow overflow-x-auto mx-24 mt-16">
-                        <Table className="simple">
+                        <Table>
                             <TableHead>
                                 <TableRow>
                                     {headerCustomer.map((item, index) => (
                                         <TableCell
+                                            className="border-b-1"
                                             key={index}
                                             align={item.align}
                                         >
@@ -145,10 +146,7 @@ function OrderDetail(props) {
                             </TableHead>
                             <TableBody>
                                 {customerInfo &&
-                                    <TableRow
-                                        role="button"
-                                        component={NavLinkAdapter}
-                                    >
+                                    <TableRow>
                                         {/* <TableCell align="left">
                                             <Typography
                                                 color="text.secondary"
@@ -187,11 +185,11 @@ function OrderDetail(props) {
                                                 className={clsx(
                                                     'inline-flex items-center font-bold text-12 px-10 py-2 tracking-wide uppercase',
                                                     customerInfo.status === "completed" &&
-                                                    'bg-green-100 text-green-800 dark:bg-green-600 dark:text-green-50',
+                                                    'bg-green-500 text-grey-100',
                                                     customerInfo.status === "pending" &&
-                                                    'bg-yellow-200 text-yellow-800 dark:bg-yellow-600 dark:text-yellow-50',
+                                                    'bg-yellow-600 text-grey-100',
                                                     customerInfo.status === "rejected" &&
-                                                    'bg-red-100 text-red-800 dark:bg-red-600 dark:text-red-50',
+                                                    'bg-red-500 text-grey-100',
                                                 )}
                                                 sx={{
                                                     borderRadius: "3px"
@@ -222,11 +220,12 @@ function OrderDetail(props) {
                         </Typography>
                     </div>
                     <FuseScrollbars className="grow overflow-x-auto mx-24 mt-16">
-                        <Table className="simple">
+                        <Table>
                             <TableHead>
                                 <TableRow>
                                     {headers.map((item, index) => (
                                         <TableCell
+                                            className="border-b-1"
                                             key={index}
                                             align={item.align}
                                         >
@@ -248,7 +247,6 @@ function OrderDetail(props) {
                                             <TableRow
                                                 key={index}
                                                 role="button"
-                                                component={NavLinkAdapter}
                                             >
                                                 {/* <TableCell align="left">
                                                 <Typography
@@ -305,11 +303,11 @@ function OrderDetail(props) {
                                         </Typography>
 
                                     </TableCell>
-                                    <TableCell colspan={2}></TableCell>
+                                    <TableCell colSpan={2}></TableCell>
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-bold text-26"
+                                            className="font-bold text-30"
                                         >
                                             $ {customerInfo.subtotal}
                                         </Typography>

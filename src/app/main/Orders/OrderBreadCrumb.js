@@ -14,7 +14,7 @@ function OrderBreadcrumb(props) {
                 <div role="presentation" className='mx-32 mt-32'>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Typography className="inline text-15 text-center font-medium"
-                            color="text.secondary">orders</Typography>
+                            color="text.secondary">Orders</Typography>
                     </Breadcrumbs>
                 </div>
             }
@@ -24,13 +24,13 @@ function OrderBreadcrumb(props) {
                         <Typography
                             className="inline text-15 text-center font-medium"
                             color="text.secondary"
-                            role = "button"
+                            role="button"
                             component={NavLinkAdapter}
                             to={`../orders`}
-                        >orders
+                        >Orders
                         </Typography>
-                        <Typography className="inline text-15 text-center font-medium"
-                            color="text.secondary">detail</Typography>
+                        <Typography className="inline text-15 text-center font-medium text-pink-500"
+                        >Detail</Typography>
                     </Breadcrumbs>
                 </div>
             }

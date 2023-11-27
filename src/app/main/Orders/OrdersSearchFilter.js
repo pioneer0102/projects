@@ -15,7 +15,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOrders } from "./store/ordersSlice";
 
 import { selectSearchText, selectSubtotal, selectChannel, selectStatus } from './store/ordersSlice';
-import { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText } from './store/ordersSlice';
+import { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText, setPagenumber } from './store/ordersSlice';
+
+// const fetchMyData = async (searchData) => {
+//     const response = await axios.post('/api/getorders', searchData);
+//     // const data = await response.json();
+//     return response.data;
+// }
 
 function OrdersSearchFilter(props) {
     const dispatch = useDispatch();
@@ -30,27 +36,38 @@ function OrdersSearchFilter(props) {
     const channel = useSelector(selectChannel);
     const status = useSelector(selectStatus);
 
+    // const searchData = {
+    //     searchText: searchText,
+    //     subtotal: subtotal,
+    //     channel: channel,
+    //     status: status,
+    //     pageNumber: page,
+    //     pageSize: rowsPerPage,
+    // };
+
+    // const { data: allOrders, isLoading, error, refetch } = useQuery(['myData', searchData], () => fetchMyData(searchData));
+
     const handleSearchText = (event) => {
         dispatch(setOrderSearchText(event.target.value));
     }
 
-    useEffect(() => {
-        dispatch(getOrders());
-    }, [subtotal]);
-    useEffect(() => {
-        dispatch(getOrders());
-    }, [searchText]);
-    useEffect(() => {
-        dispatch(getOrders());
-    }, [channel]);
-    useEffect(() => {
-        dispatch(getOrders());
-    }, [status]);
+    // useEffect(() => {
+    //     dispatch(getOrders());
+    // }, [subtotal]);
+    // useEffect(() => {
+    //     dispatch(getOrders());
+    // }, [searchText]);
+    // useEffect(() => {
+    //     dispatch(getOrders());
+    // }, [channel]);
+    // useEffect(() => {
+    //     dispatch(getOrders());
+    // }, [status]);
 
     return (
         <>
             <Paper
-                className="px-24 py-8 border-b-1 mt-32 mx-32"
+                className="px-16 py-8 border-b-1 mt-32 mx-32"
                 component={motion.div}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
@@ -122,7 +139,10 @@ function OrdersSearchFilter(props) {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => dispatch(setOrderSubtotal(event.target.value))}
+                            onChange={(event) => {
+                                dispatch(setOrderSubtotal(event.target.value));
+                                dispatch(setPagenumber(0));
+                            }}
                         >
                             <MenuItem value="">
                                 <em>None</em>
@@ -161,7 +181,11 @@ function OrdersSearchFilter(props) {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => dispatch(setOrderChannel(event.target.value))}
+                            onChange={(event) => {
+                                dispatch(setOrderChannel(event.target.value))
+                                dispatch(setPagenumber(0));
+                            }
+                            }
                         >
                             <MenuItem value="">
                                 <em>None</em>
@@ -198,7 +222,11 @@ function OrdersSearchFilter(props) {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => dispatch(setOrderStatus(event.target.value))}
+                            onChange={(event) => {
+                                dispatch(setOrderStatus(event.target.value))
+                                dispatch(setPagenumber(0));
+                            }
+                            }
                         >
                             <MenuItem value="">
                                 <em>None</em>

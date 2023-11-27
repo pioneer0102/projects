@@ -126,7 +126,7 @@
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "6000",
-            "channel": "DoorDash",
+            "channel": "GrubHub",
             "status": "pending",
             "items": [
               {
@@ -146,7 +146,7 @@
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
-            "channel": "DoorDash",
+            "channel": "GrubHub",
             "status": "rejected",
             "items": [
               {
@@ -174,7 +174,7 @@
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "3500",
-            "channel": "DoorDash",
+            "channel": "GrubHub",
             "status": "completed",
             "items": [
               {
@@ -218,7 +218,7 @@
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
-            "channel": "DoorDash",
+            "channel": "GrubHub",
             "status": "rejected",
             "items": [
               {
@@ -246,7 +246,7 @@
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "3500",
-            "channel": "DoorDash",
+            "channel": "Uber",
             "status": "completed",
             "items": [
               {
@@ -291,6 +291,34 @@
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
             "channel": "DoorDash",
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 13,
+            "customer": "Bertha Biner",
+            "date": "March 6, 2022",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "8500",
+            "channel": "Uber",
             "status": "rejected",
             "items": [
               {

@@ -28,7 +28,8 @@ mock.onPost('/api/getorders').reply(({ data }) => {
         const pagedData = ordersDB.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
-            dbSize: dbSize
+            dbSize: dbSize,
+            filterSize: dbSize
         }
         return [200, data];
     }
@@ -46,7 +47,8 @@ mock.onPost('/api/getorders').reply(({ data }) => {
         const pagedData = filteredData.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
-            dbSize: dbSize
+            dbSize: dbSize,
+            filterSize: filteredData.length
         }
         return [200, data];
     }

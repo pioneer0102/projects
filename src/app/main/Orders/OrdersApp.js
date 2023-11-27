@@ -6,6 +6,10 @@ import { getOrders } from "./store/ordersSlice";
 import OrdersTable from "./OrdersTable";
 import OrdersSearchFilter from "./OrdersSearchFilter";
 import OrderBreadcrumb from './OrderBreadCrumb';
+import { QueryClient, QueryClientProvider } from 'react-query';
+// import styles from './style.module.scss';
+
+const queryClient = new QueryClient();
 
 function OrdersApp(props) {
     // const dispatch = useDispatch();
@@ -16,9 +20,11 @@ function OrdersApp(props) {
 
     return (
         <>
-            <OrderBreadcrumb />
-            <OrdersSearchFilter />
-            <OrdersTable />
+            <QueryClientProvider client={queryClient}>
+                <OrderBreadcrumb />
+                <OrdersSearchFilter />
+                <OrdersTable />
+            </QueryClientProvider >
         </>
     )
 }
