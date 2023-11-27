@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { changeLanguage, selectCurrentLanguage, selectLanguages } from 'app/store/i18nSlice';
 
-function LanguageSwitcher(props) {
+function LanguageSwitcher() {
   const currentLanguage = useSelector(selectCurrentLanguage);
   const languages = useSelector(selectLanguages);
   const [menu, setMenu] = useState(null);

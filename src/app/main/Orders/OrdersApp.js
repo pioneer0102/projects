@@ -15,6 +15,6 @@ const OrdersApp = () => {
             </QueryClientProvider >
         </>
     );
-}
+};
 
 export default withReducer('ordersApp', reducer)(OrdersApp);

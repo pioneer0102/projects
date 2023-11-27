@@ -4,19 +4,19 @@ const SubTotals = [
     "$500 - $1000",
     "$1000 - $5000",
     "$5000 - $10000"
-]
+];
 
 const Channels = [
     "DoorDash",
     "Uber",
     "GrubHub"
-]
+];
 
 const Status = [
     "Completed",
     "Pending",
     "Rejected"
-]
+];
 
 const OrdersListHeader = [
     {
@@ -92,7 +92,7 @@ const OrderDetailCustomHeader = [
         label: 'Status',
         sort: true,
     },
-]
+];
 
 const OrderDetailContentHeader = [
     {
@@ -126,4 +126,4 @@ const OrderDetailContentHeader = [
 
 ];
 
-export { SubTotals, Channels, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader }
+export { SubTotals, Channels, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader };

@@ -23,85 +23,9 @@ import { useTranslation } from 'react-i18next';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 
-<<<<<<< HEAD
-const headerCustomer = [
-    {
-        id: 'customer',
-        align: 'left',
-        disablePadding: true,
-        label: 'Customer',
-        sort: true,
-    },
-    {
-        id: 'datetime',
-        align: 'left',
-        disablePadding: false,
-        label: 'Datetime',
-        sort: true,
-    },
-    {
-        id: 'channel',
-        align: 'left',
-        disablePadding: true,
-        label: 'Channel',
-        sort: true,
-    },
-    {
-        id: 'status',
-        align: 'left',
-        disablePadding: true,
-        label: 'Status',
-        sort: true,
-    },
-];
-
-const headers = [
-    // {
-    //     id: 'id',
-    //     align: 'left',
-    //     disablePadding: true,
-    //     label: 'NO',
-    //     sort: true,
-    // },
-
-    {
-        id: 'image',
-        align: 'left',
-        disablePadding: true,
-        label: 'Image',
-        sort: true,
-    },
-    {
-        id: 'productname',
-        align: 'left',
-        disablePadding: false,
-        label: 'Product Name',
-        sort: true,
-    },
-    {
-        id: 'price',
-        align: 'left',
-        disablePadding: true,
-        label: 'Price',
-        sort: true,
-    },
-    {
-        id: 'quantity',
-        align: 'left',
-        disablePadding: true,
-        label: 'Quantity',
-        sort: true,
-    },
-
-];
-
-
-function OrderDetail(props) {
-=======
-const OrderDetail = ({props}) => {
+const OrderDetail = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
     const routeParams = useParams();
     const itemsInfo = useSelector(selectItems);
     const customerInfo = useSelector(selectCustomer);
@@ -112,18 +36,6 @@ const OrderDetail = ({props}) => {
 
     return (
         <>
-<<<<<<< HEAD
-            <OrderBreadcrumb id={routeParams.id} subtotal={routeParams.subtotal} />
-            <Button
-                className="mx-32"
-                variant="contained"
-                color="secondary"
-                sx={{ alignSelf: 'flex-end', borderRadius: 1, display: 'inline' }}
-                onClick={() => { history.push('/orders'); }}
-            >
-                Back
-            </Button>
-=======
             <div className='flex items-center mx-32 mt-32 justify-between'>
                 <div role="presentation">
                     <Breadcrumbs aria-label="breadcrumb">
@@ -143,12 +55,11 @@ const OrderDetail = ({props}) => {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => { history.push('/orders') }}>
+                    onClick={() => { history.push('/orders'); }}>
                     <Icon>arrow_back</Icon>
                     <span className='ml-8'>{ t('back') }</span>
                 </Button>
             </div>
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
             <div className="flex flex-row">
                 <Paper
                     className="flex flex-col px-8 py-24 border-b-10 my-32 mx-32 w-1/2"
@@ -324,7 +235,7 @@ const OrderDetail = ({props}) => {
             </div >
         </>
     );
-}
+};
 
 export default withReducer('ordersApp', reducer)(OrderDetail);
 
