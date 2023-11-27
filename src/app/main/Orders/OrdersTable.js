@@ -385,8 +385,7 @@ function OrdersTable(props) {
                             nextIconButtonProps={{
                                 'aria-label': 'Next Page',
                             }}
-                            // onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
-                            onPageChange={() => { handlePageChange() }}
+                            onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
                             onRowsPerPageChange={(event) => {
                                 dispatch(setPagesize(parseInt(event.target.value, 10)));
                                 dispatch(setPagenumber(0));
