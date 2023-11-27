@@ -6,7 +6,6 @@ import { getOrders } from "./store/ordersSlice";
 import OrdersTable from "./OrdersTable";
 import OrdersSearchFilter from "./OrdersSearchFilter";
 import OrderBreadcrumb from './OrderBreadCrumb';
-import DisplayPosts from './DisplayPosts';
 
 function OrdersApp(props) {
     // const dispatch = useDispatch();
@@ -20,7 +19,6 @@ function OrdersApp(props) {
             <OrderBreadcrumb />
             <OrdersSearchFilter />
             <OrdersTable />
-            {/* <DisplayPosts /> */}
         </>
     )
 }
