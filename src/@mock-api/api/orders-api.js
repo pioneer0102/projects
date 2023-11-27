@@ -36,7 +36,7 @@ mock.onPost('/api/getorders').reply(({ data }) => {
     else {
         const filteredData = ordersDB.filter((item) => {
             return (
-                (searchText === '' || item.customer.toLowerCase().startsWith(searchText.toLowerCase())) &&
+                (searchText === '' || item.customer.toLowerCase().includes(searchText.toLowerCase())) &&
                 (subtotal === '' || ((priceRange[subtotal].min <= item.subtotal) && (item.subtotal <= priceRange[subtotal].max))) &&
                 (channel === '' || item.channel === channel) &&
                 (status === '' || item.status === status)
