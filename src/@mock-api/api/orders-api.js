@@ -54,30 +54,6 @@ mock.onPost('/api/getorders').reply(({ data }) => {
     }
 });
 
-<<<<<<< HEAD
-mock.onGet('/api/getItem').reply(config => {
-    const {id} = config;
-    console.log(id);
-    // const {customer, channel, date, status, subtotal, items} = JSON.parse(data);
-    // var resultArray =[];
-    // items.map((item) => {
-    //     const oneItem = _.find(itemDB, {id: item.id});
-    //     oneItem.quantity = item.quantity;
-    //     oneItem && resultArray.push(oneItem);
-    // })
-    // const result = {
-    //     customer: {
-    //         customer: customer,
-    //         channel: channel,
-    //         date: date,
-    //         status: status,
-    //         subtotal: subtotal
-    //     },
-    //     detail: resultArray
-    // }
-    // return [200, result];
-});
-=======
 mock.onGet('/api/getItem').reply((data) => {
     const { id } = data;
     const order = _.find(ordersDB, { id: parseInt(id) });
@@ -86,7 +62,7 @@ mock.onGet('/api/getItem').reply((data) => {
         const oneItem = _.find(itemDB, {id: item.id});
         oneItem.quantity = item.quantity;
         oneItem && resultArray.push(oneItem);
-    })
+    });
     const result = {
         customer: {
             customer: order.customer,
@@ -96,7 +72,6 @@ mock.onGet('/api/getItem').reply((data) => {
             subtotal: order.subtotal
         },
         detail: resultArray
-    }
+    };
     return [200, result];
-})
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
+});
