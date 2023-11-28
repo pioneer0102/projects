@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import styles from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
-import { logoSrc, backImgSrc, abbDetail, detail } from 'src/app/model/PartnerModel';
+import { logoSrc, backImgSrc, detail } from 'src/app/model/PartnerModel';
 import { Icon } from '@mui/material';
 
 const ExpandMore = styled((props) => {
@@ -35,7 +35,7 @@ const PartnerCard = (props) => {
     const handleExpandClick = () => setExpanded(!expanded);
 
     return (
-        <Card className={`${styles.card_height} ${styles.paper}`}>
+        <Card className={`flex-1 ${styles.card_height} ${styles.paper}`}>
             <CardHeader
                 avatar={
                     <div className={styles.header_size}>
@@ -56,6 +56,7 @@ const PartnerCard = (props) => {
             <CardMedia
                 component="img"
                 image={backImgSrc[name]}
+                className = {styles.backimg_size}
                 alt="image"
             />
             <CardContent>
