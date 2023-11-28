@@ -33,10 +33,7 @@ function PartnerForm() {
     const channel = routeParams.channel;
 
     const handleCancel = () => history.push('/partners');
-
-    function onSubmit() {
-
-    }
+    const onSubmit = () => {}
 
     return (
         <>
