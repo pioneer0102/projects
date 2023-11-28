@@ -1,13 +1,13 @@
 const backImgSrc = {
-    DoorDash: "/assets/images/Partners/Doordash/doordash-back.png",
-    Uber: "/assets/images/Partners/Uber/uber-back.png",
-    GrubHub: "/assets/images/Partners/GrubHub/grubhub-back.png"
+    DoorDash: "https://img.cdn4dd.com/cdn-cgi/image/fit=cover,format=auto,quality=60/https://cdn.doordash.com/managed/consumer/seo/home/landing_oh_canada/hero_landing_us_desktop.png",
+    Uber: "https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/c413f20400e04805.webp",
+    GrubHub: "https://media-cdn.grubhub.com/grubhub-marketing/image/upload/f_auto,fl_lossy/v1692270106/grubhubHomePage/sushi_homepage1.png"
 };
 
 const logoSrc = {
-    DoorDash: "/assets/images/Partners/Doordash/doordash-logo.ico",
-    Uber: "/assets/images/Partners/Uber/uber-logo.svg",
-    GrubHub: "/assets/images/Partners/GrubHub/grubhub-logo1.webp"
+    DoorDash: "https://cdn.doordash.com/static/img/favicon@2x.ico?dd-nonce",
+    Uber: "https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/31ee382bd0e6ed84.svg",
+    GrubHub: "https://www.grubhub.com/static-assets/img/favicon.ico"
 };
 
 const abbDetail = {
