@@ -18,7 +18,7 @@ const Root = styled('div')(({ theme }) => ({
 function Logo() {
   return (
     <Root className="flex flex-col">
-      <img className="w-160" src="assets/images/logo/logo.png" alt="logo" />
+      <img className="w-160" src="assets/images/logo/Logo.png" alt="logo" />
     </Root>
   );
 }
