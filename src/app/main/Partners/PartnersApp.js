@@ -1,19 +1,15 @@
 import PartnerCard from "./PartnerCard";
 import { Channels } from 'src/app/model/Global';
-import PartnerBreadcrumb from "./PartnerBreadCrumb";
 
 function PartnersApp() {
     return (
-        <>
-            <PartnerBreadcrumb />
-            <div className="flex">
-                {
-                    Channels.map((item, index) => (
-                        <PartnerCard key={index} name={item} />
-                    ))
-                }
-            </div>
-        </>
+        <div className="flex md:flex-row flex-col mx-24 my-32 gap-24">
+            {
+                Channels.map((item, index) => (
+                    <PartnerCard key={index} name={item} />
+                ))
+            }
+        </div>
     );
 }
 

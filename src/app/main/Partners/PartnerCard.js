@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -16,6 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { logoSrc, backImgSrc } from 'src/app/model/PartnerModel';
 import { Channels } from 'src/app/model/Global';
+import { Icon } from '@mui/material';
 
 const ExpandMore = styled((props) => {
     const { ...other } = props;
@@ -30,10 +31,10 @@ const ExpandMore = styled((props) => {
 
 const PartnerCard = (props) => {
     const { name } = props;
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [partner, setPartner] = useState(null);
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [partner, setPartner] = React.useState(null);
     const navigate = useNavigate();
 
     const open = Boolean(anchorEl);
@@ -41,6 +42,7 @@ const PartnerCard = (props) => {
         setAnchorEl(event.currentTarget);
         setPartner(name);
     }
+
     const handleEdit = () => {
         setAnchorEl(null);
         navigate(`/partners/edit/${partner}`);
@@ -51,51 +53,31 @@ const PartnerCard = (props) => {
         navigate(`/partners/add/${partner}`);
     }
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    }
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
+    const handleClose = () => setAnchorEl(null);
+    const handleExpandClick = () => setExpanded(!expanded);
 
     return (
-        <Card className={`mx-32 my-32 ${styles.card_height} ${styles.paper}`}>
+        <Card className={`${styles.card_height} ${styles.paper}`}>
             <CardHeader
                 avatar={
                     <div className={styles.header_size}>
-                        {name === "DoorDash" && <img src={logoSrc.DoorDash} />}
-                        {name === "Uber" && <img src={logoSrc.Uber} />}
-                        {name === "GrubHub" && <img src={logoSrc.GrubHub} />}
+                        <img src={logoSrc[name]} alt={name} />
                     </div>
                 }
                 action={
                     <IconButton aria-label="settings" onClick={handleClick}>
-                        <MoreVertIcon />
+                        <Icon>add</Icon>
                     </IconButton>
                 }
                 title={
-                    (name === "DoorDash" &&
-                        <Typography className="font-bold text-20 text-red-500">
-                            {Channels[0]}
-                        </Typography>) ||
-                    (name === "Uber" &&
-                        <Typography className="font-bold text-20">
-                            {Channels[1]}
-                        </Typography>) ||
-                    (name === "GrubHub" &&
-                        <Typography className="font-bold text-20 text-orange-500">
-                           {Channels[2]}
-                        </Typography>)
+                    <Typography className={`font-bold text-20 ${styles[name]}`}>
+                        {name}
+                    </Typography>
                 }
             />
             <CardMedia
                 component="img"
-                image={
-                    (name === "DoorDash" && backImgSrc.DoorDash) ||
-                    (name === "Uber" && backImgSrc.Uber) ||
-                    (name === "GrubHub" && backImgSrc.GrubHub)
-                }
+                image={backImgSrc[name]}
                 alt="image"
             />
             <CardContent>
@@ -137,18 +119,6 @@ const PartnerCard = (props) => {
                     }
                 </CardContent>
             </Collapse>
-            <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': 'basic-button',
-                }}
-            >
-                <MenuItem onClick={handleEdit}>Edit</MenuItem>
-                <MenuItem onClick={handleAdd}>Add</MenuItem>
-            </Menu>
         </Card>
     )
 }

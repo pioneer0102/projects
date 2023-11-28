@@ -56,44 +56,44 @@ function PartnerForm() {
         <>
             <PartnerBreadcrumb channel={channel} />
             <div className="flex flex-col m-32">
-                <div className='flex items-center justify-center pb-32'>
-                    {channel === "DoorDash" &&
-                        (<><img
-                            className={styles.header_size}
-                            src={logoSrc.DoorDash}
-                            alt="user background" />
-                            <Typography className="ml-8 font-bold text-20 text-red-500">
-                                {Channels[0]}
-                            </Typography></>)
-                    }
-                    {channel === "Uber" &&
-                        (<><img
-                            className={styles.header_size}
-                            src={logoSrc.Uber}
-                            alt="user background" />
-                            <Typography className="ml-8 font-bold text-20">
-                                {Channels[1]}
-                            </Typography></>)
-                    }
-                    {channel === "GrubHub" &&
-                        (<><img
-                            className={styles.header_size}
-                            src={logoSrc.GrubHub}
-                            alt="user background" />
-                            <Typography className="ml-8 font-bold text-20 text-orange-500">
-                                {Channels[2]}
-                            </Typography></>)
-                    }
-                    {/* <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => { navigate('/partners'); }}>
-                        <Icon>arrow_back</Icon>
-                        <span className='ml-8'>{t('back')}</span>
-                    </Button> */}
-                </div>
-
                 <Paper className={`px-32 py-32 ${styles.paper}`}>
+                    <div className='flex items-center justify-center pb-32'>
+                        {channel === "DoorDash" &&
+                            (<><img
+                                className={styles.header_size}
+                                src={logoSrc.DoorDash}
+                                alt="user background" />
+                                <Typography className="ml-8 font-bold text-20 text-red-500">
+                                    {Channels[0]}
+                                </Typography></>)
+                        }
+                        {channel === "Uber" &&
+                            (<><img
+                                className={styles.header_size}
+                                src={logoSrc.Uber}
+                                alt="user background" />
+                                <Typography className="ml-8 font-bold text-20">
+                                    {Channels[1]}
+                                </Typography></>)
+                        }
+                        {channel === "GrubHub" &&
+                            (<><img
+                                className={styles.header_size}
+                                src={logoSrc.GrubHub}
+                                alt="user background" />
+                                <Typography className="ml-8 font-bold text-20 text-orange-500">
+                                    {Channels[2]}
+                                </Typography></>)
+                        }
+                        {/* <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => { navigate('/partners'); }}>
+                            <Icon>arrow_back</Icon>
+                            <span className='ml-8'>{t('back')}</span>
+                        </Button> */}
+                    </div>
+
                     <Controller
                         control={control}
                         name="name"
@@ -193,13 +193,8 @@ function PartnerForm() {
                         )}
                     />
                     <Box
-                        className="flex items-center mt-40 py-14 pr-16 pl-4 sm:pr-48 sm:pl-36 border-t"
+                        className="flex items-center mt-24"
                     >
-                        {/* {routeParams.either == 'edit' && (
-                            <Button color="error">
-                                Delete
-                            </Button>
-                        )} */}
                         <Button className="ml-auto">
                             Cancel
                         </Button>
