@@ -1,6 +1,5 @@
 import Button from '@mui/material/Button';
-import { useNavigate, useParams } from 'react-router-dom';
-import FuseLoading from '@fuse/core/FuseLoading';
+import { useParams } from 'react-router-dom';
 import _ from '@lodash';
 import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
@@ -12,13 +11,10 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Typography } from "@mui/material";
 import styles from './style.module.scss';
-import { useTranslation } from 'react-i18next';
 import PartnerBreadcrumb from './PartnerBreadCrumb';
 import { logoSrc } from 'src/app/model/PartnerModel';
-import { Channels } from 'src/app/model/Global';
-/**
- * Form Validation Schema
- */
+import history from '@history';
+
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a name'),
     address: yup.string().required('You must enter a address'),
@@ -28,70 +24,33 @@ const schema = yup.object().shape({
 
 function PartnerForm() {
     const routeParams = useParams();
-
-    const { control, watch, handleSubmit, formState } = useForm({
+    const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema),
     });
 
     const { isValid, dirtyFields, errors } = formState;
-
-    const form = watch();
     const channel = routeParams.channel;
-    /**
-     * Form Submit
-     */
-    function onSubmit(data) {
-        // if (routeParams.either === 'new') {
 
-        // } else {
-        // }
+    const handleCancel = () => history.push('/partners');
 
-        if (_.isEmpty(form) || !channel) {
-            return <FuseLoading />;
-        }
+    function onSubmit() {
+
     }
 
     return (
         <>
             <PartnerBreadcrumb channel={channel} />
-            <div className="flex flex-col m-32">
+            <div className="flex flex-col m-24">
                 <Paper className={`px-32 py-32 ${styles.paper}`}>
-                    <div className='flex items-center justify-center pb-32'>
-                        {channel === "DoorDash" &&
-                            (<><img
-                                className={styles.header_size}
-                                src={logoSrc.DoorDash}
-                                alt="user background" />
-                                <Typography className="ml-8 font-bold text-20 text-red-500">
-                                    {Channels[0]}
-                                </Typography></>)
-                        }
-                        {channel === "Uber" &&
-                            (<><img
-                                className={styles.header_size}
-                                src={logoSrc.Uber}
-                                alt="user background" />
-                                <Typography className="ml-8 font-bold text-20">
-                                    {Channels[1]}
-                                </Typography></>)
-                        }
-                        {channel === "GrubHub" &&
-                            (<><img
-                                className={styles.header_size}
-                                src={logoSrc.GrubHub}
-                                alt="user background" />
-                                <Typography className="ml-8 font-bold text-20 text-orange-500">
-                                    {Channels[2]}
-                                </Typography></>)
-                        }
-                        {/* <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => { navigate('/partners'); }}>
-                            <Icon>arrow_back</Icon>
-                            <span className='ml-8'>{t('back')}</span>
-                        </Button> */}
+                    <div className='flex items-center justify-center'>
+                        <img
+                            className={styles.header_size}
+                            src={logoSrc[channel]}
+                            alt="user background" />
+                        <Typography className={`font-bold text-24 px-8 ${styles[channel]}`}>
+                            {channel}
+                        </Typography>
                     </div>
 
                     <Controller
@@ -193,9 +152,12 @@ function PartnerForm() {
                         )}
                     />
                     <Box
-                        className="flex items-center mt-24"
+                        className="flex items-center mt-32"
                     >
-                        <Button className="ml-auto">
+                        <Button
+                            className="ml-auto"
+                            onClick={handleCancel}
+                        >
                             Cancel
                         </Button>
                         <Button
