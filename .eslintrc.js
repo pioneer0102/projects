@@ -29,5 +29,11 @@ module.exports = {
         "react"
     ],
     "rules": {
+        
+        "react/prop-types": "off", // Disable prop-types validation if you use PropTypes from Material-UI
+        "react/react-in-jsx-scope": "off", // No need for this rule if you are using React 17+
+        "react/display-name": "off", // Disable display-name rule if not needed
+        
+        
     }
-}
+};

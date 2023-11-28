@@ -21,6 +21,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FuseScrollbars from "@fuse/core/FuseScrollbars";
+import { makeStyles } from '@mui/styles';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import {
     selectSearchText,
@@ -37,10 +38,19 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import { OrdersListHeader } from 'src/app/model/OrdersModel';
 import { useTranslation } from 'react-i18next';
 
+const useStyles = makeStyles(() => ({
+    popover: {
+        '& .MuiPaper-elevation8': {
+            boxShadow: '3px 3px 5px 1px rgba(200, 200, 200, 0.15)' /* Customize the boxShadow here */
+        }
+    },
+}));
+
 const OrdersTable = () => {
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const { t } = useTranslation();
+    const classes = useStyles();
 
     const searchText = useSelector(selectSearchText);
     const subtotal = useSelector(selectSubtotal);
@@ -65,33 +75,33 @@ const OrdersTable = () => {
     const showDetail = (item) => history.push(`/orders/${item.id}`);
 
     if (isLoading) {
-        return <FuseLoading />
+        return <FuseLoading />;
     }
 
-    if(isError) {
+    if (isError) {
         return (
             <div className="flex flex-1 items-center justify-center h-full">
                 <Typography color="text.secondary" variant="h5">
-                    { t('orders.noData') }
+                    {t('orders.noData')}
                 </Typography>
             </div>
-        )
+        );
     }
 
     if (allOrders.pagedData.length === 0) {
         return (
             <div className="flex flex-1 items-center justify-center h-full">
                 <Typography color="text.secondary" variant="h5">
-                { t('orders.noData') }
+                    {t('orders.noData')}
                 </Typography>
             </div>
-        )
+        );
     }
 
     const handleAction = (event) => {
         event.stopPropagation();
         setAnchorEl(event.currentTarget);
-    }
+    };
 
     const handleActionClose = (event) => {
         event.stopPropagation();
@@ -134,7 +144,7 @@ const OrdersTable = () => {
                                         <TableRow
                                             key={index}
                                             role="button"
-                                            onClick={() => { showDetail(item) }}>
+                                            onClick={() => { showDetail(item); }}>
                                             <TableCell align="left">
                                                 <Typography
                                                     color="text.secondary"
@@ -187,6 +197,12 @@ const OrdersTable = () => {
                                                     open={popOpen}
                                                     anchorEl={anchorEl}
                                                     onClose={handleActionClose}
+                                                    // sx={{
+                                                    //     '.muiltr-q5bk6i-MuiPaper-root-MuiPopover-paper': {
+                                                    //         boxShadow: '3px 3px 5px 1px rgba(200, 200, 200, 0.15)' /* Customize the boxShadow here */
+                                                    //     }
+                                                    // }}
+                                                    className={classes.popover}
                                                     anchorOrigin={{
                                                         vertical: 'bottom',
                                                         horizontal: 'left',
@@ -196,19 +212,19 @@ const OrdersTable = () => {
                                                             className="text-blue-500"
                                                             onClick={handleActionClose}
                                                             startIcon={<EditIcon />}>
-                                                            { t('orders.replace') }
+                                                            {t('orders.replace')}
                                                         </Button>
                                                         <Button
                                                             className="text-blue-500"
                                                             onClick={handleActionClose}
                                                             startIcon={<DeleteIcon />}>
-                                                            { t('orders.cancel') }
+                                                            {t('orders.cancel')}
                                                         </Button>
                                                     </Box>
                                                 </Popover>
                                             </TableCell>
                                         </TableRow>
-                                    )
+                                    );
                                 })
                             }
                         </TableBody>
@@ -217,7 +233,7 @@ const OrdersTable = () => {
                         <Typography
                             className="inline text-16 text-center font-medium mt-16 ml-24"
                             color="text.secondary">
-                            { t('orders.total') } : {dbSize}
+                            {t('orders.total')} : {dbSize}
                         </Typography>
                         <TablePagination
                             className=" flex-auto"
@@ -237,7 +253,7 @@ const OrdersTable = () => {
                 </FuseScrollbars>
             </Paper>
         </>
-    )
-}
+    );
+};
 
 export default OrdersTable;

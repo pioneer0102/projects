@@ -17,7 +17,7 @@ function NavbarToggleButton(props) {
       className={props.className}
       color="inherit"
       size="small"
-      onClick={(ev) => {
+      onClick={() => {
         if (isMobile) {
           dispatch(navbarToggleMobile());
         } else if (config.navbar.style === 'style-2') {

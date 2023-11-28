@@ -1,5 +1,4 @@
 import _ from '@lodash';
-import FuseUtils from '@fuse/utils/FuseUtils';
 import mockApi from '../mock-api.json';
 import mock from '../mock';
 
@@ -30,7 +29,7 @@ mock.onPost('/api/getorders').reply(({ data }) => {
             pagedData: pagedData,
             dbSize: dbSize,
             filterSize: dbSize
-        }
+        };
         return [200, data];
     }
     else {
@@ -49,10 +48,10 @@ mock.onPost('/api/getorders').reply(({ data }) => {
             pagedData: pagedData,
             dbSize: dbSize,
             filterSize: filteredData.length
-        }
+        };
         return [200, data];
     }
-})
+});
 
 mock.onGet('/api/getItem').reply((data) => {
     const { id } = data;
@@ -62,7 +61,7 @@ mock.onGet('/api/getItem').reply((data) => {
         const oneItem = _.find(itemDB, {id: item.id});
         oneItem.quantity = item.quantity;
         oneItem && resultArray.push(oneItem);
-    })
+    });
     const result = {
         customer: {
             customer: order.customer,
@@ -72,6 +71,6 @@ mock.onGet('/api/getItem').reply((data) => {
             subtotal: order.subtotal
         },
         detail: resultArray
-    }
+    };
     return [200, result];
-})
+});

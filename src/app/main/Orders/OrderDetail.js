@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Paper from "@mui/material/Paper";
 import Table from '@mui/material/Table';
 import Button from "@mui/material/Button";
-import { Icon, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useParams } from 'react-router-dom';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
@@ -22,8 +22,10 @@ import { OrderDetailContentHeader, OrderDetailCustomHeader } from 'src/app/model
 import { useTranslation } from 'react-i18next';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
+import styles from './style.module.scss';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 
-const OrderDetail = ({props}) => {
+const OrderDetail = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const routeParams = useParams();
@@ -54,9 +56,11 @@ const OrderDetail = ({props}) => {
                 </div>
                 <Button
                     variant="contained"
-                    color="primary"
-                    onClick={() => { history.push('/orders') }}>
-                    <Icon>arrow_back</Icon>
+                    color="secondary"
+                    onClick={() => { history.push('/orders'); }}
+                    className = {styles.backButton}
+                    >
+                    <FuseSvgIcon size={18}>heroicons-solid:arrow-left</FuseSvgIcon>
                     <span className='ml-8'>{ t('back') }</span>
                 </Button>
             </div>
@@ -208,7 +212,7 @@ const OrderDetail = ({props}) => {
                                                     </Typography>
                                                 </TableCell>
                                             </TableRow>
-                                        )
+                                        );
                                     })}
                                 <TableRow>
                                     <TableCell align="left">
@@ -234,8 +238,8 @@ const OrderDetail = ({props}) => {
                 </Paper>
             </div >
         </>
-    )
-}
+    );
+};
 
 export default withReducer('ordersApp', reducer)(OrderDetail);
 
