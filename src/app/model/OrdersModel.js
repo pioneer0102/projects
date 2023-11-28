@@ -6,12 +6,6 @@ const SubTotals = [
     "$5000 - $10000"
 ];
 
-const Channels = [
-    "DoorDash",
-    "Uber",
-    "GrubHub"
-];
-
 const Status = [
     "Completed",
     "Pending",
@@ -126,4 +120,4 @@ const OrderDetailContentHeader = [
 
 ];
 
-export { SubTotals, Channels, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader };
+export { SubTotals, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader };

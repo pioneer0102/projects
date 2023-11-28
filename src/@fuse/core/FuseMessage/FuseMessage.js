@@ -44,7 +44,7 @@ const variantIcon = {
   info: 'info',
 };
 
-function FuseMessage(props) {
+function FuseMessage() {
   const dispatch = useDispatch();
   const state = useSelector(selectFuseMessageState);
   const options = useSelector(selectFuseMessageOptions);

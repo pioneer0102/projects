@@ -8,12 +8,10 @@ const queryClient = new QueryClient();
 
 const OrdersApp = () => {
     return (
-        <>
-            <QueryClientProvider client={queryClient}>
-                <OrdersSearchFilter />
-                <OrdersTable />
-            </QueryClientProvider >
-        </>
+        <QueryClientProvider client={queryClient}>
+            <OrdersSearchFilter />
+            <OrdersTable />
+        </QueryClientProvider >
     );
 };
 

@@ -1,29 +1,4 @@
 import clsx from 'clsx';
-<<<<<<< HEAD
-import FuseScrollbars from "@fuse/core/FuseScrollbars";
-import { selectSearchText, selectSubtotal, setPagenumber, setPagesize } from "./store/ordersSlice";
-import { useDispatch } from 'react-redux';
-import { selectOrders, selectPageSize, selectPageNumber, selectDBsize, selectItems, selectChannel, selectStatus } from "./store/ordersSlice";
-import { getOrders, getItem } from "./store/ordersSlice";
-import Popover from "@mui/material/Popover";
-import DeleteIcon from '@mui/icons-material/Delete';
-import { ArrowBack } from "@mui/icons-material";
-import EditIcon from "@mui/icons-material/Edit";
-import CloseIcon from '@mui/icons-material/Close';
-import { makeStyles } from "@mui/styles";
-import { Box } from "@mui/material";
-import Dialog, { DialogProps } from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import TableContainer from '@mui/material/TableContainer';
-import { Divider } from "@mui/material";
-import { useQuery } from "react-query";
-import axios from 'axios';
-import styles from './style.module.scss';
-=======
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
 import history from '@history';
 import { useState } from "react";
 import { format } from "date-fns";
@@ -46,6 +21,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FuseScrollbars from "@fuse/core/FuseScrollbars";
+import { makeStyles } from '@mui/styles';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import {
     selectSearchText,
@@ -62,90 +38,19 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import { OrdersListHeader } from 'src/app/model/OrdersModel';
 import { useTranslation } from 'react-i18next';
 
-<<<<<<< HEAD
-const headerColor = red[500];
-
-const OrderDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-        padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-        padding: theme.spacing(1),
+const useStyles = makeStyles(() => ({
+    popover: {
+        '& .MuiPaper-elevation8': {
+            boxShadow: '3px 3px 5px 1px rgba(200, 200, 200, 0.15)' /* Customize the boxShadow here */
+        }
     },
 }));
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: headerColor,
-        color: theme.palette.common.white,
-    }
-}));
-
-const headers = [
-    // {
-    //     id: 'id',
-    //     align: 'center',
-    //     disablePadding: true,
-    //     label: 'NO',
-    //     sort: true,
-    // },
-    {
-        id: 'customer',
-        align: 'left',
-        disablePadding: true,
-        label: 'Customer',
-        sort: true,
-    },
-    {
-        id: 'datetime',
-        align: 'left',
-        disablePadding: false,
-        label: 'Datetime',
-        sort: true,
-    },
-    {
-        id: 'subtotal',
-        align: 'left',
-        disablePadding: true,
-        label: 'Subtotal',
-        sort: true,
-    },
-    {
-        id: 'channel',
-        align: 'left',
-        disablePadding: true,
-        label: 'Channel',
-        sort: true,
-    },
-    {
-        id: 'status',
-        align: 'left',
-        disablePadding: true,
-        label: 'Status',
-        sort: true,
-    },
-    {
-        id: 'action',
-        align: 'left',
-        disablePadding: true,
-        label: 'Action',
-        sort: true,
-    },
-];
-
-const fetchMyData = async (searchData) => {
-    const response = await axios.post('/api/getorders', searchData);
-    // const data = await response.json();
-    return response.data;
-};
-
-function OrdersTable(props) {
-=======
 const OrdersTable = () => {
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const { t } = useTranslation();
+    const classes = useStyles();
 
     const searchText = useSelector(selectSearchText);
     const subtotal = useSelector(selectSubtotal);
@@ -169,70 +74,25 @@ const OrdersTable = () => {
 
     const showDetail = (item) => history.push(`/orders/${item.id}`);
 
-<<<<<<< HEAD
-    const handleDialogOpen = (item) => {
-        dispatch(getItem(item.id));
-        const url = item.id;
-        history.push('/orders/${url}');
-    };
-
-    const handleDialogClose = () => {
-        setOpen(false);
-    };
-
-    const descriptionElementRef = useRef(null);
-
-    useEffect(() => {
-        if (open) {
-            const { current: descriptionElement } = descriptionElementRef;
-            if (descriptionElement !== null) {
-                descriptionElement.focus();
-            }
-        }
-    });
-
-    // useEffect(() => {
-    //     const searchData = {
-    //         searchText: searchText,
-    //         subtotal: subtotal,
-    //         channel: channel,
-    //         status: status,
-    //         pageNumber: page,
-    //         pageSize: rowsPerPage,
-    //     };
-
-
-    // }, [searchText])
-
-    // dispatch -> getOrders()
-    // useEffect(() => {
-    //     dispatch(getOrders());
-    // }, [page, rowsPerPage]);
-
-    // case: empty Orders
-    if (allOrders == null) {
-        return <FuseSplashScreen />;
-=======
     if (isLoading) {
-        return <FuseLoading />
+        return <FuseLoading />;
     }
 
-    if(isError) {
+    if (isError) {
         return (
             <div className="flex flex-1 items-center justify-center h-full">
                 <Typography color="text.secondary" variant="h5">
-                    { t('orders.noData') }
+                    {t('orders.noData')}
                 </Typography>
             </div>
-        )
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
+        );
     }
 
     if (allOrders.pagedData.length === 0) {
         return (
             <div className="flex flex-1 items-center justify-center h-full">
                 <Typography color="text.secondary" variant="h5">
-                { t('orders.noData') }
+                    {t('orders.noData')}
                 </Typography>
             </div>
         );
@@ -241,7 +101,7 @@ const OrdersTable = () => {
     const handleAction = (event) => {
         event.stopPropagation();
         setAnchorEl(event.currentTarget);
-    }
+    };
 
     const handleActionClose = (event) => {
         event.stopPropagation();
@@ -284,7 +144,7 @@ const OrdersTable = () => {
                                         <TableRow
                                             key={index}
                                             role="button"
-                                            onClick={() => { showDetail(item) }}>
+                                            onClick={() => { showDetail(item); }}>
                                             <TableCell align="left">
                                                 <Typography
                                                     color="text.secondary"
@@ -337,6 +197,12 @@ const OrdersTable = () => {
                                                     open={popOpen}
                                                     anchorEl={anchorEl}
                                                     onClose={handleActionClose}
+                                                    // sx={{
+                                                    //     '.muiltr-q5bk6i-MuiPaper-root-MuiPopover-paper': {
+                                                    //         boxShadow: '3px 3px 5px 1px rgba(200, 200, 200, 0.15)' /* Customize the boxShadow here */
+                                                    //     }
+                                                    // }}
+                                                    className={classes.popover}
                                                     anchorOrigin={{
                                                         vertical: 'bottom',
                                                         horizontal: 'left',
@@ -346,22 +212,13 @@ const OrdersTable = () => {
                                                             className="text-blue-500"
                                                             onClick={handleActionClose}
                                                             startIcon={<EditIcon />}>
-                                                            { t('orders.replace') }
+                                                            {t('orders.replace')}
                                                         </Button>
                                                         <Button
                                                             className="text-blue-500"
-<<<<<<< HEAD
-                                                            onClick={(event) => {
-                                                                event.stopPropagation();
-                                                                handleClose();
-                                                            }}
-                                                            startIcon={<ArrowBack />}>
-                                                            Cancel
-=======
                                                             onClick={handleActionClose}
                                                             startIcon={<DeleteIcon />}>
-                                                            { t('orders.cancel') }
->>>>>>> e3ac1891d1925e64e7ed03891405c4e847c34fc2
+                                                            {t('orders.cancel')}
                                                         </Button>
                                                     </Box>
                                                 </Popover>
@@ -376,7 +233,7 @@ const OrdersTable = () => {
                         <Typography
                             className="inline text-16 text-center font-medium mt-16 ml-24"
                             color="text.secondary">
-                            { t('orders.total') } : {dbSize}
+                            {t('orders.total')} : {dbSize}
                         </Typography>
                         <TablePagination
                             className=" flex-auto"
@@ -397,6 +254,6 @@ const OrdersTable = () => {
             </Paper>
         </>
     );
-}
+};
 
 export default OrdersTable;

@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import PartnerForm from './PartnerForm';
 
 const PartnersApp = lazy(() => import('./PartnersApp'));
 
@@ -28,6 +29,10 @@ const PartnersConfig = {
         {
             path: 'partners',
             element: <PartnersApp />
+        },
+        {
+            path: 'partners/:either/:channel',
+            element: <PartnerForm />
         }
     ]
 };

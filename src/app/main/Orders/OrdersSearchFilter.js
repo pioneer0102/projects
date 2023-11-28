@@ -9,7 +9,8 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
-import { Channels, Status, SubTotals } from 'src/app/model/OrdersModel';
+import { Status, SubTotals } from 'src/app/model/OrdersModel';
+import { Channels } from 'src/app/model/Global';
 import { 
     selectSearchText,
     selectSubtotal,
@@ -30,35 +31,6 @@ const OrdersSearchFilter = () => {
     const channel = useSelector(selectChannel);
     const status = useSelector(selectStatus);
 
-<<<<<<< HEAD
-    // const searchData = {
-    //     searchText: searchText,
-    //     subtotal: subtotal,
-    //     channel: channel,
-    //     status: status,
-    //     pageNumber: page,
-    //     pageSize: rowsPerPage,
-    // };
-
-    // const { data: allOrders, isLoading, error, refetch } = useQuery(['myData', searchData], () => fetchMyData(searchData));
-
-    const handleSearchText = (event) => {
-        dispatch(setOrderSearchText(event.target.value));
-    };
-
-    // useEffect(() => {
-    //     dispatch(getOrders());
-    // }, [subtotal]);
-    // useEffect(() => {
-    //     dispatch(getOrders());
-    // }, [searchText]);
-    // useEffect(() => {
-    //     dispatch(getOrders());
-    // }, [channel]);
-    // useEffect(() => {
-    //     dispatch(getOrders());
-    // }, [status]);
-=======
     const handleChange = (actionCreator, value) => {
         dispatch(actionCreator(value));
         dispatch(setPagenumber(0));
@@ -67,23 +39,22 @@ const OrdersSearchFilter = () => {
     return (
         <>
             <Paper className={`px-16 py-8 border-b-1 mt-32 mx-32 ${styles.paper}`}>
-                <div className="flex flex-col sm:flex-row sm:space-y-0 mt-8 -mx-8">
+                <div className="flex md:flex-row sm:flex-col justify-between flex-wrap sm:space-y-0 mt-8 -mx-8">
                     <Box
-                        className="flex w-full items-center px-16 mx-8 mb-8 border-1"
-                        sx={{ borderRadius: 1 }}>
+                        className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
                         <FuseSvgIcon color="action" size={20}>
                             heroicons-outline:search
                         </FuseSvgIcon>
                         <Input
                             placeholder={ t('search') }
-                            className="flex flex-1 px-16"
+                            className="flex px-16"
                             disableUnderline
                             fullWidth
                             value={searchText}
                             onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
                         />
                     </Box>
-                    <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1, minWidth: 160 }} size="small">
                         <InputLabel
                             id="select-small-label"
                             sx={{
@@ -125,7 +96,7 @@ const OrdersSearchFilter = () => {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1, minWidth: 160 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -166,7 +137,7 @@ const OrdersSearchFilter = () => {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex" sx={{ m: 1, minWidth: 160 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1, minWidth: 160 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
