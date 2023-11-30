@@ -3,12 +3,10 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import styles from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { logoSrc, backImgSrc, detail } from 'src/app/model/PartnerModel';
-import { Icon } from '@mui/material';
 import { CircularProgress } from '@mui/material';
 
 const PartnerCard = (props) => {
@@ -29,11 +27,6 @@ const PartnerCard = (props) => {
                         <img src={logoSrc[name]} alt={name} className='flex-1 self-center' />
                     </div>
                 }
-                // action={
-                //     <IconButton aria-label="settings" onClick={handleClick} className={styles.logo_size}>
-                //         <Icon fontSize="large">add</Icon>
-                //     </IconButton>
-                // }
                 title={
                     <Typography className={`font-bold text-32 ${styles[name]}`}>
                         {name}
