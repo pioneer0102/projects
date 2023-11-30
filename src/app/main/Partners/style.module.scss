@@ -1,24 +1,92 @@
-.card_height {
-    height: fit-content;
+.logo_size {
+    width: 40px;
+    height: 40px;
 }
 
-.header_size {
-    width: 32px;
-    height: 32px;
+.container {
+    position: relative;
+    width: 100%;
+    height: 560px;
 }
 
 .backimg_size {
     width: 100%;
-    height: 220px;
+    height: 560px;
+    border-radius: 5px;
+    box-shadow: 0px 20px 30px #AAA;
+    opacity: 1;
+    transition: .5s ease;
 }
 
-.expand_size {
-    width: 355px;
+.container:hover .backimg_size {
+    opacity: 0.7;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 100%;
+    overflow: auto;
+    width: 100%;
+    left: 5%;
+    height: 0;
+    transition: .5s ease;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+    bottom: 0;
+    height: 100%;
+}
+
+.text {
+    color: aliceblue;
+    position: absolute;
+    width: 90%;
+    font-size: 20px;
+    font-weight: bold;
+    top: 50%;
+    word-break: break-all;
 }
 
 .paper {
     box-shadow: none;
+    border: 2px dashed #6a6a70;
     border-radius: 4px;
+    height: fit-content;
+    transform: rotateX(0deg) scale(0.9);
+    transition: .5s all ease;
+    animation: entry 01s linear 1;
+    perspective: 900px;
+    box-shadow: 0px 20px 50px #555;
+}
+
+.form {
+    animation: entry 01s linear 1;
+    border-radius: 6px;
+    box-shadow: 0px 20px 50px #555;
+}
+
+.paper:hover {
+    cursor: pointer;
+    transform: rotate(0deg) scale(1) translateY(10px);
+    transition: .5s ease;
+    z-index: 400;
+}
+
+@keyframes entry {
+    0% {
+        top: -20%;
+        opacity: 0.1;
+    }
+
+    100% {
+        top: 0%;
+    }
+}
+
+.wrapper {
+    // position: relative;
+    perspective: 900px;
 }
 
 .DoorDash {
@@ -34,11 +102,11 @@
 .cardContent {
     white-space: nowrap;
     height: 20px;
-    overflow: hidden ;
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.backButton {
+.button {
     font-size: 16px;
     border-radius: 5px;
 }

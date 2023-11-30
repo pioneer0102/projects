@@ -2,7 +2,7 @@ const backImgSrc = {
     DoorDash: "https://img.cdn4dd.com/cdn-cgi/image/fit=cover,format=auto,quality=60/https://cdn.doordash.com/managed/consumer/seo/home/landing_oh_canada/hero_landing_us_desktop.png",
     Uber: "https://d3i4yxtzktqr9n.cloudfront.net/web-eats-v2/c413f20400e04805.webp",
     GrubHub: "https://media-cdn.grubhub.com/grubhub-marketing/image/upload/f_auto,fl_lossy/v1692270106/grubhubHomePage/sushi_homepage1.png"
-};
+};  
 
 const logoSrc = {
     DoorDash: "https://cdn.doordash.com/static/img/favicon@2x.ico?dd-nonce",
