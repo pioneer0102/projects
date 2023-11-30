@@ -13,7 +13,7 @@ function PartnerBreadcrumb(props) {
     const { t } = useTranslation();
     return (
         <>
-            <div className='flex items-center mx-24 mt-32 justify-between'>
+            <div className='flex items-center mx-24 mt-24 justify-between'>
                 <div role="presentation">
                     <Breadcrumbs aria-label="breadcrumb">
                         <Typography
@@ -31,7 +31,7 @@ function PartnerBreadcrumb(props) {
                 <Button
                     variant="contained"
                     color="secondary"
-                    className={styles.backButton}
+                    className={styles.button}
                     onClick={() => { history.push('/partners'); }}>
                     <FuseSvgIcon size={18}>heroicons-solid:arrow-left</FuseSvgIcon>
                     <span className='ml-8'>{t('back')}</span>

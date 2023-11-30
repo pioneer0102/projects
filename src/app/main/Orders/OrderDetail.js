@@ -145,7 +145,7 @@ const OrderDetail = () => {
                     </FuseScrollbars>
                 </Paper>
                 <Paper
-                    className="flex flex-col px-8 py-24 border-b-10 my-32 mx-32 w-1/2"
+                    className="flex flex-col px-8 py-24 border-b-10 my-32 mr-32 w-1/2"
                     component={motion.div}
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
