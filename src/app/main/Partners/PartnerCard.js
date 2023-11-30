@@ -8,6 +8,8 @@ import styles from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { logoSrc, backImgSrc, detail } from 'src/app/model/PartnerModel';
 import { CircularProgress } from '@mui/material';
+import {IconButton} from '@mui/material';
+import {Icon} from '@mui/material';
 
 const PartnerCard = (props) => {
     const { name } = props;
@@ -26,6 +28,11 @@ const PartnerCard = (props) => {
                     <div className={`${styles.logo_size} flex`}>
                         <img src={logoSrc[name]} alt={name} className='flex-1 self-center' />
                     </div>
+                }
+                action={
+                    <IconButton aria-label="settings" onClick={handleClick}>
+                        <Icon fontSize="large">add</Icon>
+                    </IconButton>
                 }
                 title={
                     <Typography className={`font-bold text-32 ${styles[name]}`}>

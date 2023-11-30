@@ -45,6 +45,7 @@
     font-size: 20px;
     font-weight: bold;
     top: 50%;
+    word-break: break-all;
 }
 
 .paper {
@@ -52,7 +53,7 @@
     border: 2px dashed #6a6a70;
     border-radius: 4px;
     height: fit-content;
-    transform: rotateX(20deg) scale(0.7);
+    transform: rotateX(0deg) scale(0.9);
     transition: .5s all ease;
     animation: entry 01s linear 1;
     perspective: 900px;
@@ -84,7 +85,7 @@
 }
 
 .wrapper {
-    position: absolute;
+    // position: relative;
     perspective: 900px;
 }
 

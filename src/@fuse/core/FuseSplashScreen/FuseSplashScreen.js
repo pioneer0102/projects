@@ -8,7 +8,7 @@ function FuseSplashScreen() {
         <img width="128" src="assets/images/logo/logo.svg" alt="logo" />
       </div> */}
       <div className='logo'>
-        <img width='128' src='assets/images/logo/logo.png' alt='logo' />
+        <img width='128' src='assets/images/logo/Logo.png' alt='logo' />
       </div>
       <Box
         id="spinner"
