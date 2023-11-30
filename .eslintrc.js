@@ -34,6 +34,8 @@ module.exports = {
         "react/react-in-jsx-scope": "off", // No need for this rule if you are using React 17+
         "react/display-name": "off", // Disable display-name rule if not needed
         
+
+        
         
     }
 };

@@ -12,7 +12,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { Typography } from "@mui/material";
 import styles from './style.module.scss';
 import PartnerBreadcrumb from './PartnerBreadCrumb';
-import { logoSrc } from 'src/app/model/PartnerModel';
+import { logoSrc, backImgSrc } from 'src/app/model/PartnerModel';
 import history from '@history';
 
 const schema = yup.object().shape({
@@ -33,23 +33,31 @@ function PartnerForm() {
     const channel = routeParams.channel;
 
     const handleCancel = () => history.push('/partners');
-    const onSubmit = () => {}
+    const onSubmit = () => { }
 
     return (
         <>
             <PartnerBreadcrumb channel={channel} />
-            <div className="flex flex-col m-24">
-                <Paper className={`px-32 py-32 ${styles.paper}`}>
+            <div
+                className={`m-24 md:px-32 sm:px-8 md:py-32 h-full flex items-center justify-center ${styles.form}`}
+                style={{
+                    backgroundImage: `url(${backImgSrc[channel]})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }}
+            >
+                <Paper
+                    className={`m-24 px-32 py-32 md:w-1/3 ${styles.form}`}
+                >
                     <div className='flex items-center justify-center'>
                         <img
-                            className={styles.header_size}
+                            className={styles.logo_size}
                             src={logoSrc[channel]}
                             alt="user background" />
-                        <Typography className={`font-bold text-24 px-8 ${styles[channel]}`}>
+                        <Typography className={`font-bold text-32 px-16 ${styles[channel]}`}>
                             {channel}
                         </Typography>
                     </div>
-
                     <Controller
                         control={control}
                         name="name"
@@ -68,7 +76,7 @@ function PartnerForm() {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={20}>heroicons-solid:user-circle</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>heroicons-solid:user-circle</FuseSvgIcon>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -93,7 +101,7 @@ function PartnerForm() {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={20}>heroicons-solid:location-marker</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>heroicons-solid:location-marker</FuseSvgIcon>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -117,7 +125,7 @@ function PartnerForm() {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={20}>heroicons-solid:mail</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>heroicons-solid:mail</FuseSvgIcon>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -141,7 +149,7 @@ function PartnerForm() {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={20}>heroicons-solid:phone</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>heroicons-solid:phone</FuseSvgIcon>
                                         </InputAdornment>
                                     ),
                                 }}
@@ -152,13 +160,13 @@ function PartnerForm() {
                         className="flex items-center mt-32"
                     >
                         <Button
-                            className="ml-auto"
+                            className={`ml-auto ${styles.button}`}
                             onClick={handleCancel}
                         >
                             Cancel
                         </Button>
                         <Button
-                            className="ml-8"
+                            className={`ml-8 ${styles.button}`}
                             variant="contained"
                             color="secondary"
                             disabled={_.isEmpty(dirtyFields) || !isValid}
