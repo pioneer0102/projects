@@ -39,7 +39,7 @@ const OrdersSearchFilter = () => {
     return (
         <>
             <Paper className={`px-16 py-8 border-b-1 mt-32 mx-32 ${styles.paper}`}>
-                <div className="flex md:flex-row sm:flex-col justify-between flex-wrap sm:space-y-0 mt-8 -mx-8">
+                <div className="flex md:flex-row flex-col justify-between sm:space-y-0 mt-8 -mx-8">
                     <Box
                         className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
                         <FuseSvgIcon color="action" size={20}>
@@ -54,7 +54,7 @@ const OrdersSearchFilter = () => {
                             onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
                         />
                     </Box>
-                    <FormControl className="flex flex-auto" sx={{ m: 1, minWidth: 160 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1 }} size="small">
                         <InputLabel
                             id="select-small-label"
                             sx={{
@@ -68,7 +68,6 @@ const OrdersSearchFilter = () => {
                             id="select-small"
                             value={subtotal}
                             label="Subtotal"
-                            className=""
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
                                     borderColor: '#e2e8f0',
@@ -96,7 +95,7 @@ const OrdersSearchFilter = () => {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex flex-auto" sx={{ m: 1, minWidth: 160 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -110,7 +109,6 @@ const OrdersSearchFilter = () => {
                             id="demo-select-small"
                             value={channel}
                             label="Channel"
-                            className=""
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
                                     borderColor: '#e2e8f0',
@@ -137,7 +135,7 @@ const OrdersSearchFilter = () => {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex flex-auto" sx={{ m: 1, minWidth: 160 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -151,7 +149,6 @@ const OrdersSearchFilter = () => {
                             id="demo-select-small"
                             value={status}
                             label="Status"
-                            className=""
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
                                     borderColor: '#e2e8f0',
