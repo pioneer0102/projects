@@ -18,6 +18,7 @@ import {
     setPagenumber,
     getInventory
 } from './store/inventorySlice';
+import Grid from "@mui/system/Unstable_Grid/Grid";
 
 const InvList = () => {
     const { t } = useTranslation();
@@ -67,15 +68,24 @@ const InvList = () => {
     }
 
     return (
-        <div className="flex flex-col mt-24">
-            <List className={styles.list}>
+        <div className="flex flex-col mt-24 mx-24">
+            <Grid container spacing={0} className={styles.list}>
+                {
+                    Inventory.pagedData.map((item, index) => (
+                        <Grid key={index} item lg={6} md={6} sm={12} xs={12}>
+                            <InvListItem key={index} item={item} />
+                        </Grid>
+                    ))
+                }
+            </Grid>
+            {/* <List className={styles.list}>
                 {
                     Inventory.pagedData.map((item, index) => (
                         <InvListItem key={index} item={item} />
                     ))
                 }
-            </List>
-            <Stack spacing={2} >
+            </List> */}
+            <Stack spacing={2} className="self-end" >
                 <Typography>Page: {pageNumber + 1}</Typography>
                 <Pagination count={Math.ceil(Inventory.filterSize / 10)} page={pageNumber+1} onChange={handleChange} />
             </Stack>

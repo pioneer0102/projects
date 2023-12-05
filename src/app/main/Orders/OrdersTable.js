@@ -41,6 +41,7 @@ const useStyles = makeStyles(() => ({
         }
     },
 }));
+const options = { month: 'numeric', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
 
 const OrdersTable = () => {
     const dispatch = useDispatch();
@@ -110,7 +111,7 @@ const OrdersTable = () => {
     return (
         <>
             <Paper
-                className={`flex flex-col py-24 px-16 my-16 mx-32 overflow-auto  ${styles.paper}`}
+                className={`flex flex-col py-24 px-24 my-16 mx-32 overflow-auto  ${styles.paper}`}
                 sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     <Table>
                         <Thead className="border-b-2">
@@ -140,6 +141,13 @@ const OrdersTable = () => {
                                                 <Typography
                                                     color="text.secondary"
                                                     className="font-semibold text-14 md:pt-16">
+                                                    {item.channel}
+                                                </Typography>
+                                            </Td>
+                                            <Td align="left">
+                                                <Typography
+                                                    color="text.secondary"
+                                                    className="font-semibold text-14 md:pt-16">
                                                     {item.customer}
                                                 </Typography>
                                             </Td>
@@ -147,7 +155,7 @@ const OrdersTable = () => {
                                                 <Typography
                                                     color="text.secondary"
                                                     className="font-semibold text-14 md:pt-16">
-                                                    {format(new Date(item.date), 'MMMM d,y')}
+                                                    {item.birthday.toLocaleString('en-US', options)}
                                                 </Typography>
                                             </Td>
                                             <Td align="left">
@@ -155,13 +163,6 @@ const OrdersTable = () => {
                                                     color="text.secondary"
                                                     className="font-semibold text-14 md:pt-16">
                                                     $ {item.subtotal}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-semibold text-14 md:pt-16">
-                                                    {item.channel}
                                                 </Typography>
                                             </Td>
                                             <Td align="left" className="md:pt-16 overflow-hidden">

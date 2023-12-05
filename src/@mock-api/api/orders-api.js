@@ -56,21 +56,59 @@ mock.onPost('/api/getorders').reply(({ data }) => {
 mock.onGet('/api/getItem').reply((data) => {
     const { id } = data;
     const order = _.find(ordersDB, { id: parseInt(id) });
-    var resultArray =[];
+    var resultArray = [];
+    var subtotal = 0;
     order.items.map((item) => {
-        const oneItem = _.find(itemDB, {id: item.id});
+        const oneItem = _.find(itemDB, { id: item.id });
         oneItem.quantity = item.quantity;
+        subtotal = subtotal + item.quantity * oneItem.price;
         oneItem && resultArray.push(oneItem);
     });
     const result = {
-        customer: {
+        orderInfo: {
+            id: order.id,
             customer: order.customer,
             channel: order.channel,
             date: order.date,
             status: order.status,
-            subtotal: order.subtotal
+            subtotal: order.subtotal,
+            tax: order.tax,
+            tip: order.tip
         },
-        detail: resultArray
+        taxInfo: resultArray
     };
     return [200, result];
 });
+
+mock.onPost('/api/updateStatus').reply(({ data }) => {
+    const { id, status } = JSON.parse(data);
+    const order = _.find(ordersDB, { id: id });
+    order.status = status;
+    var success = false;
+    if (order) {
+        success = true;
+    }
+    return [200, { success: success }];
+});
+
+mock.onPost('/api/removeItem').reply(({ data }) => {
+    const { orderId, itemId } = JSON.parse(data);
+    const order = _.find(ordersDB, { id: orderId });
+    var success = false;
+    const remove = _.remove(order.items, { id: itemId });
+    if (remove.length != null) {
+        success = true;
+    }
+    if (success == true) {
+        var subtotal = 0;
+        order.items.map((item) => {
+            const oneItem = _.find(itemDB, { id: item.id });
+            subtotal = subtotal + item.quantity * oneItem.price;
+        });
+        order.subtotal=subtotal;
+        return [200, { success: success, subtotal: order.subtotal }];
+    }
+    else {
+        return [200, {success: success}]
+    }
+})

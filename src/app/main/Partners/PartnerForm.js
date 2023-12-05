@@ -38,145 +38,136 @@ function PartnerForm() {
     return (
         <>
             <PartnerBreadcrumb channel={channel} />
-            <div
-                className={`m-24 md:px-32 sm:px-8 md:py-32 h-full flex items-center justify-center ${styles.form}`}
-                style={{
-                    backgroundImage: `url(${backImgSrc[channel]})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                }}
+            <Paper
+                className={`mx-24 my-32 px-32 py-32 ${styles.form}`}
             >
-                <Paper
-                    className={`m-24 px-32 py-32 md:w-1/3 ${styles.form}`}
+                <div className='flex items-center justify-center'>
+                    <img
+                        className={styles.logo_size}
+                        src={logoSrc[channel]}
+                        alt="user background" />
+                    <Typography className={`font-bold text-32 px-16 ${styles[channel]}`}>
+                        {channel}
+                    </Typography>
+                </div>
+                <Controller
+                    control={control}
+                    name="name"
+                    render={({ field }) => (
+                        <TextField
+                            className="mt-32"
+                            {...field}
+                            label="Business Name"
+                            placeholder="Business Name"
+                            id="name"
+                            error={!!errors.name}
+                            helperText={errors?.name?.message}
+                            variant="outlined"
+                            required
+                            fullWidth
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <FuseSvgIcon size={24}>heroicons-solid:user-circle</FuseSvgIcon>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
+                />
+
+                <Controller
+                    control={control}
+                    name="address"
+                    render={({ field }) => (
+                        <TextField
+                            className="mt-32"
+                            {...field}
+                            label="Address"
+                            placeholder="Address"
+                            id="address"
+                            error={!!errors.address}
+                            helperText={errors?.address?.message}
+                            variant="outlined"
+                            fullWidth
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <FuseSvgIcon size={24}>heroicons-solid:location-marker</FuseSvgIcon>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
+                />
+
+                <Controller
+                    control={control}
+                    name="email"
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            className="mt-32"
+                            label="Email"
+                            placeholder="Email"
+                            variant="outlined"
+                            fullWidth
+                            error={!!errors.email}
+                            helperText={errors?.email?.message}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <FuseSvgIcon size={24}>heroicons-solid:mail</FuseSvgIcon>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
+                />
+
+                <Controller
+                    control={control}
+                    name="phoneNumber"
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            className="mt-32"
+                            label="Phone Number"
+                            placeholder="Phone Number"
+                            variant="outlined"
+                            fullWidth
+                            error={!!errors.phoneNumber}
+                            helperText={errors?.phoneNumber?.message}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <FuseSvgIcon size={24}>heroicons-solid:phone</FuseSvgIcon>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
+                />
+                <Box
+                    className="flex items-center mt-32"
                 >
-                    <div className='flex items-center justify-center'>
-                        <img
-                            className={styles.logo_size}
-                            src={logoSrc[channel]}
-                            alt="user background" />
-                        <Typography className={`font-bold text-32 px-16 ${styles[channel]}`}>
-                            {channel}
-                        </Typography>
-                    </div>
-                    <Controller
-                        control={control}
-                        name="name"
-                        render={({ field }) => (
-                            <TextField
-                                className="mt-32"
-                                {...field}
-                                label="Business Name"
-                                placeholder="Business Name"
-                                id="name"
-                                error={!!errors.name}
-                                helperText={errors?.name?.message}
-                                variant="outlined"
-                                required
-                                fullWidth
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:user-circle</FuseSvgIcon>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        )}
-                    />
-
-                    <Controller
-                        control={control}
-                        name="address"
-                        render={({ field }) => (
-                            <TextField
-                                className="mt-32"
-                                {...field}
-                                label="Address"
-                                placeholder="Address"
-                                id="address"
-                                error={!!errors.address}
-                                helperText={errors?.address?.message}
-                                variant="outlined"
-                                fullWidth
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:location-marker</FuseSvgIcon>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        )}
-                    />
-
-                    <Controller
-                        control={control}
-                        name="email"
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                className="mt-32"
-                                label="Email"
-                                placeholder="Email"
-                                variant="outlined"
-                                fullWidth
-                                error={!!errors.email}
-                                helperText={errors?.email?.message}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:mail</FuseSvgIcon>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        )}
-                    />
-
-                    <Controller
-                        control={control}
-                        name="phoneNumber"
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                className="mt-32"
-                                label="Phone Number"
-                                placeholder="Phone Number"
-                                variant="outlined"
-                                fullWidth
-                                error={!!errors.phoneNumber}
-                                helperText={errors?.phoneNumber?.message}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:phone</FuseSvgIcon>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        )}
-                    />
-                    <Box
-                        className="flex items-center mt-32"
+                    <Button
+                        className={`ml-auto ${styles.button}`}
+                        onClick={handleCancel}
                     >
-                        <Button
-                            className={`ml-auto ${styles.button}`}
-                            onClick={handleCancel}
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            className={`ml-8 ${styles.button}`}
-                            variant="contained"
-                            color="secondary"
-                            disabled={_.isEmpty(dirtyFields) || !isValid}
-                            onClick={handleSubmit(onSubmit)}
-                        >
-                            Integrate
-                        </Button>
-                    </Box>
-                </Paper>
-            </div>
+                        Cancel
+                    </Button>
+                    <Button
+                        className={`ml-8 ${styles.button}`}
+                        variant="contained"
+                        color="secondary"
+                        disabled={_.isEmpty(dirtyFields) || !isValid}
+                        onClick={handleSubmit(onSubmit)}
+                    >
+                        Integrate
+                    </Button>
+                </Box>
+            </Paper>
         </>
     );
 }

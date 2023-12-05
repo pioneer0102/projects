@@ -4,6 +4,7 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
+import _ from '@lodash';
 
 export const getOrders = async (searchData) => {
     const response = await axios.post('/api/getorders', searchData);
@@ -11,7 +12,17 @@ export const getOrders = async (searchData) => {
 };
 
 export const getItem = createAsyncThunk('orderApp/orders/getItems', async (itemId) => {
-    const response = await axios.get(`/api/getItem`, {id: itemId});
+    const response = await axios.get(`/api/getItem`, { id: itemId });
+    return response.data;
+});
+
+export const updateStatusById = createAsyncThunk('orderApp/orders/updateStatus', async (statusData) => {
+    const response = await axios.post(`/api/updateStatus`, statusData);
+    return response.data;
+});
+
+export const removeItem = createAsyncThunk('orderApp/orders/removeItem', async (item) => {
+    const response = await axios.post(`/api/removeItem`, item);
     return response.data;
 });
 
@@ -30,8 +41,8 @@ export const {
     selectAll: selectOrders
 } = ordersAdapter.getSelectors((state) => state.ordersApp.orders);
 
-export const selectItems = ({ ordersApp }) => ordersApp.orders.detail;
-export const selectCustomer = ({ ordersApp }) => ordersApp.orders.customer;
+export const selectTaxInfo = ({ ordersApp }) => ordersApp.orders.taxInfo;
+export const selectOrderInfo = ({ ordersApp }) => ordersApp.orders.orderInfo;
 
 const ordersSlice = createSlice({
     name: 'ordersApp/orders',
@@ -43,8 +54,10 @@ const ordersSlice = createSlice({
         pageNumber: 0,
         pageSize: 10,
         dbSize: 0,
-        detail: [],
-        customer: {}
+        taxInfo: [],
+        orderInfo: {},
+        updateFlag: false,
+        removeFlag: false,
     }),
     reducers: {
         setOrderSubtotal: (state, action) => {
@@ -63,21 +76,33 @@ const ordersSlice = createSlice({
         },
         setPagenumber: (state, action) => {
             state.pageNumber = action.payload;
-
         },
         setPagesize: (state, action) => {
             state.pageSize = action.payload;
 
+        },
+        updateStatus: (state, action) => {
+            state.orderInfo.status = action.payload;
+        },
+        removeFront : (state, action) => {
+            _.remove(state.taxInfo, { id: action.payload });
         }
     },
     extraReducers: (builder) => {
         builder.addCase(getItem.fulfilled, (state, action) => {
-            state.detail = action.payload.detail;
-            state.customer = action.payload.customer;
+            state.taxInfo = action.payload.taxInfo;
+            state.orderInfo = action.payload.orderInfo;
         });
+        builder.addCase(updateStatusById.fulfilled, (state, action) => {
+            state.updateFlag = action.payload.success;
+        });
+        builder.addCase(removeItem.fulfilled, (state, action) => {
+            state.removeFlag = action.payload.success;
+            state.orderInfo.subtotal = action.payload.subtotal;
+        })
     }
 });
 
-export const { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText, setPagenumber, setPagesize } = ordersSlice.actions;
+export const { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText, setPagenumber, setPagesize, updateStatus, removeFront } = ordersSlice.actions;
 
 export default ordersSlice.reducer;
