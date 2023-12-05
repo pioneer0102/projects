@@ -54,7 +54,7 @@ const OrdersSearchFilter = () => {
                             onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
                         />
                     </Box>
-                    <FormControl className="flex flex-auto" sx={{ m: 1 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1, maxWidth: 250 }} size="small">
                         <InputLabel
                             id="select-small-label"
                             sx={{
@@ -85,7 +85,6 @@ const OrdersSearchFilter = () => {
                             </MenuItem>
                             {
                                 SubTotals.map((subTotal, index) => {
-                                    console.log(subTotal);
                                     return (
                                         <MenuItem key={index} value={index}>
                                             { subTotal }
@@ -95,7 +94,7 @@ const OrdersSearchFilter = () => {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex flex-auto" sx={{ m: 1 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1, maxWidth: 250 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -135,7 +134,7 @@ const OrdersSearchFilter = () => {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex flex-auto" sx={{ m: 1 }} size="small">
+                    <FormControl className="flex flex-auto" sx={{ m: 1, maxWidth: 250 }} size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{

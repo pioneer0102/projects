@@ -103,14 +103,14 @@ const OrderDetail = () => {
                                         <TableCell align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="font-semibold text-14 ml-8">
+                                                className="font-semibold text-14">
                                                 {customerInfo.customer}
                                             </Typography>
                                         </TableCell>
                                         <TableCell align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="font-semibold text-14 -ml-8">
+                                                className="font-semibold text-14">
                                                 {customerInfo.date}
                                             </Typography>
                                         </TableCell>
@@ -186,15 +186,15 @@ const OrderDetail = () => {
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14 ml-8">
+                                                        className="font-semibold text-14">
                                                         image
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14 -ml-8">
-                                                        {item.productname}
+                                                        className="font-semibold text-14">
+                                                        {item.category}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">

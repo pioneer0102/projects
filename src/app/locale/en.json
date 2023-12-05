@@ -17,5 +17,9 @@
     },
     "partners": {
         "partners": "Partners"
+    },
+    "inventory": {
+        "priceRange": "Price Range",
+        "category": "Category"
     }
 }

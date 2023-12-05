@@ -1,6 +1,8 @@
 import './api/auth-api';
 import './api/notifications-api';
 import './api/orders-api';
+import './api/inventory-api';
+import './api/insights/channel-api';
 import history from '@history';
 import mock from './mock';
 

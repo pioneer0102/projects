@@ -4,7 +4,6 @@
 }
 
 .container {
-    position: relative;
     width: 100%;
     height: 560px;
 }
@@ -24,7 +23,7 @@
 
 .overlay {
     position: absolute;
-    bottom: 100%;
+    bottom: 90%;
     overflow: auto;
     width: 100%;
     left: 5%;
@@ -53,7 +52,7 @@
     border: 2px dashed #6a6a70;
     border-radius: 4px;
     height: fit-content;
-    transform: rotateX(0deg) scale(0.9);
+    transform: rotateX(0deg) scale(0.93);
     transition: .5s all ease;
     animation: entry 01s linear 1;
     perspective: 900px;
