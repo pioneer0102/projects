@@ -18,7 +18,8 @@
 }
 
 .container:hover .backimg_size {
-    opacity: 0.7;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
 }
 
 .overlay {
@@ -38,36 +39,40 @@
 }
 
 .text {
-    color: aliceblue;
+    color: white;
+    background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
     position: absolute;
     width: 90%;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     top: 50%;
     word-break: break-all;
+    padding: 10px;
+    border: 3px solid #f1f1f1;
 }
 
 .paper {
     box-shadow: none;
-    border: 2px dashed #6a6a70;
+    // border: 2px dashed #6a6a70;
     border-radius: 4px;
     height: fit-content;
-    transform: rotateX(0deg) scale(0.93);
+    transform: rotateX(0deg) scale(1);
     transition: .5s all ease;
     animation: entry 01s linear 1;
     perspective: 900px;
-    box-shadow: 0px 20px 50px #555;
+    box-shadow: 0px 10px 10px #CCC;
 }
 
 .form {
-    animation: entry 01s linear 1;
+    animation: entry 0.5s linear 1;
     border-radius: 6px;
-    box-shadow: 0px 20px 50px #555;
+    box-shadow: 0px 10px 10px #CCC;
 }
 
 .paper:hover {
     cursor: pointer;
-    transform: rotate(0deg) scale(1) translateY(10px);
+    transform: rotate(0deg) scale(1);
     transition: .5s ease;
     z-index: 400;
 }

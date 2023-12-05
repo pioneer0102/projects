@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
 import styles from './style.module.scss';
-import { useNavigate } from 'react-router-dom';
-import { ListItem, ListItemText, ListItemAvatar } from '@mui/material';
+import { ListItem, ListItemText } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
 import { Typography } from '@mui/material';
-import { Avatar } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { CircularProgress } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles(() => ({
+    dialog: {
+        '& .muiltr-7en360-MuiPaper-root-MuiDialog-paper': {
+            borderRadius: '6px'
+        }
+    },
+}));
 
 const InvListItem = (props) => {
     const { image, category, price, quantity, upc, description } = props.item;
 
     const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const classes = useStyles();
 
     const detailData = {
         "category": category,
@@ -85,7 +91,7 @@ const InvListItem = (props) => {
                 />
             </ListItem>
             <Divider />
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleClose} className={classes.dialog}>
                 <DialogTitle>Detail Information</DialogTitle>
                 <IconButton
                     aria-label="close"

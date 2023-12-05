@@ -7,12 +7,17 @@ const SubTotals = [
 ];
 
 const Status = [
-    "Completed",
-    "Pending",
-    "Rejected"
+    "completed",
+    "pending",
+    "rejected"
 ];
 
 const OrdersListHeader = [
+    {
+        id: 'channel',
+        align: 'left',
+        label: 'Channel',
+    },
     {
         id: 'customer',
         align: 'left',
@@ -27,11 +32,6 @@ const OrdersListHeader = [
         id: 'subtotal',
         align: 'left',
         label: 'Subtotal',
-    },
-    {
-        id: 'channel',
-        align: 'left',
-        label: 'Channel',
     },
     {
         id: 'status',
@@ -81,16 +81,20 @@ const OrderDetailContentHeader = [
         label: 'Product Name',
     },
     {
+        id: 'quantity',
+        align: 'left',
+        label: 'Quantity',
+    },
+    {
         id: 'price',
         align: 'left',
         label: 'Price',
     },
     {
-        id: 'quantity',
+        id: 'price',
         align: 'left',
-        label: 'Quantity',
+        label: '',
     },
-
 ];
 
 export { SubTotals, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader };

@@ -12,8 +12,8 @@
         "replace": "Replace",
         "cancel": "Cancel",
         "total": "Total Orders",
-        "customerInfo": "Customer Information",
-        "detailInfo": "Detail Information"
+        "orderInfo": "Order Information",
+        "taxInfo": "Tax Information"
     },
     "partners": {
         "partners": "Partners"

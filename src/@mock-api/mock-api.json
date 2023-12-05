@@ -28,21 +28,23 @@
             "customer": "John Doe",
             "date": "December 4, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "3500",
+            "birthday": "December 4, 2023 10:30 AM",
+            "subtotal": "2500",
             "channel": "DoorDash",
             "status": "completed",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 14,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               }
             ]
@@ -52,17 +54,19 @@
             "customer": "Brokle Myles",
             "date": "December 1, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "6000",
+            "birthday": "December 1, 2023 10:30 AM",
+            "subtotal": "2000",
             "channel": "DoorDash",
             "status": "pending",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -72,25 +76,27 @@
             "customer": "Bertha Biner",
             "date": "November 6, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "8500",
+            "birthday": "November 6, 2023 10:30 AM",
+            "subtotal": "4000",
             "channel": "DoorDash",
             "status": "rejected",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -100,21 +106,23 @@
             "customer": "John Doe",
             "date": "November 6, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "3500",
+            "birthday": "November 6, 2023 10:30 AM",
+            "subtotal": "3000",
             "channel": "DoorDash",
             "status": "completed",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               }
             ]
@@ -124,17 +132,19 @@
             "customer": "Brokle Myles",
             "date": "November 6, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "6000",
+            "birthday": "November 6, 2023 10:30 AM",
+            "subtotal": "2000",
             "channel": "GrubHub",
             "status": "pending",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -144,25 +154,27 @@
             "customer": "Bertha Biner",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "8500",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "4000",
             "channel": "GrubHub",
             "status": "rejected",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -172,21 +184,23 @@
             "customer": "John Doe",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "3500",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "3000",
             "channel": "Uber",
             "status": "completed",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               }
             ]
@@ -196,17 +210,19 @@
             "customer": "Brokle Myles",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "6000",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "2000",
             "channel": "GrubHub",
             "status": "pending",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -216,25 +232,27 @@
             "customer": "Bertha Biner",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "8500",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "4000",
             "channel": "GrubHub",
             "status": "rejected",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -244,21 +262,23 @@
             "customer": "John Doe",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "3500",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "3000",
             "channel": "Uber",
             "status": "completed",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               }
             ]
@@ -268,17 +288,19 @@
             "customer": "Brokle Myles",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "6000",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "2000",
             "channel": "DoorDash",
             "status": "pending",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -288,25 +310,27 @@
             "customer": "Bertha Biner",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "8500",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "4000",
             "channel": "DoorDash",
             "status": "rejected",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -316,25 +340,27 @@
             "customer": "Bertha Biner",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "8500",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "4000",
             "channel": "Uber",
             "status": "rejected",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
@@ -344,25 +370,27 @@
             "customer": "Bertha Biner",
             "date": "November 20, 2023",
             "time": "10:30 AM",
-            "birthday": "1960-01-26T12:00:00.000Z",
-            "subtotal": "8500",
+            "birthday": "November 20, 2023 10:30 AM",
+            "subtotal": "4000",
             "channel": "Uber",
             "status": "rejected",
+            "tax": 100,
+            "tip": 50,
             "items": [
               {
-                "id": "1",
+                "id": 1,
                 "quantity": "5"
               },
               {
-                "id": "2",
+                "id": 2,
                 "quantity": "5"
               },
               {
-                "id": "3",
+                "id": 3,
                 "quantity": "5"
               },
               {
-                "id": "4",
+                "id": 4,
                 "quantity": "5"
               }
             ]
