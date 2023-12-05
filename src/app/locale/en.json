@@ -4,6 +4,8 @@
     "search": "Search",
     "status": "Status",
     "channel": "Channel",
+    "cancel": "Cancel",
+    "ok": "Ok",
     "orders": {
         "orders": "Orders",
         "detail": "Detail",

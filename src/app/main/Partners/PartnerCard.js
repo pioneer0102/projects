@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import styles from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -17,10 +16,8 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
-import { Link } from 'react-router-dom';
 
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -41,12 +38,12 @@ const useStyles = makeStyles(() => ({
 
 const PartnerCard = (props) => {
     const { name } = props;
-
+    const classes = useStyles();
     const navigate = useNavigate();
+
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
-    const classes = useStyles();
-
+    
     const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema),
@@ -54,16 +51,9 @@ const PartnerCard = (props) => {
     const { isValid, dirtyFields, errors } = formState;
 
     const handleOnLoad = () => setIsLoading(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const onSubmit = (data) => {
-        console.log(data);
-        navigate(`/partners/add/${name}`);
-    }
+    const handleClickOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const onSubmit = (data) => navigate(`/partners/add/${name}`);
 
     return (
         <>
@@ -115,8 +105,6 @@ const PartnerCard = (props) => {
                         </p>
                     </div>
                 </div>
-                <CardContent>
-                </CardContent>
             </Card>
             <Dialog open={open} onClose={handleClose} className={classes.dialog}>
                 <DialogTitle className='flex flex-col'>
@@ -126,7 +114,7 @@ const PartnerCard = (props) => {
                             {name}
                         </Typography>
                     </div>
-                    <Typography className={`self-center font-semibold text-16 mt-16 ${styles[name]}`}>
+                    <Typography className={`self-center font-semibold text-12 mt-16`}>
                         Welcome to {name} !
                     </Typography>
                 </DialogTitle>

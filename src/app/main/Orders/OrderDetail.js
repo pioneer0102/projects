@@ -26,13 +26,12 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Popover from '@mui/material/Popover';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box } from "@mui/material";
+import { makeStyles } from '@mui/styles';
 import { Status } from 'src/app/model/OrdersModel';
-
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import { showMessage } from 'app/store/fuse/messageSlice';
 
 import {
     updateStatus,
@@ -42,9 +41,19 @@ import {
     removeFront
 } from './store/ordersSlice';
 
+const useStyles = makeStyles(() => ({
+    dialog: {
+        '& .muiltr-7en360-MuiPaper-root-MuiDialog-paper': {
+            borderRadius: '6px',
+            padding: '24px'
+        }
+    },
+}));
+
 const OrderDetail = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
+    const classes = useStyles();
     const routeParams = useParams();
     const taxInfo = useSelector(selectTaxInfo);
     const orderInfo = useSelector(selectOrderInfo);
@@ -64,6 +73,7 @@ const OrderDetail = () => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
+        setDialogOpen(false);
         setAnchorEl(null);
     };
     const handleStatusChange = (status) => {
@@ -83,6 +93,12 @@ const OrderDetail = () => {
         dispatch(removeItem(item))
         dispatch(removeFront(removeId))
         setDialogOpen(false);
+        dispatch(
+            showMessage({
+                message: 'Deleted item successfully.',
+                variant: 'success',
+            })
+        );
     }
 
     const handleOpenDialog = (id) => {
@@ -304,21 +320,29 @@ const OrderDetail = () => {
                                                 <Dialog
                                                     open={dialogOpen}
                                                     onClose={handleClose}
+                                                    className={classes.dialog}
                                                     aria-labelledby="alert-dialog-title"
                                                     aria-describedby="alert-dialog-description"
                                                 >
-                                                    <DialogTitle id="alert-dialog-title">
-                                                        {"User"}
-                                                    </DialogTitle>
-                                                    <DialogContent>
-                                                        <DialogContentText id="alert-dialog-description">
-                                                            Do you want to really delete this Item?
-                                                        </DialogContentText>
+                                                    <DialogContent className='p-0'>
+                                                        <h1 className='mt-12 mb-12'>Are you sure to delete this Item?</h1>
                                                     </DialogContent>
-                                                    <DialogActions>
-                                                        <Button onClick={handleClose}>Disagree</Button>
-                                                        <Button onClick={handleRemoveItem} autoFocus>
-                                                            Agree
+                                                    <DialogActions className='p-0 mt-12'>
+                                                        <Button
+                                                            variant="outline"
+                                                            color="secondary"
+                                                            onClick={handleClose}
+                                                            className={styles.backButton}
+                                                        >
+                                                            <span>{t('cancel')}</span>
+                                                        </Button>
+                                                        <Button
+                                                            variant="contained"
+                                                            color="secondary"
+                                                            onClick={handleRemoveItem}
+                                                            className={styles.backButton}
+                                                        >
+                                                            <span>{t('ok')}</span>
                                                         </Button>
                                                     </DialogActions>
                                                 </Dialog>
