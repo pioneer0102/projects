@@ -1,22 +1,10 @@
-import clsx from 'clsx';
-import history from '@history';
-import { useState } from "react";
-import { format } from "date-fns";
-import { Box } from "@mui/material";
-import { useQuery } from "react-query";
-import { Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
-import Popover from "@mui/material/Popover";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { makeStyles } from '@mui/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import FuseLoading from '@fuse/core/FuseLoading';
+import { useSelector } from 'react-redux';
 import { ChannelTableHeader } from 'src/app/model/ChannelModel';
-import { useTranslation } from 'react-i18next';
 import styles from '../style.module.scss';
-import { useEffect } from 'react';
 import OrderStatistics from './statistics/OrderStatistics';
 import SaleStatistics from './statistics/SaleStatistics';
 import { Channels } from 'src/app/model/Global';
@@ -89,7 +77,7 @@ const ChannelTable = () => {
                     </Tbody>
                 </Table>
             </Paper>
-            <BarStatistics />
+            {/* <BarStatistics /> */}
         </>
     );
 };
