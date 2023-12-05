@@ -379,31 +379,32 @@ const OrderDetail = () => {
             <Dialog
                 open={dialogOpen}
                 onClose={handleClose}
-                className={classes.dialog}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogContent className='p-0'>
-                    <h1 className='mt-12 mb-12'>Are you sure to delete this Item?</h1>
-                </DialogContent>
-                <DialogActions className='p-0 mt-12'>
-                    <Button
-                        variant="outline"
-                        color="secondary"
-                        onClick={handleClose}
-                        className={styles.backButton}
-                    >
-                        <span>{t('cancel')}</span>
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleRemoveItem}
-                        className={styles.backButton}
-                    >
-                        <span>{t('ok')}</span>
-                    </Button>
-                </DialogActions>
+                <div className='p-24'>
+                    <DialogContent className='p-0'>
+                        <h1 className='mt-12 mb-12'>Are you sure to delete this Item?</h1>
+                    </DialogContent>
+                    <DialogActions className='p-0 mt-12'>
+                        <Button
+                            variant="outline"
+                            color="secondary"
+                            onClick={handleClose}
+                            className={styles.backButton}
+                        >
+                            <span>{t('cancel')}</span>
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleRemoveItem}
+                            className={styles.backButton}
+                        >
+                            <span>{t('ok')}</span>
+                        </Button>
+                    </DialogActions>
+                </div>
             </Dialog>
         </div>
     );
