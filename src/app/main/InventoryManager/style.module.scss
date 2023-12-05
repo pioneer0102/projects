@@ -1,0 +1,27 @@
+.text_effect {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search_paper {
+    box-shadow: none;
+    border-radius: 4px;
+    animation: search 0.5s linear 1;
+}
+
+.list {
+    animation: search 0.5s linear 1;
+}
+
+@keyframes search {
+    0% {
+        top: -20%;
+        opacity: 0.1;
+    }
+
+    100% {
+        top: 0%;
+    }
+}

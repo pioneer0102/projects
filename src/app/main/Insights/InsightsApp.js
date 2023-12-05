@@ -1,7 +1,9 @@
 import { Outlet } from 'react-router-dom';
+import reducer from './store';
+import withReducer from 'app/store/withReducer';
 
-function InsightsApp(props) {
-    return <Outlet />
+function InsightsApp() {
+    return <Outlet />;
 }
 
-export default InsightsApp;
+export default withReducer('insightsApp', reducer)(InsightsApp);

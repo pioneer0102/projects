@@ -67,7 +67,7 @@ function SignInPage() {
         <div className="flex flex-col items-center sm:justify-center md:justify-center flex-1 min-w-0">
             <Paper className="flex flex-col md:items-center md:justify-center w-full sm:w-auto h-100 w-auto p-48 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none ltr:border-r-1 rtl:border-l-1">
                 <div className="flex flex-col items-center w-full max-w-320 sm:w-320 sm:mx-0">
-                    <img className="w-250" src="assets/images/logo/logo.png" alt="logo" />
+                    <img className="w-250" src="assets/images/logo/Logo.png" alt="logo" />
                     <Typography className="mt-24 font-bold tracking-tight leading-tight" variant="h6">
                         Welcome to Bag N Dash!
                     </Typography>

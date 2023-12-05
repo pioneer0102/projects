@@ -147,7 +147,7 @@ function UserManagement(props) {
                 </Table>
             </Paper>
         </>
-    )
+    );
 }
 
 export default UserManagement;

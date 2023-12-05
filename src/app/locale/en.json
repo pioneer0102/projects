@@ -14,5 +14,12 @@
         "total": "Total Orders",
         "customerInfo": "Customer Information",
         "detailInfo": "Detail Information"
+    },
+    "partners": {
+        "partners": "Partners"
+    },
+    "inventory": {
+        "priceRange": "Price Range",
+        "category": "Category"
     }
 }

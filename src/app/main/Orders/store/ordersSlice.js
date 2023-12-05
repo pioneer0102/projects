@@ -16,7 +16,6 @@ export const getItem = createAsyncThunk('orderApp/orders/getItems', async (itemI
 });
 
 const ordersAdapter = createEntityAdapter({});
-const itemsAdapter = createEntityAdapter({});
 
 export const selectSearchText = ({ ordersApp }) => ordersApp.orders.searchText;
 export const selectSubtotal = ({ ordersApp }) => ordersApp.orders.subtotal;
@@ -75,7 +74,7 @@ const ordersSlice = createSlice({
         builder.addCase(getItem.fulfilled, (state, action) => {
             state.detail = action.payload.detail;
             state.customer = action.payload.customer;
-        })
+        });
     }
 });
 

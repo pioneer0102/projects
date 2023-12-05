@@ -26,7 +26,7 @@
           {
             "id": 1,
             "customer": "John Doe",
-            "date": "March 6, 2022",
+            "date": "December 4, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "3500",
@@ -50,7 +50,7 @@
           {
             "id": 2,
             "customer": "Brokle Myles",
-            "date": "March 6, 2022",
+            "date": "December 1, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "6000",
@@ -70,7 +70,7 @@
           {
             "id": 3,
             "customer": "Bertha Biner",
-            "date": "March 6, 2022",
+            "date": "November 6, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
@@ -98,7 +98,7 @@
           {
             "id": 4,
             "customer": "John Doe",
-            "date": "March 6, 2022",
+            "date": "November 6, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "3500",
@@ -122,7 +122,7 @@
           {
             "id": 5,
             "customer": "Brokle Myles",
-            "date": "March 6, 2022",
+            "date": "November 6, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "6000",
@@ -142,7 +142,7 @@
           {
             "id": 6,
             "customer": "Bertha Biner",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
@@ -170,11 +170,11 @@
           {
             "id": 7,
             "customer": "John Doe",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "3500",
-            "channel": "GrubHub",
+            "channel": "Uber",
             "status": "completed",
             "items": [
               {
@@ -194,11 +194,11 @@
           {
             "id": 8,
             "customer": "Brokle Myles",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "6000",
-            "channel": "DoorDash",
+            "channel": "GrubHub",
             "status": "pending",
             "items": [
               {
@@ -214,7 +214,7 @@
           {
             "id": 9,
             "customer": "Bertha Biner",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
@@ -242,7 +242,7 @@
           {
             "id": 10,
             "customer": "John Doe",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "3500",
@@ -266,7 +266,7 @@
           {
             "id": 11,
             "customer": "Brokle Myles",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "6000",
@@ -286,7 +286,7 @@
           {
             "id": 12,
             "customer": "Bertha Biner",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
@@ -314,7 +314,35 @@
           {
             "id": 13,
             "customer": "Bertha Biner",
-            "date": "March 6, 2022",
+            "date": "November 20, 2023",
+            "time": "10:30 AM",
+            "birthday": "1960-01-26T12:00:00.000Z",
+            "subtotal": "8500",
+            "channel": "Uber",
+            "status": "rejected",
+            "items": [
+              {
+                "id": "1",
+                "quantity": "5"
+              },
+              {
+                "id": "2",
+                "quantity": "5"
+              },
+              {
+                "id": "3",
+                "quantity": "5"
+              },
+              {
+                "id": "4",
+                "quantity": "5"
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "customer": "Bertha Biner",
+            "date": "November 20, 2023",
             "time": "10:30 AM",
             "birthday": "1960-01-26T12:00:00.000Z",
             "subtotal": "8500",
@@ -344,39 +372,197 @@
       "items": {
         "value": [
           {
-            "id": "1",
-            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
-            "productname": "Handphone",
-            "price": "200",
-            "category": "Electronic"
+            "id": 1,
+            "image":"assets/images/items/handphone/1.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
-            "id": "2",
-            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
-            "productname": "Laptop",
-            "price": "100",
-            "category": "Electronic"
+            "id": 2,
+            "image":"assets/images/items/handphone/2.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
-            "id": "3",
-            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
-            "productname": "Coat",
-            "price": "400",
-            "category": "Clothes"
+            "id": 3,
+            "image":"assets/images/items/handphone/3.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
-            "id": "4",
-            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
-            "productname": "Watch",
-            "price": "1000",
-            "category": "Accessory"
+            "id": 4,
+            "image":"assets/images/items/handphone/4.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
-            "id": "5",
-            "image":"assets/images/apps/ecommerce/a-walk-amongst-friends.jpg",
-            "productname": "Jacket",
+            "id": 5,
+            "image":"assets/images/items/handphone/5.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 6,
+            "image":"assets/images/items/handphone/6.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 7,
+            "image":"assets/images/items/handphone/7.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 8,
+            "image":"assets/images/items/handphone/8.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 9,
+            "image":"assets/images/items/handphone/9.jpeg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 10,
+            "image":"assets/images/items/handphone/10.avif",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 11,
+            "image":"assets/images/items/handphone/11.avif",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 12,
+            "image":"assets/images/items/handphone/12.avif",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 13,
+            "image":"assets/images/items/handphone/13.jpg",
+            "category": "Handphone",
+            "price": 200,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 14,
+            "image":"assets/images/items/accessory/1.jpg",
+            "category": "Accessory",
+            "price": 100,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 15,
+            "image":"assets/images/items/accessory/2.jpg",
+            "category": "Accessory",
+            "price": 400,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 16,
+            "image":"assets/images/items/accessory/3.webp",
+            "category": "Accessory",
+            "price": 1000,
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          },
+          {
+            "id": 17,
+            "image":"assets/images/items/accessory/4.jpg",
+            "category": "Accessory",
             "price": "500",
-            "category": "Clothes"
+            "quantity": 100,
+            "upc": "1234567890",
+            "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
+          }
+        ]
+      },
+      "category": {
+        "value": [
+          {
+            "id": 1,
+            "name": "handphone"
+          },
+          {
+            "id": 2,
+            "name": "coat"
+          },
+          {
+            "id": 3,
+            "name": "laptop"
+          },
+          {
+            "id": 4,
+            "name": "watch"
+          },
+          {
+            "id": 5,
+            "name": "shoes"
+          }
+        ]
+      },
+      "channel": {
+        "value": [
+          {
+            "id": 1,
+            "name": "DoorDash"
+          },
+          {
+            "id": 2,
+            "name": "Uber"
+          },
+          {
+            "id": 3,
+            "name": "GrubHub"
           }
         ]
       }
