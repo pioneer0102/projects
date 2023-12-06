@@ -23,6 +23,12 @@ import { Button } from "@mui/material";
 
 import {
     selectSearchText,
+    selectSubtotal,
+    selectChannel,
+    selectStatus,
+    setSubtotal,
+    setChannel,
+    setStatus,
     setOrderSearchText,
     setPagenumber,
     submit
@@ -44,12 +50,9 @@ const OrdersSearchFilter = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const searchText = useSelector(selectSearchText);
-    // const subtotal = useSelector(selectSubtotal);
-    // const channel = useSelector(selectChannel);
-    // const status = useSelector(selectStatus);
-    const [subtotal, setSubtotal] = useState('');
-    const [channel, setChannel] = useState('');
-    const [status, setStatus] = useState('');
+    const subtotal = useSelector(selectSubtotal);
+    const channel = useSelector(selectChannel);
+    const status = useSelector(selectStatus);
 
     const handleChange = (actionCreator, value) => {
         dispatch(actionCreator(value));
@@ -141,7 +144,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => setSubtotal(event.target.value)}
+                            onChange={(event) => handleChange(setSubtotal, event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}
@@ -182,7 +185,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => setChannel(event.target.value)}
+                            onChange={(event) => handleChange(setChannel, event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}
@@ -223,7 +226,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => setStatus(event.target.value)}
+                            onChange={(event) => handleChange(setStatus, event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}
