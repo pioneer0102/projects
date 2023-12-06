@@ -27,7 +27,7 @@ import Popover from '@mui/material/Popover';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { Status } from 'src/app/model/OrdersModel';
+import { Status, ItemStatus } from 'src/app/model/OrdersModel';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -35,8 +35,10 @@ import { showMessage } from 'app/store/fuse/messageSlice';
 
 import {
     updateStatus,
+    updateItemStatus,
     getItem,
     updateStatusById,
+    updateItemStatusById,
     removeItem,
     removeFront
 } from './store/ordersSlice';
@@ -59,32 +61,60 @@ const OrderDetail = () => {
     const orderInfo = useSelector(selectOrderInfo);
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorItemEl, setAnchorItemEl] = useState(null);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [removeId, setRemoveId] = useState(null);
+    const [historyIndex, setHistoryIndex] = useState(0);
+    const [itemIndex, setItemIndex] = useState(0);
+    const [itemId, setItemid] = useState(0);
 
     const open = Boolean(anchorEl);
+    const itemOpen = Boolean(anchorItemEl);
     const id = open ? 'simple-popover' : undefined;
 
     useEffect(() => {
         dispatch(getItem(routeParams.id));
     }, [routeParams]);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleClick = (currentTarget, historyIndex) => {
+        setAnchorEl(currentTarget);
+        setHistoryIndex(historyIndex);
     };
+
+    const handleClickItemStatus = (currentTarget, itemIndex, itemId) => {
+        setAnchorItemEl(currentTarget);
+        setItemIndex(itemIndex);
+        setItemid(itemId);
+    }
+
     const handleClose = () => {
         setDialogOpen(false);
         setAnchorEl(null);
+        setAnchorItemEl(null);
     };
+
     const handleStatusChange = (status) => {
         const statusData = {
             id: orderInfo.id,
+            history: historyIndex,
             status: status
         }
         dispatch(updateStatusById(statusData))
-        dispatch(updateStatus(status));
+        dispatch(updateStatus(statusData));
         setAnchorEl(null);
-    }
+    };
+    const handleItemStatusChange = (itemStatus) => {
+        const statusData = {
+            id: orderInfo.id,
+            itemId: itemId,
+            itemIndex: itemIndex,
+            itemStatus: itemStatus
+        }
+        dispatch(updateItemStatusById(statusData));
+        dispatch(updateItemStatus(statusData));
+        setAnchorItemEl(null);
+    };
+
     const handleRemoveItem = () => {
         const item = {
             orderId: orderInfo.id,
@@ -127,7 +157,7 @@ const OrderDetail = () => {
                 <Button
                     variant="contained"
                     color="info"
-                    onClick={() => { history.push('/orders'); }}
+                    onClick={() => history.push('/orders')}
                     className={styles.backButton}
                 >
                     <FuseSvgIcon size={18}>heroicons-solid:arrow-left</FuseSvgIcon>
@@ -166,21 +196,21 @@ const OrderDetail = () => {
                             </TableHead>
                             <TableBody>
                                 {orderInfo.history &&
-                                    orderInfo.history.map((item, index) => {
+                                    orderInfo.history.map((item, historyIndex) => {
                                         return (
-                                            <TableRow key={index}>
+                                            <TableRow key={historyIndex}>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
                                                         className="font-semibold text-16">
-                                                        {index==0? orderInfo.customer : ""}
+                                                        {historyIndex == 0 ? orderInfo.customer : ""}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
                                                         className="font-semibold text-16">
-                                                        {index==0? orderInfo.channel : ""}
+                                                        {historyIndex == 0 ? orderInfo.channel : ""}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
@@ -207,13 +237,13 @@ const OrderDetail = () => {
                                                         )}
                                                         role="button"
                                                         aria-describedby={id}
-                                                        // onClick={handleClick}
+                                                        onClick={(event) => handleClick(event.currentTarget, historyIndex)}
                                                         sx={{
                                                             borderRadius: "3px"
                                                         }}>
                                                         {item.status}
-                                                        {/* {!open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
-                                                        {open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>} */}
+                                                        {!open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
+                                                        {open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>}
                                                     </Typography>
                                                     <Popover
                                                         id={id}
@@ -227,10 +257,10 @@ const OrderDetail = () => {
                                                     >
                                                         <Box className='flex flex-col' sx={{ p: 1 }}>
                                                             {
-                                                                Status.map((item, index) => {
+                                                                Status.map((item, indexStatus) => {
                                                                     return (
                                                                         <Typography
-                                                                            key={index}
+                                                                            key={indexStatus}
                                                                             color="text.secondary"
                                                                             role="button"
                                                                             className="font-semibold text-14 px-8 py-2 uppercase uppercase"
@@ -284,10 +314,10 @@ const OrderDetail = () => {
                             </TableHead>
                             <TableBody>
                                 {taxInfo
-                                    .map((item, index) => {
+                                    .map((item, itemIndex) => {
                                         return (taxInfo &&
                                             <TableRow
-                                                key={index}
+                                                key={itemIndex}
                                                 role="button"
                                             >
                                                 <TableCell align="left">
@@ -329,9 +359,41 @@ const OrderDetail = () => {
                                                         )}
                                                         sx={{
                                                             borderRadius: "3px"
-                                                        }}>
+                                                        }}
+                                                        onClick={(event) => handleClickItemStatus(event.currentTarget, itemIndex, item.id)}
+                                                    >
                                                         {item.status}
+                                                        {item.status && !itemOpen && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
+                                                        {item.status && itemOpen && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>}
                                                     </Typography>
+                                                    <Popover
+                                                        id={id}
+                                                        open={itemOpen}
+                                                        anchorEl={anchorItemEl}
+                                                        onClose={handleClose}
+                                                        anchorOrigin={{
+                                                            vertical: 'bottom',
+                                                            horizontal: 'left',
+                                                        }}
+                                                    >
+                                                        <Box className='flex flex-col' sx={{ p: 1 }}>
+                                                            {
+                                                                ItemStatus.map((item, indexStatus) => {
+                                                                    return (
+                                                                        <Typography
+                                                                            key={indexStatus}
+                                                                            color="text.secondary"
+                                                                            role="button"
+                                                                            className="font-semibold text-14 px-8 py-2 uppercase uppercase"
+                                                                            onClick={() => handleItemStatusChange(item)}
+                                                                        >
+                                                                            {item}
+                                                                        </Typography>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </Box>
+                                                    </Popover>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <IconButton
@@ -348,7 +410,7 @@ const OrderDetail = () => {
                                         <Typography
                                             color="text.secondary"
                                             className="font-semibold text-16">
-                                            subtotal
+                                            Subtotal
                                         </Typography>
                                     </TableCell>
                                     <TableCell colSpan={2}></TableCell>
@@ -365,7 +427,7 @@ const OrderDetail = () => {
                                         <Typography
                                             color="text.secondary"
                                             className="font-semibold text-16">
-                                            tax
+                                            Tax
                                         </Typography>
                                     </TableCell>
                                     <TableCell colSpan={2}></TableCell>
@@ -382,7 +444,7 @@ const OrderDetail = () => {
                                         <Typography
                                             color="text.secondary"
                                             className="font-semibold text-16">
-                                            tip
+                                            Tip
                                         </Typography>
                                     </TableCell>
                                     <TableCell colSpan={2}></TableCell>
