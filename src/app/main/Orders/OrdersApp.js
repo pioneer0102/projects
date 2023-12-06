@@ -1,7 +1,7 @@
 import reducer from './store';
-import OrdersTable from "./OrdersTable";
+import OrdersTable from "./components/OrdersTable";
 import withReducer from 'app/store/withReducer';
-import OrdersSearchFilter from "./OrdersSearchFilter";
+import OrdersSearchFilter from "./components/OrdersSearchFilter";
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();

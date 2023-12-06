@@ -28,11 +28,11 @@ import {
     selectChannel,
     selectStatus,
     getOrders
-} from "./store/ordersSlice";
+} from "../store/ordersSlice";
 import FuseLoading from '@fuse/core/FuseLoading';
 import { OrdersListHeader } from 'src/app/model/OrdersModel';
 import { useTranslation } from 'react-i18next';
-import styles from './style.module.scss';
+import styles from '../style.module.scss';
 
 const useStyles = makeStyles(() => ({
     popover: {

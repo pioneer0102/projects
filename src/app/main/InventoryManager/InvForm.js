@@ -325,7 +325,6 @@ const InvForm = () => {
                         render={(field) => (
                             <>
                                 <Button
-                                    {...field}
                                     color="info"
                                     variant="contained"
                                     component="label"

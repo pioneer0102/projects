@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import styles from './style.module.scss';
+import styles from '../style.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { logoSrc, backImgSrc, detail } from 'src/app/model/PartnerModel';
 import { CircularProgress } from '@mui/material';
@@ -19,9 +19,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import { useTranslation } from 'react-i18next';
-
 import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
-
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -54,11 +52,11 @@ const PartnerCard = (props) => {
     const { isValid, dirtyFields, errors } = formState;
 
     const handleOnLoad = () => setIsLoading(false);
-    const handleClickOpen =
-        useGoogleLogin({
-            onSuccess: () => navigate(`/partners/add/${name}`),
-            onError: () => { }
-        });
+    const handleClickOpen = useGoogleLogin({
+        onSuccess: () => navigate(`/partners/add/${name}`),
+        onError: () => navigate(`/partners/add/${name}`)
+    });
+
     const handleClose = () => setOpen(false);
     const onSubmit = (data) => navigate(`/partners/add/${name}`);
 
@@ -79,7 +77,7 @@ const PartnerCard = (props) => {
                         </div>
                     }
                     action={
-                        <IconButton aria-label="settings" onClick={() => handleClickOpen()}>
+                        <IconButton aria-label="settings" onClick={() => { handleClickOpen(); navigate(`/partners/add/${name}`); } }>
                             <Icon fontSize="large">add</Icon>
                         </IconButton>
                     }

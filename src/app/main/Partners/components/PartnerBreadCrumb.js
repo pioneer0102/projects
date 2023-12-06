@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
 import history from '@history';
-import styles from './style.module.scss';
+import styles from '../style.module.scss';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 
 function PartnerBreadcrumb(props) {

@@ -18,11 +18,11 @@ import {
     setPagenumber,
     setPagesize,
     getInventory
-} from './store/inventorySlice';
+} from '../store/inventorySlice';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { InventoryTableHeader } from 'src/app/model/InvManModel';
 import { useTranslation } from 'react-i18next';
-import styles from './style.module.scss';
+import styles from '../style.module.scss';
 
 const useStyles = makeStyles(() => ({
     popover: {

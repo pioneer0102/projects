@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
 import Input from '@mui/material/Input';
-import styles from './style.module.scss';
+import styles from '../style.module.scss';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
@@ -10,23 +10,23 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
-import { PriceRange, Category } from 'src/app/model/InvManModel';
-import { Button } from "@mui/material";
+import { Status, SubTotals } from 'src/app/model/OrdersModel';
+import { Channels } from 'src/app/model/Global';
 import { Typography } from "@mui/material";
 import { makeStyles } from '@mui/styles';
-import { useNavigate } from 'react-router-dom';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { Button } from "@mui/material";
 
 import {
     selectSearchText,
-    setInventorySearchText,
+    setOrderSearchText,
     setPagenumber,
     submit
-} from './store/inventorySlice';
+} from '../store/ordersSlice';
 
 const useStyles = makeStyles(() => ({
     dialog: {
@@ -36,25 +36,25 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-const InvSearchFilter = () => {
+const OrdersSearchFilter = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const classes = useStyles();
-    const navigate = useNavigate();
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const searchText = useSelector(selectSearchText);
-    // const price = useSelector(selectPrice);
-    // const category = useSelector(selectCategory);
-    const [price, setPrice] = useState('');
-    const [category, setCategory] = useState('');
+    // const subtotal = useSelector(selectSubtotal);
+    // const channel = useSelector(selectChannel);
+    // const status = useSelector(selectStatus);
+    const [subtotal, setSubtotal] = useState('');
+    const [channel, setChannel] = useState('');
+    const [status, setStatus] = useState('');
 
-    const handleChange = (action, value) => {
-        dispatch(action(value));
+    const handleChange = (actionCreator, value) => {
+        dispatch(actionCreator(value));
         dispatch(setPagenumber(0));
     };
-
     const handleOpenDialog = () => {
         setDialogOpen(true);
     }
@@ -63,20 +63,18 @@ const InvSearchFilter = () => {
     }
     const handleSubmit = () => {
         const filterData = {
-            price: price,
-            category: category
+            subtotal: subtotal,
+            channel: channel,
+            status: status
         }
         dispatch(submit(filterData));
         setPagenumber(0);
         setDialogOpen(false);
     }
-    const handleAdd = () => {
-        navigate('/inventoryManager/Add/0');
-    }
 
     return (
         <>
-            <Paper className={`px-16 py-8 border-b-1 mt-32 mx-24 ${styles.paper}`}>
+            <Paper className={`px-16 py-8 border-b-1 mt-32 mx-32 ${styles.paper}`}>
                 <div className="flex md:flex-row flex-col justify-between sm:space-y-0 mt-8 -mx-8">
                     <Box
                         className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
@@ -89,7 +87,7 @@ const InvSearchFilter = () => {
                             disableUnderline
                             fullWidth
                             value={searchText}
-                            onChange={(event) => handleChange(setInventorySearchText, event.target.value)}
+                            onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
                         />
                     </Box>
                     <Button
@@ -102,17 +100,6 @@ const InvSearchFilter = () => {
                             material-solid:filter_alt
                         </FuseSvgIcon>
                         <span className='mx-4'> {t('search_filter')}</span>
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="info"
-                        onClick={handleAdd}
-                        className={`mx-8 my-8 ${styles.backButton}`}
-                    >
-                        <FuseSvgIcon size={24}>
-                            heroicons-solid:plus
-                        </FuseSvgIcon>
-                        <span className='mx-4'>{t('add')}</span>
                     </Button>
                 </div>
             </Paper>
@@ -129,7 +116,7 @@ const InvSearchFilter = () => {
                     </Typography>
                 </DialogTitle>
                 <DialogContent className='flex flex-col' sx={{ width: '450px' }}>
-                    <FormControl className='mx-8 my-8' size="small">
+                    <FormControl sx={{ m: 1 }}>
                         <InputLabel
                             id="select-small-label"
                             sx={{
@@ -137,12 +124,12 @@ const InvSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{t('inventory.priceRange')}</InputLabel>
+                        >{t('orders.subTotal')}</InputLabel>
                         <Select
                             labelId="select-small-label"
                             id="select-small"
-                            value={price}
-                            label={t('inventory.priceRange')}
+                            value={subtotal}
+                            label="Subtotal"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
                                     borderColor: '#e2e8f0',
@@ -154,23 +141,23 @@ const InvSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => setPrice(event.target.value)}>
+                            onChange={(event) => setSubtotal(event.target.value)}
+                        >
                             <MenuItem value="">
                                 {t('none')}
                             </MenuItem>
                             {
-                                PriceRange.map((price, index) => {
+                                SubTotals.map((subTotal, index) => {
                                     return (
                                         <MenuItem key={index} value={index}>
-                                            {price}
+                                            {subTotal}
                                         </MenuItem>
                                     );
                                 })
                             }
                         </Select>
                     </FormControl>
-
-                    <FormControl className='mx-8 my-8' size="small">
+                    <FormControl sx={{ m: 1 }}>
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -178,13 +165,12 @@ const InvSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{t('inventory.category')}
-                        </InputLabel>
+                        >{t('channel')}</InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={category}
-                            label={t('inventory.category')}
+                            value={channel}
+                            label="Channel"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
                                     borderColor: '#e2e8f0',
@@ -196,16 +182,57 @@ const InvSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => setCategory(event.target.value)}
+                            onChange={(event) => setChannel(event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}
                             </MenuItem>
                             {
-                                Category.map((category, index) => {
+                                Channels.map((channel, index) => {
                                     return (
-                                        <MenuItem key={index} value={category}>
-                                            {category}
+                                        <MenuItem key={index} value={channel}>
+                                            {channel}
+                                        </MenuItem>
+                                    );
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                    <FormControl sx={{ m: 1 }}>
+                        <InputLabel
+                            id="demo-select-small-label"
+                            sx={{
+                                '&.Mui-focused': {
+                                    color: 'grey.600'
+                                }
+                            }}
+                        >{t('status')}</InputLabel>
+                        <Select
+                            labelId="demo-select-small-label"
+                            id="demo-select-small"
+                            value={status}
+                            label="Status"
+                            sx={{
+                                '.MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                                '&:hover .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#e2e8f0',
+                                },
+                            }}
+                            onChange={(event) => setStatus(event.target.value)}
+                        >
+                            <MenuItem value="">
+                                {t('none')}
+                            </MenuItem>
+                            {
+                                Status.map((status, index) => {
+                                    return (
+                                        <MenuItem key={index} value={status.toLowerCase()}>
+                                            {status}
                                         </MenuItem>
                                     );
                                 })
@@ -237,4 +264,4 @@ const InvSearchFilter = () => {
     );
 };
 
-export default InvSearchFilter;
+export default OrdersSearchFilter;

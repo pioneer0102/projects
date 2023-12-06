@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Typography } from "@mui/material";
 import styles from './style.module.scss';
-import PartnerBreadcrumb from './PartnerBreadCrumb';
+import PartnerBreadcrumb from './components/PartnerBreadCrumb';
 import { logoSrc } from 'src/app/model/PartnerModel';
 import history from '@history';
 import { styled } from '@mui/material/styles';
