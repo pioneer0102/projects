@@ -32,11 +32,7 @@
             "tip": 50,
             "history": [
               {
-                "status": "received",
-                "date": "December 4, 2023 10:30 AM"
-              },
-              {
-                "status": "pending",
+                "status": "completed",
                 "date": "December 4, 2023 10:30 AM"
               },
               {
@@ -44,7 +40,11 @@
                 "date": "December 4, 2023 10:30 AM"
               },
               {
-                "status": "completed",
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
                 "date": "December 4, 2023 10:30 AM"
               }
             ],
@@ -75,7 +75,7 @@
             "tip": 50,
             "history": [
               {
-                "status": "received",
+                "status": "pickedup",
                 "date": "December 4, 2023 10:30 AM"
               },
               {
@@ -83,7 +83,7 @@
                 "date": "December 4, 2023 10:30 AM"
               },
               {
-                "status": "pickedup",
+                "status": "received",
                 "date": "December 4, 2023 10:30 AM"
               }
             ],
@@ -109,11 +109,11 @@
             "tip": 50,
             "history": [
               {
-                "status": "received",
+                "status": "pending",
                 "date": "December 4, 2023 10:30 AM"
               },
               {
-                "status": "pending",
+                "status": "received",
                 "date": "December 4, 2023 10:30 AM"
               }
             ],
@@ -149,15 +149,7 @@
             "tip": 50,
             "history": [
               {
-                "status": "received",
-                "date": "December 4, 2023 10:30 AM"
-              },
-              {
-                "status": "pending",
-                "date": "December 4, 2023 10:30 AM"
-              },
-              {
-                "status": "pickedup",
+                "status": "rejected",
                 "date": "December 4, 2023 10:30 AM"
               },
               {
@@ -165,7 +157,15 @@
                 "date": "December 4, 2023 10:30 AM"
               },
               {
-                "status": "rejected",
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
                 "date": "December 4, 2023 10:30 AM"
               }
             ],
@@ -188,7 +188,7 @@
             ]
           },
           {
-            "id": 4,
+            "id": 5,
             "customer": "John Doe",
             "subtotal": "2500",
             "channel": "DoorDash",

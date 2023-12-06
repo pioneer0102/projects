@@ -77,6 +77,7 @@ const OrderDetail = () => {
     }, [routeParams]);
 
     const handleClick = (currentTarget, historyIndex) => {
+        if(historyIndex !== 0) return;
         setAnchorEl(currentTarget);
         setHistoryIndex(historyIndex);
     };
@@ -242,7 +243,7 @@ const OrderDetail = () => {
                                                             borderRadius: "3px"
                                                         }}>
                                                         {item.status}
-                                                        {!open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
+                                                        {(historyIndex==0 && !open) && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
                                                         {open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>}
                                                     </Typography>
                                                     <Popover
@@ -363,8 +364,15 @@ const OrderDetail = () => {
                                                         onClick={(event) => handleClickItemStatus(event.currentTarget, itemIndex, item.id)}
                                                     >
                                                         {item.status}
-                                                        {item.status && !itemOpen && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
-                                                        {item.status && itemOpen && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>}
+                                                        {
+                                                            (itemId == item.id && itemOpen && item.status) ?
+                                                            <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>
+                                                            :
+                                                            item.status ?
+                                                            <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>
+                                                            :
+                                                            <></>
+                                                        }
                                                     </Typography>
                                                     <Popover
                                                         id={id}

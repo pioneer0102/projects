@@ -163,7 +163,7 @@ const OrdersTable = () => {
                                                             <Typography
                                                                 color="text.secondary"
                                                                 className="font-semibold text-14 md:pt-16">
-                                                                {item.history[item.history.length-1].date.toLocaleString('en-US', options)}
+                                                                {item.history[0].date.toLocaleString('en-US', options)}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
@@ -177,19 +177,19 @@ const OrdersTable = () => {
                                                             <Typography
                                                                 className={clsx(
                                                                     'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
-                                                                    item.history[item.history.length-1].status === "completed" &&
+                                                                    item.history[0].status === "completed" &&
                                                                     'bg-green-500 text-grey-100',
-                                                                    item.history[item.history.length-1].status === "pickedup" &&
+                                                                    item.history[0].status === "pickedup" &&
                                                                     'bg-blue-500 text-grey-100',
-                                                                    item.history[item.history.length-1].status === "pending" &&
+                                                                    item.history[0].status === "pending" &&
                                                                     'bg-yellow-600 text-grey-100',
-                                                                    item.history[item.history.length-1].status === "received" &&
+                                                                    item.history[0].status === "received" &&
                                                                     'bg-purple-500 text-grey-100',
-                                                                    item.history[item.history.length-1].status === "rejected" &&
+                                                                    item.history[0].status === "rejected" &&
                                                                     'bg-red-500 text-grey-100',
                                                                 )}
                                                                 sx={{ borderRadius: "3px" }}>
-                                                                {item.history[item.history.length-1].status}
+                                                                {item.history[0].status}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left" className="md:pt-16">
