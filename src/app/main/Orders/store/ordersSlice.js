@@ -21,6 +21,11 @@ export const updateStatusById = createAsyncThunk('orderApp/orders/updateStatus',
     return response.data;
 });
 
+export const updateItemStatusById = createAsyncThunk('orderApp/orders/updateItemStatusById', async (statusData) => {
+    const response = await axios.post(`/api/updateItemStatusById`, statusData);
+    return response.data;
+});
+
 export const removeItem = createAsyncThunk('orderApp/orders/removeItem', async (item) => {
     const response = await axios.post(`/api/removeItem`, item);
     return response.data;
@@ -71,6 +76,9 @@ const ordersSlice = createSlice({
             state.status = action.payload;
 
         },
+        updateItemStatus: (state, action) => {
+            state.taxInfo[action.payload.itemIndex].status = action.payload.itemStatus;
+        },
         setOrderSearchText: (state, action) => {
             state.searchText = action.payload;
         },
@@ -81,9 +89,9 @@ const ordersSlice = createSlice({
             state.pageSize = action.payload;
 
         },
-        // updateStatus: (state, action) => {
-        //     state.orderInfo.status = action.payload;
-        // },
+        updateStatus: (state, action) => {
+            state.orderInfo.history[action.payload.history].status = action.payload.status;
+        },
         removeFront : (state, action) => {
             _.remove(state.taxInfo, { id: action.payload });
         },
@@ -108,6 +116,6 @@ const ordersSlice = createSlice({
     }
 });
 
-export const { setSubtotal, setChannel, setStatus, setOrderSearchText, setPagenumber, setPagesize, updateStatus, removeFront, submit } = ordersSlice.actions;
+export const { setSubtotal, setChannel, setStatus, setOrderSearchText, setPagenumber, setPagesize, updateStatus, removeFront, submit, updateItemStatus } = ordersSlice.actions;
 
 export default ordersSlice.reducer;
