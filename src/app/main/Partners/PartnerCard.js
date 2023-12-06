@@ -19,6 +19,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 
+import { GoogleLogin } from '@react-oauth/google';
+
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -43,7 +45,7 @@ const PartnerCard = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
-    
+
     const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema),
@@ -54,6 +56,13 @@ const PartnerCard = (props) => {
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const onSubmit = (data) => navigate(`/partners/add/${name}`);
+
+    const responseMessage = (response) => {
+        navigate(`/partners/add/${name}`);
+    };
+    const errorMessage = (error) => {
+        console.log(error);
+    };
 
     return (
         <>
@@ -119,6 +128,7 @@ const PartnerCard = (props) => {
                     </Typography>
                 </DialogTitle>
                 <DialogContent className='max-w-400'>
+                    <GoogleLogin className='w-full' onSuccess={responseMessage} onError={errorMessage} />
                     <Controller
                         name="email"
                         control={control}
@@ -128,6 +138,7 @@ const PartnerCard = (props) => {
                                 className="mt-24"
                                 label="Email"
                                 type="email"
+                                disabled
                                 error={!!errors.email}
                                 helperText={errors?.email?.message}
                                 variant="outlined"
@@ -141,9 +152,10 @@ const PartnerCard = (props) => {
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                className="mt-40"
+                                className="mt-24"
                                 label="Password"
                                 type="password"
+                                disabled
                                 error={!!errors.password}
                                 helperText={errors?.password?.message}
                                 variant="outlined"
@@ -157,9 +169,9 @@ const PartnerCard = (props) => {
                         <Button
                             className={`font-semibold ${styles.button}`}
                             variant="contained"
-                            color="secondary"
+                            color="info"
                             aria-label="Sign in"
-                            disabled={_.isEmpty(dirtyFields) || !isValid}
+                            disabled
                             type="submit"
                             size="large"
                             onClick={handleSubmit(onSubmit)}>

@@ -13,4 +13,37 @@ const Category = [
     "Laptop"
 ];
 
-export {PriceRange, Category}
+const InventoryTableHeader = [
+    {
+        id: 'image',
+        align: 'left',
+        label: 'Image',
+    },
+    {
+        id: 'name',
+        align: 'left',
+        label: 'Name',
+    },
+    {
+        id: 'category',
+        align: 'left',
+        label: 'Category',
+    },
+    {
+        id: 'price',
+        align: 'left',
+        label: 'Subtotal',
+    },
+    {
+        id: 'quantity',
+        align: 'left',
+        label: 'Quantity',
+    },
+    {
+        id: 'active',
+        align: 'left',
+        label: 'Active',
+    },
+];
+
+export {PriceRange, Category, InventoryTableHeader};

@@ -1,6 +1,7 @@
 import _ from '@lodash';
 import mockApi from '../mock-api.json';
 import mock from '../mock';
+import FuseUtils from '@fuse/utils';
 
 const itemDB = mockApi.database.examples.items.value;
 
@@ -49,4 +50,42 @@ mock.onPost('/api/getInventory').reply(({ data }) => {
         };
         return [200, data];
     }
+});
+
+mock.onGet('/api/getInventoryById').reply((data) => {
+    const { id } = data;
+    const item = _.find(itemDB, { id: parseInt(id) });
+    return [200, item];
+})
+
+mock.onPost('/api/addInventory').reply(({ data }) => {
+    const { active, category, image, price, quantity, tax, upc, } = JSON.parse(data);
+    const newItem = {
+        id: FuseUtils.generateGUID(),
+        active: active,
+        category: category,
+        image: image,
+        price: price,
+        quantity: quantity,
+        tax: tax,
+        upc: upc
+    };
+    itemDB.push(newItem);
+    return [200, newItem]
+});
+
+mock.onPost('/api/updateInventory').reply(({ data }) => {
+    const { id, active, category, image, price, quantity, tax, upc, } = JSON.parse(data);
+    const newItem = {
+        id: id,
+        active: active,
+        category: category,
+        image: image,
+        price: price,
+        quantity: quantity,
+        tax: tax,
+        upc: upc
+    };
+    _.assign(_.find(itemDB, { id }), newItem);
+    return [200, newItem]
 });

@@ -5,7 +5,11 @@
     "status": "Status",
     "channel": "Channel",
     "cancel": "Cancel",
-    "ok": "Ok",
+    "ok": "OK",
+    "search_filter": "Filter",
+    "add": "Add",
+    "edit": "Edit",
+    "upload": "Upload",
     "orders": {
         "orders": "Orders",
         "detail": "Detail",
@@ -15,13 +19,15 @@
         "cancel": "Cancel",
         "total": "Total Orders",
         "orderInfo": "Order Information",
-        "taxInfo": "Tax Information"
+        "itemInfo": "Item Information"
     },
     "partners": {
         "partners": "Partners"
     },
     "inventory": {
         "priceRange": "Price Range",
-        "category": "Category"
+        "category": "Category",
+        "inventoryManager": "Inventory Manager",
+        "add": "Add"
     }
 }

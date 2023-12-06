@@ -5,7 +5,7 @@
     text-overflow: ellipsis;
 }
 
-.search_paper {
+.paper {
     box-shadow: none;
     border-radius: 4px;
     animation: search 0.5s linear 1;
@@ -13,6 +13,11 @@
 
 .list {
     animation: search 0.5s linear 1;
+}
+
+.backButton {
+    font-size: 16px;
+    border-radius: 5px;
 }
 
 @keyframes search {
@@ -24,4 +29,11 @@
     100% {
         top: 0%;
     }
+}
+
+.form {
+    animation: entry 0.5s linear 1;
+    border-radius: 6px;
+    box-shadow: 0px 10px 10px #CCC;
+    animation: search 0.5s linear 1;
 }

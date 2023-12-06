@@ -5,36 +5,72 @@ import styles from './style.module.scss';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status, SubTotals } from 'src/app/model/OrdersModel';
 import { Channels } from 'src/app/model/Global';
-import { 
+import { Typography } from "@mui/material";
+import { makeStyles } from '@mui/styles';
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import { Button } from "@mui/material";
+
+import {
     selectSearchText,
-    selectSubtotal,
-    selectChannel,
-    selectStatus,
-    setOrderSubtotal,
-    setOrderChannel,
-    setOrderStatus,
     setOrderSearchText,
-    setPagenumber
+    setPagenumber,
+    submit
 } from './store/ordersSlice';
+
+const useStyles = makeStyles(() => ({
+    dialog: {
+        '& .muiltr-7en360-MuiPaper-root-MuiDialog-paper': {
+            borderRadius: '6px'
+        }
+    },
+}));
 
 const OrdersSearchFilter = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const classes = useStyles();
+
+    const [dialogOpen, setDialogOpen] = useState(false);
+
     const searchText = useSelector(selectSearchText);
-    const subtotal = useSelector(selectSubtotal);
-    const channel = useSelector(selectChannel);
-    const status = useSelector(selectStatus);
+    // const subtotal = useSelector(selectSubtotal);
+    // const channel = useSelector(selectChannel);
+    // const status = useSelector(selectStatus);
+    const [subtotal, setSubtotal] = useState('');
+    const [channel, setChannel] = useState('');
+    const [status, setStatus] = useState('');
 
     const handleChange = (actionCreator, value) => {
         dispatch(actionCreator(value));
         dispatch(setPagenumber(0));
     };
+    const handleOpenDialog = () => {
+        setDialogOpen(true);
+    }
+    const handleClose = () => {
+        setDialogOpen(false);
+    }
+    const handleSubmit = () => {
+        const filterData = {
+            subtotal: subtotal,
+            channel: channel,
+            status: status
+        }
+        dispatch(submit(filterData));
+        setPagenumber(0);
+        setDialogOpen(false);
+    }
 
     return (
         <>
@@ -46,7 +82,7 @@ const OrdersSearchFilter = () => {
                             heroicons-outline:search
                         </FuseSvgIcon>
                         <Input
-                            placeholder={ t('search') }
+                            placeholder={t('search')}
                             className="flex px-16"
                             disableUnderline
                             fullWidth
@@ -54,7 +90,33 @@ const OrdersSearchFilter = () => {
                             onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
                         />
                     </Box>
-                    <FormControl className="flex flex-auto" sx={{ m: 1, maxWidth: 250 }} size="small">
+                    <Button
+                        variant="contained"
+                        color="inherit"
+                        onClick={handleOpenDialog}
+                        className={`mx-8 my-8 ${styles.backButton}`}
+                    >
+                        <FuseSvgIcon className="text-gray-500" size={24}>
+                            material-solid:filter_alt
+                        </FuseSvgIcon>
+                        <span className='mx-4'> {t('search_filter')}</span>
+                    </Button>
+                </div>
+            </Paper>
+            <Dialog
+                open={dialogOpen}
+                onClose={handleClose}
+                className={classes.dialog}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle>
+                    <Typography className={`font-semibold text-32 mt-16 ml-8`}>
+                        <span>{t('search_filter')}</span>
+                    </Typography>
+                </DialogTitle>
+                <DialogContent className='flex flex-col' sx={{ width: '450px' }}>
+                    <FormControl sx={{ m: 1 }}>
                         <InputLabel
                             id="select-small-label"
                             sx={{
@@ -62,7 +124,7 @@ const OrdersSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{ t('orders.subTotal') }</InputLabel>
+                        >{t('orders.subTotal')}</InputLabel>
                         <Select
                             labelId="select-small-label"
                             id="select-small"
@@ -79,22 +141,23 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => handleChange(setOrderSubtotal, event.target.value)}>
+                            onChange={(event) => setSubtotal(event.target.value)}
+                        >
                             <MenuItem value="">
-                                { t('none') }
+                                {t('none')}
                             </MenuItem>
                             {
                                 SubTotals.map((subTotal, index) => {
                                     return (
                                         <MenuItem key={index} value={index}>
-                                            { subTotal }
+                                            {subTotal}
                                         </MenuItem>
-                                    );                                    
+                                    );
                                 })
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex flex-auto" sx={{ m: 1, maxWidth: 250 }} size="small">
+                    <FormControl sx={{ m: 1 }}>
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -102,7 +165,7 @@ const OrdersSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{ t('channel') }</InputLabel>
+                        >{t('channel')}</InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
@@ -119,22 +182,23 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => handleChange(setOrderChannel, event.target.value)}>
+                            onChange={(event) => setChannel(event.target.value)}
+                        >
                             <MenuItem value="">
-                                { t('none') }
+                                {t('none')}
                             </MenuItem>
                             {
                                 Channels.map((channel, index) => {
                                     return (
                                         <MenuItem key={index} value={channel}>
-                                            { channel }
+                                            {channel}
                                         </MenuItem>
-                                    );                                    
+                                    );
                                 })
                             }
                         </Select>
                     </FormControl>
-                    <FormControl className="flex flex-auto" sx={{ m: 1, maxWidth: 250 }} size="small">
+                    <FormControl sx={{ m: 1 }}>
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -142,7 +206,7 @@ const OrdersSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{ t('status') }</InputLabel>
+                        >{t('status')}</InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
@@ -159,23 +223,43 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => handleChange(setOrderStatus, event.target.value)}>
+                            onChange={(event) => setStatus(event.target.value)}
+                        >
                             <MenuItem value="">
-                                { t('none') }
+                                {t('none')}
                             </MenuItem>
                             {
                                 Status.map((status, index) => {
                                     return (
                                         <MenuItem key={index} value={status.toLowerCase()}>
-                                            { status }
+                                            {status}
                                         </MenuItem>
-                                    );                                    
+                                    );
                                 })
                             }
                         </Select>
                     </FormControl>
-                </div>
-            </Paper>
+                </DialogContent>
+                <DialogActions className='mx-24 mb-24'>
+                    <Button
+                        variant="outline"
+                        color="secondary"
+                        onClick={handleClose}
+                        className={styles.backButton}
+                    >
+                        <span>{t('cancel')}</span>
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        type="submit"
+                        onClick={handleSubmit}
+                        className={styles.backButton}
+                    >
+                        <span>{t('ok')}</span>
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 };

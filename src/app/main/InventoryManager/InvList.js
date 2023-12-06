@@ -72,7 +72,7 @@ const InvList = () => {
             <Grid container spacing={0} className={styles.list}>
                 {
                     Inventory.pagedData.map((item, index) => (
-                        <Grid key={index} item lg={6} md={6} sm={12} xs={12}>
+                        <Grid key={index} lg={6} md={6} sm={12} xs={12}>
                             <InvListItem key={index} item={item} />
                         </Grid>
                     ))
