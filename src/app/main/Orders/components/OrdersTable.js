@@ -74,10 +74,8 @@ const OrdersTable = () => {
 
     const { data, isLoading, isError } = useQuery(['ordersList', searchData], async () => {
         try {
-            setOrderLoading(isLoading);
             const ordersData = await getOrders(searchData);
             dispatch(setOrders(ordersData));
-            setOrderLoading(isLoading);
         } catch (error) {
             console.log(error)
         }
