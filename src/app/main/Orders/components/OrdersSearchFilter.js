@@ -235,7 +235,7 @@ const OrdersSearchFilter = () => {
                                 Status.map((status, index) => {
                                     return (
                                         <MenuItem key={index} value={status.toLowerCase()}>
-                                            {status}
+                                            {status.toUpperCase()}
                                         </MenuItem>
                                     );
                                 })
