@@ -72,15 +72,23 @@ mock.onGet('/api/getItem').reply((data) => {
 });
 
 mock.onPost('/api/updateStatus').reply(({ data }) => {
-    const { id, status } = JSON.parse(data);
+    const { id, history, status } = JSON.parse(data);
     const order = _.find(ordersDB, { id: id });
-    order.status = status;
+    order.history[history].status = status;
     var success = false;
     if (order) {
         success = true;
     }
     return [200, { success: success }];
 });
+
+mock.onPost('/api/updateItemStatusById').reply(({data}) => {
+    const { id, itemId, itemStatus } = JSON.parse(data);
+    const order = _.find(ordersDB, { id: id });
+    const item = _.find(order.items, {id: itemId});
+    item.status = itemStatus;
+    return [200, {success: true}]
+})
 
 mock.onPost('/api/removeItem').reply(({ data }) => {
     const { orderId, itemId } = JSON.parse(data);

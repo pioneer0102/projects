@@ -14,6 +14,11 @@ const Status = [
     "rejected"
 ];
 
+const ItemStatus = [
+    "replaced",
+    "canceled"
+]
+
 const OrdersListHeader = [
     {
         id: 'channel',
@@ -104,4 +109,4 @@ const OrderDetailContentHeader = [
     },
 ];
 
-export { SubTotals, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader };
+export { SubTotals, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader, ItemStatus };
