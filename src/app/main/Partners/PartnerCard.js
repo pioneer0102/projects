@@ -18,13 +18,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
+import { useTranslation } from 'react-i18next';
 
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import _ from '@lodash';
 
 const schema = yup.object().shape({
     email: yup.string().required('You must enter a email')
@@ -42,6 +42,7 @@ const PartnerCard = (props) => {
     const { name } = props;
     const classes = useStyles();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
@@ -53,7 +54,11 @@ const PartnerCard = (props) => {
     const { isValid, dirtyFields, errors } = formState;
 
     const handleOnLoad = () => setIsLoading(false);
-    const handleClickOpen = () => setOpen(true);
+    const handleClickOpen =
+        useGoogleLogin({
+            onSuccess: () => navigate(`/partners/add/${name}`),
+            onError: () => { }
+        });
     const handleClose = () => setOpen(false);
     const onSubmit = (data) => navigate(`/partners/add/${name}`);
 
@@ -74,7 +79,7 @@ const PartnerCard = (props) => {
                         </div>
                     }
                     action={
-                        <IconButton aria-label="settings" onClick={handleClickOpen}>
+                        <IconButton aria-label="settings" onClick={() => handleClickOpen()}>
                             <Icon fontSize="large">add</Icon>
                         </IconButton>
                     }
@@ -104,11 +109,8 @@ const PartnerCard = (props) => {
                         className={styles.backimg_size}
                         alt="image"
                         onLoad={handleOnLoad}
-                        role="button"
-                        onClick={handleClickOpen}
                     />
-                    <div className={styles.overlay} role="button"
-                        onClick={handleClickOpen}>
+                    <div className={styles.overlay}>
                         <p className={styles.text}>
                             {detail[name]}
                         </p>
@@ -173,9 +175,8 @@ const PartnerCard = (props) => {
                             aria-label="Sign in"
                             disabled
                             type="submit"
-                            size="large"
                             onClick={handleSubmit(onSubmit)}>
-                            Login
+                            {t('partners.login')}
                         </Button>
                     </Box>
                 </DialogActions>

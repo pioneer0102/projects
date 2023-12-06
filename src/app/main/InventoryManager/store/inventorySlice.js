@@ -90,10 +90,10 @@ const inventorySlice = createSlice({
             state.inventory = action.payload;
         });
         builder.addCase(addInventory.fulfilled, (state, action) => {
-
+            console.log(action.payload);
         });
         builder.addCase(updateInventory.fulfilled, (state, action) => {
-
+            console.log(action.payload);
         })
     }
 });

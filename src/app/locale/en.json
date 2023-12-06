@@ -8,8 +8,8 @@
     "ok": "OK",
     "search_filter": "Filter",
     "add": "Add",
+    "save": "Save",
     "edit": "Edit",
-    "upload": "Upload",
     "orders": {
         "orders": "Orders",
         "detail": "Detail",
@@ -22,12 +22,15 @@
         "itemInfo": "Item Information"
     },
     "partners": {
-        "partners": "Partners"
+        "partners": "Partners",
+        "connected": "Connected",
+        "integrate": "Integrate",
+        "login": "Login"
     },
     "inventory": {
         "priceRange": "Price Range",
         "category": "Category",
         "inventoryManager": "Inventory Manager",
-        "add": "Add"
+        "upload": "Upload"
     }
 }

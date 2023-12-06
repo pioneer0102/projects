@@ -20,11 +20,9 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import FuseUtils from '@fuse/utils';
-import ImageUploading from 'react-images-uploading';
 import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel'
-import { blue } from '@mui/material/colors';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { showMessage } from 'app/store/fuse/messageSlice';
 import { grey } from '@mui/material/colors';
 import {
     getInventoryById,
@@ -39,16 +37,13 @@ const schema = yup.object().shape({
     price: yup.string().required('You must enter a address'),
     upc: yup.string().required('You must enter a email'),
     quantity: yup.string().required('You must enter a phone Number'),
-    image: yup.string().required('You must enter a phone Number'),
-    name: yup.string().required('You must enter a phone Number'),
-    active: yup.bool().required('You must enter a phone Number'),
+    image: yup.string().required('You must select image'),
+    name: yup.string().required('You must enter a name'),
 });
 
 const InvForm = () => {
 
     const [image, setImage] = useState({});
-    const [active, setActive] = useState(true);
-    const maxNumber = 69;
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -62,15 +57,17 @@ const InvForm = () => {
     useEffect(() => {
         if (routeParams.action === 'Edit') {
             dispatch(getInventoryById(routeParams.id));
-            { inventory && setImage(inventory.image); }
+            
         }
         if (routeParams.action === 'Add') {
             dispatch(initializeInventory({}));
+            setImage({});
         }
-    }, [dispatch, routeParams]);
+    }, [dispatch, routeParams.action, routeParams.id]);
 
     useEffect(() => {
         reset({ ...inventory });
+        setImage(inventory.image);
     }, [inventory, reset]);
 
     const { isValid, dirtyFields, errors } = formState;
@@ -79,7 +76,6 @@ const InvForm = () => {
     const onSubmit = (data) => {
         const formData = {
             ...data,
-            active: active,
             image: image
         }
         if (routeParams.action === 'Add') {
@@ -90,12 +86,14 @@ const InvForm = () => {
         }
         history.push('/inventoryManager');
     }
-    const handleActive = (event) => {
-        setActive(event.target.checked);
-    }
     function handleChange(e) {
-        console.log(e.target.files);
-        setImage(URL.createObjectURL(e.target.files[0]));
+        // eslint-disable-next-line no-constant-condition
+        if(e.target.files[0].type===("image/png" || "image/jpg") ){
+            setImage(URL.createObjectURL(e.target.files[0]));
+        } else{
+            dispatch(showMessage({message: "Select Image Correctly", variant: "error"}));
+            setImage({});
+        }
     }
 
     return (
@@ -136,17 +134,16 @@ const InvForm = () => {
                     <Controller
                         control={control}
                         name="active"
-                        defaultValue={active}
+                        defaultValue={true}
                         render={({ field }) => (
                             <FormControlLabel
-                                {...field}
                                 label="Active"
-                                className={`self-end z-50 ${styles.backButton}`}
+                                className={`self-end ${styles.backButton}`}
                                 control={
                                     <Checkbox
                                         color='info'
-                                        checked={active}
-                                        onChange={handleActive}
+                                        checked={field.value}
+                                        onChange={(e) => field.onChange(e.target.checked)}
                                     />
                                 }
                             />
@@ -165,8 +162,8 @@ const InvForm = () => {
                                 label="name"
                                 placeholder="Name"
                                 id="name"
-                                error={!!errors.category}
-                                helperText={errors?.category?.message}
+                                error={!!errors.name}
+                                helperText={errors?.name?.message}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -308,18 +305,19 @@ const InvForm = () => {
                 </div>
                 <div className='flex flex-col items-center justify-center'>
 
-                    {Object.keys(image).length === 0 ?
+                    {(Object.entries(image).length==0) ?
                         <Box
                             sx={{
                                 backgroundColor: grey[300],
                             }}
                             component="label"
-                            className="flex items-center justify-center relative w-128 h-128 mx-12 my-24 overflow-hidden cursor-pointer shadow hover:shadow-lg"
+                            className="flex items-center justify-center relative w-128 h-128 mx-12 mt-32 overflow-hidden cursor-pointer shadow hover:shadow-lg"
                         ><FuseSvgIcon size={32} color="action">
                                 heroicons-solid:upload
                             </FuseSvgIcon>
-                        </Box> : <img className='mt-24 w-128 h-128' src={image} />
+                        </Box> : <img className='mt-32 w-128' src={image} />
                     }
+
                     <Controller
                         name="image"
                         control={control}
@@ -331,9 +329,9 @@ const InvForm = () => {
                                     color="info"
                                     variant="contained"
                                     component="label"
-                                    className="mx-12 my-24 rounded-none overflow-hidden cursor-pointer shadow hover:shadow-lg"
+                                    className="mx-12 mt-32 rounded overflow-hidden cursor-pointer shadow hover:shadow-lg"
                                 >
-                                    Upload
+                                    {t('inventory.upload')}
                                     <input className="hidden" type="file" onChange={handleChange} />
                                 </Button>
                             </>
@@ -348,7 +346,7 @@ const InvForm = () => {
                         className={`ml-auto ${styles.backButton}`}
                         onClick={handleCancel}
                     >
-                        Cancel
+                        {t('cancel')}
                     </Button>
                     <Button
                         className={`ml-8 ${styles.backButton}`}
@@ -356,7 +354,7 @@ const InvForm = () => {
                         color="info"
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action == "Add" ? "Add" : "Save"}
+                        {routeParams.action == "Add" ? t('add') : t('save')}
                     </Button>
                 </Box>
             </Paper>

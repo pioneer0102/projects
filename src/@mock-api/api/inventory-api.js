@@ -71,7 +71,7 @@ mock.onPost('/api/addInventory').reply(({ data }) => {
         upc: upc
     };
     itemDB.push(newItem);
-    return [200, newItem]
+    return [200, {success:true}]
 });
 
 mock.onPost('/api/updateInventory').reply(({ data }) => {
@@ -87,5 +87,5 @@ mock.onPost('/api/updateInventory').reply(({ data }) => {
         upc: upc
     };
     _.assign(_.find(itemDB, { id }), newItem);
-    return [200, newItem]
+    return [200, {success:true}]
 });

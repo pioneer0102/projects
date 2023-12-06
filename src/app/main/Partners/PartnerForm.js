@@ -16,6 +16,7 @@ import { logoSrc } from 'src/app/model/PartnerModel';
 import history from '@history';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
+import { useTranslation } from 'react-i18next';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a name'),
@@ -55,6 +56,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 function PartnerForm() {
     const routeParams = useParams();
+    const { t } = useTranslation();
     const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema),
@@ -82,15 +84,16 @@ function PartnerForm() {
                             {channel}
                         </Typography>
                     </div>
-                    <div className="self-center">
+                    <div className="flex self-center">
                         <StyledBadge
+                        className='self-center'
                             overlap="circular"
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot"
                         >
                         </StyledBadge>
                         <Typography className={`inline font-semibold text-16 px-16 text-green-500`}>
-                            conneceted
+                            {t('partners.connected')}
                         </Typography>
                     </div>
                 </div>
@@ -199,7 +202,7 @@ function PartnerForm() {
                         className={`ml-auto ${styles.button}`}
                         onClick={handleCancel}
                     >
-                        Cancel
+                        {t('cancel')}
                     </Button>
                     <Button
                         className={`ml-8 ${styles.button}`}
@@ -208,7 +211,7 @@ function PartnerForm() {
                         disabled={_.isEmpty(dirtyFields) || !isValid}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        Integrate
+                        {t('integrate')}
                     </Button>
                 </Box>
             </Paper>
