@@ -24,6 +24,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {
     selectSearchText,
     setInventorySearchText,
+    selectPrice,
+    selectCategory,
+    setInventoryPrice,
+    setInventoryCategory,
     setPagenumber,
     submit
 } from '../store/inventorySlice';
@@ -45,10 +49,8 @@ const InvSearchFilter = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const searchText = useSelector(selectSearchText);
-    // const price = useSelector(selectPrice);
-    // const category = useSelector(selectCategory);
-    const [price, setPrice] = useState('');
-    const [category, setCategory] = useState('');
+    const price = useSelector(selectPrice);
+    const category = useSelector(selectCategory);
 
     const handleChange = (action, value) => {
         dispatch(action(value));
@@ -154,7 +156,7 @@ const InvSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => setPrice(event.target.value)}>
+                            onChange={(event) => handleChange(setInventoryPrice, event.target.value)}>
                             <MenuItem value="">
                                 {t('none')}
                             </MenuItem>
@@ -196,7 +198,7 @@ const InvSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => setCategory(event.target.value)}
+                            onChange={(event) => handleChange(setInventoryCategory, event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}
