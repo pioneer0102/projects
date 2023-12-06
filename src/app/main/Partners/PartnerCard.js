@@ -18,11 +18,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
+import { useTranslation } from 'react-i18next';
+
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import _ from '@lodash';
 
 const schema = yup.object().shape({
     email: yup.string().required('You must enter a email')
@@ -40,10 +42,11 @@ const PartnerCard = (props) => {
     const { name } = props;
     const classes = useStyles();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
-    
+
     const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema),
@@ -51,9 +54,20 @@ const PartnerCard = (props) => {
     const { isValid, dirtyFields, errors } = formState;
 
     const handleOnLoad = () => setIsLoading(false);
-    const handleClickOpen = () => setOpen(true);
+    const handleClickOpen =
+        useGoogleLogin({
+            onSuccess: () => navigate(`/partners/add/${name}`),
+            onError: () => { }
+        });
     const handleClose = () => setOpen(false);
     const onSubmit = (data) => navigate(`/partners/add/${name}`);
+
+    const responseMessage = (response) => {
+        navigate(`/partners/add/${name}`);
+    };
+    const errorMessage = (error) => {
+        console.log(error);
+    };
 
     return (
         <>
@@ -65,7 +79,7 @@ const PartnerCard = (props) => {
                         </div>
                     }
                     action={
-                        <IconButton aria-label="settings" onClick={handleClickOpen}>
+                        <IconButton aria-label="settings" onClick={() => handleClickOpen()}>
                             <Icon fontSize="large">add</Icon>
                         </IconButton>
                     }
@@ -95,11 +109,8 @@ const PartnerCard = (props) => {
                         className={styles.backimg_size}
                         alt="image"
                         onLoad={handleOnLoad}
-                        role="button"
-                        onClick={handleClickOpen}
                     />
-                    <div className={styles.overlay} role="button"
-                        onClick={handleClickOpen}>
+                    <div className={styles.overlay}>
                         <p className={styles.text}>
                             {detail[name]}
                         </p>
@@ -119,6 +130,7 @@ const PartnerCard = (props) => {
                     </Typography>
                 </DialogTitle>
                 <DialogContent className='max-w-400'>
+                    <GoogleLogin className='w-full' onSuccess={responseMessage} onError={errorMessage} />
                     <Controller
                         name="email"
                         control={control}
@@ -128,6 +140,7 @@ const PartnerCard = (props) => {
                                 className="mt-24"
                                 label="Email"
                                 type="email"
+                                disabled
                                 error={!!errors.email}
                                 helperText={errors?.email?.message}
                                 variant="outlined"
@@ -141,9 +154,10 @@ const PartnerCard = (props) => {
                         render={({ field }) => (
                             <TextField
                                 {...field}
-                                className="mt-40"
+                                className="mt-24"
                                 label="Password"
                                 type="password"
+                                disabled
                                 error={!!errors.password}
                                 helperText={errors?.password?.message}
                                 variant="outlined"
@@ -157,13 +171,12 @@ const PartnerCard = (props) => {
                         <Button
                             className={`font-semibold ${styles.button}`}
                             variant="contained"
-                            color="secondary"
+                            color="info"
                             aria-label="Sign in"
-                            disabled={_.isEmpty(dirtyFields) || !isValid}
+                            disabled
                             type="submit"
-                            size="large"
                             onClick={handleSubmit(onSubmit)}>
-                            Login
+                            {t('partners.login')}
                         </Button>
                     </Box>
                 </DialogActions>

@@ -12,8 +12,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { Typography } from "@mui/material";
 import styles from './style.module.scss';
 import PartnerBreadcrumb from './PartnerBreadCrumb';
-import { logoSrc, backImgSrc } from 'src/app/model/PartnerModel';
+import { logoSrc } from 'src/app/model/PartnerModel';
 import history from '@history';
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+import { useTranslation } from 'react-i18next';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a name'),
@@ -22,8 +25,38 @@ const schema = yup.object().shape({
     phoneNumber: yup.string().required('You must enter a phone Number')
 });
 
+const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        backgroundColor: '#44b700',
+        color: '#44b700',
+        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+        '&::after': {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            animation: 'ripple 1.2s infinite ease-in-out',
+            border: '1px solid currentColor',
+            content: '""',
+        },
+    },
+    '@keyframes ripple': {
+        '0%': {
+            transform: 'scale(.8)',
+            opacity: 1,
+        },
+        '100%': {
+            transform: 'scale(2.4)',
+            opacity: 0,
+        },
+    },
+}));
+
 function PartnerForm() {
     const routeParams = useParams();
+    const { t } = useTranslation();
     const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema),
@@ -41,14 +74,28 @@ function PartnerForm() {
             <Paper
                 className={`mx-24 my-32 px-32 py-32 ${styles.form}`}
             >
-                <div className='flex items-center justify-center'>
-                    <img
-                        className={styles.logo_size}
-                        src={logoSrc[channel]}
-                        alt="user background" />
-                    <Typography className={`font-bold text-32 px-16 ${styles[channel]}`}>
-                        {channel}
-                    </Typography>
+                <div className='flex flex-row justify-between'>
+                    <div className='flex self-center items-center justify-center'>
+                        <img
+                            className={styles.logo_size}
+                            src={logoSrc[channel]}
+                            alt="user background" />
+                        <Typography className={`font-bold text-32 px-16 ${styles[channel]}`}>
+                            {channel}
+                        </Typography>
+                    </div>
+                    <div className="flex self-center">
+                        <StyledBadge
+                        className='self-center'
+                            overlap="circular"
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                            variant="dot"
+                        >
+                        </StyledBadge>
+                        <Typography className={`inline font-semibold text-16 px-16 text-green-500`}>
+                            {t('partners.connected')}
+                        </Typography>
+                    </div>
                 </div>
                 <Controller
                     control={control}
@@ -155,7 +202,7 @@ function PartnerForm() {
                         className={`ml-auto ${styles.button}`}
                         onClick={handleCancel}
                     >
-                        Cancel
+                        {t('cancel')}
                     </Button>
                     <Button
                         className={`ml-8 ${styles.button}`}
@@ -164,7 +211,7 @@ function PartnerForm() {
                         disabled={_.isEmpty(dirtyFields) || !isValid}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        Integrate
+                        {t('integrate')}
                     </Button>
                 </Box>
             </Paper>

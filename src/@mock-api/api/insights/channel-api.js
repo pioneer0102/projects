@@ -36,7 +36,7 @@ mock.onGet('/api/getchanneldata').reply(() => {
             var order = 0;
             ordersDB.forEach((item) => {
                 if (item.channel == channel.name) {
-                    const orderDate = new Date(item.date);
+                    const orderDate = new Date(item.history[item.history.length-1].date);
                     if (orderDate.toDateString() === currentDate.toDateString()) {
                         sale = sale + parseInt(item.subtotal);
                         order++;

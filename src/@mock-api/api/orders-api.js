@@ -38,7 +38,7 @@ mock.onPost('/api/getorders').reply(({ data }) => {
                 (searchText === '' || item.customer.toLowerCase().includes(searchText.toLowerCase())) &&
                 (subtotal === '' || ((priceRange[subtotal].min <= item.subtotal) && (item.subtotal <= priceRange[subtotal].max))) &&
                 (channel === '' || item.channel === channel) &&
-                (status === '' || item.status === status)
+                (status === '' || item.history[item.history.length-1].status === status)
             );
         });
         const startIndex = pagenumber * pagesize || 0;
@@ -62,19 +62,10 @@ mock.onGet('/api/getItem').reply((data) => {
         const oneItem = _.find(itemDB, { id: item.id });
         oneItem.quantity = item.quantity;
         subtotal = subtotal + item.quantity * oneItem.price;
-        oneItem && resultArray.push(oneItem);
+        oneItem && resultArray.push({...oneItem, status: item.status });
     });
     const result = {
-        orderInfo: {
-            id: order.id,
-            customer: order.customer,
-            channel: order.channel,
-            date: order.date,
-            status: order.status,
-            subtotal: order.subtotal,
-            tax: order.tax,
-            tip: order.tip
-        },
+        orderInfo: order,
         taxInfo: resultArray
     };
     return [200, result];

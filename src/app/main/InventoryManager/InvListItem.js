@@ -12,6 +12,11 @@ import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { makeStyles } from '@mui/styles';
+import { Button } from "@mui/material";
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel'
 
 const useStyles = makeStyles(() => ({
     dialog: {
@@ -22,11 +27,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 const InvListItem = (props) => {
-    const { image, category, price, quantity, upc, description } = props.item;
+    const { id, image, category, price, quantity, upc, description } = props.item;
 
     const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [active, setActive] = useState(true);
+
     const classes = useStyles();
+    const { t } = useTranslation();
+    const navigate = useNavigate();
 
     const detailData = {
         "category": category,
@@ -39,12 +48,19 @@ const InvListItem = (props) => {
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handleOnLoad = () => setIsLoading(false);
+    const handleEdit = () => navigate(`/inventoryManager/Edit/${id}`);
+    const handleActive = (event) => {
+        event.stopPropagation();
+        setOpen(false);
+        setActive(event.target.checked);
+    }
 
     return (
         <>
             <ListItem
-                className="px-32 py-32"
-                button
+                className="px-32 py-32 flex justify-between"
+                role='button'
+                disabled= {!active}
                 onClick={handleClickOpen}
             >
                 <div>
@@ -75,18 +91,29 @@ const InvListItem = (props) => {
                     secondary={
                         <>
                             <Typography
-                                className={`block text-xl ${styles.text_effect}`}
+                                className={`text-xl ${styles.text_effect}`}
                                 color="text.secondary"
                             >
                                 price: ${price}
                             </Typography>
                             <Typography
-                                className={`block text-xl ${styles.text_effect}`}
+                                className={`text-xl ${styles.text_effect}`}
                                 color="text.secondary"
                             >
                                 quantity: {quantity} left
                             </Typography>
                         </>
+                    }
+                />
+                <FormControlLabel
+                    label="Active"
+                    className={`self-end z-50 ${styles.backButton}`}
+                    control={
+                        <Checkbox
+                        color='info'
+                            checked={active}
+                            onChange={handleActive}
+                        />
                     }
                 />
             </ListItem>
@@ -132,6 +159,14 @@ const InvListItem = (props) => {
                         </TableBody>
                     </Table>
                 </div>
+                <Button
+                    variant="contained"
+                    color="info"
+                    onClick={handleEdit}
+                    className={`mx-8 my-8 ${styles.backButton}`}
+                >
+                    <span>{t('edit')}</span>
+                </Button>
             </Dialog >
         </>
     )

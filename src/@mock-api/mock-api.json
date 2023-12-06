@@ -26,372 +26,195 @@
           {
             "id": 1,
             "customer": "John Doe",
-            "date": "December 4, 2023",
-            "time": "10:30 AM",
-            "birthday": "December 4, 2023 10:30 AM",
             "subtotal": "2500",
             "channel": "DoorDash",
-            "status": "completed",
             "tax": 100,
             "tip": 50,
+            "history": [
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "completed",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
             "items": [
               {
                 "id": 14,
-                "quantity": "5"
+                "quantity": "5",
+                "status": "replaced"
               },
               {
                 "id": 2,
-                "quantity": "5"
+                "quantity": "5",
+                "status": ""
               },
               {
                 "id": 3,
-                "quantity": "5"
+                "quantity": "5",
+                "status": ""
               }
             ]
           },
           {
             "id": 2,
             "customer": "Brokle Myles",
-            "date": "December 1, 2023",
-            "time": "10:30 AM",
-            "birthday": "December 1, 2023 10:30 AM",
             "subtotal": "2000",
             "channel": "DoorDash",
-            "status": "pending",
             "tax": 100,
             "tip": 50,
+            "history": [
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
             "items": [
               {
                 "id": 1,
-                "quantity": "5"
+                "quantity": "5",
+                "status": "replaced"
               },
               {
                 "id": 4,
-                "quantity": "5"
+                "quantity": "5",
+                "status": "canceled"
               }
             ]
           },
           {
             "id": 3,
             "customer": "Bertha Biner",
-            "date": "November 6, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 6, 2023 10:30 AM",
             "subtotal": "4000",
             "channel": "DoorDash",
-            "status": "rejected",
             "tax": 100,
             "tip": 50,
+            "history": [
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
             "items": [
               {
                 "id": 1,
-                "quantity": "5"
+                "quantity": "5",
+                "status": "replaced"
               },
               {
                 "id": 2,
-                "quantity": "5"
+                "quantity": "5",
+                "status": ""
               },
               {
                 "id": 3,
-                "quantity": "5"
+                "quantity": "5",
+                "status": "canceled"
               },
               {
                 "id": 4,
-                "quantity": "5"
+                "quantity": "5",
+                "status": ""
               }
             ]
           },
           {
             "id": 4,
             "customer": "John Doe",
-            "date": "November 6, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 6, 2023 10:30 AM",
-            "subtotal": "3000",
+            "subtotal": "2500",
             "channel": "DoorDash",
-            "status": "completed",
             "tax": 100,
             "tip": 50,
+            "history": [
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "completed",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "rejected",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
             "items": [
               {
-                "id": 1,
-                "quantity": "5"
+                "id": 14,
+                "quantity": "5",
+                "status": ""
               },
               {
                 "id": 2,
-                "quantity": "5"
+                "quantity": "5",
+                "status": "replaced"
               },
               {
                 "id": 3,
-                "quantity": "5"
+                "quantity": "5",
+                "status": ""
               }
             ]
           },
           {
-            "id": 5,
-            "customer": "Brokle Myles",
-            "date": "November 6, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 6, 2023 10:30 AM",
-            "subtotal": "2000",
-            "channel": "GrubHub",
-            "status": "pending",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 6,
-            "customer": "Bertha Biner",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "4000",
-            "channel": "GrubHub",
-            "status": "rejected",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 2,
-                "quantity": "5"
-              },
-              {
-                "id": 3,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 7,
+            "id": 4,
             "customer": "John Doe",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "3000",
-            "channel": "Uber",
-            "status": "completed",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 2,
-                "quantity": "5"
-              },
-              {
-                "id": 3,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 8,
-            "customer": "Brokle Myles",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "2000",
-            "channel": "GrubHub",
-            "status": "pending",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 9,
-            "customer": "Bertha Biner",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "4000",
-            "channel": "GrubHub",
-            "status": "rejected",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 2,
-                "quantity": "5"
-              },
-              {
-                "id": 3,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 10,
-            "customer": "John Doe",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "3000",
-            "channel": "Uber",
-            "status": "completed",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 2,
-                "quantity": "5"
-              },
-              {
-                "id": 3,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 11,
-            "customer": "Brokle Myles",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "2000",
+            "subtotal": "2500",
             "channel": "DoorDash",
-            "status": "pending",
             "tax": 100,
             "tip": 50,
-            "items": [
+            "history": [
               {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
               }
-            ]
-          },
-          {
-            "id": 12,
-            "customer": "Bertha Biner",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "4000",
-            "channel": "DoorDash",
-            "status": "rejected",
-            "tax": 100,
-            "tip": 50,
+            ],
             "items": [
               {
-                "id": 1,
-                "quantity": "5"
+                "id": 14,
+                "quantity": "5",
+                "status": ""
               },
               {
                 "id": 2,
-                "quantity": "5"
+                "quantity": "5",
+                "status": "canceled"
               },
               {
                 "id": 3,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 13,
-            "customer": "Bertha Biner",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "4000",
-            "channel": "Uber",
-            "status": "rejected",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 2,
-                "quantity": "5"
-              },
-              {
-                "id": 3,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
-              }
-            ]
-          },
-          {
-            "id": 14,
-            "customer": "Bertha Biner",
-            "date": "November 20, 2023",
-            "time": "10:30 AM",
-            "birthday": "November 20, 2023 10:30 AM",
-            "subtotal": "4000",
-            "channel": "Uber",
-            "status": "rejected",
-            "tax": 100,
-            "tip": 50,
-            "items": [
-              {
-                "id": 1,
-                "quantity": "5"
-              },
-              {
-                "id": 2,
-                "quantity": "5"
-              },
-              {
-                "id": 3,
-                "quantity": "5"
-              },
-              {
-                "id": 4,
-                "quantity": "5"
+                "quantity": "5",
+                "status": ""
               }
             ]
           }
@@ -403,153 +226,204 @@
             "id": 1,
             "image":"assets/images/items/handphone/1.jpg",
             "category": "Handphone",
+            "name": "Android Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 2,
             "image":"assets/images/items/handphone/2.jpg",
             "category": "Handphone",
+            "name": "Android Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 3,
             "image":"assets/images/items/handphone/3.jpg",
             "category": "Handphone",
+            "name": "Android Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 4,
             "image":"assets/images/items/handphone/4.jpg",
             "category": "Handphone",
+            "name": "Android Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 5,
             "image":"assets/images/items/handphone/5.jpg",
             "category": "Handphone",
+            "name": "Android Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": false,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 6,
             "image":"assets/images/items/handphone/6.jpg",
             "category": "Handphone",
+            "name": "Android Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": false,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 7,
             "image":"assets/images/items/handphone/7.jpg",
             "category": "Handphone",
+            "name": "iOS Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 8,
             "image":"assets/images/items/handphone/8.jpg",
             "category": "Handphone",
+            "name": "iOS Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 9,
             "image":"assets/images/items/handphone/9.jpeg",
             "category": "Handphone",
+            "name": "iOS Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 10,
             "image":"assets/images/items/handphone/10.avif",
             "category": "Handphone",
+            "name": "iOS Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 11,
             "image":"assets/images/items/handphone/11.avif",
             "category": "Handphone",
+            "name": "iOS Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 12,
             "image":"assets/images/items/handphone/12.avif",
             "category": "Handphone",
+            "name": "iOS Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": false,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 13,
             "image":"assets/images/items/handphone/13.jpg",
             "category": "Handphone",
+            "name": "iOS Handphone",
             "price": 200,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 14,
             "image":"assets/images/items/accessory/1.jpg",
             "category": "Accessory",
+            "name": "TISSOT watch",
             "price": 100,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": false,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 15,
             "image":"assets/images/items/accessory/2.jpg",
             "category": "Accessory",
+            "name": "TISSOT watch",
             "price": 400,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 16,
             "image":"assets/images/items/accessory/3.webp",
             "category": "Accessory",
+            "name": "Rolex watch",
             "price": 1000,
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           },
           {
             "id": 17,
             "image":"assets/images/items/accessory/4.jpg",
             "category": "Accessory",
+            "name": "Rolex watch",
             "price": "500",
+            "tax": 10,
             "quantity": 100,
             "upc": "1234567890",
+            "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
           }
         ]

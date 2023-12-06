@@ -126,7 +126,7 @@ const OrderDetail = () => {
                 </div>
                 <Button
                     variant="contained"
-                    color="secondary"
+                    color="info"
                     onClick={() => { history.push('/orders'); }}
                     className={styles.backButton}
                 >
@@ -165,80 +165,88 @@ const OrderDetail = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {orderInfo &&
-                                    <TableRow>
-                                        <TableCell align="left">
-                                            <Typography
-                                                color="text.secondary"
-                                                className="font-semibold text-14">
-                                                {orderInfo.customer}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <Typography
-                                                color="text.secondary"
-                                                className="font-semibold text-14">
-                                                {orderInfo.date}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <Typography
-                                                color="text.secondary"
-                                                className="font-semibold text-14">
-                                                {orderInfo.channel}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            <Typography
-                                                className={clsx(
-                                                    'inline-flex items-center font-bold text-12 px-10 py-2 tracking-wide uppercase',
-                                                    orderInfo.status === "completed" &&
-                                                    'bg-green-500 text-grey-100',
-                                                    orderInfo.status === "pending" &&
-                                                    'bg-yellow-600 text-grey-100',
-                                                    orderInfo.status === "rejected" &&
-                                                    'bg-red-500 text-grey-100',
-                                                )}
-                                                role="button"
-                                                aria-describedby={id}
-                                                onClick={handleClick}
-                                                sx={{
-                                                    borderRadius: "3px"
-                                                }}>
-                                                {orderInfo.status}
-                                                {!open && <FuseSvgIcon className="inline" size={24}>heroicons-solid:chevron-down</FuseSvgIcon>}
-                                                {open && <FuseSvgIcon className="inline" size={24}>heroicons-solid:chevron-up</FuseSvgIcon>}
-                                            </Typography>
-                                            <Popover
-                                                id={id}
-                                                open={open}
-                                                anchorEl={anchorEl}
-                                                onClose={handleClose}
-                                                anchorOrigin={{
-                                                    vertical: 'bottom',
-                                                    horizontal: 'left',
-                                                }}
-                                            >
-                                                <Box className='flex flex-col' sx={{ p: 1 }}>
-                                                    {
-                                                        Status.map((item, index) => {
-                                                            return (
-                                                                <Typography
-                                                                    key={index}
-                                                                    color="text.secondary"
-                                                                    role="button"
-                                                                    className="font-semibold text-14 px-8 py-2 uppercase uppercase"
-                                                                    onClick={() => handleStatusChange(item)}
-                                                                >
-                                                                    {item}
-                                                                </Typography>
-                                                            )
-                                                        })
-                                                    }
-                                                </Box>
-                                            </Popover>
-                                        </TableCell>
-                                    </TableRow>
+                                {orderInfo.history &&
+                                    orderInfo.history.map((item, index) => {
+                                        return (
+                                            <TableRow key={index}>
+                                                <TableCell align="left">
+                                                    <Typography
+                                                        color="text.secondary"
+                                                        className="font-semibold text-16">
+                                                        {index==0? orderInfo.customer : ""}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    <Typography
+                                                        color="text.secondary"
+                                                        className="font-semibold text-16">
+                                                        {index==0? orderInfo.channel : ""}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    <Typography
+                                                        color="text.secondary"
+                                                        className="font-semibold text-14">
+                                                        {item.date}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    <Typography
+                                                        className={clsx(
+                                                            'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
+                                                            item.status === "completed" &&
+                                                            'bg-green-500 text-grey-100',
+                                                            item.status === "pickedup" &&
+                                                            'bg-blue-500 text-grey-100',
+                                                            item.status === "pending" &&
+                                                            'bg-yellow-600 text-grey-100',
+                                                            item.status === "received" &&
+                                                            'bg-purple-500 text-grey-100',
+                                                            item.status === "rejected" &&
+                                                            'bg-red-500 text-grey-100',
+                                                        )}
+                                                        role="button"
+                                                        aria-describedby={id}
+                                                        // onClick={handleClick}
+                                                        sx={{
+                                                            borderRadius: "3px"
+                                                        }}>
+                                                        {item.status}
+                                                        {/* {!open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
+                                                        {open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>} */}
+                                                    </Typography>
+                                                    <Popover
+                                                        id={id}
+                                                        open={open}
+                                                        anchorEl={anchorEl}
+                                                        onClose={handleClose}
+                                                        anchorOrigin={{
+                                                            vertical: 'bottom',
+                                                            horizontal: 'left',
+                                                        }}
+                                                    >
+                                                        <Box className='flex flex-col' sx={{ p: 1 }}>
+                                                            {
+                                                                Status.map((item, index) => {
+                                                                    return (
+                                                                        <Typography
+                                                                            key={index}
+                                                                            color="text.secondary"
+                                                                            role="button"
+                                                                            className="font-semibold text-14 px-8 py-2 uppercase uppercase"
+                                                                            onClick={() => handleStatusChange(item)}
+                                                                        >
+                                                                            {item}
+                                                                        </Typography>
+                                                                    )
+                                                                })
+                                                            }
+                                                        </Box>
+                                                    </Popover>
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    })
                                 }
                             </TableBody>
                         </Table>
@@ -252,7 +260,7 @@ const OrderDetail = () => {
                         <Typography
                             className="text-20 font-medium"
                             color="text.secondary">
-                            {t('orders.taxInfo')}
+                            {t('orders.itemInfo')}
                         </Typography>
                     </div>
                     <FuseScrollbars className="grow overflow-x-auto mx-24 mt-16">
@@ -308,6 +316,21 @@ const OrderDetail = () => {
                                                         color="text.secondary"
                                                         className="font-semibold text-14">
                                                         $ {item.price}
+                                                    </Typography>
+                                                </TableCell>
+                                                <TableCell align="left">
+                                                    <Typography
+                                                        className={clsx(
+                                                            'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
+                                                            item.status === "replaced" &&
+                                                            'bg-blue-500 text-grey-100',
+                                                            item.status === "canceled" &&
+                                                            'bg-red-500 text-grey-100'
+                                                        )}
+                                                        sx={{
+                                                            borderRadius: "3px"
+                                                        }}>
+                                                        {item.status}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">

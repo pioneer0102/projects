@@ -8,7 +8,9 @@ const SubTotals = [
 
 const Status = [
     "completed",
+    "pickedup",
     "pending",
+    "received",
     "rejected"
 ];
 
@@ -52,14 +54,14 @@ const OrderDetailCustomHeader = [
         label: 'Customer',
     },
     {
-        id: 'datetime',
-        align: 'left',
-        label: 'Datetime',
-    },
-    {
         id: 'channel',
         align: 'left',
         label: 'Channel',
+    },
+    {
+        id: 'datetime',
+        align: 'left',
+        label: 'Datetime',
     },
     {
         id: 'status',
@@ -89,6 +91,11 @@ const OrderDetailContentHeader = [
         id: 'price',
         align: 'left',
         label: 'Price',
+    },
+    {
+        id: 'status',
+        align: 'left',
+        label: 'Status',
     },
     {
         id: 'price',

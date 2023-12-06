@@ -81,11 +81,16 @@ const ordersSlice = createSlice({
             state.pageSize = action.payload;
 
         },
-        updateStatus: (state, action) => {
-            state.orderInfo.status = action.payload;
-        },
+        // updateStatus: (state, action) => {
+        //     state.orderInfo.status = action.payload;
+        // },
         removeFront : (state, action) => {
             _.remove(state.taxInfo, { id: action.payload });
+        },
+        submit: (state, action) => {
+            state.subtotal = action.payload.subtotal;
+            state.channel = action.payload.channel;
+            state.status = action.payload.status;
         }
     },
     extraReducers: (builder) => {
@@ -103,6 +108,6 @@ const ordersSlice = createSlice({
     }
 });
 
-export const { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText, setPagenumber, setPagesize, updateStatus, removeFront } = ordersSlice.actions;
+export const { setOrderSubtotal, setOrderChannel, setOrderStatus, setOrderSearchText, setPagenumber, setPagesize, updateStatus, removeFront, submit } = ordersSlice.actions;
 
 export default ordersSlice.reducer;

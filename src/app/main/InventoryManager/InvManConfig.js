@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import InvForm from './InvForm';
 
 const InvManApp = lazy(() => import('./InvManApp'));
 
@@ -12,6 +13,10 @@ const InvManCofig = {
         {
             path: 'inventoryManager',
             element: <InvManApp />
+        },
+        {
+            path: 'inventoryManager/:action/:id',
+            element: <InvForm />
         }
     ]
 };
