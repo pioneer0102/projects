@@ -26,6 +26,12 @@ export const removeItem = createAsyncThunk('orderApp/orders/removeItem', async (
     return response.data;
 });
 
+const getRandomStatus = () => {
+    const statusList = ['received', 'pending', 'pickedup', 'completed'];
+    const randomIndex = Math.floor(Math.random() * statusList.length);
+    return statusList[randomIndex];
+};
+
 const ordersAdapter = createEntityAdapter({});
 
 export const selectSearchText = ({ ordersApp }) => ordersApp.orders.searchText;
@@ -34,8 +40,8 @@ export const selectChannel = ({ ordersApp }) => ordersApp.orders.channel;
 export const selectStatus = ({ ordersApp }) => ordersApp.orders.status;
 export const selectPageNumber = ({ ordersApp }) => ordersApp.orders.pageNumber;
 export const selectPageSize = ({ ordersApp }) => ordersApp.orders.pageSize;
-
-export const selectDBsize = ({ ordersApp }) => ordersApp.orders.dbSize;
+export const selectDbSize = ({ ordersApp }) => ordersApp.orders.dbSize;
+export const selectFilterSize = ({ ordersApp }) => ordersApp.orders.filterSize;
 
 export const {
     selectAll: selectOrders
@@ -58,18 +64,25 @@ const ordersSlice = createSlice({
         orderInfo: {},
         updateFlag: false,
         removeFlag: false,
+        newOrderId: null,
+        dbSize: 0,
+        filterSize: 0
     }),
     reducers: {
+        setOrders: (state, action) => {
+            const data = action.payload.pagedData;
+            state.dbSize = action.payload.dbSize;
+            state.filterSize = action.payload.filterSize;
+            ordersAdapter.setAll(state, data);
+        },
         setSubtotal: (state, action) => {
             state.subtotal = action.payload;
         },
         setChannel: (state, action) => {
             state.channel = action.payload;
-
         },
         setStatus: (state, action) => {
             state.status = action.payload;
-
         },
         setOrderSearchText: (state, action) => {
             state.searchText = action.payload;
@@ -79,11 +92,55 @@ const ordersSlice = createSlice({
         },
         setPagesize: (state, action) => {
             state.pageSize = action.payload;
-
         },
-        // updateStatus: (state, action) => {
-        //     state.orderInfo.status = action.payload;
-        // },
+        receivedNewOrder: (state, action) => {
+            const randomNumber = Math.random();
+            const scaledNumber = 5 + randomNumber * (Number.MAX_VALUE - 5);
+            const newOrder = {
+                "id": scaledNumber,
+                "customer": "John Doe",
+                "subtotal": "2500",
+                "channel": "DoorDash",
+                "tax": 100,
+                "tip": 50,
+                "history": [
+                    {
+                        "status": "received",
+                        "date": "December 4, 2023 10:30 AM"
+                    },
+                    {
+                        "status": "pending",
+                        "date": "December 4, 2023 10:30 AM"
+                    },
+                    {
+                        "status": "pickedup",
+                        "date": "December 4, 2023 10:30 AM"
+                    },
+                    {
+                        "status": getRandomStatus(),
+                        "date": "December 4, 2023 10:30 AM"
+                    }
+                ],
+                "items": [
+                    {
+                        "id": 14,
+                        "quantity": "5",
+                        "status": "replaced"
+                    },
+                    {
+                        "id": 2,
+                        "quantity": "5",
+                        "status": ""
+                    },
+                    {
+                        "id": 3,
+                        "quantity": "5",
+                        "status": ""
+                    }
+                ]
+            }
+            ordersAdapter.upsertOne(state, newOrder)
+        },
         removeFront : (state, action) => {
             _.remove(state.taxInfo, { id: action.payload });
         },
@@ -108,6 +165,18 @@ const ordersSlice = createSlice({
     }
 });
 
-export const { setSubtotal, setChannel, setStatus, setOrderSearchText, setPagenumber, setPagesize, updateStatus, removeFront, submit } = ordersSlice.actions;
+export const { 
+    setOrders,
+    setSubtotal, 
+    setChannel, 
+    setStatus, 
+    setOrderSearchText, 
+    setPagenumber, 
+    setPagesize, 
+    updateStatus, 
+    removeFront, 
+    submit,
+    receivedNewOrder
+} = ordersSlice.actions;
 
 export default ordersSlice.reducer;

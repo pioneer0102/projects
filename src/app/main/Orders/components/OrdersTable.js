@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import history from '@history';
 import { useState } from "react";
-import { format } from "date-fns";
 import { Box } from "@mui/material";
 import { useQuery } from "react-query";
 import { Button } from "@mui/material";
@@ -27,7 +26,11 @@ import {
     selectPageNumber,
     selectChannel,
     selectStatus,
-    getOrders
+    getOrders,
+    selectOrders,
+    setOrders,
+    selectDbSize,
+    selectFilterSize
 } from "../store/ordersSlice";
 import FuseLoading from '@fuse/core/FuseLoading';
 import { OrdersListHeader } from 'src/app/model/OrdersModel';
@@ -56,6 +59,9 @@ const OrdersTable = () => {
     const status = useSelector(selectStatus);
     const page = useSelector(selectPageNumber);
     const rowsPerPage = useSelector(selectPageSize);
+    const orders = useSelector(selectOrders);
+    const dbSize = useSelector(selectDbSize);
+    const filterSize = useSelector(selectFilterSize);
 
     const searchData = {
         searchText: searchText,
@@ -66,35 +72,18 @@ const OrdersTable = () => {
         pageSize: rowsPerPage,
     };
 
-    const { data: allOrders, isLoading, isError } = useQuery(['ordersList', searchData], () => getOrders(searchData));
-    const dbSize = allOrders && allOrders.dbSize;
-    const filterSize = allOrders && allOrders.filterSize;
+    const { data, isLoading, isError } = useQuery(['ordersList', searchData], async () => {
+        try {
+            setOrderLoading(isLoading);
+            const ordersData = await getOrders(searchData);
+            dispatch(setOrders(ordersData));
+            setOrderLoading(isLoading);
+        } catch (error) {
+            console.log(error)
+        }
+    });
 
     const showDetail = (item) => history.push(`/orders/${item.id}`);
-
-    if (isLoading) {
-        return <FuseLoading />;
-    }
-
-    if (isError) {
-        return (
-            <div className="flex flex-1 items-center justify-center h-full">
-                <Typography color="text.secondary" variant="h5">
-                    {t('orders.noData')}
-                </Typography>
-            </div>
-        );
-    }
-
-    if (allOrders.pagedData.length === 0) {
-        return (
-            <div className="flex flex-1 items-center justify-center h-full">
-                <Typography color="text.secondary" variant="h5">
-                    {t('orders.noData')}
-                </Typography>
-            </div>
-        );
-    }
 
     const handleAction = (event) => {
         event.stopPropagation();
@@ -111,138 +100,161 @@ const OrdersTable = () => {
 
     return (
         <>
-            <Paper
-                className={`flex flex-col py-24 px-24 my-16 mx-32 overflow-auto  ${styles.paper}`}
-                sx={{ boxShadow: 'none', borderRadius: 1 }}>
-                    <Table>
-                        <Thead className="border-b-2">
-                            <Tr>
-                                {OrdersListHeader.map((item, index) => (
-                                    <Th
-                                        key={index}
-                                        align={item.align}>
-                                        <Typography
-                                            color="text.secondary"
-                                            className="font-bold text-16 pb-16">
-                                            {item.label}
-                                        </Typography>
-                                    </Th>
-                                ))}
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            {allOrders.pagedData
-                                .map((item, index) => {
-                                    return (allOrders &&
-                                        <Tr
-                                            key={index}
-                                            role="button"
-                                            onClick={() => { showDetail(item); }}>
-                                            <Td align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-semibold text-14 md:pt-16">
-                                                    {item.channel}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-semibold text-14 md:pt-16">
-                                                    {item.customer}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-semibold text-14 md:pt-16">
-                                                    {item.history[item.history.length-1].date.toLocaleString('en-US', options)}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-semibold text-14 md:pt-16">
-                                                    $ {item.subtotal}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left" className="md:pt-16 overflow-hidden">
-                                                <Typography
-                                                    className={clsx(
-                                                        'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
-                                                        item.history[item.history.length-1].status === "completed" &&
-                                                        'bg-green-500 text-grey-100',
-                                                        item.history[item.history.length-1].status === "pickedup" &&
-                                                        'bg-blue-500 text-grey-100',
-                                                        item.history[item.history.length-1].status === "pending" &&
-                                                        'bg-yellow-600 text-grey-100',
-                                                        item.history[item.history.length-1].status === "received" &&
-                                                        'bg-purple-500 text-grey-100',
-                                                        item.history[item.history.length-1].status === "rejected" &&
-                                                        'bg-red-500 text-grey-100',
-                                                    )}
-                                                    sx={{ borderRadius: "3px" }}>
-                                                    {item.history[item.history.length-1].status}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left" className="md:pt-16">
-                                                <IconButton aria-describedby={id} onClick={handleAction}>
-                                                    <MoreHoriz />
-                                                </IconButton>
-                                                <Popover
-                                                    id={id}
-                                                    open={popOpen}
-                                                    anchorEl={anchorEl}
-                                                    onClose={handleActionClose}
-                                                    className={classes.popover}
-                                                    anchorOrigin={{
-                                                        vertical: 'bottom',
-                                                        horizontal: 'left',
-                                                    }}>
-                                                    <Box className='flex flex-col' sx={{ p: 1 }}>
-                                                        <Button
-                                                            className="text-grey-500"
-                                                            onClick={handleActionClose}
-                                                            startIcon={<EditIcon />}>
-                                                            {t('orders.replace')}
-                                                        </Button>
-                                                        <Button
-                                                            className="text-grey-500"
-                                                            onClick={handleActionClose}
-                                                            startIcon={<DeleteIcon />}>
-                                                            {t('orders.cancel')}
-                                                        </Button>
-                                                    </Box>
-                                                </Popover>
-                                            </Td>
+            {
+                isLoading ?
+                <FuseLoading />
+                :
+                isError?
+                <div className="flex flex-1 items-center justify-center h-full">
+                    <Typography color="text.secondary" variant="h5">
+                        {t('orders.noData')}
+                    </Typography>
+                </div>
+                :
+                <Paper
+                    className={`flex flex-col py-24 px-24 my-16 mx-32 overflow-auto  ${styles.paper}`}
+                    sx={{ boxShadow: 'none', borderRadius: 1 }}>
+                        {
+                            orders.length == 0 ? 
+                            <div className="flex flex-1 items-center justify-center h-full">
+                                <Typography color="text.secondary" variant="h5">
+                                    {t('orders.noData')}
+                                </Typography>
+                            </div>
+                            :
+                            <>
+                                <Table>
+                                    <Thead className="border-b-2">
+                                        <Tr>
+                                            {OrdersListHeader.map((item, index) => (
+                                                <Th
+                                                    key={index}
+                                                    align={item.align}>
+                                                    <Typography
+                                                        color="text.secondary"
+                                                        className="font-bold text-16 pb-16">
+                                                        {item.label}
+                                                    </Typography>
+                                                </Th>
+                                            ))}
                                         </Tr>
-                                    );
-                                })
-                            }
-                        </Tbody>
-                    </Table>
-                    <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
-                        <Typography
-                            className="text-16 text-center font-medium"
-                            color="text.secondary">
-                            {t('orders.total')} : {dbSize}
-                        </Typography>
-                        <TablePagination
-                            className="flex-1 overflow-scroll mt-8"
-                            component="div"
-                            count={filterSize}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            backIconButtonProps={{ 'aria-label': 'Previous Page' }}
-                            nextIconButtonProps={{ 'aria-label': 'Next Page' }}
-                            onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
-                            onRowsPerPageChange={(event) => {
-                                dispatch(setPagesize(parseInt(event.target.value, 10)));
-                                dispatch(setPagenumber(0));
-                            }}
-                        />
-                    </div>
-            </Paper>
+                                    </Thead>
+                                    <Tbody>
+                                        {
+                                            orders.map((item, index) => {
+                                                return (orders &&
+                                                    <Tr
+                                                        key={index}
+                                                        role="button"
+                                                        onClick={() => { showDetail(item); }}>
+                                                        <Td align="left">
+                                                            <Typography
+                                                                color="text.secondary"
+                                                                className="font-semibold text-14 md:pt-16">
+                                                                {item.channel}
+                                                            </Typography>
+                                                        </Td>
+                                                        <Td align="left">
+                                                            <Typography
+                                                                color="text.secondary"
+                                                                className="font-semibold text-14 md:pt-16">
+                                                                {item.customer}
+                                                            </Typography>
+                                                        </Td>
+                                                        <Td align="left">
+                                                            <Typography
+                                                                color="text.secondary"
+                                                                className="font-semibold text-14 md:pt-16">
+                                                                {item.history[item.history.length-1].date.toLocaleString('en-US', options)}
+                                                            </Typography>
+                                                        </Td>
+                                                        <Td align="left">
+                                                            <Typography
+                                                                color="text.secondary"
+                                                                className="font-semibold text-14 md:pt-16">
+                                                                $ {item.subtotal}
+                                                            </Typography>
+                                                        </Td>
+                                                        <Td align="left" className="md:pt-16 overflow-hidden">
+                                                            <Typography
+                                                                className={clsx(
+                                                                    'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
+                                                                    item.history[item.history.length-1].status === "completed" &&
+                                                                    'bg-green-500 text-grey-100',
+                                                                    item.history[item.history.length-1].status === "pickedup" &&
+                                                                    'bg-blue-500 text-grey-100',
+                                                                    item.history[item.history.length-1].status === "pending" &&
+                                                                    'bg-yellow-600 text-grey-100',
+                                                                    item.history[item.history.length-1].status === "received" &&
+                                                                    'bg-purple-500 text-grey-100',
+                                                                    item.history[item.history.length-1].status === "rejected" &&
+                                                                    'bg-red-500 text-grey-100',
+                                                                )}
+                                                                sx={{ borderRadius: "3px" }}>
+                                                                {item.history[item.history.length-1].status}
+                                                            </Typography>
+                                                        </Td>
+                                                        <Td align="left" className="md:pt-16">
+                                                            <IconButton aria-describedby={id} onClick={handleAction}>
+                                                                <MoreHoriz />
+                                                            </IconButton>
+                                                            <Popover
+                                                                id={id}
+                                                                open={popOpen}
+                                                                anchorEl={anchorEl}
+                                                                onClose={handleActionClose}
+                                                                className={classes.popover}
+                                                                anchorOrigin={{
+                                                                    vertical: 'bottom',
+                                                                    horizontal: 'left',
+                                                                }}>
+                                                                <Box className='flex flex-col' sx={{ p: 1 }}>
+                                                                    <Button
+                                                                        className="text-grey-500"
+                                                                        onClick={handleActionClose}
+                                                                        startIcon={<EditIcon />}>
+                                                                        {t('orders.replace')}
+                                                                    </Button>
+                                                                    <Button
+                                                                        className="text-grey-500"
+                                                                        onClick={handleActionClose}
+                                                                        startIcon={<DeleteIcon />}>
+                                                                        {t('orders.cancel')}
+                                                                    </Button>
+                                                                </Box>
+                                                            </Popover>
+                                                        </Td>
+                                                    </Tr>
+                                                );
+                                            })
+                                        }
+                                    </Tbody>
+                                </Table>
+                                <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
+                                    <Typography
+                                        className="text-16 text-center font-medium"
+                                        color="text.secondary">
+                                        {t('orders.total')} : {dbSize}
+                                    </Typography>
+                                    <TablePagination
+                                        className="flex-1 overflow-scroll mt-8"
+                                        component="div"
+                                        count={filterSize}
+                                        rowsPerPage={rowsPerPage}
+                                        page={page}
+                                        backIconButtonProps={{ 'aria-label': 'Previous Page' }}
+                                        nextIconButtonProps={{ 'aria-label': 'Next Page' }}
+                                        onPageChange={(event, newPage) => dispatch(setPagenumber(parseInt(newPage, 10)))}
+                                        onRowsPerPageChange={(event) => {
+                                            dispatch(setPagesize(parseInt(event.target.value, 10)));
+                                            dispatch(setPagenumber(0));
+                                        }}
+                                    />
+                                </div>
+                            </>
+                        }
+                </Paper>
+            }
         </>
     );
 };
