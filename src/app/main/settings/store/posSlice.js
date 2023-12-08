@@ -6,7 +6,7 @@ import {
 import axios from 'axios';
 
 export const getAllPos = async (filterData) => {
-    const response = await axios.post('/api/getallpos', filterData);
+    const response = await axios.post('/api/getAllPos', filterData);
     return response.data;
 }
 

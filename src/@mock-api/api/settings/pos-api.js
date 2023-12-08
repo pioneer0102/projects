@@ -5,7 +5,7 @@ import FuseUtils from '@fuse/utils/FuseUtils';
 
 const posDB = mockApi.database.examples.pos.value;
 
-mock.onPost('/api/getallpos').reply(({ data }) => {
+mock.onPost('/api/getAllPos').reply(({ data }) => {
     const { searchText, rowsPerPage, page } = JSON.parse(data);
 
     const pagesize = parseInt(rowsPerPage);

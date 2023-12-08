@@ -41,20 +41,6 @@ const DepartmentTab = (props) => {
             <Paper
                 className={`px-24 py-24 rounded-md shadow-none ${styles.paper}`}
             >
-                <div className='flex items-center justify-between'>
-                    <Typography className={`font-bold text-32`} color="text.secondary">
-                        {routeParams.action} Deparatment
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        color="info"
-                        onClick={() => addDepartment()}
-                        className="rounded-md"
-                    >
-                        <FuseSvgIcon size={24}>heroicons-solid:plus</FuseSvgIcon>
-                        <span className='ml-8'>{t('add')}</span>
-                    </Button>
-                </div>
                 {
                     Object.entries(posById) == 0 ?
                         <div className="flex flex-1 items-center justify-center mt-32">
