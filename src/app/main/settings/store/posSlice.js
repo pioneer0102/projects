@@ -10,8 +10,8 @@ export const getAllPos = async (filterData) => {
     return response.data;
 }
 
-export const getPosById = createAsyncThunk('settingsApp/pos/getPosById',
-    async (id) => {
+export const getPosById = createAsyncThunk(
+    'settingsApp/pos/getPosById', async (id) => {
         const response = await axios.get('/api/getPosById', { id: id });
         return response.data;
     }

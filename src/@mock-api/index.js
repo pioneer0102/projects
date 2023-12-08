@@ -4,6 +4,7 @@ import './api/orders-api';
 import './api/inventory-api';
 import './api/insights/channel-api';
 import './api/settings/pos-api';
+import './api/settings/user-api';
 import history from '@history';
 import mock from './mock';
 
