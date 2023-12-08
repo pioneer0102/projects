@@ -100,21 +100,21 @@ const PosTable = () => {
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-16 md:pt-16">
+                                                                className="text-16 md:pt-16">
                                                                 {item.type}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-16 md:pt-16">
+                                                                className="text-16 md:pt-16">
                                                                 {item.user_name}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-16 md:pt-16">
+                                                                className="text-16 md:pt-16">
                                                                 {item.url}
                                                             </Typography>
                                                         </Td>

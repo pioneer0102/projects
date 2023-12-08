@@ -5,18 +5,18 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from "@mui/system/Unstable_Grid/Grid";
 
-const TaxItem = ({index, value, handleEdit, handleRemove}) => {
-    const [tax, setTax] = useState({ 'name': '', 'rate': 0 });
+const DepartmentItem = ({index, value, handleEdit, handleRemove}) => {
+    const [department, setDepartment] = useState({ 'name': '', 'rate': 0 });
     const [isEditable, setEditable] = useState(true);
 
     const handleChange = (key, value) => {
-        setTax({ ...tax, [key]: value});
+        setDepartment({ ...department, [key]: value});
         handleEdit(index, key, value);
     };
     const handleEditable = (state) => setEditable(state);
 
     useEffect(() => {
-        setTax(value);
+        setDepartment(value);
     }, [value]);
 
     return (
@@ -24,14 +24,14 @@ const TaxItem = ({index, value, handleEdit, handleRemove}) => {
             <Grid lg={5} md={5} sm={5} xs={5}>
                 <TextField
                     className="mt-32"
-                    label="Tax Name"
-                    placeholder="Tax Name"
+                    label="Department Name"
+                    placeholder="Department Name"
                     id="name"
                     variant="outlined"
                     required
                     fullWidth
                     disabled={isEditable}
-                    value={tax.name}
+                    value={department.name}
                     onChange={(event) => handleChange('name', event.target.value)}
                     InputProps={{
                         startAdornment: (
@@ -45,13 +45,13 @@ const TaxItem = ({index, value, handleEdit, handleRemove}) => {
             <Grid lg={5} md={5} sm={5} xs={5}>
                 <TextField
                     className="mt-32"
-                    label="Tax Rate"
-                    placeholder="Tax Rate"
+                    label="Department Tax Rate"
+                    placeholder="Department Tax Rate"
                     id="rate"
                     variant="outlined"
                     fullWidth
                     disabled={isEditable}
-                    value={tax.rate}
+                    value={department.rate}
                     onChange={(event) => handleChange('rate', event.target.value)}
                     InputProps={{
                         startAdornment: (
@@ -80,4 +80,4 @@ const TaxItem = ({index, value, handleEdit, handleRemove}) => {
     ); 
 }
 
-export default TaxItem;
+export default DepartmentItem;

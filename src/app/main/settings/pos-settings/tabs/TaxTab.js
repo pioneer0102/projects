@@ -85,7 +85,7 @@ const TaxTab = () => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <FuseSvgIcon size={24}>heroicons-solid:user-circle</FuseSvgIcon>
+                                    <FuseSvgIcon size={24}>heroicons-outline:receipt-tax</FuseSvgIcon>
                                 </InputAdornment>
                             ),
                         }}
@@ -110,7 +110,7 @@ const TaxTab = () => {
                             },
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <FuseSvgIcon size={24}>heroicons-solid:briefcase</FuseSvgIcon>
+                                    <FuseSvgIcon size={24}>heroicons-outline:currency-dollar</FuseSvgIcon>
                                 </InputAdornment>
                             ),
                         }}

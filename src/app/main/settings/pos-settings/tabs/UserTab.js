@@ -43,7 +43,7 @@ const UserTab = (props) => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <FuseSvgIcon size={24}>heroicons-solid:user-circle</FuseSvgIcon>
+                                    <FuseSvgIcon size={24}>heroicons-outline:adjustments</FuseSvgIcon>
                                 </InputAdornment>
                             ),
                         }}
@@ -99,7 +99,7 @@ const UserTab = (props) => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <FuseSvgIcon size={24}>heroicons-solid:briefcase</FuseSvgIcon>
+                                    <FuseSvgIcon size={24}>heroicons-outline:key</FuseSvgIcon>
                                 </InputAdornment>
                             ),
                         }}
@@ -120,7 +120,7 @@ const UserTab = (props) => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <FuseSvgIcon size={24}>heroicons-solid:currency-dollar</FuseSvgIcon>
+                                    <FuseSvgIcon size={24}>heroicons-outline:link</FuseSvgIcon>
                                 </InputAdornment>
                             ),
                         }}
