@@ -58,7 +58,7 @@ const PosForm = () => {
                     id: routeParams.id
                 })
             );
-            navigate('/settings/posSettings')
+            navigate('/settings/pos-settings')
         }
         if (routeParams.action === 'Add') {
             dispatch(addPos(
@@ -66,7 +66,7 @@ const PosForm = () => {
                     ...posById
                 })
             );
-            navigate('/settings/posSettings')
+            navigate('/settings/pos-settings')
         }
     }
 
@@ -80,7 +80,7 @@ const PosForm = () => {
                             color="text.secondary"
                             role="button"
                             component={NavLinkAdapter}
-                            to={`../settings/posSettings`}>
+                            to={`../settings/pos-settings`}>
                             {t('settings.posSettings')}
                         </Typography>
                         <Typography className="inline text-18 text-center font-medium text-pink-500">
@@ -91,7 +91,7 @@ const PosForm = () => {
                 <Button
                     variant="contained"
                     color="info"
-                    onClick={() => navigate('/settings/posSettings')}
+                    onClick={() => navigate('/settings/pos-settings')}
                     className="rounded-md"
                 >
                     <FuseSvgIcon size={20}>heroicons-solid:arrow-left</FuseSvgIcon>

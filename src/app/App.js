@@ -16,7 +16,7 @@ import FuseAuthorization from '@fuse/core/FuseAuthorization';
 import settingsConfig from 'app/configs/settingsConfig';
 import withAppProviders from './withAppProviders';
 import { AuthProvider } from './auth/AuthContext';
-import { receivedNewOrder } from './main/Orders/store/ordersSlice';
+import { receivedNewOrder } from './main/orders/store/ordersSlice';
 
 // import axios from 'axios';
 /**

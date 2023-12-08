@@ -16,11 +16,11 @@ const navigationConfig = [
     url: 'partners',
   },
   {
-    id: 'Inventory Manager',
+    id: 'InventoryManager',
     title: 'Inventory Manager',
     type: 'item',
     icon: 'heroicons-outline:shopping-cart',
-    url: 'inventoryManager',
+    url: 'inventory-manager',
   },
   {
     id: 'Orders',
@@ -56,16 +56,16 @@ const navigationConfig = [
     icon: 'heroicons-outline:cog',
     children: [
       {
-        id: 'Settings.User Management',
+        id: 'Settings.UserManagement',
         title: 'User Management',
         type: 'item',
-        url: 'settings/userManagement',
+        url: 'settings/user-management',
       },
       {
-        id: 'Insights.posSettings',
+        id: 'Insights.PosSettings',
         title: 'POS Settings',
         type: 'item',
-        url: 'settings/posSettings',
+        url: 'settings/pos-settings',
       }
     ]
   }

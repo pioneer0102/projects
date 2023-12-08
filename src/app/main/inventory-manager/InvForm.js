@@ -72,7 +72,7 @@ const InvForm = () => {
 
     const { isValid, dirtyFields, errors } = formState;
 
-    const handleCancel = () => history.push('/inventoryManager');
+    const handleCancel = () => history.push('/inventory-manager');
     const onSubmit = (data) => {
         const formData = {
             ...data,
@@ -84,7 +84,7 @@ const InvForm = () => {
         if (routeParams.action === 'Edit') {
             dispatch(updateInventory(formData));
         }
-        history.push('/inventoryManager');
+        history.push('/inventory-manager');
     }
     function handleChange(e) {
         // eslint-disable-next-line no-constant-condition
@@ -106,7 +106,7 @@ const InvForm = () => {
                             color="text.secondary"
                             role="button"
                             component={NavLinkAdapter}
-                            to={`../inventoryManager`}>
+                            to={`../inventory-manager`}>
                             {t('inventory.inventoryManager')}
                         </Typography>
                         <Typography className="inline text-18 text-center font-medium text-pink-500">
@@ -117,7 +117,7 @@ const InvForm = () => {
                 <Button
                     variant="contained"
                     color="info"
-                    onClick={() => { history.push('/inventorymanager'); }}
+                    onClick={() => { history.push('/inventory-manager'); }}
                     className={styles.backButton}
                 >
                     <FuseSvgIcon size={18}>heroicons-solid:arrow-left</FuseSvgIcon>
