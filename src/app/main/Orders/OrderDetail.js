@@ -322,11 +322,7 @@ const OrderDetail = () => {
                                                 role="button"
                                             >
                                                 <TableCell align="left">
-                                                    <Typography
-                                                        color="text.secondary"
-                                                        className="font-semibold text-14">
-                                                        image
-                                                    </Typography>
+                                                    <img src = {item.image} width={64} />
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography

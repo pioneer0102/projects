@@ -1,0 +1,14 @@
+.paper {
+    animation: entry 0.5s linear 1;
+}
+
+@keyframes entry {
+    0% {
+        top: -20%;
+        opacity: 0.1;
+    }
+
+    100% {
+        top: 0%;
+    }
+}

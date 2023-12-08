@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import history from '@history';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { useQuery } from "react-query";
 import { Button } from "@mui/material";
@@ -18,19 +18,16 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { makeStyles } from '@mui/styles';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import {
-    selectSearchText,
-    selectSubtotal,
     setPagenumber,
     setPagesize,
     selectPageSize,
     selectPageNumber,
-    selectChannel,
-    selectStatus,
     getOrders,
     selectOrders,
     setOrders,
     selectDbSize,
-    selectFilterSize
+    selectFilterSize,
+    selectFilter
 } from "../store/ordersSlice";
 import FuseLoading from '@fuse/core/FuseLoading';
 import { OrdersListHeader } from 'src/app/model/OrdersModel';
@@ -52,29 +49,19 @@ const OrdersTable = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const { t } = useTranslation();
     const classes = useStyles();
+    const [searchData, setSearchData] = useState(null);
 
-    const searchText = useSelector(selectSearchText);
-    const subtotal = useSelector(selectSubtotal);
-    const channel = useSelector(selectChannel);
-    const status = useSelector(selectStatus);
+    const filter = useSelector(selectFilter);
     const page = useSelector(selectPageNumber);
     const rowsPerPage = useSelector(selectPageSize);
     const orders = useSelector(selectOrders);
     const dbSize = useSelector(selectDbSize);
     const filterSize = useSelector(selectFilterSize);
 
-    const searchData = {
-        searchText: searchText,
-        subtotal: subtotal,
-        channel: channel,
-        status: status,
-        pageNumber: page,
-        pageSize: rowsPerPage,
-    };
-
     const { data, isLoading, isError } = useQuery(['ordersList', searchData], async () => {
         try {
             const ordersData = await getOrders(searchData);
+            console.log(ordersData);
             dispatch(setOrders(ordersData));
         } catch (error) {
             console.log(error)
@@ -95,6 +82,19 @@ const OrdersTable = () => {
 
     const popOpen = Boolean(anchorEl);
     const id = popOpen ? 'simple-popover' : undefined;
+
+    useEffect(() => {
+        const database = {
+            searchText: filter.searchText,
+            subtotal: filter.subtotal,
+            channel: filter.channel,
+            status: filter.status,
+            pageNumber: page,
+            pageSize: rowsPerPage,
+        };
+
+        setSearchData(database);
+    }, [filter, page, rowsPerPage]);
 
     return (
         <>
@@ -130,7 +130,7 @@ const OrdersTable = () => {
                                                     align={item.align}>
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-bold text-16 pb-16">
+                                                        className="font-bold text-20 pb-16">
                                                         {item.label}
                                                     </Typography>
                                                 </Th>
@@ -148,28 +148,28 @@ const OrdersTable = () => {
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-14 md:pt-16">
+                                                                className="font-semibold text-16 md:pt-16">
                                                                 {item.channel}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-14 md:pt-16">
+                                                                className="font-semibold text-16 md:pt-16">
                                                                 {item.customer}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-14 md:pt-16">
+                                                                className="font-semibold text-16 md:pt-16">
                                                                 {item.history[0].date.toLocaleString('en-US', options)}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-14 md:pt-16">
+                                                                className="font-semibold text-16 md:pt-16">
                                                                 $ {item.subtotal}
                                                             </Typography>
                                                         </Td>
@@ -230,7 +230,7 @@ const OrdersTable = () => {
                                 </Table>
                                 <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
                                     <Typography
-                                        className="text-16 text-center font-medium"
+                                        className="text-18 text-center font-medium"
                                         color="text.secondary">
                                         {t('orders.total')} : {dbSize}
                                     </Typography>

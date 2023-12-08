@@ -38,7 +38,7 @@ mock.onPost('/api/getorders').reply(({ data }) => {
                 (searchText === '' || item.customer.toLowerCase().includes(searchText.toLowerCase())) &&
                 (subtotal === '' || ((priceRange[subtotal].min <= item.subtotal) && (item.subtotal <= priceRange[subtotal].max))) &&
                 (channel === '' || item.channel === channel) &&
-                (status === '' || item.history[item.history.length-1].status === status)
+                (status === '' || item.history[0].status === status)
             );
         });
         const startIndex = pagenumber * pagesize || 0;
@@ -62,7 +62,7 @@ mock.onGet('/api/getItem').reply((data) => {
         const oneItem = _.find(itemDB, { id: item.id });
         oneItem.quantity = item.quantity;
         subtotal = subtotal + item.quantity * oneItem.price;
-        oneItem && resultArray.push({...oneItem, status: item.status });
+        oneItem && resultArray.push({ ...oneItem, status: item.status });
     });
     const result = {
         orderInfo: order,
@@ -82,12 +82,12 @@ mock.onPost('/api/updateStatus').reply(({ data }) => {
     return [200, { success: success }];
 });
 
-mock.onPost('/api/updateItemStatusById').reply(({data}) => {
+mock.onPost('/api/updateItemStatusById').reply(({ data }) => {
     const { id, itemId, itemStatus } = JSON.parse(data);
     const order = _.find(ordersDB, { id: id });
-    const item = _.find(order.items, {id: itemId});
+    const item = _.find(order.items, { id: itemId });
     item.status = itemStatus;
-    return [200, {success: true}]
+    return [200, { success: true }]
 })
 
 mock.onPost('/api/removeItem').reply(({ data }) => {
@@ -104,10 +104,10 @@ mock.onPost('/api/removeItem').reply(({ data }) => {
             const oneItem = _.find(itemDB, { id: item.id });
             subtotal = subtotal + item.quantity * oneItem.price;
         });
-        order.subtotal=subtotal;
+        order.subtotal = subtotal;
         return [200, { success: success, subtotal: order.subtotal }];
     }
     else {
-        return [200, {success: success}]
+        return [200, { success: success }]
     }
 })

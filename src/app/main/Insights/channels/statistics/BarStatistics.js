@@ -17,8 +17,8 @@ const BarStatistics = () => {
     const saleData = [];
 
     Channels.forEach((channel) => {
-        saleData.push(saleTotalByChannel[channel]);
-        orderData.push(orderTotalByChannel[channel]);
+        if(Object.entries(saleTotalByChannel).length!==0) saleData.push(saleTotalByChannel[channel]);
+        if(Object.entries(orderTotalByChannel).length!==0)orderData.push(orderTotalByChannel[channel]);
     })
 
     const saleChartOptions = {

@@ -22,16 +22,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from "@mui/material";
 
 import {
-    selectSearchText,
-    selectSubtotal,
-    selectChannel,
-    selectStatus,
     setSubtotal,
     setChannel,
     setStatus,
     setOrderSearchText,
     setPagenumber,
-    submit
+    submit,
+    selectFilter,
+    setFilter
 } from '../store/ordersSlice';
 
 const useStyles = makeStyles(() => ({
@@ -49,13 +47,10 @@ const OrdersSearchFilter = () => {
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
-    const searchText = useSelector(selectSearchText);
-    const subtotal = useSelector(selectSubtotal);
-    const channel = useSelector(selectChannel);
-    const status = useSelector(selectStatus);
+    const filter = useSelector(selectFilter);
 
-    const handleChange = (actionCreator, value) => {
-        dispatch(actionCreator(value));
+    const handleChange = (type, value) => {
+        dispatch(setFilter({type: type, value: value}));
         dispatch(setPagenumber(0));
     };
     const handleOpenDialog = () => {
@@ -66,9 +61,9 @@ const OrdersSearchFilter = () => {
     }
     const handleSubmit = () => {
         const filterData = {
-            subtotal: subtotal,
-            channel: channel,
-            status: status
+            subtotal: filter.subtotal,
+            channel: filter.channel,
+            status: filter.status
         }
         dispatch(submit(filterData));
         setPagenumber(0);
@@ -89,8 +84,8 @@ const OrdersSearchFilter = () => {
                             className="flex px-16"
                             disableUnderline
                             fullWidth
-                            value={searchText}
-                            onChange={(event) => handleChange(setOrderSearchText, event.target.value)}
+                            value={filter.searchText}
+                            onChange={(event) => handleChange("searchText", event.target.value)}
                         />
                     </Box>
                     <Button
@@ -131,7 +126,7 @@ const OrdersSearchFilter = () => {
                         <Select
                             labelId="select-small-label"
                             id="select-small"
-                            value={subtotal}
+                            value={filter.subtotal}
                             label="Subtotal"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
@@ -144,7 +139,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => handleChange(setSubtotal, event.target.value)}
+                            onChange={(event) => handleChange("subtotal", event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}
@@ -172,7 +167,7 @@ const OrdersSearchFilter = () => {
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={channel}
+                            value={filter.channel}
                             label="Channel"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
@@ -185,7 +180,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => handleChange(setChannel, event.target.value)}
+                            onChange={(event) => handleChange("channel", event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}
@@ -213,7 +208,7 @@ const OrdersSearchFilter = () => {
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={status}
+                            value={filter.status}
                             label="Status"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
@@ -226,7 +221,7 @@ const OrdersSearchFilter = () => {
                                     borderColor: '#e2e8f0',
                                 },
                             }}
-                            onChange={(event) => handleChange(setStatus, event.target.value)}
+                            onChange={(event) => handleChange("status", event.target.value)}
                         >
                             <MenuItem value="">
                                 {t('none')}

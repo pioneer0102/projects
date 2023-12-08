@@ -47,6 +47,7 @@ export const selectPageNumber = ({ ordersApp }) => ordersApp.orders.pageNumber;
 export const selectPageSize = ({ ordersApp }) => ordersApp.orders.pageSize;
 export const selectDbSize = ({ ordersApp }) => ordersApp.orders.dbSize;
 export const selectFilterSize = ({ ordersApp }) => ordersApp.orders.filterSize;
+export const selectFilter = ({ ordersApp }) => ordersApp.orders.filter;
 
 export const {
     selectAll: selectOrders
@@ -58,10 +59,6 @@ export const selectOrderInfo = ({ ordersApp }) => ordersApp.orders.orderInfo;
 const ordersSlice = createSlice({
     name: 'ordersApp/orders',
     initialState: ordersAdapter.getInitialState({
-        subtotal: '',
-        channel: '',
-        status: '',
-        searchText: '',
         pageNumber: 0,
         pageSize: 10,
         dbSize: 0,
@@ -70,8 +67,13 @@ const ordersSlice = createSlice({
         updateFlag: false,
         removeFlag: false,
         newOrderId: null,
-        dbSize: 0,
-        filterSize: 0
+        filterSize: 0,
+        filter: {
+            searchText: '',
+            subtotal: '',
+            channel: '',
+            status: '',
+        }
     }),
     reducers: {
         setOrders: (state, action) => {
@@ -80,20 +82,24 @@ const ordersSlice = createSlice({
             state.filterSize = action.payload.filterSize;
             ordersAdapter.setAll(state, data);
         },
-        setSubtotal: (state, action) => {
-            state.subtotal = action.payload;
-        },
-        setChannel: (state, action) => {
-            state.channel = action.payload;
-        },
-        setStatus: (state, action) => {
-            state.status = action.payload;
+        setFilter: (state, action) => {
+            switch (action.payload.type) {
+                case 'searchText':
+                    state.filter.searchText = action.payload.value;
+                    break;
+                case 'status':
+                    state.filter.status = action.payload.value;
+                    break;
+                case 'subtotal':
+                    state.filter.subtotal = action.payload.value;
+                    break;
+                case 'channel':
+                    state.filter.channel = action.payload.value;
+                    break;
+            }
         },
         updateItemStatus: (state, action) => {
             state.taxInfo[action.payload.itemIndex].status = action.payload.itemStatus;
-        },
-        setOrderSearchText: (state, action) => {
-            state.searchText = action.payload;
         },
         setPagenumber: (state, action) => {
             state.pageNumber = action.payload;
@@ -152,7 +158,7 @@ const ordersSlice = createSlice({
         updateStatus: (state, action) => {
             state.orderInfo.history[action.payload.history].status = action.payload.status;
         },
-        removeFront : (state, action) => {
+        removeFront: (state, action) => {
             _.remove(state.taxInfo, { id: action.payload });
         },
         submit: (state, action) => {
@@ -176,19 +182,16 @@ const ordersSlice = createSlice({
     }
 });
 
-export const { 
-    setOrders, 
-    setSubtotal, 
-    setChannel, 
-    setStatus, 
-    setOrderSearchText, 
-    setPagenumber, 
-    setPagesize, 
-    updateStatus, 
-    removeFront, 
-    submit, 
-    updateItemStatus, 
-    receivedNewOrder 
+export const {
+    setOrders,
+    setFilter,
+    setPagenumber,
+    setPagesize,
+    updateStatus,
+    removeFront,
+    submit,
+    updateItemStatus,
+    receivedNewOrder
 } = ordersSlice.actions;
 
 export default ordersSlice.reducer;
