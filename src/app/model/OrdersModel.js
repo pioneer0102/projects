@@ -80,7 +80,7 @@ const OrderDetailContentHeader = [
     {
         id: 'image',
         align: 'left',
-        label: 'Image',
+        label: '',
     },
     {
         id: 'productname',

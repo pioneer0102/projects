@@ -33,7 +33,7 @@ const ChannelTable = () => {
                                     align={item.align}>
                                     <Typography
                                         color="text.secondary"
-                                        className="font-bold text-16 pb-16">
+                                        className="font-bold text-20 pb-16">
                                         {item.label}
                                     </Typography>
                                 </Th>
@@ -47,14 +47,14 @@ const ChannelTable = () => {
                                     <Td align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-semibold text-14 md:pt-16">
+                                            className="font-semibold text-16 md:pt-16">
                                             {item}
                                         </Typography>
                                     </Td>
                                     <Td align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-semibold text-14 md:pt-16">
+                                            className="font-semibold text-16 md:pt-16">
                                             $ {saleByChannel[item]}
                                         </Typography>
                                     </Td>
@@ -64,7 +64,7 @@ const ChannelTable = () => {
                                     <Td align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-semibold text-14 md:pt-16">
+                                            className="font-semibold text-16 md:pt-16">
                                             {orderByChannel[item]}
                                         </Typography>
                                     </Td>
@@ -77,7 +77,7 @@ const ChannelTable = () => {
                     </Tbody>
                 </Table>
             </Paper>
-            {/* <BarStatistics /> */}
+            <BarStatistics />
         </>
     );
 };

@@ -467,6 +467,118 @@
             "name": "GrubHub"
           }
         ]
+      },
+      "pos": {
+        "value": [
+          {
+            "id": "1",
+            "type": "Desktop POS System",
+            "user_name": "desktoppos01",
+            "password": "123456",
+            "url": "http://desktop01.pos",
+            "tax": [
+              {
+                "tax_name": "Sales Tax",
+                "tax_rate": 10
+              },
+              {
+                "tax_name": "Trash Tax",
+                "tax_rate": 5
+              }
+            ],
+            "department": [
+              {
+                "department_name": "clothe",
+                "tax_rate": 20
+              },
+              {
+                "department_name": "accessory",
+                "tax_rate": 8
+              }
+            ]
+          },
+          {
+            "id": "2",
+            "type": "Handheld POS System",
+            "user_name": "handheldpos02",
+            "password": "456789",
+            "url": "http://handleheld02.pos",
+            "tax": [
+              {
+                "tax_name": "Window Tax",
+                "tax_rate": 20
+              },
+              {
+                "tax_name": "Internet Tax",
+                "tax_rate": 10
+              }
+            ],
+            "department": [
+              {
+                "department_name": "clothe",
+                "tax_rate": 8
+              },
+              {
+                "department_name": "accessory",
+                "tax_rate": 12
+              }
+            ]
+          },
+          {
+            "id": "3",
+            "type": "Phone POS System",
+            "user_name": "phonepos01",
+            "password": "123456",
+            "url": "http://phone03.pos",
+            "tax": [
+              {
+                "tax_name": "Fair Tax",
+                "tax_rate": 10
+              }
+            ],
+            "department": [
+              {
+                "department_name": "clothe",
+                "tax_rate": 20
+              },
+              {
+                "department_name": "accessory",
+                "tax_rate": 8
+              }
+            ]
+          },
+          {
+            "id": "4",
+            "type": "Tablet POS System",
+            "user_name": "tabletpos01",
+            "password": "123456",
+            "url": "http://tablet04.pos",
+            "tax": [
+              {
+                "tax_name": "Income Tax",
+                "tax_rate": 10
+              },
+              {
+                "tax_name": "Consumption Ttax",
+                "tax_rate": 5
+              },
+              {
+                "tax_name": "Property Ttax",
+                "tax_rate": 5
+              }
+            ],
+            "department": [
+              {
+                "department_name": "clothe",
+                "tax_rate": 20
+              },
+              {
+                "department_name": "accessory",
+                "tax_rate": 8
+              }
+            ]
+          }
+        ]
       }
     }
   },
