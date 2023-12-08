@@ -59,7 +59,7 @@ const PosForm = () => {
                     id: routeParams.id
                 })
             );
-            dispatch(showMessage({ message: "POS added successfully!", variant: "success" }));
+            dispatch(showMessage({ message: "POS updateed successfully!", variant: "success" }));
             navigate('/settings/pos-settings')
         }
         if (routeParams.action === 'add') {
@@ -68,7 +68,7 @@ const PosForm = () => {
                     ...posById
                 })
             );
-            dispatch(showMessage({ message: "POS updateed successfully!", variant: "success" }));
+            dispatch(showMessage({ message: "POS added successfully!", variant: "success" }));
             navigate('/settings/pos-settings')
         }
     }

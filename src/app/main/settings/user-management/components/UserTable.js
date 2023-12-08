@@ -103,21 +103,21 @@ const UserTable = () => {
                                                                 <Td align="left">
                                                                     <Typography
                                                                         color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
+                                                                        className="text-16 md:pt-16">
                                                                         {item.name}
                                                                     </Typography>
                                                                 </Td>
                                                                 <Td align="left">
                                                                     <Typography
                                                                         color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
+                                                                        className="text-16 md:pt-16">
                                                                         {item.url}
                                                                     </Typography>
                                                                 </Td>
                                                                 <Td align="left">
                                                                     <Typography
                                                                         color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
+                                                                        className="text-16 md:pt-16">
                                                                         {item.role.charAt(0).toUpperCase() + item.role.slice(1)}
                                                                     </Typography>
                                                                 </Td>
