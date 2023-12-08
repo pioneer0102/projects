@@ -43,7 +43,7 @@ const schema = yup.object().shape({
 
 const InvForm = () => {
 
-    const [image, setImage] = useState({});
+    const [image, setImage] = useState(null);
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -55,13 +55,13 @@ const InvForm = () => {
     });
 
     useEffect(() => {
-        if (routeParams.action === 'Edit') {
+        if (routeParams.action === 'edit') {
             dispatch(getInventoryById(routeParams.id));
-            
+
         }
-        if (routeParams.action === 'Add') {
+        if (routeParams.action === 'add') {
             dispatch(initializeInventory({}));
-            setImage({});
+            setImage(null);
         }
     }, [dispatch, routeParams.action, routeParams.id]);
 
@@ -78,20 +78,20 @@ const InvForm = () => {
             ...data,
             image: image
         }
-        if (routeParams.action === 'Add') {
+        if (routeParams.action === 'add') {
             dispatch(addInventory(formData));
         }
-        if (routeParams.action === 'Edit') {
+        if (routeParams.action === 'edit') {
             dispatch(updateInventory(formData));
         }
         history.push('/inventory-manager');
     }
     function handleChange(e) {
         // eslint-disable-next-line no-constant-condition
-        if(e.target.files[0].type===("image/png" || "image/jpg") ){
+        if (e.target.files[0].type === ("image/png" || "image/jpg")) {
             setImage(URL.createObjectURL(e.target.files[0]));
-        } else{
-            dispatch(showMessage({message: "Select Image Correctly", variant: "error"}));
+        } else {
+            dispatch(showMessage({ message: "Select Image Correctly", variant: "error" }));
             setImage({});
         }
     }
@@ -129,7 +129,7 @@ const InvForm = () => {
             >
                 <div className='flex items-center justify-between'>
                     <Typography className={`font-bold text-32`} color="text.secondary">
-                        {routeParams.action} Item
+                        {routeParams.action.charAt(0).toUpperCase() + routeParams.action.slice(1)} Item
                     </Typography>
                     <Controller
                         control={control}
@@ -305,7 +305,7 @@ const InvForm = () => {
                 </div>
                 <div className='flex flex-col items-center justify-center'>
 
-                    {(Object.entries(image).length==0) ?
+                    {image == null ?
                         <Box
                             sx={{
                                 backgroundColor: grey[300],

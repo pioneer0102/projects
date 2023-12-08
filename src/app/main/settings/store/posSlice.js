@@ -4,6 +4,7 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
+import _ from '@lodash';
 
 export const getAllPos = async (filterData) => {
     const response = await axios.post('/api/getAllPos', filterData);
@@ -50,7 +51,15 @@ const posSlice = createSlice({
             page: 0
         },
         totalCount: 0,
-        posById: {}
+        posById: {
+            id: '',
+            type: '',
+            user_name: '',
+            password: '',
+            url: '',
+            tax: [],
+            department: []
+        }
     }),
     reducers: {
         setFilter: (state, action) => {
@@ -66,10 +75,6 @@ const posSlice = createSlice({
                     break;
             }
         },
-        setPos: (state, action) => {
-            state.totalCount = action.payload.filterSize;
-            posAdapter.setAll(state, action.payload.pagedData);
-        },
         initializePos: (state, action) => {
             state.posById = {
                 id: '',
@@ -80,6 +85,10 @@ const posSlice = createSlice({
                 tax: [],
                 department: []
             }
+        },
+        setPos: (state, action) => {
+            state.totalCount = action.payload.filterSize;
+            posAdapter.setAll(state, action.payload.pagedData);
         },
         setFormdata: (state, action) => {
             switch (action.payload.type) {
@@ -98,18 +107,46 @@ const posSlice = createSlice({
                 case 'tax':
                     state.posById.tax.push(
                         {
-                            tax_name: action.payload.value.tax_name,
-                            tax_rate: action.payload.value.tax_rate
+                            name: action.payload.value.name,
+                            rate: action.payload.value.rate
                         }
                     );
                     break;
                 case 'department':
                     state.posById.department.push(
                         {
-                            department_name: action.payload.value.department_name,
-                            tax_rate: action.payload.value.tax_rate
+                            name: action.payload.value.name,
+                            rate: action.payload.value.rate
                         }
                     );
+                    break;
+            }
+        },
+        update: (state, action) => {
+            let temp;
+            switch (action.payload.type) {
+                case 'tax':
+                    // console.log(action.payload);
+                    temp = state.posById.tax[action.payload.id];
+                    temp[action.payload.key] = action.payload.value;
+                    break;
+                case 'department':
+                    temp = state.posById.department[action.payload.id];
+                    temp[action.payload.key] = action.payload.value;
+                    break;
+            }
+        },
+        remove: (state, action) => {
+            let temp;
+            switch (action.payload.type) {
+                case 'tax':
+                    // _.remove(state.posById.tax, { id: `${action.payload.id}` });
+                    temp = state.posById.tax.filter((_, i) => i !== action.payload.id);
+                    state.posById.tax = temp;
+                    break;
+                case 'department':
+                    temp = state.posById.department.filter((_, i) => i !== action.payload.id);
+                    state.posById.department = temp;
                     break;
             }
         }
@@ -125,7 +162,9 @@ export const {
     setFilter,
     setPos,
     initializePos,
-    setFormdata
+    setFormdata,
+    update,
+    remove
 } = posSlice.actions;
 
 export default posSlice.reducer;

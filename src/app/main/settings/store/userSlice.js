@@ -107,7 +107,9 @@ const userSlice = createSlice({
 export const {
     setFilter,
     setUserEntityAdapter,
-    initializeUser
+    initializeUser,
+    update,
+    remove
 } = userSlice.actions;
 
 export default userSlice.reducer;
