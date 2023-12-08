@@ -1,6 +1,6 @@
-import UserManagement from './userManagement/userManagement';
-import PosSettings from './posSettings/PosSettings';
-import PosForm from './posSettings/PosForm';
+import UserManagement from './user-management/UserManagement';
+import PosSettings from './pos-settings/PosSettings';
+import PosForm from './pos-settings/PosForm';
 
 const SettingsConfig = {
     settings: {
@@ -10,15 +10,15 @@ const SettingsConfig = {
     },
     routes: [
         {
-            path: 'settings/userManagement',
+            path: 'settings/user-management',
             element: <UserManagement />
         },
         {
-            path: 'settings/posSettings',
+            path: 'settings/pos-settings',
             element: <PosSettings />
         },
         {
-            path: 'settings/posSettings/:action/:id',
+            path: 'settings/pos-settings/:action/:id',
             element: <PosForm />
         }
     ]

@@ -27,7 +27,7 @@ const PosSearchFilter = () => {
     }
 
     const handleAdd = () => {
-        navigate('/settings/posSettings/Add/0');
+        navigate('/settings/pos-settings/add/0');
     }
 
     return (

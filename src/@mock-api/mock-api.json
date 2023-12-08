@@ -472,10 +472,10 @@
         "value": [
           {
             "id": "1",
-            "type": "Desktop POS System",
-            "user_name": "desktoppos01",
+            "type": "Desktop POS",
+            "user_name": "John Dae",
             "password": "123456",
-            "url": "http://desktop01.pos",
+            "url": "http://example01.pos.com",
             "tax": [
               {
                 "tax_name": "Sales Tax",
@@ -499,10 +499,10 @@
           },
           {
             "id": "2",
-            "type": "Handheld POS System",
-            "user_name": "handheldpos02",
+            "type": "Handheld POS",
+            "user_name": "Danyil Balko",
             "password": "456789",
-            "url": "http://handleheld02.pos",
+            "url": "http://example02.pos.com",
             "tax": [
               {
                 "tax_name": "Window Tax",
@@ -526,10 +526,10 @@
           },
           {
             "id": "3",
-            "type": "Phone POS System",
-            "user_name": "phonepos01",
+            "type": "Phone POS",
+            "user_name": "Alejandro Gonjaless",
             "password": "123456",
-            "url": "http://phone03.pos",
+            "url": "http://example03.pos.com",
             "tax": [
               {
                 "tax_name": "Fair Tax",
@@ -549,10 +549,10 @@
           },
           {
             "id": "4",
-            "type": "Tablet POS System",
-            "user_name": "tabletpos01",
+            "type": "Tablet POS",
+            "user_name": "Fernando Ferrira",
             "password": "123456",
-            "url": "http://tablet04.pos",
+            "url": "http://example04.pos.com",
             "tax": [
               {
                 "tax_name": "Income Tax",

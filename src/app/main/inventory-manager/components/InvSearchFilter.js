@@ -73,7 +73,7 @@ const InvSearchFilter = () => {
         setDialogOpen(false);
     }
     const handleAdd = () => {
-        navigate('/inventoryManager/Add/0');
+        navigate('/inventory-manager/Add/0');
     }
 
     return (
@@ -103,7 +103,7 @@ const InvSearchFilter = () => {
                         <FuseSvgIcon className="text-gray-500" size={24}>
                             material-solid:filter_alt
                         </FuseSvgIcon>
-                        <span className='mx-4'> {t('search_filter')}</span>
+                        <span className='mx-4'> {t('searchFilter')}</span>
                     </Button>
                     <Button
                         variant="contained"
@@ -127,7 +127,7 @@ const InvSearchFilter = () => {
             >
                 <DialogTitle>
                     <Typography className={`font-semibold text-32 mt-16 ml-8`}>
-                        <span>{t('search_filter')}</span>
+                        <span>{t('searchFilter')}</span>
                     </Typography>
                 </DialogTitle>
                 <DialogContent className='flex flex-col' sx={{ width: '450px' }}>

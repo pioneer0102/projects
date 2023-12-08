@@ -29,16 +29,15 @@ const PosTable = () => {
     console.log(posData);
     const totalCount = useSelector(selectTotalCount);
 
-    const { isLoading, isError } = useQuery(['posTable'],
-        async () => {
-            try {
-                const result = await getAllPos(filterData);
-                console.log(result);
-                dispatch(setPos(result));
-            } catch (error) {
-                console.log(error)
-            }
-        });
+    const { isLoading, isError } = useQuery(['posTable', filterData], async () => {
+        try {
+            const result = await getAllPos(filterData);
+            console.log(result);
+            dispatch(setPos(result));
+        } catch (error) {
+            console.log(error)
+        }
+    });
 
     const handleChange = (type, value) => {
         dispatch(setFilter({ type: type, value: value }));
@@ -46,110 +45,110 @@ const PosTable = () => {
     };
 
     const EditPage = (id) => {
-        navigate(`/settings/posSettings/Edit/${id}`);
+        navigate(`/settings/pos-settings/edit/${id}`);
     }
 
     return (
         <>
             {
                 isLoading ?
-                    <FuseLoading />
-                    :
-                    isError ?
-                        <div className="flex flex-1 items-center justify-center h-full">
-                            <Typography color="text.secondary" variant="h5">
-                                {t('nodata')}
-                            </Typography>
-                        </div>
-                        :
-                        <Paper
-                            className={`flex flex-col py-24 px-24 my-16 mx-32 overflow-auto  ${styles.paper}`}
-                            sx={{ boxShadow: 'none', borderRadius: 1 }}>
-                            {
-                                posData.length == 0 ?
-                                    <div className="flex flex-1 items-center justify-center h-full">
-                                        <Typography color="text.secondary" variant="h5">
-                                            {t('noData')}
-                                        </Typography>
-                                    </div>
-                                    :
-                                    <>
-                                        <Table>
-                                            <Thead className="border-b-2">
-                                                <Tr>
-                                                    {posTableHeader.map((item, index) => (
-                                                        <Th
-                                                            key={index}
-                                                            align={item.align}>
+                <FuseLoading />
+                :
+                isError ?
+                <div className="flex flex-1 items-center justify-center h-full">
+                    <Typography color="text.secondary" variant="h5">
+                        {t('nodata')}
+                    </Typography>
+                </div>
+                :
+                <Paper
+                    className={`flex flex-col py-24 px-24 my-16 mx-32 overflow-auto  ${styles.paper}`}
+                    sx={{ boxShadow: 'none', borderRadius: 1 }}>
+                    {
+                        posData.length == 0 ?
+                            <div className="flex flex-1 items-center justify-center h-full">
+                                <Typography color="text.secondary" variant="h5">
+                                    {t('noData')}
+                                </Typography>
+                            </div>
+                            :
+                            <>
+                                <Table>
+                                    <Thead className="border-b-2">
+                                        <Tr>
+                                            {posTableHeader.map((item, index) => (
+                                                <Th
+                                                    key={index}
+                                                    align={item.align}>
+                                                    <Typography
+                                                        color="text.secondary"
+                                                        className="font-bold text-20 pb-16">
+                                                        {item.label}
+                                                    </Typography>
+                                                </Th>
+                                            ))}
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {
+                                            posData.map((item, index) => {
+                                                return (
+                                                    <Tr
+                                                        key={index}
+                                                        role="button"
+                                                        onClick={() => { EditPage(item.id) }}
+                                                    >
+                                                        <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-bold text-20 pb-16">
-                                                                {item.label}
+                                                                className="font-semibold text-16 md:pt-16">
+                                                                {item.type}
                                                             </Typography>
-                                                        </Th>
-                                                    ))}
-                                                </Tr>
-                                            </Thead>
-                                            <Tbody>
-                                                {
-                                                    posData.map((item, index) => {
-                                                        return (
-                                                            <Tr
-                                                                key={index}
-                                                                role="button"
-                                                                onClick={() => { EditPage(item.id) }}
-                                                            >
-                                                                <Td align="left">
-                                                                    <Typography
-                                                                        color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
-                                                                        {item.type}
-                                                                    </Typography>
-                                                                </Td>
-                                                                <Td align="left">
-                                                                    <Typography
-                                                                        color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
-                                                                        {item.user_name}
-                                                                    </Typography>
-                                                                </Td>
-                                                                <Td align="left">
-                                                                    <Typography
-                                                                        color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
-                                                                        {item.url}
-                                                                    </Typography>
-                                                                </Td>
-                                                            </Tr>
-                                                        )
-                                                    })
+                                                        </Td>
+                                                        <Td align="left">
+                                                            <Typography
+                                                                color="text.secondary"
+                                                                className="font-semibold text-16 md:pt-16">
+                                                                {item.user_name}
+                                                            </Typography>
+                                                        </Td>
+                                                        <Td align="left">
+                                                            <Typography
+                                                                color="text.secondary"
+                                                                className="font-semibold text-16 md:pt-16">
+                                                                {item.url}
+                                                            </Typography>
+                                                        </Td>
+                                                    </Tr>
+                                                )
+                                            })
 
-                                                }
-                                            </Tbody>
-                                        </Table>
-                                        <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
-                                            <Typography
-                                                className="text-18 text-center font-medium"
-                                                color="text.secondary">
-                                                {t('orders.total')} : {totalCount}
-                                            </Typography>
-                                            <TablePagination
-                                                className="flex-1 overflow-scroll mt-8"
-                                                component="div"
-                                                count={totalCount}
-                                                rowsPerPage={filterData.rowsPerPage}
-                                                page={filterData.page}
-                                                backIconButtonProps={{ 'aria-label': 'Previous Page' }}
-                                                nextIconButtonProps={{ 'aria-label': 'Next Page' }}
-                                                onPageChange={(event, newPage) => handleChange('page', parseInt(newPage, 10))}
-                                                onRowsPerPageChange={(event) => {
-                                                    handleChange('rowsPerPage', parseInt(event.target.value, 10))
-                                                }}
-                                            />
-                                        </div>
-                                    </>
-                            }
-                        </Paper>
+                                        }
+                                    </Tbody>
+                                </Table>
+                                <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
+                                    <Typography
+                                        className="text-18 text-center font-medium"
+                                        color="text.secondary">
+                                        {t('orders.total')} : {totalCount}
+                                    </Typography>
+                                    <TablePagination
+                                        className="flex-1 overflow-scroll mt-8"
+                                        component="div"
+                                        count={totalCount}
+                                        rowsPerPage={filterData.rowsPerPage}
+                                        page={filterData.page}
+                                        backIconButtonProps={{ 'aria-label': 'Previous Page' }}
+                                        nextIconButtonProps={{ 'aria-label': 'Next Page' }}
+                                        onPageChange={(event, newPage) => handleChange('page', parseInt(newPage, 10))}
+                                        onRowsPerPageChange={(event) => {
+                                            handleChange('rowsPerPage', parseInt(event.target.value, 10))
+                                        }}
+                                    />
+                                </div>
+                            </>
+                    }
+                </Paper>
             }
         </>
     );
