@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import styles from '../style.module.scss';
-
+import { showMessage } from "app/store/fuse/messageSlice";
 import UserTab from './tabs/UserTab';
 import TaxTab from './tabs/TaxTab';
 import DepartmentTab from './tabs/DepartmentTab';
@@ -23,7 +23,8 @@ import {
     selectPosById,
     initializePos,
     addPos,
-    updatePos
+    updatePos,
+    setFormdata
 } from '../store/posSlice';
 
 const PosForm = () => {
@@ -35,10 +36,10 @@ const PosForm = () => {
     const posById = useSelector(selectPosById);
 
     useEffect(() => {
-        if (routeParams.action === 'Edit') {
+        if (routeParams.action === 'edit') {
             dispatch(getPosById(routeParams.id));
         }
-        if (routeParams.action === 'Add') {
+        if (routeParams.action === 'add') {
             dispatch(initializePos());
         }
     }, [dispatch, routeParams]);
@@ -51,21 +52,23 @@ const PosForm = () => {
 
     const finalSave = () => {
         console.log(posById);
-        if (routeParams.action === 'Edit') {
+        if (routeParams.action === 'edit') {
             dispatch(updatePos(
                 {
                     ...posById,
                     id: routeParams.id
                 })
             );
+            dispatch(showMessage({ message: "POS added successfully!", variant: "success" }));
             navigate('/settings/pos-settings')
         }
-        if (routeParams.action === 'Add') {
+        if (routeParams.action === 'add') {
             dispatch(addPos(
                 {
                     ...posById
                 })
             );
+            dispatch(showMessage({ message: "POS updateed successfully!", variant: "success" }));
             navigate('/settings/pos-settings')
         }
     }
@@ -124,15 +127,22 @@ const PosForm = () => {
                 </Tabs>
                 <div className='py-16'>
                     <div className={tabValue !== 0 ? 'hidden' : ''}>
-                        <UserTab posById={posById} />
+                        <UserTab
+                            userDetail={{
+                                type: posById.type,
+                                user_name: posById.user_name,
+                                password: posById.password,
+                                url: posById.url
+                            }}
+                        />
                     </div>
 
                     <div className={tabValue !== 1 ? 'hidden' : ''}>
-                        <TaxTab posById={posById} />
+                        <TaxTab />
                     </div>
 
                     <div className={tabValue !== 2 ? 'hidden' : ''}>
-                        <DepartmentTab posById={posById} />
+                        <DepartmentTab />
                     </div>
                 </div>
                 <div>
@@ -145,7 +155,7 @@ const PosForm = () => {
                         <FuseSvgIcon size={20}>heroicons-solid:check</FuseSvgIcon>
                         <span className='ml-8'>{t('save')}</span>
                     </Button>
-                </div>                
+                </div>
             </Paper>
         </>
 

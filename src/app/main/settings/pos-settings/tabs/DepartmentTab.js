@@ -6,6 +6,15 @@ import TextField from '@mui/material/TextField';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import InputAdornment from '@mui/material/InputAdornment';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import {
+    selectPosById,
+    setFormdata,
+    update,
+    remove
+} from "../../store/posSlice";
 
 const isNumeric = (value) => !isNaN(parseFloat(value)) && isFinite(value);
 
@@ -29,9 +38,14 @@ const initialErrors = {
 };
 
 const DepartmentTab = () => {
+    const dispatch = useDispatch();
+    const posById = useSelector(selectPosById);
     const [errors, setErrors] = useState(initialErrors);
     const [newDepartmentItem, setNewDepartmentItem] = useState({ name: '', rate: 0 });
-    const [departmentItems, setDepartmentItems] = useState([]);
+    // const [departmentItems, setDepartmentItems] = useState([]);
+    // useEffect(() => {
+    //     setDepartmentItems(departmentDetail);
+    // }, [departmentDetail])
 
     const handleAdd = () => {
         const validationErrors = validateTaxItem(newDepartmentItem);
@@ -45,24 +59,22 @@ const DepartmentTab = () => {
             return;
         }
 
-        setDepartmentItems((prevItems) => [...prevItems, { ...newDepartmentItem }]);
+        // handleDepartmentItems(newDepartmentItem);
+        dispatch(setFormdata({ type: 'department', value: newDepartmentItem }))
         setNewDepartmentItem({ name: '', rate: 0 });
     };
 
     const removeTax = (index) => {
-        setDepartmentItems(prevItems => prevItems.filter((_, i) => i !== index));
+        dispatch(remove({ type: 'department', id: index }))
     };
 
     const handleChange = (key, value) => {
         setErrors((prevErrors) => ({ ...prevErrors, [`${key}Error`]: { isError: false, text: '' } }));
-        setNewDepartmentItem({ ...newDepartmentItem, [key]: value});
+        setNewDepartmentItem({ ...newDepartmentItem, [key]: value });
     }
 
     const handleEdit = (index, key, value) => {
-        const items = [...departmentItems];
-        const itemToUpdate = items[index];
-        itemToUpdate[key] = value;
-        setDepartmentItems(items);
+        dispatch(update({ type: 'department', id: index, key: key, value: value }));
     };
 
     return (
@@ -125,7 +137,7 @@ const DepartmentTab = () => {
                 </Grid>
             </Grid>
             {
-                departmentItems.map((taxItem, index) => {
+                posById.department !== null && posById.department.map((taxItem, index) => {
                     return (
                         <DepartmentItem key={index} index={index} value={taxItem} handleEdit={handleEdit} handleRemove={removeTax} />
                     );

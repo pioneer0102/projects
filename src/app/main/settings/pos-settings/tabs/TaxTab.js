@@ -1,11 +1,19 @@
 import TaxItem from "./TaxItem";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Paper from "@mui/material/Paper";
 import { IconButton } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import InputAdornment from '@mui/material/InputAdornment';
+import {
+    selectPosById,
+    setFormdata,
+    update,
+    remove
+} from "../../store/posSlice";
 
 const isNumeric = (value) => !isNaN(parseFloat(value)) && isFinite(value);
 
@@ -29,15 +37,21 @@ const initialErrors = {
 };
 
 const TaxTab = () => {
+    const dispatch = useDispatch();
+    const posById = useSelector(selectPosById);
+    // const { taxDetail } = props
     const [errors, setErrors] = useState(initialErrors);
     const [newTaxItem, setNewTaxItem] = useState({ name: '', rate: 0 });
-    const [taxItems, setTaxItems] = useState([]);
+
+    // useEffect(() => {
+    //     setTaxItems(taxDetail);
+    // }, [taxDetail]);
 
     const addNewTax = () => {
         const validationErrors = validateTaxItem(newTaxItem);
 
         if (Object.keys(validationErrors).length > 0) {
-            setErrors((prevErrors) => ({
+            setErrors(() => ({
                 ...initialErrors,
                 ...Object.fromEntries(Object.entries(validationErrors).map(([key, value]) => [`${key}Error`, { isError: true, text: value }])),
             }));
@@ -45,25 +59,25 @@ const TaxTab = () => {
             return;
         }
 
-        setTaxItems((prevTaxItems) => [...prevTaxItems, { ...newTaxItem }]);
+        // handleTaxItems(newTaxItem);
+
+        dispatch(setFormdata({ type: 'tax', value: newTaxItem }))
         setNewTaxItem({ name: '', rate: 0 });
     };
 
     const removeTax = (index) => {
-        setTaxItems(prevTaxItems => prevTaxItems.filter((_, i) => i !== index));
+        dispatch(remove({ type: 'tax', id: index }))
     };
 
     const handleChange = (key, value) => {
         setErrors((prevErrors) => ({ ...prevErrors, [`${key}Error`]: { isError: false, text: '' } }));
-        setNewTaxItem({ ...newTaxItem, [key]: value});
+        setNewTaxItem({ ...newTaxItem, [key]: value });
     }
 
     const handleEdit = (index, key, value) => {
-        const updatedTaxItems = [...taxItems];
-        const taxItemToUpdate = updatedTaxItems[index];
-        taxItemToUpdate[key] = value;
-        updatedTaxItems[index] = taxItemToUpdate;
-        setTaxItems(updatedTaxItems);
+        
+        
+        dispatch(update({ type: 'tax', id: index, key: key, value: value }));
     };
 
     return (
@@ -126,7 +140,7 @@ const TaxTab = () => {
                 </Grid>
             </Grid>
             {
-                taxItems.map((taxItem, index) => {
+                posById.tax != null && posById.tax.map((taxItem, index) => {
                     return (
                         <TaxItem key={index} index={index} value={taxItem} handleEdit={handleEdit} handleRemove={removeTax} />
                     );

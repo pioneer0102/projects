@@ -67,11 +67,11 @@ const UserForm = () => {
         console.log(data);
         if (routeParams.action === 'add') {
             dispatch(addUser(data));
-            dispatch(showMessage({ message: "Success to Add User !", variant: "success" }));
+            dispatch(showMessage({ message: "User added successfully!", variant: "success" }));
         }
         if (routeParams.action === 'edit') {
             dispatch(updateUser(data));
-            dispatch(showMessage({ message: "Success to Update User !", variant: "success" }));
+            dispatch(showMessage({ message: "User updated successsfully!", variant: "success" }));
         }
         history.push('/settings/user-management');
     }

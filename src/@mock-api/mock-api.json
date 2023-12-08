@@ -472,109 +472,109 @@
         "value": [
           {
             "id": "1",
-            "type": "Desktop POS",
+            "type": "Desktop POS System",
             "user_name": "John Dae",
             "password": "123456",
             "url": "http://example01.pos.com",
             "tax": [
               {
-                "tax_name": "Sales Tax",
-                "tax_rate": 10
+                "name": "Sales Tax",
+                "rate": 10
               },
               {
-                "tax_name": "Trash Tax",
-                "tax_rate": 5
+                "name": "Trash Tax",
+                "rate": 5
               }
             ],
             "department": [
               {
-                "department_name": "clothe",
-                "tax_rate": 20
+                "name": "clothe",
+                "rate": 20
               },
               {
-                "department_name": "accessory",
-                "tax_rate": 8
+                "name": "accessory",
+                "rate": 8
               }
             ]
           },
           {
             "id": "2",
-            "type": "Handheld POS",
+            "type": "Handheld POS System",
             "user_name": "Danyil Balko",
             "password": "456789",
             "url": "http://example02.pos.com",
             "tax": [
               {
-                "tax_name": "Window Tax",
-                "tax_rate": 20
+                "name": "Window Tax",
+                "rate": 20
               },
               {
-                "tax_name": "Internet Tax",
-                "tax_rate": 10
+                "name": "Internet Tax",
+                "rate": 10
               }
             ],
             "department": [
               {
-                "department_name": "clothe",
-                "tax_rate": 8
+                "name": "clothe",
+                "rate": 8
               },
               {
-                "department_name": "accessory",
-                "tax_rate": 12
+                "name": "accessory",
+                "rate": 12
               }
             ]
           },
           {
             "id": "3",
-            "type": "Phone POS",
+            "type": "Phone POS System",
             "user_name": "Alejandro Gonjaless",
             "password": "123456",
             "url": "http://example03.pos.com",
             "tax": [
               {
-                "tax_name": "Fair Tax",
-                "tax_rate": 10
+                "name": "Fair Tax",
+                "rate": 10
               }
             ],
             "department": [
               {
-                "department_name": "clothe",
-                "tax_rate": 20
+                "name": "clothe",
+                "rate": 20
               },
               {
-                "department_name": "accessory",
-                "tax_rate": 8
+                "name": "accessory",
+                "rate": 8
               }
             ]
           },
           {
             "id": "4",
-            "type": "Tablet POS",
+            "type": "Tablet POS System",
             "user_name": "Fernando Ferrira",
             "password": "123456",
             "url": "http://example04.pos.com",
             "tax": [
               {
-                "tax_name": "Income Tax",
-                "tax_rate": 10
+                "name": "Income Tax",
+                "rate": 10
               },
               {
-                "tax_name": "Consumption Ttax",
-                "tax_rate": 5
+                "name": "Consumption Ttax",
+                "rate": 5
               },
               {
-                "tax_name": "Property Ttax",
-                "tax_rate": 5
+                "name": "Property Ttax",
+                "rate": 5
               }
             ],
             "department": [
               {
-                "department_name": "clothe",
-                "tax_rate": 20
+                "name": "clothe",
+                "rate": 20
               },
               {
-                "department_name": "accessory",
-                "tax_rate": 8
+                "name": "accessory",
+                "rate": 8
               }
             ]
           }

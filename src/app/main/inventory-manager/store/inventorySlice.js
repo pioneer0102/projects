@@ -77,7 +77,7 @@ const inventorySlice = createSlice({
                 id: '',
                 category: '',
                 description: '',
-                image: '',
+                image: null,
                 price: '',
                 quantity: '',
                 tax: '',

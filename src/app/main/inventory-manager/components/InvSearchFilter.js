@@ -73,7 +73,7 @@ const InvSearchFilter = () => {
         setDialogOpen(false);
     }
     const handleAdd = () => {
-        navigate('/inventory-manager/Add/0');
+        navigate('/inventory-manager/add/0');
     }
 
     return (
