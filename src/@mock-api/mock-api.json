@@ -579,6 +579,34 @@
             ]
           }
         ]
+      },
+      "user": {
+        "value": [
+          {
+            "id": "1",
+            "name": "John Doe",
+            "url": "http://example01.pos.com",
+            "role": "store owner"
+          },
+          {
+            "id": "2",
+            "name": "Danyil Balko",
+            "url": "http://example02.pos.com",
+            "role": "store owner"
+          },
+          {
+            "id": "3",
+            "name": "Alejandro Gonjaless",
+            "url": "http://example03.pos.com",
+            "role": "employee"
+          },
+          {
+            "id": "4",
+            "name": "Fernando Ferrira",
+            "url": "http://example03.pos.com",
+            "role": "store owner"
+          }
+        ]
       }
     }
   },

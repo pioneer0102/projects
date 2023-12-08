@@ -2,6 +2,12 @@
     animation: entry 0.5s linear 1;
 }
 
+.form {
+    border-radius: 6px;
+    box-shadow: 0px 5px 5px #CCC;
+    animation: entry 0.5s linear 1;
+}
+
 @keyframes entry {
     0% {
         top: -20%;
