@@ -46,7 +46,7 @@ const PosTable = () => {
     };
 
     const EditPage = (id) => {
-        navigate(`/settings/pos-settings/Edit/${id}`);
+        navigate(`/settings/pos-settings/edit/${id}`);
     }
 
     return (

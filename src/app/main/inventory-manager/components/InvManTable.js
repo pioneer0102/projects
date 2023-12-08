@@ -53,7 +53,7 @@ const InvManTable = () => {
     const dbSize = Inventory && Inventory.dbSize;
     const filterSize = Inventory && Inventory.filterSize;
 
-    const showDetail = (id) => history.push(`/inventory-manager/Edit/${id}`);
+    const showDetail = (id) => history.push(`/inventory-manager/edit/${id}`);
 
     if (isLoading) {
         return <FuseLoading />;
