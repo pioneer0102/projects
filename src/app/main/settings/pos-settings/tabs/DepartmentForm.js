@@ -151,5 +151,3 @@ const DepartmentForm = (props) => {
 }
 
 export default DepartmentForm;
-
-

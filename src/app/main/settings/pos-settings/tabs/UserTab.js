@@ -144,4 +144,4 @@ const UserTab = (props) => {
     );
 }
 
-export default withReducer('settingsApp', reducer)(UserTab);
+export default UserTab;
