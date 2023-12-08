@@ -10,9 +10,9 @@ const posTableHeader = [
         label: 'User Name',
     },
     {
-        id: 'Url',
+        id: 'Pos URL',
         align: 'left',
-        label: 'Url',
+        label: 'Pos URL',
     },
 ];
 

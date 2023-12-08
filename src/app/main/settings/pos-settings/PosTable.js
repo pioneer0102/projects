@@ -26,7 +26,6 @@ const PosTable = () => {
 
     const filterData = useSelector(selectFilter);
     const posData = useSelector(selectAllPos);
-    console.log(posData);
     const totalCount = useSelector(selectTotalCount);
 
     const { isLoading, isError } = useQuery(['posTable', filterData], async () => {
@@ -100,21 +99,21 @@ const PosTable = () => {
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-16 md:pt-16">
+                                                                className="text-16 md:pt-16">
                                                                 {item.type}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-16 md:pt-16">
+                                                                className="text-16 md:pt-16">
                                                                 {item.user_name}
                                                             </Typography>
                                                         </Td>
                                                         <Td align="left">
                                                             <Typography
                                                                 color="text.secondary"
-                                                                className="font-semibold text-16 md:pt-16">
+                                                                className="text-16 md:pt-16">
                                                                 {item.url}
                                                             </Typography>
                                                         </Td>

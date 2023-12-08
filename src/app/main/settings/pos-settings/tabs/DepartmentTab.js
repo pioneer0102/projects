@@ -1,106 +1,137 @@
-import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { departmentTableHeader } from 'src/app/model/PosModel';
-import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
-import styles from '../../style.module.scss';
 import { useState } from "react";
-import { Button } from '@mui/material';
+import Paper from "@mui/material/Paper";
+import { IconButton } from "@mui/material";
+import DepartmentItem from "./DepartmentItem";
+import TextField from '@mui/material/TextField';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import DepartmentForm from "./DepartmentForm";
+import Grid from "@mui/system/Unstable_Grid/Grid";
+import InputAdornment from '@mui/material/InputAdornment';
 
-const DepartmentTab = (props) => {
-    const { posById } = props;
-    const { t } = useTranslation();
-    const routeParams = useParams();
+const isNumeric = (value) => !isNaN(parseFloat(value)) && isFinite(value);
 
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [item, setItem] = useState({});
-    const [action, setAction] = useState('');
+const validateTaxItem = (department) => {
+    const errors = {};
 
-    const editDepartment = (item) => {
-        setAction('edit');
-        setDialogOpen(true);
-        setItem(item);
+    if (!department.name.trim()) {
+        errors.name = 'Please input department name.';
     }
 
-    const addDepartment = () => {
-        setAction('add');
-        setDialogOpen(true);
-        setItem({ tax_name: '', tax_rate: '' })
+    if (!isNumeric(department.rate)) {
+        errors.rate = 'Please input a numeric value.';
     }
 
-    const dialogClose = () => {
-        setDialogOpen(false);
+    return errors;
+};
+
+const initialErrors = {
+    nameError: { isError: false, text: '' },
+    rateError: { isError: false, text: '' },
+};
+
+const DepartmentTab = () => {
+    const [errors, setErrors] = useState(initialErrors);
+    const [newDepartmentItem, setNewDepartmentItem] = useState({ name: '', rate: 0 });
+    const [departmentItems, setDepartmentItems] = useState([]);
+
+    const handleAdd = () => {
+        const validationErrors = validateTaxItem(newDepartmentItem);
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors((prevErrors) => ({
+                ...initialErrors,
+                ...Object.fromEntries(Object.entries(validationErrors).map(([key, value]) => [`${key}Error`, { isError: true, text: value }])),
+            }));
+
+            return;
+        }
+
+        setDepartmentItems((prevItems) => [...prevItems, { ...newDepartmentItem }]);
+        setNewDepartmentItem({ name: '', rate: 0 });
+    };
+
+    const removeTax = (index) => {
+        setDepartmentItems(prevItems => prevItems.filter((_, i) => i !== index));
+    };
+
+    const handleChange = (key, value) => {
+        setErrors((prevErrors) => ({ ...prevErrors, [`${key}Error`]: { isError: false, text: '' } }));
+        setNewDepartmentItem({ ...newDepartmentItem, [key]: value});
     }
+
+    const handleEdit = (index, key, value) => {
+        const items = [...departmentItems];
+        const itemToUpdate = items[index];
+        itemToUpdate[key] = value;
+        setDepartmentItems(items);
+    };
 
     return (
-        <>
-            <Paper
-                className={`px-24 py-24 rounded-md shadow-none ${styles.paper}`}
-            >
-                {
-                    Object.entries(posById) == 0 ?
-                        <div className="flex flex-1 items-center justify-center mt-32">
-                            <Typography color="text.secondary" variant="h5">
-                                {t('noData')}
-                            </Typography>
-                        </div>
-                        :
-                        <>
-                            <Table className="mt-32">
-                                <Thead className="border-b-2">
-                                    <Tr>
-                                        {departmentTableHeader.map((item, index) => (
-                                            <Th
-                                                key={index}
-                                                align={item.align}>
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-bold text-16 pb-16">
-                                                    {item.label}
-                                                </Typography>
-                                            </Th>
-                                        ))}
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    {
-                                        posById.department.map((item, index) => {
-                                            return (
-                                                <Tr
-                                                    key={index}
-                                                    role="button"
-                                                    onClick={() => { editDepartment(item); }}
-                                                >
-                                                    <Td align="left">
-                                                        <Typography
-                                                            color="text.secondary"
-                                                            className="font-semibold text-14 md:pt-16">
-                                                            {item.department_name}
-                                                        </Typography>
-                                                    </Td>
-                                                    <Td align="left">
-                                                        <Typography
-                                                            color="text.secondary"
-                                                            className="font-semibold text-14 md:pt-16">
-                                                            {item.tax_rate}
-                                                        </Typography>
-                                                    </Td>
-                                                </Tr>
-                                            )
-                                        })
-
-                                    }
-                                </Tbody>
-                            </Table>
-                        </>
-                }
-            </Paper>
-            <DepartmentForm dialogOpen={dialogOpen} handleClose={dialogClose} item={item} action={action} />
-        </>
+        <Paper className='rounded-md shadow-none'>
+            <Grid container spacing={2} className="flex items-center">
+                <Grid lg={5} md={5} sm={5} xs={5}>
+                    <TextField
+                        className="mt-32"
+                        label="Department Name"
+                        placeholder="Department Name"
+                        id="name"
+                        error={errors.nameError.isError}
+                        helperText={errors.nameError.text}
+                        variant="outlined"
+                        required
+                        fullWidth
+                        value={newDepartmentItem.name}
+                        onChange={(event) => handleChange('name', event.target.value)}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <FuseSvgIcon size={24}>heroicons-outline:receipt-tax</FuseSvgIcon>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </Grid>
+                <Grid lg={5} md={5} sm={5} xs={5}>
+                    <TextField
+                        className="mt-32"
+                        label="Department Tax Rate"
+                        placeholder="Department Tax Rate"
+                        id="rate"
+                        error={errors.rateError.isError}
+                        helperText={errors.rateError.text}
+                        variant="outlined"
+                        fullWidth
+                        value={newDepartmentItem.rate}
+                        onChange={(event) => handleChange('rate', event.target.value)}
+                        InputProps={{
+                            inputProps: {
+                                type: 'number',
+                                min: 0,
+                            },
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <FuseSvgIcon size={24}>heroicons-outline:currency-dollar</FuseSvgIcon>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </Grid>
+                <Grid lg={2} md={2} sm={2} xs={2}>
+                    <IconButton
+                        onClick={handleAdd}
+                        variant="outline"
+                        className='btn_tax_add mt-32'>
+                        <FuseSvgIcon size={20}>heroicons-outline:plus-circle</FuseSvgIcon>
+                    </IconButton>
+                </Grid>
+            </Grid>
+            {
+                departmentItems.map((taxItem, index) => {
+                    return (
+                        <DepartmentItem key={index} index={index} value={taxItem} handleEdit={handleEdit} handleRemove={removeTax} />
+                    );
+                })
+            }
+        </Paper>
     );
 };
 
