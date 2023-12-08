@@ -71,7 +71,7 @@ const TaxForm = (props) => {
             >
                 <DialogTitle>
                     <Typography className={`font-semibold text-32 mt-16 ml-8`}>
-                        <span>{t('search_filter')}</span>
+                        <span>{t('searchFilter')}</span>
                     </Typography>
                 </DialogTitle>
                 <DialogContent className='flex flex-col' sx={{ width: '450px' }}>
