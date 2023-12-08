@@ -37,70 +37,8 @@ const DepartmentTab = (props) => {
     }
 
     return (
-        <>
-            <Paper
-                className={`px-24 py-24 rounded-md shadow-none ${styles.paper}`}
-            >
-                {
-                    Object.entries(posById) == 0 ?
-                        <div className="flex flex-1 items-center justify-center mt-32">
-                            <Typography color="text.secondary" variant="h5">
-                                {t('noData')}
-                            </Typography>
-                        </div>
-                        :
-                        <>
-                            <Table className="mt-32">
-                                <Thead className="border-b-2">
-                                    <Tr>
-                                        {departmentTableHeader.map((item, index) => (
-                                            <Th
-                                                key={index}
-                                                align={item.align}>
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="font-bold text-16 pb-16">
-                                                    {item.label}
-                                                </Typography>
-                                            </Th>
-                                        ))}
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    {
-                                        posById.department.map((item, index) => {
-                                            return (
-                                                <Tr
-                                                    key={index}
-                                                    role="button"
-                                                    onClick={() => { editDepartment(item); }}
-                                                >
-                                                    <Td align="left">
-                                                        <Typography
-                                                            color="text.secondary"
-                                                            className="font-semibold text-14 md:pt-16">
-                                                            {item.department_name}
-                                                        </Typography>
-                                                    </Td>
-                                                    <Td align="left">
-                                                        <Typography
-                                                            color="text.secondary"
-                                                            className="font-semibold text-14 md:pt-16">
-                                                            {item.tax_rate}
-                                                        </Typography>
-                                                    </Td>
-                                                </Tr>
-                                            )
-                                        })
-
-                                    }
-                                </Tbody>
-                            </Table>
-                        </>
-                }
-            </Paper>
-            <DepartmentForm dialogOpen={dialogOpen} handleClose={dialogClose} item={item} action={action} />
-        </>
+        <Paper className='rounded-md shadow-none'>
+        </Paper>
     );
 };
 

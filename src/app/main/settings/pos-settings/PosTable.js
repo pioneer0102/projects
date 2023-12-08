@@ -26,7 +26,6 @@ const PosTable = () => {
 
     const filterData = useSelector(selectFilter);
     const posData = useSelector(selectAllPos);
-    console.log(posData);
     const totalCount = useSelector(selectTotalCount);
 
     const { isLoading, isError } = useQuery(['posTable', filterData], async () => {
