@@ -40,7 +40,6 @@ const PosTable = () => {
 
     const handleChange = (type, value) => {
         dispatch(setFilter({ type: type, value: value }));
-        dispatch(setFilter({ type: 'page', value: 0 }));
     };
 
     const EditPage = (id) => {
@@ -61,7 +60,7 @@ const PosTable = () => {
                 </div>
                 :
                 <Paper
-                    className={`flex flex-col py-24 px-24 my-16 mx-32 overflow-auto  ${styles.paper}`}
+                    className={`flex flex-col py-24 px-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
                     sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     {
                         posData.length == 0 ?
@@ -141,7 +140,8 @@ const PosTable = () => {
                                         nextIconButtonProps={{ 'aria-label': 'Next Page' }}
                                         onPageChange={(event, newPage) => handleChange('page', parseInt(newPage, 10))}
                                         onRowsPerPageChange={(event) => {
-                                            handleChange('rowsPerPage', parseInt(event.target.value, 10))
+                                            handleChange('rowsPerPage', parseInt(event.target.value, 10));
+                                            handleChange('page', 0);
                                         }}
                                     />
                                 </div>

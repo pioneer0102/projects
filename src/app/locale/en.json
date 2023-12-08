@@ -37,5 +37,9 @@
     },
     "settings": {
         "posSettings": "POS Settings"
+    },
+    "users": {
+        "total": "Total Users",
+        "userManagement": "User Management"
     }
 }
