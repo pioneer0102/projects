@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
 import CategoryTable from './CategoryTable';
 import { useDispatch } from 'react-redux';
 import { useDeepCompareEffect } from '@fuse/hooks';
@@ -12,13 +11,12 @@ const CategoryApp = () => {
     const dispatch = useDispatch();
     useDeepCompareEffect(() => {
         dispatch(categoryStatisticalData());
-      }, [dispatch]);
+    }, [dispatch]);
 
     return (
         // <QueryClientProvider client={queryClient}>
-            <CategoryTable />
+        <CategoryTable />
         // </QueryClientProvider >
-
     );
 };
 

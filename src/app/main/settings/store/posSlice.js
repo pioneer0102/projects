@@ -1,15 +1,10 @@
-import {
-    createAsyncThunk,
-    createSlice,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getPos = createAsyncThunk(
-    'settingsApp/pos/getPos', async () => {
-        const response = await axios.get('/api/getPos');
-        return response.data;
-    }
-);
+export const getPos = createAsyncThunk('settingsApp/pos/getPos', async () => {
+    const response = await axios.get('/api/getPos');
+    return response.data;
+});
 
 export const updatePos = createAsyncThunk(
     'settingsApp/pos/updatePos',
@@ -49,20 +44,16 @@ const posSlice = createSlice({
                     state.posDetail.url = action.payload.value;
                     break;
                 case 'tax':
-                    state.posDetail.taxes.push(
-                        {
-                            name: action.payload.value.name,
-                            rate: action.payload.value.rate
-                        }
-                    );
+                    state.posDetail.taxes.push({
+                        name: action.payload.value.name,
+                        rate: action.payload.value.rate
+                    });
                     break;
                 case 'department':
-                    state.posDetail.departments.push(
-                        {
-                            name: action.payload.value.name,
-                            rate: action.payload.value.rate
-                        }
-                    );
+                    state.posDetail.departments.push({
+                        name: action.payload.value.name,
+                        rate: action.payload.value.rate
+                    });
                     break;
             }
         },
@@ -83,11 +74,15 @@ const posSlice = createSlice({
             let temp;
             switch (action.payload.type) {
                 case 'tax':
-                    temp = state.posDetail.taxes.filter((_, i) => i !== action.payload.id);
+                    temp = state.posDetail.taxes.filter(
+                        (_, i) => i !== action.payload.id
+                    );
                     state.posDetail.taxes = temp;
                     break;
                 case 'department':
-                    temp = state.posDetail.departments.filter((_, i) => i !== action.payload.id);
+                    temp = state.posDetail.departments.filter(
+                        (_, i) => i !== action.payload.id
+                    );
                     state.posDetail.departments = temp;
                     break;
             }
@@ -96,14 +91,10 @@ const posSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getPos.fulfilled, (state, action) => {
             state.posDetail = action.payload;
-        })
+        });
     }
 });
 
-export const {
-    setFormdata,
-    update,
-    remove
-} = posSlice.actions;
+export const { setFormdata, update, remove } = posSlice.actions;
 
 export default posSlice.reducer;

@@ -151,8 +151,8 @@ const TaxTab = () => {
                     </IconButton>
                 </Grid>
             </Grid>
-            {
-                posDetail.taxes != null && posDetail.taxes.map((taxItem, index) => {
+            {posDetail.taxes !== null &&
+                posDetail.taxes.map((taxItem, index) => {
                     return (
                         <TaxItem
                             key={index}

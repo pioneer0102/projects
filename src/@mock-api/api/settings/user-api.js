@@ -13,22 +13,23 @@ mock.onPost('/api/getAllUsers').reply(({ data }) => {
 
     if (searchText === '') {
         const startIndex = pagenumber * pagesize;
-        const endIndex = (pagenumber * pagesize + pagesize);
+        const endIndex = pagenumber * pagesize + pagesize;
         const pagedData = userDB.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
             filterSize: userDB.length
         };
         return [200, data];
-    }
-    else {
+    } else {
         const filteredData = userDB.filter((item) => {
             return (
-                (searchText === '' || item.name.toLowerCase().includes(searchText.toLowerCase()))
+                searchText === '' ||
+                item.name.toLowerCase().includes(searchText.toLowerCase())
             );
         });
         const startIndex = pagenumber * pagesize || 0;
-        const endIndex = (pagenumber * pagesize + pagesize) || filteredData.length;
+        const endIndex =
+            pagenumber * pagesize + pagesize || filteredData.length;
         const pagedData = filteredData.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
@@ -56,7 +57,7 @@ mock.onPost('/api/addUser').reply(({ data }) => {
         address: address,
         avatar: avatar
     });
-    return [200, { success: true }]
+    return [200, { success: true }];
 });
 
 mock.onPost('/api/updateUser').reply(({ data }) => {

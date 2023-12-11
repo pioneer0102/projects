@@ -70,12 +70,14 @@ function PartnerForm() {
 
     return (
         <>
-            <Breadcrumb parentUrl = "partners" parent = "Partners" child={channel} />
-            <Paper
-                className={`mx-24 my-32 px-32 py-32 ${styles.form}`}
-            >
-                <div className='flex flex-row justify-between'>
-                    <div className='flex self-center items-center justify-center'>
+            <Breadcrumb
+                parentUrl="partners"
+                parent="Partners"
+                child={channel}
+            />
+            <Paper className={`mx-24 my-32 px-32 py-32 ${styles.form}`}>
+                <div className="flex flex-row justify-between">
+                    <div className="flex self-center items-center justify-center">
                         <img
                             className={styles.logo_size}
                             src={logoSrc[channel]}

@@ -82,13 +82,24 @@ const InvForm = () => {
         history.push('/inventory-manager');
     };
     function handleChange(e) {
-        // eslint-disable-next-line no-constant-condition
-        if (e.target.files[0].type === ("image/png" || "image/jpg" || "image/jpeg" || "image/gif" || "image/tif" || "image/tiff" || "image/bmp" || "image/svg" || "image/webp")) {
+        // setImage(URL.createObjectURL(e.target.files[0]));
+        console.log(e.target.files[0].type);
+        if (
+            e.target.files[0].type === 'image/png' ||
+            e.target.files[0].type === 'image/jpg' ||
+            e.target.files[0].type === 'image/jpeg' ||
+            e.target.files[0].type === 'image/gif' ||
+            e.target.files[0].type === 'image/tif' ||
+            e.target.files[0].type === 'image/tiff' ||
+            e.target.files[0].type === 'image/bmp' ||
+            e.target.files[0].type === 'image/svg' ||
+            e.target.files[0].type === 'image/webp'
+        ) {
             setImage(URL.createObjectURL(e.target.files[0]));
         } else {
             dispatch(
                 showMessage({
-                    message: 'Select Image Correctly',
+                    message: 'Please select correct image.',
                     variant: 'error'
                 })
             );
@@ -98,13 +109,23 @@ const InvForm = () => {
 
     return (
         <>
-            <Breadcrumb parentUrl = "inventory-manager" parent = "Inventory Manager" child={routeParams.action.charAt(0).toUpperCase() + routeParams.action.slice(1)} />
-            <Paper
-                className={`mx-24 my-32 px-32 py-32 ${styles.form}`}
-            >
-                <div className='flex items-center justify-between'>
-                    <Typography className={`font-bold text-32`} color="text.secondary">
-                        {routeParams.action.charAt(0).toUpperCase() + routeParams.action.slice(1)} Item
+            <Breadcrumb
+                parentUrl="inventory-manager"
+                parent="Inventory Manager"
+                child={
+                    routeParams.action.charAt(0).toUpperCase() +
+                    routeParams.action.slice(1)
+                }
+            />
+            <Paper className={`mx-24 my-32 px-32 py-32 ${styles.form}`}>
+                <div className="flex items-center justify-between">
+                    <Typography
+                        className={'font-bold text-32'}
+                        color="text.secondary"
+                    >
+                        {routeParams.action.charAt(0).toUpperCase() +
+                            routeParams.action.slice(1)}{' '}
+                        Item
                     </Typography>
                     <Controller
                         control={control}
@@ -292,7 +313,7 @@ const InvForm = () => {
                     />
                 </div>
                 <div className="flex flex-col items-center justify-center">
-                    {image == null ? 
+                    {image === null ? (
                         <Box
                             sx={{
                                 backgroundColor: grey[300]
@@ -303,8 +324,13 @@ const InvForm = () => {
                             <FuseSvgIcon size={32} color="action">
                                 heroicons-solid:upload
                             </FuseSvgIcon>
-                        </Box> : <img className='mt-32 w-128 h-128' src={image} /> 
-                    }
+                        </Box>
+                    ) : (
+                        <img
+                            className="mt-32 w-200 h-200 object-cover"
+                            src={image}
+                        />
+                    )}
 
                     <Controller
                         name="image"
@@ -342,7 +368,7 @@ const InvForm = () => {
                         color="info"
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action == 'Add' ? t('add') : t('save')}
+                        {routeParams.action === 'Add' ? t('add') : t('save')}
                     </Button>
                 </Box>
             </Paper>
