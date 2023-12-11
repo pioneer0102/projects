@@ -1,4 +1,3 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
 import ChannelTable from './ChannelTable';
 import { useDispatch } from 'react-redux';
 import { useDeepCompareEffect } from '@fuse/hooks';
@@ -12,13 +11,12 @@ const ChannelApp = () => {
     const dispatch = useDispatch();
     useDeepCompareEffect(() => {
         dispatch(channelStatisticalData());
-      }, [dispatch]);
+    }, [dispatch]);
 
     return (
         // <QueryClientProvider client={queryClient}>
-            <ChannelTable />
+        <ChannelTable />
         // </QueryClientProvider >
-
     );
 };
 

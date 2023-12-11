@@ -13,25 +13,25 @@ import AppContext from './AppContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const withAppProviders = (Component) => (props) => {
-  const WrapperComponent = () => (
-    <GoogleOAuthProvider clientId='296932451994-bj7irbmiofbu6sifs1vqh383u3uvfva6.apps.googleusercontent.com'>
-      <AppContext.Provider
-        value={{
-          routes,
-        }}
-      >
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <Provider store={store}>
-            <StyledEngineProvider injectFirst>
-              <Component {...props} />
-            </StyledEngineProvider>
-          </Provider>
-        </LocalizationProvider>
-      </AppContext.Provider>
-    </GoogleOAuthProvider>
-  );
+    const WrapperComponent = () => (
+        <GoogleOAuthProvider clientId="296932451994-bj7irbmiofbu6sifs1vqh383u3uvfva6.apps.googleusercontent.com">
+            <AppContext.Provider
+                value={{
+                    routes
+                }}
+            >
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <Provider store={store}>
+                        <StyledEngineProvider injectFirst>
+                            <Component {...props} />
+                        </StyledEngineProvider>
+                    </Provider>
+                </LocalizationProvider>
+            </AppContext.Provider>
+        </GoogleOAuthProvider>
+    );
 
-  return WrapperComponent;
+    return WrapperComponent;
 };
 
 export default withAppProviders;

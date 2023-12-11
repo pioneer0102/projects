@@ -7,7 +7,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import Box from '@mui/system/Box';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { IconButton } from '@mui/material';
@@ -44,7 +44,7 @@ const UserForm = () => {
     const routeParams = useParams();
     const { control, handleSubmit, reset, formState } = useForm({
         mode: 'onChange',
-        resolver: yupResolver(schema),
+        resolver: yupResolver(schema)
     });
 
     const user = useSelector(selectUser);
@@ -69,14 +69,24 @@ const UserForm = () => {
         console.log(data);
         if (routeParams.action === 'add') {
             dispatch(addUser(data));
-            dispatch(showMessage({ message: "User added successfully!", variant: "success" }));
+            dispatch(
+                showMessage({
+                    message: 'User added successfully!',
+                    variant: 'success'
+                })
+            );
         }
         if (routeParams.action === 'edit') {
             dispatch(updateUser(data));
-            dispatch(showMessage({ message: "User updated successsfully!", variant: "success" }));
+            dispatch(
+                showMessage({
+                    message: 'User updated successsfully!',
+                    variant: 'success'
+                })
+            );
         }
         history.push('/settings/user-management');
-    }
+    };
 
     return (
         <>
@@ -155,7 +165,7 @@ const UserForm = () => {
                     <Controller
                         control={control}
                         name="name"
-                        defaultValue=''
+                        defaultValue=""
                         render={({ field }) => (
                             <TextField
                                 className="mt-32"
@@ -171,9 +181,11 @@ const UserForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:user-circle</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:user-circle
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
@@ -197,9 +209,11 @@ const UserForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:external-link</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:external-link
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
@@ -224,23 +238,22 @@ const UserForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:lock-open</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:lock-open
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             >
-                                <MenuItem value="">
-                                    {t('none')}
-                                </MenuItem>
-                                {
-                                    userRole.map((role, index) => {
-                                        return (
-                                            <MenuItem key={index} value={role}>
-                                                {role.charAt(0).toUpperCase() + role.slice(1)}
-                                            </MenuItem>
-                                        );
-                                    })
-                                }
+                                <MenuItem value="">{t('none')}</MenuItem>
+                                {userRole.map((role, index) => {
+                                    return (
+                                        <MenuItem key={index} value={role}>
+                                            {role.charAt(0).toUpperCase() +
+                                                role.slice(1)}
+                                        </MenuItem>
+                                    );
+                                })}
                             </TextField>
                         )}
                     />
@@ -297,28 +310,26 @@ const UserForm = () => {
                         )}
                     />
                 </div>
-                <Box
-                    className="flex items-center mt-32"
-                >
+                <Box className="flex items-center mt-32">
                     <Button
-                        className={`ml-auto rounded-md`}
+                        className={'ml-auto rounded-md'}
                         onClick={handleCancel}
                     >
                         {t('cancel')}
                     </Button>
                     <Button
-                        className={`ml-8 rounded-md`}
+                        className={'ml-8 rounded-md'}
                         variant="contained"
                         color="info"
                         disabled={_.isEmpty(dirtyFields) || !isValid}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action == "add" ? t('add') : t('save')}
+                        {routeParams.action == 'add' ? t('add') : t('save')}
                     </Button>
                 </Box>
             </Paper>
         </>
     );
-}
+};
 
 export default withReducer('inventoryApp', reducer)(UserForm);

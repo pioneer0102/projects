@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
         '& .muiltr-7en360-MuiPaper-root-MuiDialog-paper': {
             borderRadius: '6px'
         }
-    },
+    }
 }));
 
 const PartnerCard = (props) => {
@@ -47,9 +47,9 @@ const PartnerCard = (props) => {
 
     const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
-        resolver: yupResolver(schema),
+        resolver: yupResolver(schema)
     });
-    const { isValid, dirtyFields, errors } = formState;
+    const { errors } = formState;
 
     const handleOnLoad = () => setIsLoading(false);
     const handleClickOpen = useGoogleLogin({
@@ -58,9 +58,9 @@ const PartnerCard = (props) => {
     });
 
     const handleClose = () => setOpen(false);
-    const onSubmit = (data) => navigate(`/partners/add/${name}`);
+    const onSubmit = () => navigate(`/partners/add/${name}`);
 
-    const responseMessage = (response) => {
+    const responseMessage = () => {
         navigate(`/partners/add/${name}`);
     };
     const errorMessage = (error) => {
@@ -73,16 +73,28 @@ const PartnerCard = (props) => {
                 <CardHeader
                     avatar={
                         <div className={`${styles.logo_size} flex`}>
-                            <img src={logoSrc[name]} alt={name} className='flex-1 self-center' />
+                            <img
+                                src={logoSrc[name]}
+                                alt={name}
+                                className="flex-1 self-center"
+                            />
                         </div>
                     }
                     action={
-                        <IconButton aria-label="settings" onClick={() => { handleClickOpen(); navigate(`/partners/add/${name}`); } }>
+                        <IconButton
+                            aria-label="settings"
+                            onClick={() => {
+                                handleClickOpen();
+                                navigate(`/partners/add/${name}`);
+                            }}
+                        >
                             <Icon fontSize="large">add</Icon>
                         </IconButton>
                     }
                     title={
-                        <Typography className={`font-bold text-32 ${styles[name]}`}>
+                        <Typography
+                            className={`font-bold text-32 ${styles[name]}`}
+                        >
                             {name}
                         </Typography>
                     }
@@ -92,12 +104,12 @@ const PartnerCard = (props) => {
                         <CircularProgress
                             size={24}
                             sx={{
-                                color: "inherit",
+                                color: 'inherit',
                                 position: 'absolute',
                                 top: '50%',
                                 left: '50%',
                                 marginTop: '0px',
-                                marginLeft: '-12px',
+                                marginLeft: '-12px'
                             }}
                         />
                     )}
@@ -109,26 +121,42 @@ const PartnerCard = (props) => {
                         onLoad={handleOnLoad}
                     />
                     <div className={styles.overlay}>
-                        <p className={styles.text}>
-                            {detail[name]}
-                        </p>
+                        <p className={styles.text}>{detail[name]}</p>
                     </div>
                 </div>
             </Card>
-            <Dialog open={open} onClose={handleClose} className={classes.dialog}>
-                <DialogTitle className='flex flex-col'>
-                    <div className={`${styles.logo_size} flex self-center justify-center mt-16`}>
-                        <img src={logoSrc[name]} alt={name} className='flex-1' />
-                        <Typography className={`font-bold text-32 mx-8 ${styles[name]}`}>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                className={classes.dialog}
+            >
+                <DialogTitle className="flex flex-col">
+                    <div
+                        className={`${styles.logo_size} flex self-center justify-center mt-16`}
+                    >
+                        <img
+                            src={logoSrc[name]}
+                            alt={name}
+                            className="flex-1"
+                        />
+                        <Typography
+                            className={`font-bold text-32 mx-8 ${styles[name]}`}
+                        >
                             {name}
                         </Typography>
                     </div>
-                    <Typography className={`self-center font-semibold text-12 mt-16`}>
+                    <Typography
+                        className={'self-center font-semibold text-12 mt-16'}
+                    >
                         Welcome to {name} !
                     </Typography>
                 </DialogTitle>
-                <DialogContent className='max-w-400'>
-                    <GoogleLogin className='w-full' onSuccess={responseMessage} onError={errorMessage} />
+                <DialogContent className="max-w-400">
+                    <GoogleLogin
+                        className="w-full"
+                        onSuccess={responseMessage}
+                        onError={errorMessage}
+                    />
                     <Controller
                         name="email"
                         control={control}
@@ -143,7 +171,8 @@ const PartnerCard = (props) => {
                                 helperText={errors?.email?.message}
                                 variant="outlined"
                                 required
-                                fullWidth />
+                                fullWidth
+                            />
                         )}
                     />
                     <Controller
@@ -160,11 +189,12 @@ const PartnerCard = (props) => {
                                 helperText={errors?.password?.message}
                                 variant="outlined"
                                 required
-                                fullWidth />
+                                fullWidth
+                            />
                         )}
                     />
                 </DialogContent>
-                <DialogActions className='flex flex-col'>
+                <DialogActions className="flex flex-col">
                     <Box className="self-center mx-16 mb-24 mt-16">
                         <Button
                             className={`font-semibold ${styles.button}`}
@@ -173,14 +203,15 @@ const PartnerCard = (props) => {
                             aria-label="Sign in"
                             disabled
                             type="submit"
-                            onClick={handleSubmit(onSubmit)}>
+                            onClick={handleSubmit(onSubmit)}
+                        >
                             {t('partners.login')}
                         </Button>
                     </Box>
                 </DialogActions>
             </Dialog>
         </>
-    )
-}
+    );
+};
 
 export default PartnerCard;

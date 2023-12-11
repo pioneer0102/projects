@@ -2,29 +2,25 @@ const userTableHeader = [
     {
         id: 'name',
         align: 'left',
-        label: 'Name',
+        label: 'Name'
     },
     {
         id: 'url',
         align: 'left',
-        label: 'Email',
+        label: 'Email'
     },
     {
         id: 'role',
         align: 'left',
-        label: 'Role',
+        label: 'Role'
     },
     {
         id: 'action',
         align: 'left',
-        label: 'Action',
-    },
+        label: 'Action'
+    }
 ];
 
-const userRole = [
-    "store owner",
-    "employee",
-    "customer"
-]
+const userRole = ['store owner', 'employee', 'customer'];
 
-export { userTableHeader, userRole }
+export { userTableHeader, userRole };

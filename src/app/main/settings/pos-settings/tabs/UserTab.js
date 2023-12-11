@@ -1,5 +1,5 @@
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import styles from '../../style.module.scss';
@@ -19,7 +19,7 @@ const UserTab = (props) => {
     const { t } = useTranslation();
     const handleChange = (type, value) => {
         dispatch(setFormdata({ type: type, value: value }));
-    }
+    };
 
     return (
         <Paper
@@ -42,19 +42,15 @@ const UserTab = (props) => {
                             <InputAdornment position="start">
                                 <FuseSvgIcon size={24}>heroicons-outline:globe-alt</FuseSvgIcon>
                             </InputAdornment>
-                        ),
+                        )
                     }}
                 >
-                    <MenuItem value="">
-                        {t('none')}
-                    </MenuItem>
-                    {
-                        posType.map((type, index) => (
-                            <MenuItem key={index} value={type}>
-                                {type}
-                            </MenuItem>
-                        ))
-                    }
+                    <MenuItem value="">{t('none')}</MenuItem>
+                    {posType.map((type, index) => (
+                        <MenuItem key={index} value={type}>
+                            {type}
+                        </MenuItem>
+                    ))}
                 </TextField>
                 <TextField
                     className="mt-32"
@@ -71,7 +67,7 @@ const UserTab = (props) => {
                             <InputAdornment position="start">
                                 <FuseSvgIcon size={24}>heroicons-outline:user-circle</FuseSvgIcon>
                             </InputAdornment>
-                        ),
+                        )
                     }}
                 />
                 <TextField
@@ -88,7 +84,7 @@ const UserTab = (props) => {
                             <InputAdornment position="start">
                                 <FuseSvgIcon size={24}>heroicons-outline:key</FuseSvgIcon>
                             </InputAdornment>
-                        ),
+                        )
                     }}
                 />
                 <TextField
@@ -105,12 +101,12 @@ const UserTab = (props) => {
                             <InputAdornment position="start">
                                 <FuseSvgIcon size={24}>heroicons-outline:currency-dollar</FuseSvgIcon>
                             </InputAdornment>
-                        ),
+                        )
                     }}
                 />
-            </div >
-        </Paper >
+            </div>
+        </Paper>
     );
-}
+};
 
 export default UserTab;

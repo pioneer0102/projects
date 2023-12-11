@@ -6,8 +6,8 @@ const OrdersApp = lazy(() => import('./index'));
 const OrdersConfig = {
     settings: {
         layout: {
-            config: {},
-        },
+            config: {}
+        }
     },
     routes: [
         {

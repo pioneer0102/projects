@@ -1,8 +1,4 @@
-import {
-    createAsyncThunk,
-    createEntityAdapter,
-    createSlice,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const channelStatisticalData = createAsyncThunk(
@@ -10,12 +6,17 @@ export const channelStatisticalData = createAsyncThunk(
     async () => {
         const response = await axios.get('/api/getchanneldata');
         return response.data;
-    });
+    }
+);
 
-export const selectOrderStatistics = ({ insightsApp }) => insightsApp.channel.orderStatistics;
-export const selectSaleStatistics = ({ insightsApp }) => insightsApp.channel.saleStatistics;
-export const selectSaleTotalByChannel = ({ insightsApp }) => insightsApp.channel.saleTotalByChannel;
-export const selectOrderTotalByChannel = ({ insightsApp }) => insightsApp.channel.orderTotalByChannel;
+export const selectOrderStatistics = ({ insightsApp }) =>
+    insightsApp.channel.orderStatistics;
+export const selectSaleStatistics = ({ insightsApp }) =>
+    insightsApp.channel.saleStatistics;
+export const selectSaleTotalByChannel = ({ insightsApp }) =>
+    insightsApp.channel.saleTotalByChannel;
+export const selectOrderTotalByChannel = ({ insightsApp }) =>
+    insightsApp.channel.orderTotalByChannel;
 
 const channelSlice = createSlice({
     name: 'insightsApp/channel',

@@ -7,33 +7,43 @@ import useThemeMediaQuery from '@fuse/hooks/useThemeMediaQuery';
 import { navbarCloseMobile } from 'app/store/fuse/navbarSlice';
 
 function Navigation(props) {
-  const navigation = useSelector(selectNavigation);
-  const isMobile = useThemeMediaQuery((theme) => theme.breakpoints.down('lg'));
-
-  const dispatch = useDispatch();
-
-  return useMemo(() => {
-    function handleItemClick(item) {
-      if (isMobile) {
-        dispatch(navbarCloseMobile());
-      }
-    }
-
-    return (
-      <FuseNavigation
-        className={clsx('navigation', props.className)}
-        navigation={navigation}
-        layout={props.layout}
-        dense={props.dense}
-        active={props.active}
-        onItemClick={handleItemClick}
-      />
+    const navigation = useSelector(selectNavigation);
+    const isMobile = useThemeMediaQuery((theme) =>
+        theme.breakpoints.down('lg')
     );
-  }, [dispatch, isMobile, navigation, props.active, props.className, props.dense, props.layout]);
+
+    const dispatch = useDispatch();
+
+    return useMemo(() => {
+        function handleItemClick() {
+            if (isMobile) {
+                dispatch(navbarCloseMobile());
+            }
+        }
+
+        return (
+            <FuseNavigation
+                className={clsx('navigation', props.className)}
+                navigation={navigation}
+                layout={props.layout}
+                dense={props.dense}
+                active={props.active}
+                onItemClick={handleItemClick}
+            />
+        );
+    }, [
+        dispatch,
+        isMobile,
+        navigation,
+        props.active,
+        props.className,
+        props.dense,
+        props.layout
+    ]);
 }
 
 Navigation.defaultProps = {
-  layout: 'vertical',
+    layout: 'vertical'
 };
 
 export default memo(Navigation);

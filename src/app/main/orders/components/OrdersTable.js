@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import history from '@history';
-import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
-import { useQuery } from "react-query";
-import { Button } from "@mui/material";
-import Paper from "@mui/material/Paper";
+import { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
+import { useQuery } from 'react-query';
+import { Button } from '@mui/material';
+import Paper from '@mui/material/Paper';
 import { useDispatch } from 'react-redux';
 import { Typography } from "@mui/material";
 import Popover from "@mui/material/Popover";
@@ -15,7 +15,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { makeStyles } from '@mui/styles';
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 import {
     setPagenumber,
     setPagesize,
@@ -27,7 +27,7 @@ import {
     selectDbSize,
     selectFilterSize,
     selectFilter
-} from "../store/ordersSlice";
+} from '../store/ordersSlice';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { OrdersListHeader } from 'src/app/model/OrdersModel';
 import { useTranslation } from 'react-i18next';
@@ -36,12 +36,20 @@ import styles from '../style.module.scss';
 const useStyles = makeStyles(() => ({
     popover: {
         '& .MuiPaper-elevation8': {
-            boxShadow: '3px 3px 5px 1px rgba(200, 200, 200, 0.15)' /* Customize the boxShadow here */
+            boxShadow:
+                '3px 3px 5px 1px rgba(200, 200, 200, 0.15)' /* Customize the boxShadow here */
         }
-    },
+    }
 }));
 
-const options = { month: 'numeric', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
+const options = {
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+};
 
 const OrdersTable = () => {
     const dispatch = useDispatch();
@@ -57,15 +65,19 @@ const OrdersTable = () => {
     const dbSize = useSelector(selectDbSize);
     const filterSize = useSelector(selectFilterSize);
 
-    const { data, isLoading, isError } = useQuery(['ordersList', searchData], async () => {
-        try {
-            const ordersData = await getOrders(searchData);
-            console.log(ordersData);
-            dispatch(setOrders(ordersData));
-        } catch (error) {
-            console.log(error)
+    const { data, isLoading, isError } = useQuery(
+        ['ordersList', searchData],
+        async () => {
+            console.log(data);
+            try {
+                const ordersData = await getOrders(searchData);
+                console.log(ordersData);
+                dispatch(setOrders(ordersData));
+            } catch (error) {
+                console.log(error);
+            }
         }
-    });
+    );
 
     const showDetail = (item) => history.push(`/orders/${item.id}`);
 
@@ -89,7 +101,7 @@ const OrdersTable = () => {
             channel: filter.channel,
             status: filter.status,
             pageNumber: page,
-            pageSize: rowsPerPage,
+            pageSize: rowsPerPage
         };
 
         setSearchData(database);

@@ -6,10 +6,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import Box from '@mui/system/Box';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Typography } from "@mui/material";
+import { Typography } from '@mui/material';
 import styles from './style.module.scss';
 import history from '@history';
 import { useTranslation } from 'react-i18next';
@@ -35,11 +35,10 @@ const schema = yup.object().shape({
     upc: yup.string().required('You must enter a email'),
     quantity: yup.string().required('You must enter a phone Number'),
     image: yup.string().required('You must select image'),
-    name: yup.string().required('You must enter a name'),
+    name: yup.string().required('You must enter a name')
 });
 
 const InvForm = () => {
-
     const [image, setImage] = useState(null);
 
     const dispatch = useDispatch();
@@ -48,13 +47,12 @@ const InvForm = () => {
     const inventory = useSelector(selectInventory);
     const { control, handleSubmit, reset, formState } = useForm({
         mode: 'onChange',
-        resolver: yupResolver(schema),
+        resolver: yupResolver(schema)
     });
 
     useEffect(() => {
         if (routeParams.action === 'edit') {
             dispatch(getInventoryById(routeParams.id));
-
         }
         if (routeParams.action === 'add') {
             dispatch(initializeInventory({}));
@@ -67,14 +65,14 @@ const InvForm = () => {
         setImage(inventory.image);
     }, [inventory, reset]);
 
-    const { isValid, dirtyFields, errors } = formState;
+    const { errors } = formState;
 
     const handleCancel = () => history.push('/inventory-manager');
     const onSubmit = (data) => {
         const formData = {
             ...data,
             image: image
-        }
+        };
         if (routeParams.action === 'add') {
             dispatch(addInventory(formData));
         }
@@ -82,13 +80,18 @@ const InvForm = () => {
             dispatch(updateInventory(formData));
         }
         history.push('/inventory-manager');
-    }
+    };
     function handleChange(e) {
         // eslint-disable-next-line no-constant-condition
         if (e.target.files[0].type === ("image/png" || "image/jpg" || "image/jpeg" || "image/gif" || "image/tif" || "image/tiff" || "image/bmp" || "image/svg" || "image/webp")) {
             setImage(URL.createObjectURL(e.target.files[0]));
         } else {
-            dispatch(showMessage({ message: "Select Image Correctly", variant: "error" }));
+            dispatch(
+                showMessage({
+                    message: 'Select Image Correctly',
+                    variant: 'error'
+                })
+            );
             setImage({});
         }
     }
@@ -113,20 +116,22 @@ const InvForm = () => {
                                 className={`self-end ${styles.backButton}`}
                                 control={
                                     <Checkbox
-                                        color='info'
+                                        color="info"
                                         checked={field.value}
-                                        onChange={(e) => field.onChange(e.target.checked)}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.checked)
+                                        }
                                     />
                                 }
                             />
                         )}
                     />
                 </div>
-                <div className='grid grid-cols-2 gap-16'>
+                <div className="grid grid-cols-2 gap-16">
                     <Controller
                         control={control}
                         name="name"
-                        defaultValue=''
+                        defaultValue=""
                         render={({ field }) => (
                             <TextField
                                 className="mt-32"
@@ -142,9 +147,11 @@ const InvForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:cube</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:cube
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
@@ -152,7 +159,7 @@ const InvForm = () => {
                     <Controller
                         control={control}
                         name="category"
-                        defaultValue=''
+                        defaultValue=""
                         render={({ field }) => (
                             <TextField
                                 className="mt-32"
@@ -168,9 +175,11 @@ const InvForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:cube</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:cube
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
@@ -178,7 +187,7 @@ const InvForm = () => {
                     <Controller
                         control={control}
                         name="price"
-                        defaultValue=''
+                        defaultValue=""
                         render={({ field }) => (
                             <TextField
                                 className="mt-32"
@@ -193,9 +202,11 @@ const InvForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:currency-dollar</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:currency-dollar
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
@@ -203,7 +214,7 @@ const InvForm = () => {
                     <Controller
                         control={control}
                         name="tax"
-                        defaultValue=''
+                        defaultValue=""
                         render={({ field }) => (
                             <TextField
                                 className="mt-32"
@@ -218,9 +229,11 @@ const InvForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-outline:currency-dollar</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-outline:currency-dollar
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
@@ -228,7 +241,7 @@ const InvForm = () => {
                     <Controller
                         control={control}
                         name="upc"
-                        defaultValue=''
+                        defaultValue=""
                         render={({ field }) => (
                             <TextField
                                 {...field}
@@ -242,9 +255,11 @@ const InvForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:key</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:key
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
@@ -252,7 +267,7 @@ const InvForm = () => {
                     <Controller
                         control={control}
                         name="quantity"
-                        defaultValue=''
+                        defaultValue=""
                         render={({ field }) => (
                             <TextField
                                 {...field}
@@ -266,34 +281,35 @@ const InvForm = () => {
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
-                                            <FuseSvgIcon size={24}>heroicons-solid:database</FuseSvgIcon>
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:database
+                                            </FuseSvgIcon>
                                         </InputAdornment>
-                                    ),
+                                    )
                                 }}
                             />
                         )}
                     />
-
                 </div>
-                <div className='flex flex-col items-center justify-center'>
-
-                    {image == null ?
+                <div className="flex flex-col items-center justify-center">
+                    {image == null ? 
                         <Box
                             sx={{
-                                backgroundColor: grey[300],
+                                backgroundColor: grey[300]
                             }}
                             component="label"
                             className="flex items-center justify-center relative w-128 h-128 mx-12 mt-32 overflow-hidden cursor-pointer shadow hover:shadow-lg"
-                        ><FuseSvgIcon size={32} color="action">
+                        >
+                            <FuseSvgIcon size={32} color="action">
                                 heroicons-solid:upload
                             </FuseSvgIcon>
-                        </Box> : <img className='mt-32 w-128 h-128' src={image} />
+                        </Box> : <img className='mt-32 w-128 h-128' src={image} /> 
                     }
 
                     <Controller
                         name="image"
                         control={control}
-                        defaultValue=''
+                        defaultValue=""
                         render={() => (
                             <>
                                 <Button
@@ -303,16 +319,17 @@ const InvForm = () => {
                                     className="mx-12 mt-32 rounded overflow-hidden cursor-pointer shadow hover:shadow-lg"
                                 >
                                     {t('inventory.upload')}
-                                    <input className="hidden" type="file" onChange={handleChange} />
+                                    <input
+                                        className="hidden"
+                                        type="file"
+                                        onChange={handleChange}
+                                    />
                                 </Button>
                             </>
                         )}
                     />
-
                 </div>
-                <Box
-                    className="flex items-center mt-32"
-                >
+                <Box className="flex items-center mt-32">
                     <Button
                         className={`ml-auto ${styles.backButton}`}
                         onClick={handleCancel}
@@ -325,12 +342,12 @@ const InvForm = () => {
                         color="info"
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action == "Add" ? t('add') : t('save')}
+                        {routeParams.action == 'Add' ? t('add') : t('save')}
                     </Button>
                 </Box>
             </Paper>
         </>
     );
-}
+};
 
 export default withReducer('inventoryApp', reducer)(InvForm);

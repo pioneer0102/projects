@@ -1,12 +1,12 @@
 import history from '@history';
-import { useQuery } from "react-query";
-import Paper from "@mui/material/Paper";
+import { useQuery } from 'react-query';
+import Paper from '@mui/material/Paper';
 import { useDispatch } from 'react-redux';
-import { Typography } from "@mui/material";
-import { TablePagination } from "@mui/material";
+import { Typography } from '@mui/material';
+import { TablePagination } from '@mui/material';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { IconButton } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
@@ -58,7 +58,7 @@ const UserTable = () => {
             const result = await getAllUsers(filter);
             dispatch(setUserEntityAdapter(result));
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     });
 
@@ -93,19 +93,29 @@ const UserTable = () => {
 
     return (
         <>
-            {
-                isLoading ?
-                    <FuseLoading />
-                    :
-                    isError ?
+            {isLoading ? (
+                <FuseLoading />
+            ) : isError ? (
+                <div className="flex flex-1 items-center justify-center h-full">
+                    <Typography color="text.secondary" variant="h5">
+                        {t('nodata')}
+                    </Typography>
+                </div>
+            ) : (
+                <Paper
+                    className={`flex flex-col py-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
+                    sx={{ boxShadow: 'none', borderRadius: 1 }}
+                >
+                    {allUsers.length == 0 ? (
                         <div className="flex flex-1 items-center justify-center h-full">
                             <Typography color="text.secondary" variant="h5">
-                                {t('nodata')}
+                                {t('noData')}
                             </Typography>
                         </div>
+                    )
                         :
-                        <Paper
-                            className={`flex flex-col py-24 px-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
+                        (<Paper
+                            className={`flex flex-col py-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
                             sx={{ boxShadow: 'none', borderRadius: 1 }}>
                             {
                                 allUsers.length == 0 ?
@@ -259,6 +269,10 @@ const UserTable = () => {
                                     </>
                             }
                         </Paper>
+                        )
+                    }
+                </Paper>
+            )
             }
         </>
     );

@@ -6,8 +6,8 @@ const InventoryApp = lazy(() => import('./index'));
 const InvManCofig = {
     settings: {
         layout: {
-            config: {},
-        },
+            config: {}
+        }
     },
     routes: [
         {

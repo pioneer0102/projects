@@ -1,9 +1,5 @@
-import {
-    createAsyncThunk,
-    createEntityAdapter,
-    createSlice,
-} from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const categoryStatisticalData = createAsyncThunk(
     'insightsApp/category/categoryStatisticalData',
@@ -36,6 +32,5 @@ const categorySlice = createSlice({
         });
     }
 });
-
 
 export default categorySlice.reducer;

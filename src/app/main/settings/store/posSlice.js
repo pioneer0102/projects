@@ -3,7 +3,6 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
-import _ from '@lodash';
 
 export const getPos = createAsyncThunk(
     'settingsApp/pos/getPos', async () => {
@@ -12,7 +11,8 @@ export const getPos = createAsyncThunk(
     }
 );
 
-export const updatePos = createAsyncThunk('settingsApp/pos/updatePos',
+export const updatePos = createAsyncThunk(
+    'settingsApp/pos/updatePos',
     async (formData) => {
         const response = await axios.post('/api/updatePos', formData);
         return response.data;

@@ -6,8 +6,8 @@ import Categories from './categories/Categories';
 const InsightsConfig = {
     settings: {
         layout: {
-            config: {},
-        },
+            config: {}
+        }
     },
     routes: [
         {

@@ -1,26 +1,31 @@
 import { Box } from '@mui/system';
+import Button from '@mui/material/Button';
 import { Paper } from '@mui/material';
 import Input from '@mui/material/Input';
-import styles from '../../style.module.scss';
+import styles from '../style.module.scss';
 import { useTranslation } from 'react-i18next';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { selectFilter, setFilter } from '../../store/userSlice';
+import { setFilter, selectFilter } from '../store/posSlice';
 
-const UserSearchFilter = () => {
+const PosSearchFilter = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const filter = useSelector(selectFilter);
 
     const handleChange = (type, value) => {
-        dispatch(setFilter({ type: type, value: value }));
-        dispatch(setFilter({ type: 'page', value: 0 }));
+        const dispatchData = {
+            type: type,
+            value: value
+        };
+        dispatch(setFilter(dispatchData));
     };
-    const handleAdd = () => navigate('/settings/user-management/add/0');
+
+    const handleAdd = () => {
+        navigate('/settings/pos-settings/add/0');
+    };
 
     return (
         <>
@@ -47,7 +52,7 @@ const UserSearchFilter = () => {
                         variant="contained"
                         color="info"
                         onClick={handleAdd}
-                        className={`mx-8 my-8 rounded-md ${styles.backButton}`}
+                        className={'mx-8 my-8 rounded-md'}
                     >
                         <FuseSvgIcon size={24}>
                             heroicons-solid:plus
@@ -60,4 +65,4 @@ const UserSearchFilter = () => {
     );
 };
 
-export default UserSearchFilter;
+export default PosSearchFilter;

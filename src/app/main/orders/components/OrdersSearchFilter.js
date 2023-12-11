@@ -12,20 +12,16 @@ import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
 import { Status, SubTotals } from 'src/app/model/OrdersModel';
 import { Channels } from 'src/app/model/Global';
-import { Typography } from "@mui/material";
+import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 
 import {
-    setSubtotal,
-    setChannel,
-    setStatus,
-    setOrderSearchText,
     setPagenumber,
     submit,
     selectFilter,
@@ -37,7 +33,7 @@ const useStyles = makeStyles(() => ({
         '& .muiltr-7en360-MuiPaper-root-MuiDialog-paper': {
             borderRadius: '6px'
         }
-    },
+    }
 }));
 
 const OrdersSearchFilter = () => {
@@ -50,32 +46,31 @@ const OrdersSearchFilter = () => {
     const filter = useSelector(selectFilter);
 
     const handleChange = (type, value) => {
-        dispatch(setFilter({type: type, value: value}));
+        dispatch(setFilter({ type: type, value: value }));
         dispatch(setPagenumber(0));
     };
     const handleOpenDialog = () => {
         setDialogOpen(true);
-    }
+    };
     const handleClose = () => {
         setDialogOpen(false);
-    }
+    };
     const handleSubmit = () => {
         const filterData = {
             subtotal: filter.subtotal,
             channel: filter.channel,
             status: filter.status
-        }
+        };
         dispatch(submit(filterData));
         setPagenumber(0);
         setDialogOpen(false);
-    }
+    };
 
     return (
         <>
             <Paper className={`px-16 py-8 border-b-1 mt-32 mx-24 ${styles.paper}`}>
                 <div className="flex md:flex-row flex-col justify-between sm:space-y-0 mt-8 -mx-8">
-                    <Box
-                        className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
+                    <Box className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
                         <FuseSvgIcon color="action" size={20}>
                             heroicons-outline:search
                         </FuseSvgIcon>
@@ -85,7 +80,9 @@ const OrdersSearchFilter = () => {
                             disableUnderline
                             fullWidth
                             value={filter.searchText}
-                            onChange={(event) => handleChange("searchText", event.target.value)}
+                            onChange={(event) =>
+                                handleChange('searchText', event.target.value)
+                            }
                         />
                     </Box>
                     <Button
@@ -97,7 +94,7 @@ const OrdersSearchFilter = () => {
                         <FuseSvgIcon className="text-gray-500" size={24}>
                             material-solid:filter_alt
                         </FuseSvgIcon>
-                        <span className='mx-4'> {t('searchFilter')}</span>
+                        <span className="mx-4"> {t('searchFilter')}</span>
                     </Button>
                 </div>
             </Paper>
@@ -109,11 +106,14 @@ const OrdersSearchFilter = () => {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle>
-                    <Typography className={`font-semibold text-32 mt-16 ml-8`}>
+                    <Typography className={'font-semibold text-32 mt-16 ml-8'}>
                         <span>{t('searchFilter')}</span>
                     </Typography>
                 </DialogTitle>
-                <DialogContent className='flex flex-col' sx={{ width: '450px' }}>
+                <DialogContent
+                    className="flex flex-col"
+                    sx={{ width: '450px' }}
+                >
                     <FormControl sx={{ m: 1 }}>
                         <InputLabel
                             id="select-small-label"
@@ -122,7 +122,9 @@ const OrdersSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{t('orders.subTotal')}</InputLabel>
+                        >
+                            {t('orders.subTotal')}
+                        </InputLabel>
                         <Select
                             labelId="select-small-label"
                             id="select-small"
@@ -130,29 +132,28 @@ const OrdersSearchFilter = () => {
                             label="Subtotal"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
+                                    borderColor: '#e2e8f0'
                                 },
-                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
-                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                    {
+                                        borderColor: '#e2e8f0'
+                                    },
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
-                                },
+                                    borderColor: '#e2e8f0'
+                                }
                             }}
-                            onChange={(event) => handleChange("subtotal", event.target.value)}
-                        >
-                            <MenuItem value="">
-                                {t('none')}
-                            </MenuItem>
-                            {
-                                SubTotals.map((subTotal, index) => {
-                                    return (
-                                        <MenuItem key={index} value={index}>
-                                            {subTotal}
-                                        </MenuItem>
-                                    );
-                                })
+                            onChange={(event) =>
+                                handleChange('subtotal', event.target.value)
                             }
+                        >
+                            <MenuItem value="">{t('none')}</MenuItem>
+                            {SubTotals.map((subTotal, index) => {
+                                return (
+                                    <MenuItem key={index} value={index}>
+                                        {subTotal}
+                                    </MenuItem>
+                                );
+                            })}
                         </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1 }}>
@@ -163,7 +164,9 @@ const OrdersSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{t('channel')}</InputLabel>
+                        >
+                            {t('channel')}
+                        </InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
@@ -171,29 +174,28 @@ const OrdersSearchFilter = () => {
                             label="Channel"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
+                                    borderColor: '#e2e8f0'
                                 },
-                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
-                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                    {
+                                        borderColor: '#e2e8f0'
+                                    },
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
-                                },
+                                    borderColor: '#e2e8f0'
+                                }
                             }}
-                            onChange={(event) => handleChange("channel", event.target.value)}
-                        >
-                            <MenuItem value="">
-                                {t('none')}
-                            </MenuItem>
-                            {
-                                Channels.map((channel, index) => {
-                                    return (
-                                        <MenuItem key={index} value={channel}>
-                                            {channel}
-                                        </MenuItem>
-                                    );
-                                })
+                            onChange={(event) =>
+                                handleChange('channel', event.target.value)
                             }
+                        >
+                            <MenuItem value="">{t('none')}</MenuItem>
+                            {Channels.map((channel, index) => {
+                                return (
+                                    <MenuItem key={index} value={channel}>
+                                        {channel}
+                                    </MenuItem>
+                                );
+                            })}
                         </Select>
                     </FormControl>
                     <FormControl sx={{ m: 1 }}>
@@ -204,7 +206,9 @@ const OrdersSearchFilter = () => {
                                     color: 'grey.600'
                                 }
                             }}
-                        >{t('status')}</InputLabel>
+                        >
+                            {t('status')}
+                        </InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
@@ -212,33 +216,35 @@ const OrdersSearchFilter = () => {
                             label="Status"
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
+                                    borderColor: '#e2e8f0'
                                 },
-                                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
-                                },
+                                '&.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                    {
+                                        borderColor: '#e2e8f0'
+                                    },
                                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                                    borderColor: '#e2e8f0',
-                                },
+                                    borderColor: '#e2e8f0'
+                                }
                             }}
-                            onChange={(event) => handleChange("status", event.target.value)}
-                        >
-                            <MenuItem value="">
-                                {t('none')}
-                            </MenuItem>
-                            {
-                                Status.map((status, index) => {
-                                    return (
-                                        <MenuItem key={index} value={status.toLowerCase()}>
-                                            {status.toUpperCase()}
-                                        </MenuItem>
-                                    );
-                                })
+                            onChange={(event) =>
+                                handleChange('status', event.target.value)
                             }
+                        >
+                            <MenuItem value="">{t('none')}</MenuItem>
+                            {Status.map((status, index) => {
+                                return (
+                                    <MenuItem
+                                        key={index}
+                                        value={status.toLowerCase()}
+                                    >
+                                        {status.toUpperCase()}
+                                    </MenuItem>
+                                );
+                            })}
                         </Select>
                     </FormControl>
                 </DialogContent>
-                <DialogActions className='mx-24 mb-24'>
+                <DialogActions className="mx-24 mb-24">
                     <Button
                         variant="outline"
                         color="secondary"
