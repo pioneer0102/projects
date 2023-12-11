@@ -22,7 +22,6 @@ import {
     OrderDetailCustomHeader
 } from 'src/app/model/OrdersModel';
 import { useTranslation } from 'react-i18next';
-import styles from './style.module.scss';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Popover from '@mui/material/Popover';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -626,7 +625,7 @@ const OrderDetail = () => {
                             variant="outline"
                             color="secondary"
                             onClick={handleClose}
-                            className={styles.backButton}
+                            className="rounded-md"
                         >
                             <span>{t('cancel')}</span>
                         </Button>
@@ -634,7 +633,7 @@ const OrderDetail = () => {
                             variant="contained"
                             color="secondary"
                             onClick={handleRemoveItem}
-                            className={styles.backButton}
+                            className="rounded-md"
                         >
                             <span>{t('ok')}</span>
                         </Button>

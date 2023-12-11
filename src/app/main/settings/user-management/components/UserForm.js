@@ -15,6 +15,7 @@ import { Avatar } from '@mui/material';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import styles from '../../style.module.scss';
 import history from '@history';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -46,6 +47,8 @@ const UserForm = () => {
         mode: 'onChange',
         resolver: yupResolver(schema)
     });
+
+    const [show, setShow] = useState(false);
 
     const user = useSelector(selectUser);
 
@@ -87,6 +90,12 @@ const UserForm = () => {
         }
         history.push('/settings/user-management');
     };
+    const handleUploadShow = () => {
+        setShow(true);
+    };
+    const handleUploadHidden = () => {
+        setShow(false);
+    };
 
     return (
         <>
@@ -98,7 +107,9 @@ const UserForm = () => {
                     routeParams.action.slice(1)
                 }
             />
-            <Paper className={`mx-24 my-32 px-40 pb-32 ${styles.form}`}>
+            <Paper
+                className={`flex flex-col mx-24 my-32 px-40 pb-32 ${styles.form}`}
+            >
                 <Controller
                     control={control}
                     name="avatar"
@@ -108,76 +119,85 @@ const UserForm = () => {
                                 borderWidth: 4,
                                 borderStyle: 'solid'
                             }}
-                            className="relative flex items-center justify-center w-128 h-128 rounded-full overflow-hidden mt-32"
+                            className="relative self-center flex items-center justify-center w-128 h-128 rounded-full overflow-hidden mt-32"
+                            onMouseOver={handleUploadShow}
+                            onMouseOut={handleUploadHidden}
                         >
-                            <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
-                            <div className="absolute inset-0 flex items-center justify-center z-20">
-                                <div>
-                                    <label
-                                        htmlFor="button-avatar"
-                                        className="flex p-8 cursor-pointer"
-                                    >
-                                        <input
-                                            accept="image/*"
-                                            className="hidden"
-                                            id="button-avatar"
-                                            type="file"
-                                            onChange={async (e) => {
-                                                function readFileAsync() {
-                                                    return new Promise(
-                                                        (resolve, reject) => {
-                                                            const file =
-                                                                e.target
-                                                                    .files[0];
-                                                            if (!file) {
-                                                                return;
-                                                            }
-                                                            const reader =
-                                                                new FileReader();
+                            {show && (
+                                <>
+                                    <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
+                                    <div className="absolute inset-0 flex items-center justify-center z-20">
+                                        <div>
+                                            <label
+                                                htmlFor="button-avatar"
+                                                className="flex p-8 cursor-pointer"
+                                            >
+                                                <input
+                                                    accept="image/*"
+                                                    className="hidden"
+                                                    id="button-avatar"
+                                                    type="file"
+                                                    onChange={async (e) => {
+                                                        function readFileAsync() {
+                                                            return new Promise(
+                                                                (
+                                                                    resolve,
+                                                                    reject
+                                                                ) => {
+                                                                    const file =
+                                                                        e.target
+                                                                            .files[0];
+                                                                    if (!file) {
+                                                                        return;
+                                                                    }
+                                                                    const reader =
+                                                                        new FileReader();
 
-                                                            reader.onload =
-                                                                () => {
-                                                                    resolve(
-                                                                        `data:${
-                                                                            file.type
-                                                                        };base64,${btoa(
-                                                                            reader.result
-                                                                        )}`
+                                                                    reader.onload =
+                                                                        () => {
+                                                                            resolve(
+                                                                                `data:${
+                                                                                    file.type
+                                                                                };base64,${btoa(
+                                                                                    reader.result
+                                                                                )}`
+                                                                            );
+                                                                        };
+
+                                                                    reader.onerror =
+                                                                        reject;
+
+                                                                    reader.readAsBinaryString(
+                                                                        file
                                                                     );
-                                                                };
-
-                                                            reader.onerror =
-                                                                reject;
-
-                                                            reader.readAsBinaryString(
-                                                                file
+                                                                }
                                                             );
                                                         }
-                                                    );
-                                                }
 
-                                                const newImage =
-                                                    await readFileAsync();
-                                                onChange(newImage);
-                                            }}
-                                        />
-                                        <FuseSvgIcon className="text-white">
-                                            heroicons-outline:camera
-                                        </FuseSvgIcon>
-                                    </label>
-                                </div>
-                                <div>
-                                    <IconButton
-                                        onClick={() => {
-                                            onChange('');
-                                        }}
-                                    >
-                                        <FuseSvgIcon className="text-white">
-                                            heroicons-outline:trash
-                                        </FuseSvgIcon>
-                                    </IconButton>
-                                </div>
-                            </div>
+                                                        const newImage =
+                                                            await readFileAsync();
+                                                        onChange(newImage);
+                                                    }}
+                                                />
+                                                <FuseSvgIcon className="text-white">
+                                                    heroicons-outline:camera
+                                                </FuseSvgIcon>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <IconButton
+                                                onClick={() => {
+                                                    onChange('');
+                                                }}
+                                            >
+                                                <FuseSvgIcon className="text-white">
+                                                    heroicons-outline:trash
+                                                </FuseSvgIcon>
+                                            </IconButton>
+                                        </div>
+                                    </div>
+                                </>
+                            )}
                             <Avatar
                                 sx={{
                                     backgroundColor: 'background.default',
@@ -356,7 +376,7 @@ const UserForm = () => {
                         disabled={_.isEmpty(dirtyFields) || !isValid}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action == 'add' ? t('add') : t('save')}
+                        {routeParams.action === 'add' ? t('add') : t('save')}
                     </Button>
                 </Box>
             </Paper>

@@ -144,7 +144,7 @@
             "id": 4,
             "customer": "John Doe",
             "subtotal": "2500",
-            "channel": "DoorDash",
+            "channel": "Uber",
             "tax": 100,
             "tip": 50,
             "history": [
@@ -191,7 +191,7 @@
             "id": 5,
             "customer": "John Doe",
             "subtotal": "2500",
-            "channel": "DoorDash",
+            "channel": "Uber",
             "tax": 100,
             "tip": 50,
             "history": [
@@ -339,7 +339,7 @@
             "id": 9,
             "customer": "John Doe",
             "subtotal": "2500",
-            "channel": "DoorDash",
+            "channel": "GrubHub",
             "tax": 100,
             "tip": 50,
             "history": [
@@ -386,7 +386,7 @@
             "id": 10,
             "customer": "John Doe",
             "subtotal": "2500",
-            "channel": "DoorDash",
+            "channel": "GrubHub",
             "tax": 100,
             "tip": 50,
             "history": [

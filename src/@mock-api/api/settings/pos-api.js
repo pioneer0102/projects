@@ -10,7 +10,8 @@ mock.onGet('/api/getPos').reply(() => {
 });
 
 mock.onPost('/api/addPos').reply(({ data }) => {
-    const { type, userName, password, url, taxes, departments } = JSON.parse(data);
+    const { type, userName, password, url, taxes, departments } =
+        JSON.parse(data);
     const id = FuseUtils.generateGUID();
     posDB.push({
         id: id,
@@ -21,11 +22,12 @@ mock.onPost('/api/addPos').reply(({ data }) => {
         taxes: taxes,
         departments: departments
     });
-    return [200, { success: true }]
+    return [200, { success: true }];
 });
 
 mock.onPost('/api/updatePos').reply(({ data }) => {
-    const { id, type, userName, password, url, taxes, departments } = JSON.parse(data);
+    const { id, type, userName, password, url, taxes, departments } =
+        JSON.parse(data);
     _.assign(_.find(posDB, { id: id }), {
         type: type,
         userName: userName,

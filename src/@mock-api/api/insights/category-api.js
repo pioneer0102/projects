@@ -38,15 +38,18 @@ mock.onGet('/api/getcategorydata').reply(() => {
                 oneOrder.items.forEach((item) => {
                     const orderDate = new Date(oneOrder.history[0].date);
                     const oneItem = _.find(itemDB, { id: item.id });
-                    if (oneItem.category == category.name) {
-                        if (orderDate.toDateString() === currentDate.toDateString()) {
+                    if (oneItem.category === category.name) {
+                        if (
+                            orderDate.toDateString() ===
+                            currentDate.toDateString()
+                        ) {
                             sale = sale + parseInt(oneItem.price);
-                            flag = flag*false;
+                            flag = flag * false;
                         }
                     }
-                })
-                if(!flag) order++;
-            })
+                });
+                if (!flag) order++;
+            });
             const formattedDate = currentDate.toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',
@@ -54,8 +57,10 @@ mock.onGet('/api/getcategorydata').reply(() => {
             });
             saleArray[category.name].push({ x: formattedDate, y: sale });
             orderArray[category.name].push({ x: formattedDate, y: order });
-            saleTotalByCategory[category.name] = saleTotalByCategory[category.name] + sale;
-            orderTotalByCategory[category.name] = orderTotalByCategory[category.name] + order;
+            saleTotalByCategory[category.name] =
+                saleTotalByCategory[category.name] + sale;
+            orderTotalByCategory[category.name] =
+                orderTotalByCategory[category.name] + order;
             currentDate.setDate(currentDate.getDate() + 1);
         }
     });
@@ -64,6 +69,6 @@ mock.onGet('/api/getcategorydata').reply(() => {
         orderArray: orderArray,
         saleTotalByCategory: saleTotalByCategory,
         orderTotalByCategory: orderTotalByCategory
-    }
+    };
     return [200, result];
 });

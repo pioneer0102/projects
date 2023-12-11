@@ -104,7 +104,7 @@ const UserTable = () => {
                 </div>
             ) : (
                 <Paper
-                    className={`flex flex-col py-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
+                    className={`flex flex-col pt-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
                     sx={{ boxShadow: 'none', borderRadius: 1 }}
                 >
                     {allUsers.length === 0 ? (
@@ -115,7 +115,7 @@ const UserTable = () => {
                         </div>
                     ) : (
                         <Paper
-                            className={`flex flex-col py-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
+                            className={`flex flex-col my-16 mx-24 overflow-auto  ${styles.paper}`}
                             sx={{ boxShadow: 'none', borderRadius: 1 }}
                         >
                             {allUsers.length === 0 ? (
@@ -357,9 +357,7 @@ const UserTable = () => {
                                                     variant="outline"
                                                     color="secondary"
                                                     onClick={handleCloseDialog}
-                                                    className={
-                                                        styles.backButton
-                                                    }
+                                                    className="rounded-md"
                                                 >
                                                     <span>{t('cancel')}</span>
                                                 </Button>
@@ -367,9 +365,7 @@ const UserTable = () => {
                                                     variant="contained"
                                                     color="secondary"
                                                     onClick={removeUser}
-                                                    className={
-                                                        styles.backButton
-                                                    }
+                                                    className="rounded-md"
                                                 >
                                                     <span>{t('ok')}</span>
                                                 </Button>

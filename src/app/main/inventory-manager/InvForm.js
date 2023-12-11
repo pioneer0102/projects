@@ -82,24 +82,24 @@ const InvForm = () => {
         history.push('/inventory-manager');
     };
     function handleChange(e) {
-        // eslint-disable-next-line no-constant-condition
+        // setImage(URL.createObjectURL(e.target.files[0]));
+        console.log(e.target.files[0].type);
         if (
-            e.target.files[0].type ===
-            ('image/png' ||
-                'image/jpg' ||
-                'image/jpeg' ||
-                'image/gif' ||
-                'image/tif' ||
-                'image/tiff' ||
-                'image/bmp' ||
-                'image/svg' ||
-                'image/webp')
+            e.target.files[0].type === 'image/png' ||
+            e.target.files[0].type === 'image/jpg' ||
+            e.target.files[0].type === 'image/jpeg' ||
+            e.target.files[0].type === 'image/gif' ||
+            e.target.files[0].type === 'image/tif' ||
+            e.target.files[0].type === 'image/tiff' ||
+            e.target.files[0].type === 'image/bmp' ||
+            e.target.files[0].type === 'image/svg' ||
+            e.target.files[0].type === 'image/webp'
         ) {
             setImage(URL.createObjectURL(e.target.files[0]));
         } else {
             dispatch(
                 showMessage({
-                    message: 'Select Image Correctly',
+                    message: 'Please select correct image.',
                     variant: 'error'
                 })
             );
@@ -326,7 +326,10 @@ const InvForm = () => {
                             </FuseSvgIcon>
                         </Box>
                     ) : (
-                        <img className="mt-32 w-128 h-128" src={image} />
+                        <img
+                            className="mt-32 w-200 h-200 object-cover"
+                            src={image}
+                        />
                     )}
 
                     <Controller
