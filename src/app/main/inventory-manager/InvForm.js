@@ -1,8 +1,6 @@
 import reducer from './store';
 import withReducer from 'app/store/withReducer';
-import clsx from 'clsx';
 import Button from '@mui/material/Button';
-import _ from '@lodash';
 import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
@@ -13,8 +11,6 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Typography } from "@mui/material";
 import styles from './style.module.scss';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import history from '@history';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -22,6 +18,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { grey } from '@mui/material/colors';
 import {
@@ -88,7 +85,7 @@ const InvForm = () => {
     }
     function handleChange(e) {
         // eslint-disable-next-line no-constant-condition
-        if (e.target.files[0].type === ("image/png" || "image/jpg")) {
+        if (e.target.files[0].type === ("image/png" || "image/jpg" || "image/jpeg" || "image/gif" || "image/tif" || "image/tiff" || "image/bmp" || "image/svg" || "image/webp")) {
             setImage(URL.createObjectURL(e.target.files[0]));
         } else {
             dispatch(showMessage({ message: "Select Image Correctly", variant: "error" }));
@@ -98,32 +95,7 @@ const InvForm = () => {
 
     return (
         <>
-            <div className='flex items-center mx-32 mt-32 justify-between'>
-                <div role="presentation">
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Typography
-                            className="inline text-18 text-center font-medium"
-                            color="text.secondary"
-                            role="button"
-                            component={NavLinkAdapter}
-                            to={`../inventory-manager`}>
-                            {t('inventory.inventoryManager')}
-                        </Typography>
-                        <Typography className="inline text-18 text-center font-medium text-pink-500">
-                            {routeParams.action}
-                        </Typography>
-                    </Breadcrumbs>
-                </div>
-                <Button
-                    variant="contained"
-                    color="info"
-                    onClick={() => { history.push('/inventory-manager'); }}
-                    className={styles.backButton}
-                >
-                    <FuseSvgIcon size={18}>heroicons-solid:arrow-left</FuseSvgIcon>
-                    <span className='ml-8'>{t('back')}</span>
-                </Button>
-            </div>
+            <Breadcrumb parentUrl = "inventory-manager" parent = "Inventory Manager" child={routeParams.action.charAt(0).toUpperCase() + routeParams.action.slice(1)} />
             <Paper
                 className={`mx-24 my-32 px-32 py-32 ${styles.form}`}
             >
@@ -315,14 +287,14 @@ const InvForm = () => {
                         ><FuseSvgIcon size={32} color="action">
                                 heroicons-solid:upload
                             </FuseSvgIcon>
-                        </Box> : <img className='mt-32 w-128' src={image} />
+                        </Box> : <img className='mt-32 w-128 h-128' src={image} />
                     }
 
                     <Controller
                         name="image"
                         control={control}
                         defaultValue=''
-                        render={(field) => (
+                        render={() => (
                             <>
                                 <Button
                                     color="info"

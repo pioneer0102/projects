@@ -32,6 +32,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { showMessage } from 'app/store/fuse/messageSlice';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 
 import {
     updateStatus,
@@ -139,35 +140,10 @@ const OrderDetail = () => {
 
     return (
         <div>
-            <div className='flex items-center mx-32 mt-32 justify-between'>
-                <div role="presentation">
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Typography
-                            className="inline text-18 text-center font-medium"
-                            color="text.secondary"
-                            role="button"
-                            component={NavLinkAdapter}
-                            to={`../orders`}>
-                            {t('orders.orders')}
-                        </Typography>
-                        <Typography className="inline text-18 text-center font-medium text-pink-500">
-                            {t('orders.detail')}
-                        </Typography>
-                    </Breadcrumbs>
-                </div>
-                <Button
-                    variant="contained"
-                    color="info"
-                    onClick={() => history.push('/orders')}
-                    className={styles.backButton}
-                >
-                    <FuseSvgIcon size={18}>heroicons-solid:arrow-left</FuseSvgIcon>
-                    <span className='ml-8'>{t('back')}</span>
-                </Button>
-            </div>
+            <Breadcrumb parentUrl = "Orders" parent = "Orders" child="Detail" />
             <div className='flex flex-col md:flex-row'>
                 <Paper
-                    className="px-8 py-24 my-32 mx-32 md:w-1/2"
+                    className="px-8 py-24 my-32 mx-24 md:w-1/2"
                     sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     <div className="sm:items-start mx-24">
                         <Typography
@@ -203,21 +179,21 @@ const OrderDetail = () => {
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-16">
+                                                        className="text-16">
                                                         {historyIndex == 0 ? orderInfo.customer : ""}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-16">
+                                                        className="text-16">
                                                         {historyIndex == 0 ? orderInfo.channel : ""}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14">
+                                                        className="text-14">
                                                         {item.date}
                                                     </Typography>
                                                 </TableCell>
@@ -264,7 +240,7 @@ const OrderDetail = () => {
                                                                             key={indexStatus}
                                                                             color="text.secondary"
                                                                             role="button"
-                                                                            className="font-semibold text-14 px-8 py-2 uppercase uppercase"
+                                                                            className="text-14 px-8 py-2 uppercase uppercase"
                                                                             onClick={() => handleStatusChange(item)}
                                                                         >
                                                                             {item}
@@ -285,7 +261,7 @@ const OrderDetail = () => {
                 </Paper>
 
                 <Paper
-                    className="px-8 py-24 my-32 mx-32 md:w-1/2"
+                    className="px-8 py-24 my-24 mx-24 md:w-1/2"
                     sx={{ boxShadow: 'none', borderRadius: 1 }}>
                     <div className="sm:items-start mx-24">
                         <Typography
@@ -327,21 +303,21 @@ const OrderDetail = () => {
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14">
-                                                        {item.category}
+                                                        className="text-14">
+                                                        {item.name}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14">
+                                                        className="text-14">
                                                         {item.quantity}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="font-semibold text-14">
+                                                        className="text-14">
                                                         $ {item.price}
                                                     </Typography>
                                                 </TableCell>
@@ -388,7 +364,7 @@ const OrderDetail = () => {
                                                                             key={indexStatus}
                                                                             color="text.secondary"
                                                                             role="button"
-                                                                            className="font-semibold text-14 px-8 py-2 uppercase uppercase"
+                                                                            className="text-14 px-8 py-2 uppercase uppercase"
                                                                             onClick={() => handleItemStatusChange(item)}
                                                                         >
                                                                             {item}
@@ -413,7 +389,7 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-semibold text-16">
+                                            className="text-16">
                                             Subtotal
                                         </Typography>
                                     </TableCell>
@@ -421,7 +397,7 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-bold text-30">
+                                            className="text-30">
                                             $ {orderInfo.subtotal}
                                         </Typography>
                                     </TableCell>
@@ -430,7 +406,7 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-semibold text-16">
+                                            className="text-16">
                                             Tax
                                         </Typography>
                                     </TableCell>
@@ -438,7 +414,7 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-bold text-30">
+                                            className="text-30">
                                             $ {orderInfo.tax}
                                         </Typography>
                                     </TableCell>
@@ -447,7 +423,7 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-semibold text-16">
+                                            className="text-16">
                                             Tip
                                         </Typography>
                                     </TableCell>
@@ -455,7 +431,7 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="font-bold text-30">
+                                            className="text-30">
                                             $ {orderInfo.tip}
                                         </Typography>
                                     </TableCell>

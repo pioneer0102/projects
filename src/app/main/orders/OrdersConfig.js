@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import OrderDetail from './OrderDetail';
 
-const OrdersApp = lazy(() => import('./OrdersApp'));
+const OrdersApp = lazy(() => import('./index'));
 
 const OrdersConfig = {
     settings: {

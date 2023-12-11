@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import InvForm from './InvForm';
 
-const InvManApp = lazy(() => import('./InvManApp'));
+const InventoryApp = lazy(() => import('./index'));
 
 const InvManCofig = {
     settings: {
@@ -12,7 +12,7 @@ const InvManCofig = {
     routes: [
         {
             path: 'inventory-manager',
-            element: <InvManApp />
+            element: <InventoryApp />
         },
         {
             path: 'inventory-manager/:action/:id',

@@ -8,9 +8,8 @@ import Grid from "@mui/system/Unstable_Grid/Grid";
 import InputAdornment from '@mui/material/InputAdornment';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import {
-    selectPosById,
+    selectPosDetail,
     setFormdata,
     update,
     remove
@@ -39,7 +38,7 @@ const initialErrors = {
 
 const DepartmentTab = () => {
     const dispatch = useDispatch();
-    const posById = useSelector(selectPosById);
+    const posDetail = useSelector(selectPosDetail);
     const [errors, setErrors] = useState(initialErrors);
     const [newDepartmentItem, setNewDepartmentItem] = useState({ name: '', rate: 0 });
     // const [departmentItems, setDepartmentItems] = useState([]);
@@ -137,7 +136,7 @@ const DepartmentTab = () => {
                 </Grid>
             </Grid>
             {
-                posById.department !== null && posById.department.map((taxItem, index) => {
+                posDetail.departments !== null && posDetail.departments.map((taxItem, index) => {
                     return (
                         <DepartmentItem key={index} index={index} value={taxItem} handleEdit={handleEdit} handleRemove={removeTax} />
                     );

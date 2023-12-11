@@ -9,7 +9,7 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from "@mui/system/Unstable_Grid/Grid";
 import InputAdornment from '@mui/material/InputAdornment';
 import {
-    selectPosById,
+    selectPosDetail,
     setFormdata,
     update,
     remove
@@ -38,14 +38,9 @@ const initialErrors = {
 
 const TaxTab = () => {
     const dispatch = useDispatch();
-    const posById = useSelector(selectPosById);
-    // const { taxDetail } = props
+    const posDetail = useSelector(selectPosDetail);
     const [errors, setErrors] = useState(initialErrors);
     const [newTaxItem, setNewTaxItem] = useState({ name: '', rate: 0 });
-
-    // useEffect(() => {
-    //     setTaxItems(taxDetail);
-    // }, [taxDetail]);
 
     const addNewTax = () => {
         const validationErrors = validateTaxItem(newTaxItem);
@@ -75,8 +70,6 @@ const TaxTab = () => {
     }
 
     const handleEdit = (index, key, value) => {
-        
-        
         dispatch(update({ type: 'tax', id: index, key: key, value: value }));
     };
 
@@ -140,7 +133,7 @@ const TaxTab = () => {
                 </Grid>
             </Grid>
             {
-                posById.tax != null && posById.tax.map((taxItem, index) => {
+                posDetail.taxes != null && posDetail.taxes.map((taxItem, index) => {
                     return (
                         <TaxItem key={index} index={index} value={taxItem} handleEdit={handleEdit} handleRemove={removeTax} />
                     );

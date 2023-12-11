@@ -3,6 +3,7 @@ import './api/notifications-api';
 import './api/orders-api';
 import './api/inventory-api';
 import './api/insights/channel-api';
+import './api/insights/category-api';
 import './api/settings/pos-api';
 import './api/settings/user-api';
 import history from '@history';

@@ -9,10 +9,19 @@ import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import FuseLoading from '@fuse/core/FuseLoading';
 import { IconButton } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { userTableHeader } from 'src/app/model/UserModel';
 import { useTranslation } from 'react-i18next';
+import Popover from "@mui/material/Popover";
+import { MoreHoriz } from "@mui/icons-material";
+import { Button } from '@mui/material';
+import { Box } from '@mui/material';
+import { useState } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 import styles from '../../style.module.scss';
+import { makeStyles } from '@mui/styles';
 import {
     selectFilter,
     setFilter,
@@ -23,9 +32,22 @@ import {
     deleteUser
 } from '../../store/userSlice';
 
+const useStyles = makeStyles(() => ({
+    popover: {
+        '& .MuiPaper-elevation8': {
+            boxShadow: '3px 3px 5px 1px rgba(200, 200, 200, 0.15)' /* Customize the boxShadow here */
+        }
+    },
+}));
+
 const UserTable = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const classes = useStyles();
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [selectedId, setSelectedId] = useState(null);
+    const [openDialog, setOpenDialog] = useState(false);
 
     const filter = useSelector(selectFilter);
     const allUsers = useSelector(selectAllUsers);
@@ -40,16 +62,34 @@ const UserTable = () => {
         }
     });
 
-    const editUser = (id) => history.push(`/settings/user-management/edit/${id}`);
-    const removeUser = (event, id) => {
-        event.stopPropagation();
-        dispatch(deleteUser(id));
-    }
-
     const handleChange = (type, value) => {
         dispatch(setFilter({ type: type, value: value }));
-        dispatch(setFilter({ type: 'page', value: 0 }));
     };
+    const handleOpenDialog = () => {
+        setAnchorEl(null);
+        setOpenDialog(true);
+    };
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    }
+    const editUser = () => {
+        setAnchorEl(null);
+        history.push(`/settings/user-management/edit/${selectedId}`);
+    }
+    const removeUser = () => {
+        dispatch(deleteUser(selectedId));
+        setOpenDialog(false);
+    }
+    const handleAction = (event, id) => {
+        setAnchorEl(event.currentTarget);
+        setSelectedId(id);
+    };
+    const handleActionClose = () => {
+        setAnchorEl(null);
+    };
+
+    const popOpen = Boolean(anchorEl);
+    const id = popOpen ? 'simple-popover' : undefined;
 
     return (
         <>
@@ -98,35 +138,66 @@ const UserTable = () => {
                                                         return (
                                                             <Tr
                                                                 key={index}
-                                                                role="button"
-                                                                onClick={() => editUser(item.id)}>
+                                                                role="button">
                                                                 <Td align="left">
                                                                     <Typography
                                                                         color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
+                                                                        className="text-16 md:pt-16">
                                                                         {item.name}
                                                                     </Typography>
                                                                 </Td>
                                                                 <Td align="left">
                                                                     <Typography
                                                                         color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
-                                                                        {item.url}
+                                                                        className="text-16 md:pt-16">
+                                                                        {item.email}
                                                                     </Typography>
                                                                 </Td>
                                                                 <Td align="left">
                                                                     <Typography
                                                                         color="text.secondary"
-                                                                        className="font-semibold text-16 md:pt-16">
+                                                                        className="text-16 md:pt-16">
                                                                         {item.role.charAt(0).toUpperCase() + item.role.slice(1)}
                                                                     </Typography>
                                                                 </Td>
-                                                                <Td align="left" className = "md:pt-16">
-                                                                    <IconButton
-                                                                        className="text-gray-500"
-                                                                        onClick={(event) => removeUser(event, item.id)}>
-                                                                        <DeleteIcon />
+                                                                <Td align="left" className="md:pt-16">
+                                                                    <IconButton aria-describedby={id} onClick={(event) => handleAction(event, item.id)}>
+                                                                        <MoreHoriz />
                                                                     </IconButton>
+                                                                    <Popover
+                                                                        id={id}
+                                                                        open={popOpen}
+                                                                        anchorEl={anchorEl}
+                                                                        onClose={handleActionClose}
+                                                                        className={classes.popover}
+                                                                        anchorOrigin={{
+                                                                            vertical: 'bottom',
+                                                                            horizontal: 'left',
+                                                                        }}>
+                                                                        <Box className='flex flex-col' sx={{ p: 1 }}>
+                                                                            <Button
+                                                                                className="text-grey-500 justify-start"
+                                                                                onClick={() => editUser()}
+                                                                            >
+                                                                                <FuseSvgIcon size={20} color="action">heroicons-solid:pencil</FuseSvgIcon>
+                                                                                <span className='mx-8'>{t('users.edit')}</span>
+                                                                            </Button>
+                                                                            <Button
+                                                                                className="text-grey-500 justify-start"
+                                                                                onClick={handleActionClose}
+                                                                            >
+                                                                                <FuseSvgIcon size={20} color="action">heroicons-solid:key</FuseSvgIcon>
+                                                                                <span className='mx-8'>{t('users.reset')}</span>
+                                                                            </Button>
+                                                                            <Button
+                                                                                className="text-grey-500 justify-start"
+                                                                                onClick={() => handleOpenDialog()}
+                                                                            >
+                                                                                <FuseSvgIcon size={20} color="action">heroicons-solid:trash</FuseSvgIcon>
+                                                                                <span className='mx-8'>{t('users.delete')}</span>
+                                                                            </Button>
+                                                                        </Box>
+                                                                    </Popover>
                                                                 </Td>
                                                             </Tr>
                                                         );
@@ -151,9 +222,40 @@ const UserTable = () => {
                                                 onPageChange={(event, newPage) => handleChange('page', parseInt(newPage, 10))}
                                                 onRowsPerPageChange={(event) => {
                                                     handleChange('rowsPerPage', parseInt(event.target.value, 10));
+                                                    dispatch(setFilter({ type: 'page', value: 0 }));
                                                 }}
                                             />
                                         </div>
+                                        <Dialog
+                                            open={openDialog}
+                                            onClose={handleCloseDialog}
+                                            aria-labelledby="alert-dialog-title"
+                                            aria-describedby="alert-dialog-description"
+                                        >
+                                            <div className='p-24'>
+                                                <DialogContent className='p-0'>
+                                                    <h1 className='mt-12 mb-12'>Are you sure to delete this User?</h1>
+                                                </DialogContent>
+                                                <DialogActions className='p-0 mt-12'>
+                                                    <Button
+                                                        variant="outline"
+                                                        color="secondary"
+                                                        onClick={handleCloseDialog}
+                                                        className={styles.backButton}
+                                                    >
+                                                        <span>{t('cancel')}</span>
+                                                    </Button>
+                                                    <Button
+                                                        variant="contained"
+                                                        color="secondary"
+                                                        onClick={removeUser}
+                                                        className={styles.backButton}
+                                                    >
+                                                        <span>{t('ok')}</span>
+                                                    </Button>
+                                                </DialogActions>
+                                            </div>
+                                        </Dialog>
                                     </>
                             }
                         </Paper>

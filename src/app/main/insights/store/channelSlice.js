@@ -5,11 +5,6 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// export const channelStatisticalData = async (date) => {
-//     const response = await axios.post('/api/getchanneldata', date);
-//     return response.data;
-// };
-
 export const channelStatisticalData = createAsyncThunk(
     'insightsApp/channel/channelStatisticalData',
     async () => {
@@ -30,8 +25,7 @@ const channelSlice = createSlice({
         saleTotalByChannel: {},
         orderTotalByChannel: {}
     },
-    reducers: {
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(channelStatisticalData.fulfilled, (state, action) => {
             state.saleStatistics = action.payload.saleArray;

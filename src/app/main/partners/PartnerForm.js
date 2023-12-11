@@ -11,12 +11,12 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Typography } from "@mui/material";
 import styles from './style.module.scss';
-import PartnerBreadcrumb from './components/PartnerBreadCrumb';
 import { logoSrc } from 'src/app/model/PartnerModel';
 import history from '@history';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import { useTranslation } from 'react-i18next';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a name'),
@@ -70,7 +70,7 @@ function PartnerForm() {
 
     return (
         <>
-            <PartnerBreadcrumb channel={channel} />
+            <Breadcrumb parentUrl = "partners" parent = "Partners" child={channel} />
             <Paper
                 className={`mx-24 my-32 px-32 py-32 ${styles.form}`}
             >

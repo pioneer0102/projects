@@ -33,7 +33,7 @@ export const updateUser = createAsyncThunk(
 
 export const deleteUser = createAsyncThunk(
     'settingsApp/user/deleteUser', async (id) => {
-        const response = await axios.post('/api/deleteUser', {id: id});
+        const response = await axios.post('/api/deleteUser', { id: id });
         return response.data;
     }
 );
@@ -99,7 +99,8 @@ const userSlice = createSlice({
             state.actionStatus = action.payload.success;
         });
         builder.addCase(deleteUser.fulfilled, (state, action) => {
-            userAdapter.removeOne(state, action.payload.id)
+            userAdapter.removeOne(state, action.payload.id);
+            state.totalCount = state.totalCount - 1;
         })
     }
 });

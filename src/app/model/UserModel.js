@@ -7,7 +7,7 @@ const userTableHeader = [
     {
         id: 'url',
         align: 'left',
-        label: 'Url',
+        label: 'Email',
     },
     {
         id: 'role',
@@ -15,9 +15,9 @@ const userTableHeader = [
         label: 'Role',
     },
     {
-        id: 'role',
+        id: 'action',
         align: 'left',
-        label: '',
+        label: 'Action',
     },
 ];
 

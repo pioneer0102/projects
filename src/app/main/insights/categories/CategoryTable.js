@@ -3,21 +3,20 @@ import { Typography } from "@mui/material";
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import { useSelector } from 'react-redux';
-import { ChannelTableHeader } from 'src/app/model/ChannelModel';
+import { CategoryTableHeader } from "src/app/model/CategoryModel";
 import styles from '../style.module.scss';
 import OrderStatistics from './statistics/OrderStatistics';
 import SaleStatistics from './statistics/SaleStatistics';
-import { Channels } from 'src/app/model/Global';
+import { Cagetories } from 'src/app/model/Global';
 import BarStatistics from './statistics/BarStatistics';
 import {
-    selectSaleTotalByChannel,
-    selectOrderTotalByChannel
-} from '../store/channelSlice';
+    selectSaleTotalByCategory,
+    selectOrderTotalByCategory
+} from '../store/categorySlice';
 
-const ChannelTable = () => {
-    // const { data: allOrders, isLoading, isError } = useQuery(['channelstatistic'], () => channelStatisticalData(new Date()));
-    const saleByChannel = useSelector(selectSaleTotalByChannel);
-    const orderByChannel = useSelector(selectOrderTotalByChannel);
+const CategoryTable = () => {
+    const saleByCategory = useSelector(selectSaleTotalByCategory);
+    const orderByCategory = useSelector(selectOrderTotalByCategory);
 
     return (
         <>
@@ -27,21 +26,23 @@ const ChannelTable = () => {
                 <Table>
                     <Thead className="border-b-2">
                         <Tr>
-                            {ChannelTableHeader.map((item, index) => (
-                                <Th
-                                    key={index}
-                                    align={item.align}>
-                                    <Typography
-                                        color="text.secondary"
-                                        className="font-bold text-20 pb-16">
-                                        {item.label}
-                                    </Typography>
-                                </Th>
-                            ))}
+                            {CategoryTableHeader.map((item, index) => {
+                                return (
+                                    <Th
+                                        key={index}
+                                        align={item.align}>
+                                        <Typography
+                                            color="text.secondary"
+                                            className="font-bold text-20 pb-16">
+                                            {item.label}
+                                        </Typography>
+                                    </Th>
+                                )
+                            })}
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {Channels.map((item, index) => {
+                        {Cagetories.map((item, index) => {
                             return (
                                 <Tr key={index} role="button">
                                     <Td align="left">
@@ -55,21 +56,21 @@ const ChannelTable = () => {
                                         <Typography
                                             color="text.secondary"
                                             className="font-semibold text-16 md:pt-16">
-                                            $ {saleByChannel[item]}
+                                            $ {saleByCategory[item]}
                                         </Typography>
                                     </Td>
                                     <Td align="center" className="md:w-1/3 px-32">
-                                        <SaleStatistics channel={item} />
+                                        <SaleStatistics category={item} />
                                     </Td>
                                     <Td align="left">
                                         <Typography
                                             color="text.secondary"
                                             className="font-semibold text-16 md:pt-16">
-                                            {orderByChannel[item]}
+                                            {orderByCategory[item]}
                                         </Typography>
                                     </Td>
                                     <Td align="center" className="md:w-1/4 px-32">
-                                        <OrderStatistics channel={item} />
+                                        <OrderStatistics category={item} />
                                     </Td>
                                 </Tr>
                             )
@@ -82,4 +83,4 @@ const ChannelTable = () => {
     );
 };
 
-export default ChannelTable;
+export default CategoryTable;

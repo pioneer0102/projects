@@ -5,4 +5,11 @@ const Channels = [
     "GrubHub"
 ];
 
-export {Channels};
+const Cagetories = [
+    "Accessory",
+    "Handphone",
+    "Clothes",
+    "Laptop"
+];
+
+export { Channels, Cagetories };
