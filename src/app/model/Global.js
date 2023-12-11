@@ -1,10 +1,5 @@
 const Channels = ['DoorDash', 'Uber', 'GrubHub'];
 
-const Cagetories = [
-    "Accessory",
-    "Handphone",
-    "Clothes",
-    "Laptop"
-];
+const Cagetories = ['Accessory', 'Handphone', 'Clothes', 'Laptop'];
 
 export { Channels, Cagetories };

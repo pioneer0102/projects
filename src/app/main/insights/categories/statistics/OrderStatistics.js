@@ -1,12 +1,10 @@
 import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
-import {
-    selectOrderStatistics,
-} from '../../store/categorySlice';
+import { selectOrderStatistics } from '../../store/categorySlice';
 import green from '@mui/material/colors/green';
 
 const OrderStatistics = (props) => {
-    const {category} = props;
+    const { category } = props;
     const orderStatistics = useSelector(selectOrderStatistics);
 
     const series = [
@@ -19,38 +17,36 @@ const OrderStatistics = (props) => {
     const chartOptions = {
         chart: {
             animations: {
-                enabled: false,
+                enabled: false
             },
             fontFamily: 'inherit',
             foreColor: 'inherit',
             height: '100%',
             type: 'area',
             sparkline: {
-                enabled: true,
-            },
+                enabled: true
+            }
         },
         colors: [green[500]],
         stroke: {
             curve: 'smooth',
-            width: 2,
+            width: 2
         },
         tooltip: {
-            theme: 'dark',
+            theme: 'dark'
         },
         xaxis: {
-            type: 'category',
+            type: 'category'
         },
         yaxis: {
-            labels: {
-              
-            },
+            labels: {},
             show: false,
-            tickAmount: 5,
-          },
+            tickAmount: 5
+        }
     };
 
     return (
-        <div className='my-16'>
+        <div className="my-16">
             {
                 <ReactApexChart
                     className="flex-auto w-full h-40"
@@ -62,6 +58,6 @@ const OrderStatistics = (props) => {
             }
         </div>
     );
-}
+};
 
 export default OrderStatistics;

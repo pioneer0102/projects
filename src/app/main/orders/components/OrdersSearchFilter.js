@@ -68,7 +68,9 @@ const OrdersSearchFilter = () => {
 
     return (
         <>
-            <Paper className={`px-16 py-8 border-b-1 mt-32 mx-24 ${styles.paper}`}>
+            <Paper
+                className={`px-16 py-8 border-b-1 mt-32 mx-24 ${styles.paper}`}
+            >
                 <div className="flex md:flex-row flex-col justify-between sm:space-y-0 mt-8 -mx-8">
                     <Box className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
                         <FuseSvgIcon color="action" size={20}>

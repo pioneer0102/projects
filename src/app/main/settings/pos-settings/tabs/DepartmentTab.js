@@ -159,8 +159,8 @@ const DepartmentTab = () => {
                     </IconButton>
                 </Grid>
             </Grid>
-            {
-                posDetail.departments !== null && posDetail.departments.map((taxItem, index) => {
+            {posDetail.departments !== null &&
+                posDetail.departments.map((taxItem, index) => {
                     return (
                         <DepartmentItem
                             key={index}
