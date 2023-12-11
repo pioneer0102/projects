@@ -1,27 +1,12 @@
 import {
     createAsyncThunk,
-    createEntityAdapter,
-    createSlice
+    createSlice,
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const getAllPos = async (filterData) => {
-    const response = await axios.post('/api/getAllPos', filterData);
-    return response.data;
-};
-
-export const getPosById = createAsyncThunk(
-    'settingsApp/pos/getPosById',
-    async (id) => {
-        const response = await axios.get('/api/getPosById', { id: id });
-        return response.data;
-    }
-);
-
-export const addPos = createAsyncThunk(
-    'settingsApp/pos/addPos',
-    async (formData) => {
-        const response = await axios.post('/api/addPos', formData);
+export const getPos = createAsyncThunk(
+    'settingsApp/pos/getPos', async () => {
+        const response = await axios.get('/api/getPos');
         return response.data;
     }
 );
@@ -33,90 +18,51 @@ export const updatePos = createAsyncThunk(
         return response.data;
     }
 );
-
-const posAdapter = createEntityAdapter({});
-
-export const { selectAll: selectAllPos } = posAdapter.getSelectors(
-    (state) => state.settingsApp.pos
-);
-
-export const selectFilter = ({ settingsApp }) => settingsApp.pos.filter;
-export const selectTotalCount = ({ settingsApp }) => settingsApp.pos.totalCount;
-export const selectPosById = ({ settingsApp }) => settingsApp.pos.posById;
+export const selectPosDetail = ({ settingsApp }) => settingsApp.pos.posDetail;
 
 const posSlice = createSlice({
     name: 'settingsApp/pos',
-    initialState: posAdapter.getInitialState({
-        filter: {
-            searchText: '',
-            rowsPerPage: 10,
-            page: 0
-        },
-        totalCount: 0,
-        posById: {
+    initialState: {
+        posDetail: {
             id: '',
             type: '',
-            user_name: '',
+            userName: '',
             password: '',
             url: '',
-            tax: [],
-            department: []
+            taxes: [],
+            departments: []
         }
-    }),
+    },
     reducers: {
-        setFilter: (state, action) => {
-            switch (action.payload.type) {
-                case 'searchText':
-                    state.filter.searchText = action.payload.value;
-                    break;
-                case 'rowsPerPage':
-                    state.filter.rowsPerPage = action.payload.value;
-                    break;
-                case 'page':
-                    state.filter.page = action.payload.value;
-                    break;
-            }
-        },
-        initializePos: (state) => {
-            state.posById = {
-                id: '',
-                type: '',
-                user_name: '',
-                password: '',
-                url: '',
-                tax: [],
-                department: []
-            };
-        },
-        setPos: (state, action) => {
-            state.totalCount = action.payload.filterSize;
-            posAdapter.setAll(state, action.payload.pagedData);
-        },
         setFormdata: (state, action) => {
             switch (action.payload.type) {
                 case 'type':
-                    state.posById.type = action.payload.value;
+                    state.posDetail.type = action.payload.value;
                     break;
-                case 'user_name':
-                    state.posById.user_name = action.payload.value;
+                case 'userName':
+                    state.posDetail.userName = action.payload.value;
                     break;
                 case 'password':
-                    state.posById.password = action.payload.value;
+                    state.posDetail.password = action.payload.value;
                     break;
                 case 'url':
-                    state.posById.url = action.payload.value;
+                    state.posDetail.url = action.payload.value;
                     break;
                 case 'tax':
-                    state.posById.tax.push({
-                        name: action.payload.value.name,
-                        rate: action.payload.value.rate
-                    });
+                    state.posDetail.taxes.push(
+                        {
+                            name: action.payload.value.name,
+                            rate: action.payload.value.rate
+                        }
+                    );
                     break;
                 case 'department':
-                    state.posById.department.push({
-                        name: action.payload.value.name,
-                        rate: action.payload.value.rate
-                    });
+                    state.posDetail.departments.push(
+                        {
+                            name: action.payload.value.name,
+                            rate: action.payload.value.rate
+                        }
+                    );
                     break;
             }
         },
@@ -124,12 +70,11 @@ const posSlice = createSlice({
             let temp;
             switch (action.payload.type) {
                 case 'tax':
-                    // console.log(action.payload);
-                    temp = state.posById.tax[action.payload.id];
+                    temp = state.posDetail.taxes[action.payload.id];
                     temp[action.payload.key] = action.payload.value;
                     break;
                 case 'department':
-                    temp = state.posById.department[action.payload.id];
+                    temp = state.posDetail.departments[action.payload.id];
                     temp[action.payload.key] = action.payload.value;
                     break;
             }
@@ -138,29 +83,27 @@ const posSlice = createSlice({
             let temp;
             switch (action.payload.type) {
                 case 'tax':
-                    // _.remove(state.posById.tax, { id: `${action.payload.id}` });
-                    temp = state.posById.tax.filter(
-                        (_, i) => i !== action.payload.id
-                    );
-                    state.posById.tax = temp;
+                    temp = state.posDetail.taxes.filter((_, i) => i !== action.payload.id);
+                    state.posDetail.taxes = temp;
                     break;
                 case 'department':
-                    temp = state.posById.department.filter(
-                        (_, i) => i !== action.payload.id
-                    );
-                    state.posById.department = temp;
+                    temp = state.posDetail.departments.filter((_, i) => i !== action.payload.id);
+                    state.posDetail.departments = temp;
                     break;
             }
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getPosById.fulfilled, (state, action) => {
-            state.posById = action.payload;
-        });
+        builder.addCase(getPos.fulfilled, (state, action) => {
+            state.posDetail = action.payload;
+        })
     }
 });
 
-export const { setFilter, setPos, initializePos, setFormdata, update, remove } =
-    posSlice.actions;
+export const {
+    setFormdata,
+    update,
+    remove
+} = posSlice.actions;
 
 export default posSlice.reducer;

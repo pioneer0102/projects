@@ -45,23 +45,29 @@ mock.onGet('/api/getUserById').reply((data) => {
 });
 
 mock.onPost('/api/addUser').reply(({ data }) => {
-    const { name, url, role } = JSON.parse(data);
+    const { name, email, role, phone, address, avatar } = JSON.parse(data);
     const id = FuseUtils.generateGUID();
     userDB.push({
         id: id,
         name: name,
-        url: url,
-        role: role
+        email: email,
+        role: role,
+        phone: phone,
+        address: address,
+        avatar: avatar
     });
     return [200, { success: true }]
 });
 
 mock.onPost('/api/updateUser').reply(({ data }) => {
-    const { id, name, url, role } = JSON.parse(data);
+    const { id, name, email, role, phone, address, avatar } = JSON.parse(data);
     _.assign(_.find(userDB, { id: id }), {
         name: name,
-        url: url,
-        role: role
+        email: email,
+        role: role,
+        phone: phone,
+        address: address,
+        avatar: avatar
     });
     return [200, { success: true }];
 });

@@ -7,7 +7,6 @@ const ordersDB = mockApi.database.examples.orders.value;
 const channelDB = mockApi.database.examples.channel.value;
 
 mock.onGet('/api/getchanneldata').reply(() => {
-
     const saleArray = {};
     const orderArray = {};
     const saleTotalByChannel = {};
@@ -36,7 +35,7 @@ mock.onGet('/api/getchanneldata').reply(() => {
             var order = 0;
             ordersDB.forEach((item) => {
                 if (item.channel == channel.name) {
-                    const orderDate = new Date(item.history[item.history.length-1].date);
+                    const orderDate = new Date(item.history[0].date);
                     if (orderDate.toDateString() === currentDate.toDateString()) {
                         sale = sale + parseInt(item.subtotal);
                         order++;

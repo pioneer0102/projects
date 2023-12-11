@@ -9,7 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {
-    selectPosById,
+    selectPosDetail,
     setFormdata,
     update,
     remove
@@ -38,7 +38,7 @@ const initialErrors = {
 
 const DepartmentTab = () => {
     const dispatch = useDispatch();
-    const posById = useSelector(selectPosById);
+    const posDetail = useSelector(selectPosDetail);
     const [errors, setErrors] = useState(initialErrors);
     const [newDepartmentItem, setNewDepartmentItem] = useState({
         name: '',
@@ -159,8 +159,8 @@ const DepartmentTab = () => {
                     </IconButton>
                 </Grid>
             </Grid>
-            {posById.department !== null &&
-                posById.department.map((taxItem, index) => {
+            {
+                posDetail.departments !== null && posDetail.departments.map((taxItem, index) => {
                     return (
                         <DepartmentItem
                             key={index}

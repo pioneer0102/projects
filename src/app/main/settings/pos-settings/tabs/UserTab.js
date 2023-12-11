@@ -5,12 +5,16 @@ import InputAdornment from '@mui/material/InputAdornment';
 import styles from '../../style.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
 import MenuItem from '@mui/material/MenuItem';
 import { posType } from 'src/app/model/PosModel';
-import { setFormdata } from '../../store/posSlice';
+import {
+    setFormdata,
+    selectPosDetail
+} from '../../store/posSlice';
 
 const UserTab = (props) => {
-    const { userDetail = {} } = props;
+    const posDetail = useSelector(selectPosDetail);
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const handleChange = (type, value) => {
@@ -18,8 +22,10 @@ const UserTab = (props) => {
     };
 
     return (
-        <Paper className={`rounded-md shadow-none ${styles.paper}`}>
-            <div className="grid grid-cols-2 gap-x-48">
+        <Paper
+            className={`rounded-md shadow-none ${styles.paper}`}
+        >
+            <div className='grid grid-cols-2 gap-x-40'>
                 <TextField
                     select
                     className="mt-32"
@@ -29,16 +35,12 @@ const UserTab = (props) => {
                     variant="outlined"
                     required
                     fullWidth
-                    value={userDetail.type || ''}
-                    onChange={(event) =>
-                        handleChange('type', event.target.value)
-                    }
+                    value={posDetail.type || ''}
+                    onChange={(event) => handleChange('type', event.target.value)}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <FuseSvgIcon size={24}>
-                                    heroicons-solid:user-circle
-                                </FuseSvgIcon>
+                                <FuseSvgIcon size={24}>heroicons-outline:globe-alt</FuseSvgIcon>
                             </InputAdornment>
                         )
                     }}
@@ -54,20 +56,16 @@ const UserTab = (props) => {
                     className="mt-32"
                     label="User Name"
                     placeholder="User Name"
-                    id="user_name"
+                    id="userName"
                     variant="outlined"
                     required
                     fullWidth
-                    value={userDetail.user_name || ''}
-                    onChange={(event) =>
-                        handleChange('user_name', event.target.value)
-                    }
+                    value={posDetail.userName || ''}
+                    onChange={(event) => handleChange('userName', event.target.value)}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <FuseSvgIcon size={24}>
-                                    heroicons-solid:user-circle
-                                </FuseSvgIcon>
+                                <FuseSvgIcon size={24}>heroicons-outline:user-circle</FuseSvgIcon>
                             </InputAdornment>
                         )
                     }}
@@ -79,16 +77,12 @@ const UserTab = (props) => {
                     id="password"
                     variant="outlined"
                     fullWidth
-                    value={userDetail.password || ''}
-                    onChange={(event) =>
-                        handleChange('password', event.target.value)
-                    }
+                    value={posDetail.password || ''}
+                    onChange={(event) => handleChange('password', event.target.value)}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <FuseSvgIcon size={24}>
-                                    heroicons-solid:briefcase
-                                </FuseSvgIcon>
+                                <FuseSvgIcon size={24}>heroicons-outline:key</FuseSvgIcon>
                             </InputAdornment>
                         )
                     }}
@@ -100,16 +94,12 @@ const UserTab = (props) => {
                     id="url"
                     variant="outlined"
                     fullWidth
-                    value={userDetail.url}
-                    onChange={(event) =>
-                        handleChange('url', event.target.value)
-                    }
+                    value={posDetail.url}
+                    onChange={(event) => handleChange('url', event.target.value)}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <FuseSvgIcon size={24}>
-                                    heroicons-solid:currency-dollar
-                                </FuseSvgIcon>
+                                <FuseSvgIcon size={24}>heroicons-outline:currency-dollar</FuseSvgIcon>
                             </InputAdornment>
                         )
                     }}

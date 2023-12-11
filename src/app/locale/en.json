@@ -40,7 +40,10 @@
     },
     "users": {
         "total": "Total Users",
-        "userManagement": "User Management"
+        "userManagement": "User Management",
+        "edit": "Edit",
+        "delete": "Delete",
+        "reset": "Reset Password"
     },
     "haveAccount": "Don't have an account?"
 }

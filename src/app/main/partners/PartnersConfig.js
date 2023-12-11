@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import PartnerForm from './PartnerForm';
 
-const PartnersApp = lazy(() => import('./PartnersApp'));
+const PartnersApp = lazy(() => import('./index'));
 
 const PartnersConfig = {
     settings: {

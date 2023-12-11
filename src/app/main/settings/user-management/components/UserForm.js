@@ -10,10 +10,10 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
+import { Avatar } from '@mui/material';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import styles from '../../style.module.scss';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
 import history from '@history';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -32,8 +32,10 @@ import {
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a Name'),
-    url: yup.string().required('You must enter a Url'),
-    role: yup.string().required('You must select a Role')
+    email: yup.string().required('You must enter a Email'),
+    role: yup.string().required('You must select a Role'),
+    phone: yup.string().required('You must select a Phone'),
+    address: yup.string().required('You must select a Address')
 });
 
 const UserForm = () => {
@@ -88,50 +90,78 @@ const UserForm = () => {
 
     return (
         <>
-            <div className="flex items-center mx-24 mt-32 justify-between">
-                <div role="presentation">
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Typography
-                            className="inline text-18 text-center font-medium"
-                            color="text.secondary"
-                            role="button"
-                            component={NavLinkAdapter}
-                            to={'../settings/user-management'}
+            <Breadcrumb parentUrl = "settings/user-management" parent = "User Management" child = {routeParams.action.charAt(0).toUpperCase() + routeParams.action.slice(1)} />
+            <Paper
+                className={`mx-24 my-32 px-40 pb-32 ${styles.form}`}
+            >
+                <Controller
+                    control={control}
+                    name="avatar"
+                    render={({ field: { onChange, value } }) => (
+                        <Box
+                            sx={{
+                                borderWidth: 4,
+                                borderStyle: 'solid',
+                            }}
+                            className="relative flex items-center justify-center w-128 h-128 rounded-full overflow-hidden mt-32"
                         >
-                            {t('users.userManagement')}
-                        </Typography>
-                        <Typography className="inline text-18 text-center font-medium text-pink-500">
-                            {routeParams.action.charAt(0).toUpperCase() +
-                                routeParams.action.slice(1)}
-                        </Typography>
-                    </Breadcrumbs>
-                </div>
-                <Button
-                    variant="contained"
-                    color="info"
-                    onClick={() => {
-                        history.push('/settings/user-management');
-                    }}
-                    className="rounded-md"
-                >
-                    <FuseSvgIcon size={18}>
-                        heroicons-solid:arrow-left
-                    </FuseSvgIcon>
-                    <span className="ml-8">{t('back')}</span>
-                </Button>
-            </div>
-            <Paper className={`mx-24 my-32 px-32 py-32 ${styles.form}`}>
-                <div className="flex items-center justify-between">
-                    <Typography
-                        className={'font-bold text-32'}
-                        color="text.secondary"
-                    >
-                        {routeParams.action.charAt(0).toUpperCase() +
-                            routeParams.action.slice(1)}{' '}
-                        Item
-                    </Typography>
-                </div>
-                <div className="grid md:grid-cols-2 grid-cols-1 gap-16">
+                            <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
+                            <div className="absolute inset-0 flex items-center justify-center z-20">
+                                <div>
+                                    <label htmlFor="button-avatar" className="flex p-8 cursor-pointer">
+                                        <input
+                                            accept="image/*"
+                                            className="hidden"
+                                            id="button-avatar"
+                                            type="file"
+                                            onChange={async (e) => {
+                                                function readFileAsync() {
+                                                    return new Promise((resolve, reject) => {
+                                                        const file = e.target.files[0];
+                                                        if (!file) {
+                                                            return;
+                                                        }
+                                                        const reader = new FileReader();
+
+                                                        reader.onload = () => {
+                                                            resolve(`data:${file.type};base64,${btoa(reader.result)}`);
+                                                        };
+
+                                                        reader.onerror = reject;
+
+                                                        reader.readAsBinaryString(file);
+                                                    });
+                                                }
+
+                                                const newImage = await readFileAsync();
+                                                onChange(newImage);
+                                            }}
+                                        />
+                                        <FuseSvgIcon className="text-white">heroicons-outline:camera</FuseSvgIcon>
+                                    </label>
+                                </div>
+                                <div>
+                                    <IconButton
+                                        onClick={() => {
+                                            onChange('');
+                                        }}
+                                    >
+                                        <FuseSvgIcon className="text-white">heroicons-outline:trash</FuseSvgIcon>
+                                    </IconButton>
+                                </div>
+                            </div>
+                            <Avatar
+                                sx={{
+                                    backgroundColor: 'background.default',
+                                    color: 'text.secondary',
+                                }}
+                                className="object-cover w-full h-full text-64 font-bold"
+                                src={value}
+                            />
+                        </Box>
+                    )}
+                />
+                <div className='grid md:grid-cols-2 grid-cols-1 gap-x-40'>
                     <Controller
                         control={control}
                         name="name"
@@ -140,7 +170,7 @@ const UserForm = () => {
                             <TextField
                                 className="mt-32"
                                 {...field}
-                                label="name"
+                                label="Name"
                                 placeholder="Name"
                                 id="name"
                                 error={!!errors.name}
@@ -162,17 +192,17 @@ const UserForm = () => {
                     />
                     <Controller
                         control={control}
-                        name="url"
-                        defaultValue=""
+                        name="email"
+                        defaultValue=''
                         render={({ field }) => (
                             <TextField
                                 className="mt-32"
                                 {...field}
-                                label="url"
-                                placeholder="URL"
-                                id="url"
-                                error={!!errors.url}
-                                helperText={errors?.url?.message}
+                                label="Email"
+                                placeholder="Email"
+                                id="email"
+                                error={!!errors.email}
+                                helperText={errors?.email?.message}
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -197,7 +227,7 @@ const UserForm = () => {
                                 {...field}
                                 select
                                 className="mt-32"
-                                label="role"
+                                label="Role"
                                 placeholder="Role"
                                 id="role"
                                 error={!!errors.role}
@@ -225,6 +255,58 @@ const UserForm = () => {
                                     );
                                 })}
                             </TextField>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name="phone"
+                        defaultValue=''
+                        render={({ field }) => (
+                            <TextField
+                                className="mt-32"
+                                {...field}
+                                label="Phone"
+                                placeholder="Phone"
+                                id="phone"
+                                error={!!errors.phone}
+                                helperText={errors?.phone?.message}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <FuseSvgIcon size={24}>heroicons-solid:phone</FuseSvgIcon>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name="address"
+                        defaultValue=''
+                        render={({ field }) => (
+                            <TextField
+                                className="mt-32"
+                                {...field}
+                                label="Address"
+                                placeholder="Address"
+                                id="address"
+                                error={!!errors.address}
+                                helperText={errors?.address?.message}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <FuseSvgIcon size={24}>heroicons-solid:location-marker</FuseSvgIcon>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
                         )}
                     />
                 </div>

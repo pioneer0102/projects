@@ -217,6 +217,396 @@
                 "status": ""
               }
             ]
+          },
+          {
+            "id": 6,
+            "customer": "John Doe",
+            "subtotal": "2500",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "completed",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 14,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "customer": "Brokle Myles",
+            "subtotal": "2000",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 1,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 4,
+                "quantity": "5",
+                "status": "canceled"
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "customer": "Bertha Biner",
+            "subtotal": "4000",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 1,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": "canceled"
+              },
+              {
+                "id": 4,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "customer": "John Doe",
+            "subtotal": "2500",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "rejected",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "completed",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 14,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "customer": "John Doe",
+            "subtotal": "2500",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 14,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": "canceled"
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "customer": "John Doe",
+            "subtotal": "2500",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "completed",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 14,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "customer": "Brokle Myles",
+            "subtotal": "2000",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 1,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 4,
+                "quantity": "5",
+                "status": "canceled"
+              }
+            ]
+          },
+          {
+            "id": 13,
+            "customer": "Bertha Biner",
+            "subtotal": "4000",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 1,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": "canceled"
+              },
+              {
+                "id": 4,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "customer": "John Doe",
+            "subtotal": "2500",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "rejected",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "completed",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pickedup",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "pending",
+                "date": "December 4, 2023 10:30 AM"
+              },
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 14,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": "replaced"
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
+          },
+          {
+            "id": 15,
+            "customer": "John Doe",
+            "subtotal": "2500",
+            "channel": "DoorDash",
+            "tax": 100,
+            "tip": 50,
+            "history": [
+              {
+                "status": "received",
+                "date": "December 4, 2023 10:30 AM"
+              }
+            ],
+            "items": [
+              {
+                "id": 14,
+                "quantity": "5",
+                "status": ""
+              },
+              {
+                "id": 2,
+                "quantity": "5",
+                "status": "canceled"
+              },
+              {
+                "id": 3,
+                "quantity": "5",
+                "status": ""
+              }
+            ]
           }
         ]
       },
@@ -224,7 +614,7 @@
         "value": [
           {
             "id": 1,
-            "image":"assets/images/items/handphone/1.jpg",
+            "image": "assets/images/items/handphone/1.jpg",
             "category": "Handphone",
             "name": "Android Handphone",
             "price": 200,
@@ -236,7 +626,7 @@
           },
           {
             "id": 2,
-            "image":"assets/images/items/handphone/2.jpg",
+            "image": "assets/images/items/handphone/2.jpg",
             "category": "Handphone",
             "name": "Android Handphone",
             "price": 200,
@@ -248,7 +638,7 @@
           },
           {
             "id": 3,
-            "image":"assets/images/items/handphone/3.jpg",
+            "image": "assets/images/items/handphone/3.jpg",
             "category": "Handphone",
             "name": "Android Handphone",
             "price": 200,
@@ -260,7 +650,7 @@
           },
           {
             "id": 4,
-            "image":"assets/images/items/handphone/4.jpg",
+            "image": "assets/images/items/handphone/4.jpg",
             "category": "Handphone",
             "name": "Android Handphone",
             "price": 200,
@@ -272,7 +662,7 @@
           },
           {
             "id": 5,
-            "image":"assets/images/items/handphone/5.jpg",
+            "image": "assets/images/items/handphone/5.jpg",
             "category": "Handphone",
             "name": "Android Handphone",
             "price": 200,
@@ -284,7 +674,7 @@
           },
           {
             "id": 6,
-            "image":"assets/images/items/handphone/6.jpg",
+            "image": "assets/images/items/handphone/6.jpg",
             "category": "Handphone",
             "name": "Android Handphone",
             "price": 200,
@@ -296,7 +686,7 @@
           },
           {
             "id": 7,
-            "image":"assets/images/items/handphone/7.jpg",
+            "image": "assets/images/items/handphone/7.jpg",
             "category": "Handphone",
             "name": "iOS Handphone",
             "price": 200,
@@ -308,7 +698,7 @@
           },
           {
             "id": 8,
-            "image":"assets/images/items/handphone/8.jpg",
+            "image": "assets/images/items/handphone/8.jpg",
             "category": "Handphone",
             "name": "iOS Handphone",
             "price": 200,
@@ -320,7 +710,7 @@
           },
           {
             "id": 9,
-            "image":"assets/images/items/handphone/9.jpeg",
+            "image": "assets/images/items/handphone/9.jpeg",
             "category": "Handphone",
             "name": "iOS Handphone",
             "price": 200,
@@ -332,7 +722,7 @@
           },
           {
             "id": 10,
-            "image":"assets/images/items/handphone/10.avif",
+            "image": "assets/images/items/handphone/10.avif",
             "category": "Handphone",
             "name": "iOS Handphone",
             "price": 200,
@@ -344,7 +734,7 @@
           },
           {
             "id": 11,
-            "image":"assets/images/items/handphone/11.avif",
+            "image": "assets/images/items/handphone/11.avif",
             "category": "Handphone",
             "name": "iOS Handphone",
             "price": 200,
@@ -356,7 +746,7 @@
           },
           {
             "id": 12,
-            "image":"assets/images/items/handphone/12.avif",
+            "image": "assets/images/items/handphone/12.avif",
             "category": "Handphone",
             "name": "iOS Handphone",
             "price": 200,
@@ -368,7 +758,7 @@
           },
           {
             "id": 13,
-            "image":"assets/images/items/handphone/13.jpg",
+            "image": "assets/images/items/handphone/13.jpg",
             "category": "Handphone",
             "name": "iOS Handphone",
             "price": 200,
@@ -380,7 +770,7 @@
           },
           {
             "id": 14,
-            "image":"assets/images/items/accessory/1.jpg",
+            "image": "assets/images/items/accessory/1.jpg",
             "category": "Accessory",
             "name": "TISSOT watch",
             "price": 100,
@@ -392,7 +782,7 @@
           },
           {
             "id": 15,
-            "image":"assets/images/items/accessory/2.jpg",
+            "image": "assets/images/items/accessory/2.jpg",
             "category": "Accessory",
             "name": "TISSOT watch",
             "price": 400,
@@ -404,7 +794,7 @@
           },
           {
             "id": 16,
-            "image":"assets/images/items/accessory/3.webp",
+            "image": "assets/images/items/accessory/3.webp",
             "category": "Accessory",
             "name": "Rolex watch",
             "price": 1000,
@@ -416,7 +806,7 @@
           },
           {
             "id": 17,
-            "image":"assets/images/items/accessory/4.jpg",
+            "image": "assets/images/items/accessory/4.jpg",
             "category": "Accessory",
             "name": "Rolex watch",
             "price": "500",
@@ -425,30 +815,6 @@
             "upc": "1234567890",
             "active": true,
             "description": "today's mobile phones provide additional services such as e-mail, Internet browsing, PDA functionality, digital camera, SMS for text messaging."
-          }
-        ]
-      },
-      "category": {
-        "value": [
-          {
-            "id": 1,
-            "name": "handphone"
-          },
-          {
-            "id": 2,
-            "name": "coat"
-          },
-          {
-            "id": 3,
-            "name": "laptop"
-          },
-          {
-            "id": 4,
-            "name": "watch"
-          },
-          {
-            "id": 5,
-            "name": "shoes"
           }
         ]
       },
@@ -468,117 +834,54 @@
           }
         ]
       },
-      "pos": {
+      "category": {
         "value": [
           {
-            "id": "1",
-            "type": "Desktop POS System",
-            "user_name": "John Dae",
-            "password": "123456",
-            "url": "http://example01.pos.com",
-            "tax": [
-              {
-                "name": "Sales Tax",
-                "rate": 10
-              },
-              {
-                "name": "Trash Tax",
-                "rate": 5
-              }
-            ],
-            "department": [
-              {
-                "name": "clothe",
-                "rate": 20
-              },
-              {
-                "name": "accessory",
-                "rate": 8
-              }
-            ]
+            "id": 1,
+            "name": "Accessory"
           },
           {
-            "id": "2",
-            "type": "Handheld POS System",
-            "user_name": "Danyil Balko",
-            "password": "456789",
-            "url": "http://example02.pos.com",
-            "tax": [
-              {
-                "name": "Window Tax",
-                "rate": 20
-              },
-              {
-                "name": "Internet Tax",
-                "rate": 10
-              }
-            ],
-            "department": [
-              {
-                "name": "clothe",
-                "rate": 8
-              },
-              {
-                "name": "accessory",
-                "rate": 12
-              }
-            ]
+            "id": 2,
+            "name": "Clothes"
           },
           {
-            "id": "3",
-            "type": "Phone POS System",
-            "user_name": "Alejandro Gonjaless",
-            "password": "123456",
-            "url": "http://example03.pos.com",
-            "tax": [
-              {
-                "name": "Fair Tax",
-                "rate": 10
-              }
-            ],
-            "department": [
-              {
-                "name": "clothe",
-                "rate": 20
-              },
-              {
-                "name": "accessory",
-                "rate": 8
-              }
-            ]
+            "id": 3,
+            "name": "Handphone"
           },
           {
-            "id": "4",
-            "type": "Tablet POS System",
-            "user_name": "Fernando Ferrira",
-            "password": "123456",
-            "url": "http://example04.pos.com",
-            "tax": [
-              {
-                "name": "Income Tax",
-                "rate": 10
-              },
-              {
-                "name": "Consumption Ttax",
-                "rate": 5
-              },
-              {
-                "name": "Property Ttax",
-                "rate": 5
-              }
-            ],
-            "department": [
-              {
-                "name": "clothe",
-                "rate": 20
-              },
-              {
-                "name": "accessory",
-                "rate": 8
-              }
-            ]
+            "id": 4,
+            "name": "Laptop"
           }
         ]
+      },
+      "pos": {
+        "value": {
+          "id": "1",
+          "type": "Desktop POS System",
+          "userName": "John Dae",
+          "password": "123456",
+          "url": "http://example01.pos.com",
+          "taxes": [
+            {
+              "name": "Sales Tax",
+              "rate": 10
+            },
+            {
+              "name": "Trash Tax",
+              "rate": 5
+            }
+          ],
+          "departments": [
+            {
+              "name": "clothe",
+              "rate": 20
+            },
+            {
+              "name": "accessory",
+              "rate": 8
+            }
+          ]
+        }
       },
       "user": {
         "value": [
@@ -586,25 +889,133 @@
             "id": "1",
             "name": "John Doe",
             "url": "http://example01.pos.com",
-            "role": "store owner"
+            "role": "store owner",
+            "password": "123456",
+            "avatar": "assets/images/avatars/male-01.jpg",
+            "email": "johndoe@gmail.com",
+            "phone": "+1-202-555-0175",
+            "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
           },
           {
             "id": "2",
             "name": "Danyil Balko",
             "url": "http://example02.pos.com",
-            "role": "store owner"
+            "role": "store owner",
+            "password": "456789",
+            "avatar": "assets/images/avatars/male-02.jpg",
+            "email": "danyilbalko@gmail.com",
+            "phone": "+1-943-511-2203",
+            "address": "197 Marconi Place, Welda, Delaware, PO6061"
           },
           {
             "id": "3",
             "name": "Alejandro Gonjaless",
             "url": "http://example03.pos.com",
-            "role": "employee"
+            "role": "employee",
+            "password": "123456",
+            "avatar": "assets/images/avatars/male-03.jpg",
+            "email": "alejandrogonjaless@gmail.com",
+            "phone": "+1-838-562-2769",
+            "address": "112 Tillary Street, Camptown, Vermont, PO8827"
           },
           {
             "id": "4",
             "name": "Fernando Ferrira",
             "url": "http://example03.pos.com",
-            "role": "store owner"
+            "role": "store owner",
+            "password": "456789",
+            "avatar": "assets/images/avatars/male-04.jpg",
+            "email": "fernandoferrira@gmail.com",
+            "phone": "+1-990-457-2106",
+            "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+          },
+          {
+            "id": "5",
+            "name": "John Doe",
+            "url": "http://example01.pos.com",
+            "role": "store owner",
+            "password": "123456",
+            "avatar": "assets/images/avatars/male-01.jpg",
+            "email": "johndoe@gmail.com",
+            "phone": "+1-202-555-0175",
+            "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+          },
+          {
+            "id": "6",
+            "name": "Danyil Balko",
+            "url": "http://example02.pos.com",
+            "role": "store owner",
+            "password": "456789",
+            "avatar": "assets/images/avatars/male-02.jpg",
+            "email": "danyilbalko@gmail.com",
+            "phone": "+1-943-511-2203",
+            "address": "197 Marconi Place, Welda, Delaware, PO6061"
+          },
+          {
+            "id": "7",
+            "name": "Alejandro Gonjaless",
+            "url": "http://example03.pos.com",
+            "role": "employee",
+            "password": "123456",
+            "avatar": "assets/images/avatars/male-03.jpg",
+            "email": "alejandrogonjaless@gmail.com",
+            "phone": "+1-838-562-2769",
+            "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+          },
+          {
+            "id": "8",
+            "name": "Fernando Ferrira",
+            "url": "http://example03.pos.com",
+            "role": "store owner",
+            "password": "456789",
+            "avatar": "assets/images/avatars/male-04.jpg",
+            "email": "fernandoferrira@gmail.com",
+            "phone": "+1-990-457-2106",
+            "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+          },
+          {
+            "id": "9",
+            "name": "John Doe",
+            "url": "http://example01.pos.com",
+            "role": "store owner",
+            "password": "123456",
+            "avatar": "assets/images/avatars/male-01.jpg",
+            "email": "johndoe@gmail.com",
+            "phone": "+1-202-555-0175",
+            "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+          },
+          {
+            "id": "10",
+            "name": "Danyil Balko",
+            "url": "http://example02.pos.com",
+            "role": "store owner",
+            "password": "456789",
+            "avatar": "assets/images/avatars/male-02.jpg",
+            "email": "danyilbalko@gmail.com",
+            "phone": "+1-943-511-2203",
+            "address": "197 Marconi Place, Welda, Delaware, PO6061"
+          },
+          {
+            "id": "11",
+            "name": "Alejandro Gonjaless",
+            "url": "http://example03.pos.com",
+            "role": "employee",
+            "password": "123456",
+            "avatar": "assets/images/avatars/male-03.jpg",
+            "email": "alejandrogonjaless@gmail.com",
+            "phone": "+1-838-562-2769",
+            "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+          },
+          {
+            "id": "12",
+            "name": "Fernando Ferrira",
+            "url": "http://example03.pos.com",
+            "role": "store owner",
+            "password": "456789",
+            "avatar": "assets/images/avatars/male-04.jpg",
+            "email": "fernandoferrira@gmail.com",
+            "phone": "+1-990-457-2106",
+            "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
           }
         ]
       }

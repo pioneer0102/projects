@@ -1,6 +1,5 @@
 import UserManagement from './user-management/UserManagement';
 import PosSettings from './pos-settings/PosSettings';
-import PosForm from './pos-settings/PosForm';
 import UserForm from './user-management/components/UserForm';
 
 const SettingsConfig = {
@@ -21,10 +20,6 @@ const SettingsConfig = {
         {
             path: 'settings/pos-settings',
             element: <PosSettings />
-        },
-        {
-            path: 'settings/pos-settings/:action/:id',
-            element: <PosForm />
         }
     ]
 };

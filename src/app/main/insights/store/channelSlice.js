@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// export const channelStatisticalData = async (date) => {
-//     const response = await axios.post('/api/getchanneldata', date);
-//     return response.data;
-// };
-
 export const channelStatisticalData = createAsyncThunk(
     'insightsApp/channel/channelStatisticalData',
     async () => {
