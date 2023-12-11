@@ -4,9 +4,18 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from '@mui/system/Unstable_Grid/Grid';
+import { selectPosDetail } from '../../store/posSlice';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import MenuItem from '@mui/material/MenuItem';
 
 const DepartmentItem = ({ index, value, handleEdit, handleRemove }) => {
-    const [department, setDepartment] = useState({ name: '', rate: 0 });
+    const { t } = useTranslation();
+
+    const posDetail = useSelector(selectPosDetail);
+    const [taxes, setTaxes] = useState([]);
+
+    const [department, setDepartment] = useState({ name: '', taxId: 0 });
     const [isEditable, setEditable] = useState(true);
 
     const handleChange = (key, value) => {
@@ -18,6 +27,10 @@ const DepartmentItem = ({ index, value, handleEdit, handleRemove }) => {
     useEffect(() => {
         setDepartment(value);
     }, [value]);
+
+    useEffect(() => {
+        setTaxes(posDetail.taxes);
+    }, [posDetail]);
 
     return (
         <Grid container spacing={2} className="flex items-center">
@@ -48,16 +61,18 @@ const DepartmentItem = ({ index, value, handleEdit, handleRemove }) => {
             </Grid>
             <Grid lg={5} md={5} sm={5} xs={5}>
                 <TextField
+                    select
                     className="mt-32"
-                    label="Department Tax Rate"
-                    placeholder="Department Tax Rate"
-                    id="rate"
+                    label="Department Tax"
+                    placeholder="Department Tax"
+                    id="taxId"
                     variant="outlined"
+                    required
                     fullWidth
                     disabled={isEditable}
-                    value={department.rate}
+                    value={department.taxId}
                     onChange={(event) =>
-                        handleChange('rate', event.target.value)
+                        handleChange('taxId', event.target.value)
                     }
                     InputProps={{
                         startAdornment: (
@@ -68,7 +83,14 @@ const DepartmentItem = ({ index, value, handleEdit, handleRemove }) => {
                             </InputAdornment>
                         )
                     }}
-                />
+                >
+                    <MenuItem value="-1">{t('none')}</MenuItem>
+                    {taxes.map((tax, index) => (
+                        <MenuItem key={index} value={index}>
+                            {tax.rate} ({tax.name})
+                        </MenuItem>
+                    ))}
+                </TextField>
             </Grid>
             <Grid lg={2} md={2} sm={2} xs={2}>
                 <IconButton

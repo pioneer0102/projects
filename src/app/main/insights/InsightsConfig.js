@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import Channels from './channels/Channels';
 import Categories from './categories/Categories';
 

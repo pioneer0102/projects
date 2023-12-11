@@ -91,10 +91,6 @@ a[role=button] {
     z-index: 9999;
 }
 
-.MuiModal-root {
-    /*z-index: 9999;*/
-}
-
 /* Medium Devices, Desktops Only */
 @media only screen and (min-width: 992px) {
     ::-webkit-scrollbar {
@@ -132,16 +128,6 @@ body.no-animate *::after {
 
 button:focus {
     outline: none;
-}
-
-/* Removes webkit's autofill backgorund color */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active
-{
-    transitionDelay: 9999s;
-    transitionProperty: background-color, color;
 }
 
 :focus {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
 import DepartmentItem from './DepartmentItem';
@@ -8,14 +8,14 @@ import Grid from '@mui/system/Unstable_Grid/Grid';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import MenuItem from '@mui/material/MenuItem';
 import {
     selectPosDetail,
     setFormdata,
     update,
     remove
 } from '../../store/posSlice';
-
-const isNumeric = (value) => !isNaN(parseFloat(value)) && isFinite(value);
 
 const validateTaxItem = (department) => {
     const errors = {};
@@ -24,8 +24,8 @@ const validateTaxItem = (department) => {
         errors.name = 'Please input department name.';
     }
 
-    if (!isNumeric(department.rate)) {
-        errors.rate = 'Please input a numeric value.';
+    if (parseInt(department.taxId) === -1) {
+        errors.taxId = 'Please select tax.';
     }
 
     return errors;
@@ -33,21 +33,20 @@ const validateTaxItem = (department) => {
 
 const initialErrors = {
     nameError: { isError: false, text: '' },
-    rateError: { isError: false, text: '' }
+    taxIdError: { isError: false, text: '' }
 };
 
 const DepartmentTab = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const posDetail = useSelector(selectPosDetail);
+
+    const [taxes, setTaxes] = useState([]);
     const [errors, setErrors] = useState(initialErrors);
     const [newDepartmentItem, setNewDepartmentItem] = useState({
         name: '',
-        rate: 0
+        taxId: 0
     });
-    // const [departmentItems, setDepartmentItems] = useState([]);
-    // useEffect(() => {
-    //     setDepartmentItems(departmentDetail);
-    // }, [departmentDetail])
 
     const handleAdd = () => {
         const validationErrors = validateTaxItem(newDepartmentItem);
@@ -68,7 +67,7 @@ const DepartmentTab = () => {
 
         // handleDepartmentItems(newDepartmentItem);
         dispatch(setFormdata({ type: 'department', value: newDepartmentItem }));
-        setNewDepartmentItem({ name: '', rate: 0 });
+        setNewDepartmentItem({ name: '', taxId: 0 });
     };
 
     const removeTax = (index) => {
@@ -88,6 +87,10 @@ const DepartmentTab = () => {
             update({ type: 'department', id: index, key: key, value: value })
         );
     };
+
+    useEffect(() => {
+        setTaxes(posDetail.taxes);
+    }, [posDetail]);
 
     return (
         <Paper className="rounded-md shadow-none">
@@ -120,23 +123,21 @@ const DepartmentTab = () => {
                 </Grid>
                 <Grid lg={5} md={5} sm={5} xs={5}>
                     <TextField
+                        select
                         className="mt-32"
-                        label="Department Tax Rate"
-                        placeholder="Department Tax Rate"
-                        id="rate"
-                        error={errors.rateError.isError}
-                        helperText={errors.rateError.text}
+                        label="Department Tax"
+                        placeholder="Department Tax"
+                        id="taxId"
+                        error={errors.taxIdError.isError}
+                        helperText={errors.taxIdError.text}
                         variant="outlined"
+                        required
                         fullWidth
-                        value={newDepartmentItem.rate}
+                        value={newDepartmentItem.taxId || 0}
                         onChange={(event) =>
-                            handleChange('rate', event.target.value)
+                            handleChange('taxId', event.target.value)
                         }
                         InputProps={{
-                            inputProps: {
-                                type: 'number',
-                                min: 0
-                            },
                             startAdornment: (
                                 <InputAdornment position="start">
                                     <FuseSvgIcon size={24}>
@@ -145,7 +146,14 @@ const DepartmentTab = () => {
                                 </InputAdornment>
                             )
                         }}
-                    />
+                    >
+                        <MenuItem value="-1">{t('none')}</MenuItem>
+                        {taxes.map((tax, index) => (
+                            <MenuItem key={index} value={index}>
+                                {tax.rate} ({tax.name})
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 </Grid>
                 <Grid lg={2} md={2} sm={2} xs={2}>
                     <IconButton
@@ -160,12 +168,12 @@ const DepartmentTab = () => {
                 </Grid>
             </Grid>
             {posDetail.departments !== null &&
-                posDetail.departments.map((taxItem, index) => {
+                posDetail.departments.map((department, index) => {
                     return (
                         <DepartmentItem
                             key={index}
                             index={index}
-                            value={taxItem}
+                            value={department}
                             handleEdit={handleEdit}
                             handleRemove={removeTax}
                         />

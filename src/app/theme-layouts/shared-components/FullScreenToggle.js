@@ -14,7 +14,7 @@ const HeaderFullScreenToggle = (props) => {
     useEnhancedEffect(() => {
         document.onfullscreenchange = () =>
             setIsFullScreen(
-                document[getBrowserFullscreenElementProp()] != null
+                document[getBrowserFullscreenElementProp()] !== null
             );
 
         return () => {
