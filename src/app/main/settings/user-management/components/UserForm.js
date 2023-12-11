@@ -258,7 +258,7 @@ const UserForm = () => {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <FuseSvgIcon size={24}>
-                                                heroicons-solid:external-link
+                                                heroicons-outline:mail
                                             </FuseSvgIcon>
                                         </InputAdornment>
                                     )

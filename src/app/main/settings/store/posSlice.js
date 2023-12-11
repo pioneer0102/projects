@@ -52,7 +52,7 @@ const posSlice = createSlice({
                 case 'department':
                     state.posDetail.departments.push({
                         name: action.payload.value.name,
-                        rate: action.payload.value.rate
+                        taxId: action.payload.value.taxId
                     });
                     break;
             }

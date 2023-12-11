@@ -874,11 +874,11 @@
           "departments": [
             {
               "name": "clothe",
-              "rate": 20
+              "taxId": 0
             },
             {
               "name": "accessory",
-              "rate": 8
+              "taxId": 1
             }
           ]
         }

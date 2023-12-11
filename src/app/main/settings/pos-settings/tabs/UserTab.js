@@ -109,7 +109,7 @@ const UserTab = () => {
                         startAdornment: (
                             <InputAdornment position="start">
                                 <FuseSvgIcon size={24}>
-                                    heroicons-outline:currency-dollar
+                                    heroicons-outline:link
                                 </FuseSvgIcon>
                             </InputAdornment>
                         )
