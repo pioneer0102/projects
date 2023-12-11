@@ -34,6 +34,7 @@ const navigationConfig = [
         title: 'Insights',
         type: 'collapse',
         icon: 'heroicons-outline:chart-bar',
+        // url: '/insights'
         children: [
             {
                 id: 'Insights.Channels',

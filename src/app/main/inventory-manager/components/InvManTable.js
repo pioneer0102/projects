@@ -40,7 +40,11 @@ const InvManTable = () => {
         pageSize: pageSize
     };
 
-    const { data: inventory, isLoading, isError } = useQuery(['inventoryList', searchData], () => getInventory(searchData));
+    const {
+        data: inventory,
+        isLoading,
+        isError
+    } = useQuery(['inventoryList', searchData], () => getInventory(searchData));
     const filterSize = inventory && inventory.filterSize;
 
     const showDetail = (id) => history.push(`/inventory-manager/edit/${id}`);
@@ -91,9 +95,9 @@ const InvManTable = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {inventory.pagedData
-                            .map((item, index) => {
-                                return (inventory &&
+                        {inventory.pagedData.map((item, index) => {
+                            return (
+                                inventory && (
                                     <Tr
                                         key={index}
                                         role="button"
@@ -104,7 +108,8 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-24">
+                                                className="text-20 md:pt-24"
+                                            >
                                                 <img
                                                     src={item.image}
                                                     alt={category}
@@ -119,35 +124,40 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16">
+                                                className="text-20 md:pt-16"
+                                            >
                                                 {item.name}
                                             </Typography>
                                         </Td>
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16">
+                                                className="text-20 md:pt-16"
+                                            >
                                                 {item.category}
                                             </Typography>
                                         </Td>
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16">
+                                                className="text-20 md:pt-16"
+                                            >
                                                 $ {item.price}
                                             </Typography>
                                         </Td>
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16">
+                                                className="text-20 md:pt-16"
+                                            >
                                                 {item.quantity}
                                             </Typography>
                                         </Td>
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16">
+                                                className="text-20 md:pt-16"
+                                            >
                                                 {item.active ? (
                                                     <FuseSvgIcon
                                                         className="text-green"
@@ -167,15 +177,15 @@ const InvManTable = () => {
                                         </Td>
                                     </Tr>
                                 )
-                            }
-                            )
-                        }
+                            );
+                        })}
                     </Tbody>
                 </Table>
                 <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
                     <Typography
                         className="text-16 text-center font-medium"
-                        color="text.secondary">
+                        color="text.secondary"
+                    >
                         {t('orders.total')} : {filterSize}
                     </Typography>
                     <TablePagination

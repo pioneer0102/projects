@@ -1,6 +1,5 @@
 /* eslint-disable indent */
 import clsx from 'clsx';
-import history from '@history';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import { Button } from '@mui/material';
@@ -23,9 +22,6 @@ import {
     OrderDetailCustomHeader
 } from 'src/app/model/OrdersModel';
 import { useTranslation } from 'react-i18next';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import NavLinkAdapter from '@fuse/core/NavLinkAdapter';
-import styles from './style.module.scss';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Popover from '@mui/material/Popover';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -134,10 +130,11 @@ const OrderDetail = () => {
     return (
         <div>
             <Breadcrumb parentUrl="Orders" parent="Orders" child="Detail" />
-            <div className='flex flex-col md:flex-row'>
+            <div className="flex flex-col md:flex-row">
                 <Paper
                     className="px-8 py-24 my-32 mx-24 md:w-1/2"
-                    sx={{ boxShadow: 'none', borderRadius: 1 }}>
+                    sx={{ boxShadow: 'none', borderRadius: 1 }}
+                >
                     <div className="sm:items-start mx-24">
                         <Typography
                             className="text-20 font-medium"
@@ -170,56 +167,96 @@ const OrderDetail = () => {
                             </TableHead>
                             <TableBody>
                                 {orderInfo.history &&
-                                    orderInfo.history.map((item, historyIndex) => {
-                                        return (
-                                            <TableRow key={historyIndex}>
-                                                <TableCell align="left">
-                                                    <Typography
-                                                        color="text.secondary"
-                                                        className="text-16">
-                                                        {historyIndex == 0 ? orderInfo.customer : ""}
-                                                    </Typography>
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    <Typography
-                                                        color="text.secondary"
-                                                        className="text-16">
-                                                        {historyIndex == 0 ? orderInfo.channel : ""}
-                                                    </Typography>
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    <Typography
-                                                        color="text.secondary"
-                                                        className="text-14">
-                                                        {item.date}
-                                                    </Typography>
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    <Typography
-                                                        className={clsx(
-                                                            'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
-                                                            item.status === "completed" &&
-                                                            'bg-green-500 text-grey-100',
-                                                            item.status === "pickedup" &&
-                                                            'bg-blue-500 text-grey-100',
-                                                            item.status === "pending" &&
-                                                            'bg-yellow-600 text-grey-100',
-                                                            item.status === "received" &&
-                                                            'bg-purple-500 text-grey-100',
-                                                            item.status === "rejected" &&
-                                                            'bg-red-500 text-grey-100',
-                                                        )}
-                                                        role="button"
-                                                        aria-describedby={id}
-                                                        onClick={(event) => handleClick(event.currentTarget, historyIndex)}
-                                                        sx={{
-                                                            borderRadius: "3px"
-                                                        }}>
-                                                        {item.status}
-                                                        {(historyIndex == 0 && !open) && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-down</FuseSvgIcon>}
-                                                        {open && <FuseSvgIcon className="inline" size={20}>heroicons-solid:chevron-up</FuseSvgIcon>}
-                                                    </Typography>
-                                                    {/* <Popover
+                                    orderInfo.history.map(
+                                        (item, historyIndex) => {
+                                            return (
+                                                <TableRow key={historyIndex}>
+                                                    <TableCell align="left">
+                                                        <Typography
+                                                            color="text.secondary"
+                                                            className="text-16"
+                                                        >
+                                                            {historyIndex === 0
+                                                                ? orderInfo.customer
+                                                                : ''}
+                                                        </Typography>
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                        <Typography
+                                                            color="text.secondary"
+                                                            className="text-16"
+                                                        >
+                                                            {historyIndex === 0
+                                                                ? orderInfo.channel
+                                                                : ''}
+                                                        </Typography>
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                        <Typography
+                                                            color="text.secondary"
+                                                            className="text-14"
+                                                        >
+                                                            {item.date}
+                                                        </Typography>
+                                                    </TableCell>
+                                                    <TableCell align="left">
+                                                        <Typography
+                                                            className={clsx(
+                                                                'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
+                                                                item.status ===
+                                                                    'completed' &&
+                                                                    'bg-green-500 text-grey-100',
+                                                                item.status ===
+                                                                    'pickedup' &&
+                                                                    'bg-blue-500 text-grey-100',
+                                                                item.status ===
+                                                                    'pending' &&
+                                                                    'bg-yellow-600 text-grey-100',
+                                                                item.status ===
+                                                                    'received' &&
+                                                                    'bg-purple-500 text-grey-100',
+                                                                item.status ===
+                                                                    'rejected' &&
+                                                                    'bg-red-500 text-grey-100'
+                                                            )}
+                                                            role="button"
+                                                            aria-describedby={
+                                                                id
+                                                            }
+                                                            onClick={(event) =>
+                                                                handleClick(
+                                                                    event.currentTarget,
+                                                                    historyIndex
+                                                                )
+                                                            }
+                                                            sx={{
+                                                                borderRadius:
+                                                                    '3px'
+                                                            }}
+                                                        >
+                                                            {item.status}
+                                                            {historyIndex ===
+                                                                0 &&
+                                                                !open && (
+                                                                    <FuseSvgIcon
+                                                                        className="inline"
+                                                                        size={
+                                                                            20
+                                                                        }
+                                                                    >
+                                                                        heroicons-solid:chevron-down
+                                                                    </FuseSvgIcon>
+                                                                )}
+                                                            {open && (
+                                                                <FuseSvgIcon
+                                                                    className="inline"
+                                                                    size={20}
+                                                                >
+                                                                    heroicons-solid:chevron-up
+                                                                </FuseSvgIcon>
+                                                            )}
+                                                        </Typography>
+                                                        {/* <Popover
                                                         id={id}
                                                         open={open}
                                                         anchorEl={anchorEl}
@@ -279,56 +316,56 @@ const OrderDetail = () => {
                                                             )}
                                                         </Box>
                                                     </Popover> */}
-                                                    <Popover
-                                                        id={id}
-                                                        open={open}
-                                                        anchorEl={anchorEl}
-                                                        onClose={
-                                                            handleClose
-                                                        }
-                                                        anchorOrigin={{
-                                                            vertical:
-                                                                'bottom',
-                                                            horizontal:
-                                                                'left'
-                                                        }}
-                                                    >
-                                                        <Box
-                                                            className="flex flex-col"
-                                                            sx={{ p: 1 }}
+                                                        <Popover
+                                                            id={id}
+                                                            open={open}
+                                                            anchorEl={anchorEl}
+                                                            onClose={
+                                                                handleClose
+                                                            }
+                                                            anchorOrigin={{
+                                                                vertical:
+                                                                    'bottom',
+                                                                horizontal:
+                                                                    'left'
+                                                            }}
                                                         >
-                                                            {Status.map(
-                                                                (
-                                                                    item,
-                                                                    indexStatus
-                                                                ) => {
-                                                                    return (
-                                                                        <Typography
-                                                                            key={
-                                                                                indexStatus
-                                                                            }
-                                                                            color="text.secondary"
-                                                                            role="button"
-                                                                            className="font-semibold text-14 px-8 py-2 uppercase uppercase"
-                                                                            onClick={() =>
-                                                                                handleStatusChange(
+                                                            <Box
+                                                                className="flex flex-col"
+                                                                sx={{ p: 1 }}
+                                                            >
+                                                                {Status.map(
+                                                                    (
+                                                                        item,
+                                                                        indexStatus
+                                                                    ) => {
+                                                                        return (
+                                                                            <Typography
+                                                                                key={
+                                                                                    indexStatus
+                                                                                }
+                                                                                color="text.secondary"
+                                                                                role="button"
+                                                                                className="font-semibold text-14 px-8 py-2 uppercase uppercase"
+                                                                                onClick={() =>
+                                                                                    handleStatusChange(
+                                                                                        item
+                                                                                    )
+                                                                                }
+                                                                            >
+                                                                                {
                                                                                     item
-                                                                                )
-                                                                            }
-                                                                        >
-                                                                            {
-                                                                                item
-                                                                            }
-                                                                        </Typography>
-                                                                    );
-                                                                }
-                                                            )}
-                                                        </Box>
-                                                    </Popover>
-                                                </TableCell>
-                                            </TableRow>
-                                        );
-                                    }
+                                                                                }
+                                                                            </Typography>
+                                                                        );
+                                                                    }
+                                                                )}
+                                                            </Box>
+                                                        </Popover>
+                                                    </TableCell>
+                                                </TableRow>
+                                            );
+                                        }
                                     )}
                             </TableBody>
                         </Table>
@@ -386,21 +423,24 @@ const OrderDetail = () => {
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="text-14">
+                                                        className="text-14"
+                                                    >
                                                         {item.name}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="text-14">
+                                                        className="text-14"
+                                                    >
                                                         {item.quantity}
                                                     </Typography>
                                                 </TableCell>
                                                 <TableCell align="left">
                                                     <Typography
                                                         color="text.secondary"
-                                                        className="text-14">
+                                                        className="text-14"
+                                                    >
                                                         $ {item.price}
                                                     </Typography>
                                                 </TableCell>
@@ -409,11 +449,11 @@ const OrderDetail = () => {
                                                         className={clsx(
                                                             'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
                                                             item.status ===
-                                                            'replaced' &&
-                                                            'bg-blue-500 text-grey-100',
+                                                                'replaced' &&
+                                                                'bg-blue-500 text-grey-100',
                                                             item.status ===
-                                                            'canceled' &&
-                                                            'bg-red-500 text-grey-100'
+                                                                'canceled' &&
+                                                                'bg-red-500 text-grey-100'
                                                         )}
                                                         sx={{
                                                             borderRadius: '3px'
@@ -427,9 +467,9 @@ const OrderDetail = () => {
                                                         }
                                                     >
                                                         {item.status}
-                                                        {itemId == item.id &&
-                                                            itemOpen &&
-                                                            item.status ? (
+                                                        {itemId === item.id &&
+                                                        itemOpen &&
+                                                        item.status ? (
                                                             <FuseSvgIcon
                                                                 className="inline"
                                                                 size={20}
@@ -474,7 +514,11 @@ const OrderDetail = () => {
                                                                             color="text.secondary"
                                                                             role="button"
                                                                             className="text-14 px-8 py-2 uppercase uppercase"
-                                                                            onClick={() => handleItemStatusChange(item)}
+                                                                            onClick={() =>
+                                                                                handleItemStatusChange(
+                                                                                    item
+                                                                                )
+                                                                            }
                                                                         >
                                                                             {
                                                                                 item
@@ -506,7 +550,8 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="text-16">
+                                            className="text-16"
+                                        >
                                             Subtotal
                                         </Typography>
                                     </TableCell>
@@ -514,7 +559,8 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="text-30">
+                                            className="text-30"
+                                        >
                                             $ {orderInfo.subtotal}
                                         </Typography>
                                     </TableCell>
@@ -523,7 +569,8 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="text-16">
+                                            className="text-16"
+                                        >
                                             Tax
                                         </Typography>
                                     </TableCell>
@@ -531,7 +578,8 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="text-30">
+                                            className="text-30"
+                                        >
                                             $ {orderInfo.tax}
                                         </Typography>
                                     </TableCell>
@@ -540,7 +588,8 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="text-16">
+                                            className="text-16"
+                                        >
                                             Tip
                                         </Typography>
                                     </TableCell>
@@ -548,7 +597,8 @@ const OrderDetail = () => {
                                     <TableCell align="left">
                                         <Typography
                                             color="text.secondary"
-                                            className="text-30">
+                                            className="text-30"
+                                        >
                                             $ {orderInfo.tip}
                                         </Typography>
                                     </TableCell>
@@ -575,7 +625,7 @@ const OrderDetail = () => {
                             variant="outline"
                             color="secondary"
                             onClick={handleClose}
-                            className={styles.backButton}
+                            className="rounded-md"
                         >
                             <span>{t('cancel')}</span>
                         </Button>
@@ -583,7 +633,7 @@ const OrderDetail = () => {
                             variant="contained"
                             color="secondary"
                             onClick={handleRemoveItem}
-                            className={styles.backButton}
+                            className="rounded-md"
                         >
                             <span>{t('ok')}</span>
                         </Button>

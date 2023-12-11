@@ -1,22 +1,18 @@
-import withReducer from "app/store/withReducer";
+import withReducer from 'app/store/withReducer';
 import reducer from '../store';
 import { Tab, Tabs } from '@mui/material';
 import { Button } from '@mui/material';
-import { Paper } from "@mui/material";
+import { Paper } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
-import { showMessage } from "app/store/fuse/messageSlice";
+import { useEffect, useState } from 'react';
+import { showMessage } from 'app/store/fuse/messageSlice';
 import UserTab from './tabs/UserTab';
 import TaxTab from './tabs/TaxTab';
 import DepartmentTab from './tabs/DepartmentTab';
 
-import {
-    getPos,
-    selectPosDetail,
-    updatePos
-} from '../store/posSlice';
+import { getPos, selectPosDetail, updatePos } from '../store/posSlice';
 
 const PosTabs = () => {
     const { t } = useTranslation();
@@ -31,17 +27,26 @@ const PosTabs = () => {
     const [tabValue, setTabValue] = useState(0);
 
     const handleChangeTab = (event, value) => {
-        setTabValue(value)
+        setTabValue(value);
     };
 
     const finalSave = () => {
         dispatch(updatePos(posDetail));
-        dispatch(showMessage({ message: "POS updated successfully!", variant: "success" }));
-    }
+        dispatch(
+            showMessage({
+                message: 'POS updated successfully!',
+                variant: 'success'
+            })
+        );
+    };
 
     return (
         <>
-            <Paper className={`flex flex-col py-24 px-24 my-32 mx-24 overflow-auto rounded-md shadow-none`}>
+            <Paper
+                className={
+                    'flex flex-col py-24 px-24 my-32 mx-24 overflow-auto rounded-md shadow-none'
+                }
+            >
                 <Tabs
                     value={tabValue}
                     onChange={handleChangeTab}
@@ -65,7 +70,7 @@ const PosTabs = () => {
                         label="Department"
                     />
                 </Tabs>
-                <div className='py-16'>
+                <div className="py-16">
                     <div className={tabValue !== 0 ? 'hidden' : ''}>
                         <UserTab />
                     </div>
@@ -83,16 +88,17 @@ const PosTabs = () => {
                         variant="contained"
                         color="info"
                         onClick={finalSave}
-                        className='rounded-md float-right mt-16'
+                        className="rounded-md float-right mt-16"
                     >
-                        <FuseSvgIcon size={20}>heroicons-solid:check</FuseSvgIcon>
-                        <span className='ml-8'>{t('save')}</span>
+                        <FuseSvgIcon size={20}>
+                            heroicons-solid:check
+                        </FuseSvgIcon>
+                        <span className="ml-8">{t('save')}</span>
                     </Button>
                 </div>
             </Paper>
         </>
-
-    )
+    );
 };
 
 export default withReducer('settingsApp', reducer)(PosTabs);
