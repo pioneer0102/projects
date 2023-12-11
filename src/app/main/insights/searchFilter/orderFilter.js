@@ -24,17 +24,17 @@ const OrderFilter = () => {
                 <Select
                     labelId="select-small-label"
                     id="select-small"
-                    value={filter.category || ''}
+                    value={filter.status || ''}
                     label="Order Status"
                     onChange={(event) =>
                         handleChange('status', event.target.value)
                     }
                 >
                     <MenuItem value="">{t('none')}</MenuItem>
-                    {Status.map((category, index) => {
+                    {Status.map((status, index) => {
                         return (
-                            <MenuItem key={index} value={category.name}>
-                                {category.name}
+                            <MenuItem key={index} value={status}>
+                                {status}
                             </MenuItem>
                         );
                     })}

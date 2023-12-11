@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { Category, Items } from '../../../model/Global';
+import parseISO from 'date-fns/parseISO';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -31,7 +32,7 @@ const SaleFilter = () => {
                     From :
                 </Typography>
                 <DateTimePicker
-                    value={filter.fromDate}
+                    value={filter.fromDate ? parseISO(filter.fromDate) : null}
                     onChange={(newDate) => handleChange('fromDate', newDate)}
                     className="col-span-4"
                     clearable
@@ -66,10 +67,8 @@ const SaleFilter = () => {
                     To :
                 </Typography>
                 <DateTimePicker
-                    value={filter.toDate}
-                    onChange={(event) =>
-                        handleChange('toDate', event.target.value)
-                    }
+                    value={filter.toDate ? parseISO(filter.toDate) : null}
+                    onChange={(newDate) => handleChange('toDate', newDate)}
                     className="col-span-4"
                     clearable
                     slotProps={{
