@@ -6,10 +6,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import Box from '@mui/system/Box';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Typography } from "@mui/material";
+import { Typography } from '@mui/material';
 import styles from './style.module.scss';
 import PartnerBreadcrumb from './components/PartnerBreadCrumb';
 import { logoSrc } from 'src/app/model/PartnerModel';
@@ -39,19 +39,19 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
             borderRadius: '50%',
             animation: 'ripple 1.2s infinite ease-in-out',
             border: '1px solid currentColor',
-            content: '""',
-        },
+            content: '""'
+        }
     },
     '@keyframes ripple': {
         '0%': {
             transform: 'scale(.8)',
-            opacity: 1,
+            opacity: 1
         },
         '100%': {
             transform: 'scale(2.4)',
-            opacity: 0,
-        },
-    },
+            opacity: 0
+        }
+    }
 }));
 
 function PartnerForm() {
@@ -59,40 +59,47 @@ function PartnerForm() {
     const { t } = useTranslation();
     const { control, handleSubmit, formState } = useForm({
         mode: 'onChange',
-        resolver: yupResolver(schema),
+        resolver: yupResolver(schema)
     });
 
     const { isValid, dirtyFields, errors } = formState;
     const channel = routeParams.channel;
 
     const handleCancel = () => history.push('/partners');
-    const onSubmit = () => { }
+    const onSubmit = () => {};
 
     return (
         <>
             <PartnerBreadcrumb channel={channel} />
-            <Paper
-                className={`mx-24 my-32 px-32 py-32 ${styles.form}`}
-            >
-                <div className='flex flex-row justify-between'>
-                    <div className='flex self-center items-center justify-center'>
+            <Paper className={`mx-24 my-32 px-32 py-32 ${styles.form}`}>
+                <div className="flex flex-row justify-between">
+                    <div className="flex self-center items-center justify-center">
                         <img
                             className={styles.logo_size}
                             src={logoSrc[channel]}
-                            alt="user background" />
-                        <Typography className={`font-bold text-32 px-16 ${styles[channel]}`}>
+                            alt="user background"
+                        />
+                        <Typography
+                            className={`font-bold text-32 px-16 ${styles[channel]}`}
+                        >
                             {channel}
                         </Typography>
                     </div>
                     <div className="flex self-center">
                         <StyledBadge
-                        className='self-center'
+                            className="self-center"
                             overlap="circular"
-                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right'
+                            }}
                             variant="dot"
+                        ></StyledBadge>
+                        <Typography
+                            className={
+                                'inline font-semibold text-16 px-16 text-green-500'
+                            }
                         >
-                        </StyledBadge>
-                        <Typography className={`inline font-semibold text-16 px-16 text-green-500`}>
                             {t('partners.connected')}
                         </Typography>
                     </div>
@@ -115,9 +122,11 @@ function PartnerForm() {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <FuseSvgIcon size={24}>heroicons-solid:user-circle</FuseSvgIcon>
+                                        <FuseSvgIcon size={24}>
+                                            heroicons-solid:user-circle
+                                        </FuseSvgIcon>
                                     </InputAdornment>
-                                ),
+                                )
                             }}
                         />
                     )}
@@ -140,9 +149,11 @@ function PartnerForm() {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <FuseSvgIcon size={24}>heroicons-solid:location-marker</FuseSvgIcon>
+                                        <FuseSvgIcon size={24}>
+                                            heroicons-solid:location-marker
+                                        </FuseSvgIcon>
                                     </InputAdornment>
-                                ),
+                                )
                             }}
                         />
                     )}
@@ -164,9 +175,11 @@ function PartnerForm() {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <FuseSvgIcon size={24}>heroicons-solid:mail</FuseSvgIcon>
+                                        <FuseSvgIcon size={24}>
+                                            heroicons-solid:mail
+                                        </FuseSvgIcon>
                                     </InputAdornment>
-                                ),
+                                )
                             }}
                         />
                     )}
@@ -188,16 +201,16 @@ function PartnerForm() {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <FuseSvgIcon size={24}>heroicons-solid:phone</FuseSvgIcon>
+                                        <FuseSvgIcon size={24}>
+                                            heroicons-solid:phone
+                                        </FuseSvgIcon>
                                     </InputAdornment>
-                                ),
+                                )
                             }}
                         />
                     )}
                 />
-                <Box
-                    className="flex items-center mt-32"
-                >
+                <Box className="flex items-center mt-32">
                     <Button
                         className={`ml-auto ${styles.button}`}
                         onClick={handleCancel}

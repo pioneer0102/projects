@@ -41,5 +41,6 @@
     "users": {
         "total": "Total Users",
         "userManagement": "User Management"
-    }
+    },
+    "haveAccount": "Don't have an account?"
 }

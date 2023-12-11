@@ -1,9 +1,9 @@
-import { Paper } from "@mui/material";
+import { Paper } from '@mui/material';
 import Input from '@mui/material/Input';
 import { Box } from '@mui/system';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { motion } from 'framer-motion';
-import { Typography } from "@mui/material";
+import { Typography } from '@mui/material';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -18,35 +18,35 @@ function Categories() {
             align: 'center',
             disablePadding: true,
             label: 'NO',
-            sort: false,
+            sort: false
         },
         {
             id: 'categorie',
             align: 'center',
             disablePadding: false,
             label: 'Category',
-            sort: true,
+            sort: true
         },
         {
             id: 'sale',
             align: 'center',
             disablePadding: false,
             label: 'Sale',
-            sort: true,
+            sort: true
         },
         {
             id: 'order',
             align: 'center',
             disablePadding: false,
             label: 'Order',
-            sort: true,
+            sort: true
         },
         {
             id: 'graphic',
             align: 'center',
             disablePadding: false,
             label: 'Graphic',
-            sort: true,
+            sort: true
         }
     ];
 
@@ -63,7 +63,11 @@ function Categories() {
                         className="inline text-20 text-center font-bold"
                         component={motion.div}
                         initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                        animate={{
+                            y: 0,
+                            opacity: 1,
+                            transition: { delay: 0.2 }
+                        }}
                         variant="body2"
                         color="text.secondary"
                     >
@@ -74,7 +78,11 @@ function Categories() {
                     <Box
                         component={motion.div}
                         initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                        animate={{
+                            y: 0,
+                            opacity: 1,
+                            transition: { delay: 0.2 }
+                        }}
                         className="flex flex-1 w-full sm:w-auto items-center px-16 mx-8 border-1 rounded-full"
                     >
                         <FuseSvgIcon color="action" size={20}>
@@ -88,9 +96,9 @@ function Categories() {
                             fullWidth
                             // value={searchText}
                             inputProps={{
-                                'aria-label': 'Search',
+                                'aria-label': 'Search'
                             }}
-                        // onChange={(ev) => dispatch(setContactsSearchText(ev))}
+                            // onChange={(ev) => dispatch(setContactsSearchText(ev))}
                         />
                     </Box>
                 </div>
@@ -108,7 +116,9 @@ function Categories() {
                                 <TableCell
                                     key={index}
                                     align={item.align}
-                                    padding={item.disablePadding ? 'none' : 'normal'}
+                                    padding={
+                                        item.disablePadding ? 'none' : 'normal'
+                                    }
                                 >
                                     <Typography
                                         color="text.secondary"

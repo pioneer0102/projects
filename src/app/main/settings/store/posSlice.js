@@ -1,31 +1,33 @@
 import {
     createAsyncThunk,
     createEntityAdapter,
-    createSlice,
+    createSlice
 } from '@reduxjs/toolkit';
 import axios from 'axios';
-import _ from '@lodash';
 
 export const getAllPos = async (filterData) => {
     const response = await axios.post('/api/getAllPos', filterData);
     return response.data;
-}
+};
 
 export const getPosById = createAsyncThunk(
-    'settingsApp/pos/getPosById', async (id) => {
+    'settingsApp/pos/getPosById',
+    async (id) => {
         const response = await axios.get('/api/getPosById', { id: id });
         return response.data;
     }
 );
 
-export const addPos = createAsyncThunk('settingsApp/pos/addPos',
+export const addPos = createAsyncThunk(
+    'settingsApp/pos/addPos',
     async (formData) => {
         const response = await axios.post('/api/addPos', formData);
         return response.data;
     }
 );
 
-export const updatePos = createAsyncThunk('settingsApp/pos/updatePos',
+export const updatePos = createAsyncThunk(
+    'settingsApp/pos/updatePos',
     async (formData) => {
         const response = await axios.post('/api/updatePos', formData);
         return response.data;
@@ -34,9 +36,9 @@ export const updatePos = createAsyncThunk('settingsApp/pos/updatePos',
 
 const posAdapter = createEntityAdapter({});
 
-export const {
-    selectAll: selectAllPos
-} = posAdapter.getSelectors((state) => state.settingsApp.pos);
+export const { selectAll: selectAllPos } = posAdapter.getSelectors(
+    (state) => state.settingsApp.pos
+);
 
 export const selectFilter = ({ settingsApp }) => settingsApp.pos.filter;
 export const selectTotalCount = ({ settingsApp }) => settingsApp.pos.totalCount;
@@ -75,7 +77,7 @@ const posSlice = createSlice({
                     break;
             }
         },
-        initializePos: (state, action) => {
+        initializePos: (state) => {
             state.posById = {
                 id: '',
                 type: '',
@@ -84,7 +86,7 @@ const posSlice = createSlice({
                 url: '',
                 tax: [],
                 department: []
-            }
+            };
         },
         setPos: (state, action) => {
             state.totalCount = action.payload.filterSize;
@@ -105,20 +107,16 @@ const posSlice = createSlice({
                     state.posById.url = action.payload.value;
                     break;
                 case 'tax':
-                    state.posById.tax.push(
-                        {
-                            name: action.payload.value.name,
-                            rate: action.payload.value.rate
-                        }
-                    );
+                    state.posById.tax.push({
+                        name: action.payload.value.name,
+                        rate: action.payload.value.rate
+                    });
                     break;
                 case 'department':
-                    state.posById.department.push(
-                        {
-                            name: action.payload.value.name,
-                            rate: action.payload.value.rate
-                        }
-                    );
+                    state.posById.department.push({
+                        name: action.payload.value.name,
+                        rate: action.payload.value.rate
+                    });
                     break;
             }
         },
@@ -141,11 +139,15 @@ const posSlice = createSlice({
             switch (action.payload.type) {
                 case 'tax':
                     // _.remove(state.posById.tax, { id: `${action.payload.id}` });
-                    temp = state.posById.tax.filter((_, i) => i !== action.payload.id);
+                    temp = state.posById.tax.filter(
+                        (_, i) => i !== action.payload.id
+                    );
                     state.posById.tax = temp;
                     break;
                 case 'department':
-                    temp = state.posById.department.filter((_, i) => i !== action.payload.id);
+                    temp = state.posById.department.filter(
+                        (_, i) => i !== action.payload.id
+                    );
                     state.posById.department = temp;
                     break;
             }
@@ -154,17 +156,11 @@ const posSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getPosById.fulfilled, (state, action) => {
             state.posById = action.payload;
-        })
+        });
     }
 });
 
-export const {
-    setFilter,
-    setPos,
-    initializePos,
-    setFormdata,
-    update,
-    remove
-} = posSlice.actions;
+export const { setFilter, setPos, initializePos, setFormdata, update, remove } =
+    posSlice.actions;
 
 export default posSlice.reducer;

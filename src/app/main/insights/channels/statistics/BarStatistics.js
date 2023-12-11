@@ -4,9 +4,9 @@ import {
     selectSaleTotalByChannel,
     selectOrderTotalByChannel
 } from '../../store/channelSlice';
-import {green, orange} from '@mui/material/colors';
+import { green, orange } from '@mui/material/colors';
 import { Channels } from 'src/app/model/Global';
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 import styles from '../../style.module.scss';
 
 const BarStatistics = () => {
@@ -17,20 +17,22 @@ const BarStatistics = () => {
     const saleData = [];
 
     Channels.forEach((channel) => {
-        if(Object.entries(saleTotalByChannel).length!==0) saleData.push(saleTotalByChannel[channel]);
-        if(Object.entries(orderTotalByChannel).length!==0)orderData.push(orderTotalByChannel[channel]);
-    })
+        if (Object.entries(saleTotalByChannel).length !== 0)
+            saleData.push(saleTotalByChannel[channel]);
+        if (Object.entries(orderTotalByChannel).length !== 0)
+            orderData.push(orderTotalByChannel[channel]);
+    });
 
     const saleChartOptions = {
         chart: {
-            id: "basic-bar",
+            id: 'basic-bar',
             toolbar: {
                 show: false
             }
         },
         plotOptions: {
             bar: {
-                columnWidth: "30%"
+                columnWidth: '30%'
             }
         },
 
@@ -40,33 +42,33 @@ const BarStatistics = () => {
         },
         colors: [green[500]],
         stroke: {
-            width: 1,
+            width: 1
         },
         xaxis: {
             categories: Channels
         },
         yaxis: {
-            tickAmount: 10,
+            tickAmount: 10
         }
     };
     const saleSeries = [
         {
-            name: "Order",
-            type: "column",
+            name: 'Order',
+            type: 'column',
             data: saleData
         }
     ];
 
     const orderChartOptions = {
         chart: {
-            id: "basic-bar",
+            id: 'basic-bar',
             toolbar: {
                 show: false
             }
         },
         plotOptions: {
             bar: {
-                columnWidth: "30%"
+                columnWidth: '30%'
             }
         },
 
@@ -82,19 +84,21 @@ const BarStatistics = () => {
             categories: Channels
         },
         yaxis: {
-            tickAmount: 5,
+            tickAmount: 5
         }
     };
     const orderSeries = [
         {
-            name: "Order",
-            type: "column",
+            name: 'Order',
+            type: 'column',
             data: orderData
         }
     ];
 
     return (
-        <Paper className={`mx-24 my-32 px-32 py-32 grid md:grid-cols-2 grid-cols-1 gap-x-96 ${styles.paper}`}>
+        <Paper
+            className={`mx-24 my-32 px-32 py-32 grid md:grid-cols-2 grid-cols-1 gap-x-96 ${styles.paper}`}
+        >
             <ReactApexChart
                 options={saleChartOptions}
                 series={saleSeries}
@@ -107,6 +111,6 @@ const BarStatistics = () => {
             />
         </Paper>
     );
-}
+};
 
 export default BarStatistics;

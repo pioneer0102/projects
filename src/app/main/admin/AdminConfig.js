@@ -5,8 +5,8 @@ const AdminApp = lazy(() => import('./AdminApp'));
 const AdminConfig = {
     settings: {
         layout: {
-            config: {},
-        },
+            config: {}
+        }
     },
     routes: [
         {

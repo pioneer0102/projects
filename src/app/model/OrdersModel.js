@@ -1,112 +1,110 @@
 const SubTotals = [
-    "$10 - $100",
-    "$100 - $500",
-    "$500 - $1000",
-    "$1000 - $5000",
-    "$5000 - $10000"
+    '$10 - $100',
+    '$100 - $500',
+    '$500 - $1000',
+    '$1000 - $5000',
+    '$5000 - $10000'
 ];
 
-const Status = [
-    "completed",
-    "pickedup",
-    "pending",
-    "received",
-    "rejected"
-];
+const Status = ['completed', 'pickedup', 'pending', 'received', 'rejected'];
 
-const ItemStatus = [
-    "replaced",
-    "canceled"
-]
+const ItemStatus = ['replaced', 'canceled'];
 
 const OrdersListHeader = [
     {
         id: 'channel',
         align: 'left',
-        label: 'Channel',
+        label: 'Channel'
     },
     {
         id: 'customer',
         align: 'left',
-        label: 'Customer',
+        label: 'Customer'
     },
     {
         id: 'datetime',
         align: 'left',
-        label: 'Datetime',
+        label: 'Datetime'
     },
     {
         id: 'subtotal',
         align: 'left',
-        label: 'Subtotal',
+        label: 'Subtotal'
     },
     {
         id: 'status',
         align: 'left',
-        label: 'Status',
+        label: 'Status'
     },
     {
         id: 'action',
         align: 'left',
-        label: 'Action',
-    },
+        label: 'Action'
+    }
 ];
 
 const OrderDetailCustomHeader = [
     {
         id: 'customer',
         align: 'left',
-        label: 'Customer',
+        label: 'Customer'
     },
     {
         id: 'channel',
         align: 'left',
-        label: 'Channel',
+        label: 'Channel'
     },
     {
         id: 'datetime',
         align: 'left',
-        label: 'Datetime',
+        label: 'Datetime'
     },
     {
         id: 'status',
         align: 'left',
         label: 'Status',
-        sort: true,
-    },
+        sort: true
+    }
 ];
 
 const OrderDetailContentHeader = [
     {
         id: 'image',
         align: 'left',
-        label: '',
+        label: ''
     },
     {
         id: 'productname',
         align: 'left',
-        label: 'Product Name',
+        label: 'Product Name'
     },
     {
         id: 'quantity',
         align: 'left',
-        label: 'Quantity',
+        label: 'Quantity'
     },
     {
         id: 'price',
         align: 'left',
-        label: 'Price',
+        label: 'Price'
     },
     {
         id: 'status',
         align: 'left',
-        label: 'Status',
+        label: 'Status'
     },
     {
         id: 'price',
         align: 'left',
-        label: '',
-    },
+        label: ''
+    }
 ];
 
-export { SubTotals, Status, OrdersListHeader, OrderDetailCustomHeader, OrderDetailContentHeader, ItemStatus };
+export {
+    SubTotals,
+    Status,
+    OrdersListHeader,
+    OrderDetailCustomHeader,
+    OrderDetailContentHeader,
+    ItemStatus
+};

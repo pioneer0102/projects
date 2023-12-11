@@ -1,11 +1,11 @@
-import { Paper } from "@mui/material";
+import { Paper } from '@mui/material';
 import Input from '@mui/material/Input';
 import { Box } from '@mui/system';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { motion } from 'framer-motion';
-import { Typography } from "@mui/material";
+import { Typography } from '@mui/material';
 
-function AdminApp(props) {
+function AdminApp() {
     return (
         <>
             <Paper
@@ -19,7 +19,11 @@ function AdminApp(props) {
                         className="inline text-20 text-center font-bold"
                         component={motion.div}
                         initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                        animate={{
+                            y: 0,
+                            opacity: 1,
+                            transition: { delay: 0.2 }
+                        }}
                         variant="body2"
                         color="text.secondary"
                     >
@@ -30,7 +34,11 @@ function AdminApp(props) {
                     <Box
                         component={motion.div}
                         initial={{ y: -20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1, transition: { delay: 0.2 } }}
+                        animate={{
+                            y: 0,
+                            opacity: 1,
+                            transition: { delay: 0.2 }
+                        }}
                         className="flex flex-1 w-full sm:w-auto items-center px-16 mx-8 border-1 rounded-full"
                     >
                         <FuseSvgIcon color="action" size={20}>
@@ -43,7 +51,7 @@ function AdminApp(props) {
                             disableUnderline
                             fullWidth
                             inputProps={{
-                                'aria-label': 'Search',
+                                'aria-label': 'Search'
                             }}
                         />
                     </Box>

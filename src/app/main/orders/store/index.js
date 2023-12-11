@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import orders from './ordersSlice';
 
 const reducer = combineReducers({
-    orders,
+    orders
 });
 
 export default reducer;
