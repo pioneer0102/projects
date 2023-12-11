@@ -1,4 +1,4 @@
-import reducer from '../store'
+import reducer from '../store';
 import withReducer from 'app/store/withReducer';
 import UserSearchFilter from './components/UserSearchFilter';
 import UserTable from './components/UserTable';
@@ -12,7 +12,7 @@ const UserManagement = () => {
         <QueryClientProvider client={queryClient}>
             <UserSearchFilter />
             <UserTable />
-        </QueryClientProvider >
+        </QueryClientProvider>
     );
 };
 

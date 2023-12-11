@@ -8,22 +8,22 @@ const PartnersConfig = {
         layout: {
             config: {
                 navbar: {
-                    display: true,
+                    display: true
                 },
                 toolbar: {
-                    display: true,
+                    display: true
                 },
                 footer: {
-                    display: false,
+                    display: false
                 },
                 leftSidePanel: {
-                    display: false,
+                    display: false
                 },
                 rightSidePanel: {
-                    display: false,
-                },
-            },
-        },
+                    display: false
+                }
+            }
+        }
     },
     routes: [
         {

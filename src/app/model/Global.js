@@ -1,8 +1,3 @@
+const Channels = ['DoorDash', 'Uber', 'GrubHub'];
 
-const Channels = [
-    "DoorDash",
-    "Uber",
-    "GrubHub"
-];
-
-export {Channels};
+export { Channels };

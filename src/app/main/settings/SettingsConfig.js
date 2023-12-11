@@ -6,8 +6,8 @@ import UserForm from './user-management/components/UserForm';
 const SettingsConfig = {
     settings: {
         layout: {
-            config: {},
-        },
+            config: {}
+        }
     },
     routes: [
         {

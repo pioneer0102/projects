@@ -1,19 +1,10 @@
-import {
-    createAsyncThunk,
-    createEntityAdapter,
-    createSlice,
-} from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 
 const categorySlice = createSlice({
     name: 'insightsApp/category',
     initialState: {},
-    reducers: {
-    },
-    extraReducers: (builder) => {
-        
-    }
+    reducers: {},
+    extraReducers: () => {}
 });
-
 
 export default categorySlice.reducer;

@@ -1,19 +1,19 @@
-import TaxItem from "./TaxItem";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import Paper from "@mui/material/Paper";
-import { IconButton } from "@mui/material";
+import TaxItem from './TaxItem';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import Paper from '@mui/material/Paper';
+import { IconButton } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Grid from "@mui/system/Unstable_Grid/Grid";
+import Grid from '@mui/system/Unstable_Grid/Grid';
 import InputAdornment from '@mui/material/InputAdornment';
 import {
     selectPosById,
     setFormdata,
     update,
     remove
-} from "../../store/posSlice";
+} from '../../store/posSlice';
 
 const isNumeric = (value) => !isNaN(parseFloat(value)) && isFinite(value);
 
@@ -33,7 +33,7 @@ const validateTaxItem = (taxItem) => {
 
 const initialErrors = {
     nameError: { isError: false, text: '' },
-    rateError: { isError: false, text: '' },
+    rateError: { isError: false, text: '' }
 };
 
 const TaxTab = () => {
@@ -53,7 +53,12 @@ const TaxTab = () => {
         if (Object.keys(validationErrors).length > 0) {
             setErrors(() => ({
                 ...initialErrors,
-                ...Object.fromEntries(Object.entries(validationErrors).map(([key, value]) => [`${key}Error`, { isError: true, text: value }])),
+                ...Object.fromEntries(
+                    Object.entries(validationErrors).map(([key, value]) => [
+                        `${key}Error`,
+                        { isError: true, text: value }
+                    ])
+                )
             }));
 
             return;
@@ -61,27 +66,28 @@ const TaxTab = () => {
 
         // handleTaxItems(newTaxItem);
 
-        dispatch(setFormdata({ type: 'tax', value: newTaxItem }))
+        dispatch(setFormdata({ type: 'tax', value: newTaxItem }));
         setNewTaxItem({ name: '', rate: 0 });
     };
 
     const removeTax = (index) => {
-        dispatch(remove({ type: 'tax', id: index }))
+        dispatch(remove({ type: 'tax', id: index }));
     };
 
     const handleChange = (key, value) => {
-        setErrors((prevErrors) => ({ ...prevErrors, [`${key}Error`]: { isError: false, text: '' } }));
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [`${key}Error`]: { isError: false, text: '' }
+        }));
         setNewTaxItem({ ...newTaxItem, [key]: value });
-    }
+    };
 
     const handleEdit = (index, key, value) => {
-        
-        
         dispatch(update({ type: 'tax', id: index, key: key, value: value }));
     };
 
     return (
-        <Paper className='rounded-md shadow-none'>
+        <Paper className="rounded-md shadow-none">
             <Grid container spacing={2} className="flex items-center">
                 <Grid lg={5} md={5} sm={5} xs={5}>
                     <TextField
@@ -95,13 +101,17 @@ const TaxTab = () => {
                         required
                         fullWidth
                         value={newTaxItem.name}
-                        onChange={(event) => handleChange('name', event.target.value)}
+                        onChange={(event) =>
+                            handleChange('name', event.target.value)
+                        }
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <FuseSvgIcon size={24}>heroicons-outline:receipt-tax</FuseSvgIcon>
+                                    <FuseSvgIcon size={24}>
+                                        heroicons-outline:receipt-tax
+                                    </FuseSvgIcon>
                                 </InputAdornment>
-                            ),
+                            )
                         }}
                     />
                 </Grid>
@@ -116,17 +126,21 @@ const TaxTab = () => {
                         variant="outlined"
                         fullWidth
                         value={newTaxItem.rate}
-                        onChange={(event) => handleChange('rate', event.target.value)}
+                        onChange={(event) =>
+                            handleChange('rate', event.target.value)
+                        }
                         InputProps={{
                             inputProps: {
                                 type: 'number',
-                                min: 0,
+                                min: 0
                             },
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <FuseSvgIcon size={24}>heroicons-outline:currency-dollar</FuseSvgIcon>
+                                    <FuseSvgIcon size={24}>
+                                        heroicons-outline:currency-dollar
+                                    </FuseSvgIcon>
                                 </InputAdornment>
-                            ),
+                            )
                         }}
                     />
                 </Grid>
@@ -134,18 +148,26 @@ const TaxTab = () => {
                     <IconButton
                         onClick={addNewTax}
                         variant="outline"
-                        className='btn_tax_add mt-32'>
-                        <FuseSvgIcon size={20}>heroicons-outline:plus-circle</FuseSvgIcon>
+                        className="btn_tax_add mt-32"
+                    >
+                        <FuseSvgIcon size={20}>
+                            heroicons-outline:plus-circle
+                        </FuseSvgIcon>
                     </IconButton>
                 </Grid>
             </Grid>
-            {
-                posById.tax != null && posById.tax.map((taxItem, index) => {
+            {posById.tax != null &&
+                posById.tax.map((taxItem, index) => {
                     return (
-                        <TaxItem key={index} index={index} value={taxItem} handleEdit={handleEdit} handleRemove={removeTax} />
+                        <TaxItem
+                            key={index}
+                            index={index}
+                            value={taxItem}
+                            handleEdit={handleEdit}
+                            handleRemove={removeTax}
+                        />
                     );
-                })
-            }
+                })}
         </Paper>
     );
 };

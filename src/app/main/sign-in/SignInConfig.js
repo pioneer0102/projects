@@ -6,30 +6,30 @@ const SignInConfig = {
         layout: {
             config: {
                 navbar: {
-                    display: false,
+                    display: false
                 },
                 toolbar: {
-                    display: false,
+                    display: false
                 },
                 footer: {
-                    display: false,
+                    display: false
                 },
                 leftSidePanel: {
-                    display: false,
+                    display: false
                 },
                 rightSidePanel: {
-                    display: false,
-                },
-            },
-        },
+                    display: false
+                }
+            }
+        }
     },
     auth: authRoles.onlyGuest,
     routes: [
         {
             path: 'sign-in',
-            element: <SignInPage />,
-        },
-    ],
+            element: <SignInPage />
+        }
+    ]
 };
 
 export default SignInConfig;

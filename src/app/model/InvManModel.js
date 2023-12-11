@@ -1,49 +1,44 @@
 const PriceRange = [
-    "$10 - $100",
-    "$100 - $500",
-    "$500 - $1000",
-    "$1000 - $5000",
-    "$5000 - $10000"
+    '$10 - $100',
+    '$100 - $500',
+    '$500 - $1000',
+    '$1000 - $5000',
+    '$5000 - $10000'
 ];
 
-const Category = [
-    "Clothes",
-    "Accessory",
-    "Handphone",
-    "Laptop"
-];
+const Category = ['Clothes', 'Accessory', 'Handphone', 'Laptop'];
 
 const InventoryTableHeader = [
     {
         id: 'image',
         align: 'left',
-        label: 'Image',
+        label: 'Image'
     },
     {
         id: 'name',
         align: 'left',
-        label: 'Name',
+        label: 'Name'
     },
     {
         id: 'category',
         align: 'left',
-        label: 'Category',
+        label: 'Category'
     },
     {
         id: 'price',
         align: 'left',
-        label: 'Subtotal',
+        label: 'Subtotal'
     },
     {
         id: 'quantity',
         align: 'left',
-        label: 'Quantity',
+        label: 'Quantity'
     },
     {
         id: 'active',
         align: 'left',
-        label: 'Active',
-    },
+        label: 'Active'
+    }
 ];
 
-export {PriceRange, Category, InventoryTableHeader};
+export { PriceRange, Category, InventoryTableHeader };

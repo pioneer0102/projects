@@ -6,8 +6,8 @@ const InvManApp = lazy(() => import('./InvManApp'));
 const InvManCofig = {
     settings: {
         layout: {
-            config: {},
-        },
+            config: {}
+        }
     },
     routes: [
         {

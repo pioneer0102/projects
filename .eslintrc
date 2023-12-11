@@ -14,7 +14,8 @@
     "extends": [
         "react-app",
         "airbnb",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "prettier"
     ],
     "plugins": [
         "prettier",
@@ -31,6 +32,5 @@
     },
     "rules": {
         // Prettier configs based on airbnb guide
-        
     }
 }

@@ -2,27 +2,27 @@ const ChannelTableHeader = [
     {
         id: 'Channel',
         align: 'left',
-        label: 'Channel',
+        label: 'Channel'
     },
     {
         id: 'Sale',
         align: 'left',
-        label: 'Sale',
+        label: 'Sale'
     },
     {
         id: 'Sale Graphic',
         align: 'center',
-        label: 'Sale Graphic',
+        label: 'Sale Graphic'
     },
     {
         id: 'Order',
         align: 'left',
-        label: 'Order',
+        label: 'Order'
     },
     {
         id: 'Order Graphic',
         align: 'center',
-        label: 'Order Graphic',
+        label: 'Order Graphic'
     }
 ];
 

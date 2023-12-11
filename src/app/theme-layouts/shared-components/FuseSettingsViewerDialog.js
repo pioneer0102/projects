@@ -13,53 +13,67 @@ import qs from 'qs';
 import Typography from '@mui/material/Typography';
 
 function FuseSettingsViewerDialog(props) {
-  const { className } = props;
-  const [openDialog, setOpenDialog] = useState(false);
-  const settings = useSelector(selectFuseCurrentSettings);
+    const { className } = props;
+    const [openDialog, setOpenDialog] = useState(false);
+    const settings = useSelector(selectFuseCurrentSettings);
 
-  function handleOpenDialog() {
-    setOpenDialog(true);
-  }
+    function handleOpenDialog() {
+        setOpenDialog(true);
+    }
 
-  function handleCloseDialog() {
-    setOpenDialog(false);
-  }
+    function handleCloseDialog() {
+        setOpenDialog(false);
+    }
 
-  return (
-    <div className={clsx('', className)}>
-      <Button
-        variant="contained"
-        color="secondary"
-        className="w-full"
-        onClick={handleOpenDialog}
-        startIcon={<FuseSvgIcon>heroicons-solid:code</FuseSvgIcon>}
-      >
-        View settings as json/query params
-      </Button>
+    return (
+        <div className={clsx('', className)}>
+            <Button
+                variant="contained"
+                color="secondary"
+                className="w-full"
+                onClick={handleOpenDialog}
+                startIcon={<FuseSvgIcon>heroicons-solid:code</FuseSvgIcon>}
+            >
+                View settings as json/query params
+            </Button>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog} aria-labelledby="form-dialog-title">
-        <DialogTitle className="">Fuse Settings Viewer</DialogTitle>
-        <DialogContent className="">
-          <Typography className="text-16 font-bold mt-24 mb-16">JSON</Typography>
+            <Dialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogTitle className="">Fuse Settings Viewer</DialogTitle>
+                <DialogContent className="">
+                    <Typography className="text-16 font-bold mt-24 mb-16">
+                        JSON
+                    </Typography>
 
-          <FuseHighlight component="pre" className="language-json">
-            {JSON.stringify(settings, null, 2)}
-          </FuseHighlight>
+                    <FuseHighlight component="pre" className="language-json">
+                        {JSON.stringify(settings, null, 2)}
+                    </FuseHighlight>
 
-          <Typography className="text-16 font-bold mt-24 mb-16">Query Params</Typography>
+                    <Typography className="text-16 font-bold mt-24 mb-16">
+                        Query Params
+                    </Typography>
 
-          {qs.stringify({
-            defaultSettings: JSON.stringify(settings, { strictNullHandling: true }),
-          })}
-        </DialogContent>
-        <DialogActions>
-          <Button color="secondary" variant="contained" onClick={handleCloseDialog}>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+                    {qs.stringify({
+                        defaultSettings: JSON.stringify(settings, {
+                            strictNullHandling: true
+                        })
+                    })}
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={handleCloseDialog}
+                    >
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
+    );
 }
 
 export default FuseSettingsViewerDialog;

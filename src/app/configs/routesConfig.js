@@ -13,35 +13,38 @@ import SettingsConfig from '../main/settings/SettingsConfig';
 import AdminConfig from '../main/admin/AdminConfig';
 
 const routeConfigs = [
-  SignInConfig,
-  SignUpConfig,
-  PartnersConfig,
-  InvManCofig,
-  OrdersConfig,
-  InsightsConfig,
-  SettingsConfig,
-  AdminConfig
+    SignInConfig,
+    SignUpConfig,
+    PartnersConfig,
+    InvManCofig,
+    OrdersConfig,
+    InsightsConfig,
+    SettingsConfig,
+    AdminConfig
 ];
 
 const routes = [
-  ...FuseUtils.generateRoutesFromConfigs(routeConfigs, settingsConfig.defaultAuth),
-  {
-    path: '/',
-    element: <Navigate to="/Partners" />,
-    auth: settingsConfig.defaultAuth,
-  },
-  {
-    path: 'loading',
-    element: <FuseLoading />,
-  },
-  {
-    path: '404',
-    element: <Error404Page />,
-  },
-  {
-    path: '*',
-    element: <Navigate to="404" />,
-  },
+    ...FuseUtils.generateRoutesFromConfigs(
+        routeConfigs,
+        settingsConfig.defaultAuth
+    ),
+    {
+        path: '/',
+        element: <Navigate to="/Partners" />,
+        auth: settingsConfig.defaultAuth
+    },
+    {
+        path: 'loading',
+        element: <FuseLoading />
+    },
+    {
+        path: '404',
+        element: <Error404Page />
+    },
+    {
+        path: '*',
+        element: <Navigate to="404" />
+    }
 ];
 
 export default routes;
