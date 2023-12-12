@@ -261,116 +261,6 @@ const OrderReport = () => {
                     <div className="flex flex-col">
                         <div className="flex items-center">
                             <div className="font-medium text-secondary leading-5">
-                                Completed
-                            </div>
-                            <Tooltip title="Score is calculated by using the historical ratio between Page Views and Visitors. Best score is 1000, worst score is 0.">
-                                <FuseSvgIcon
-                                    className="ml-6"
-                                    size={16}
-                                    color="disabled"
-                                >
-                                    heroicons-solid:information-circle
-                                </FuseSvgIcon>
-                            </Tooltip>
-                        </div>
-                        <div className="flex items-start mt-8">
-                            <div className="text-2xl font-bold tracking-tight leading-none">
-                                {currentCompleted} %
-                            </div>
-                            <div className="flex items-center ml-8">
-                                {currentCompleted >= previousCompleted ? (
-                                    <>
-                                        <FuseSvgIcon
-                                            className="text-green-500"
-                                            size={20}
-                                        >
-                                            heroicons-solid:arrow-circle-up
-                                        </FuseSvgIcon>
-                                        <Typography className="ml-4 text-md font-medium text-green-500">
-                                            {Math.abs(
-                                                currentCompleted -
-                                                    previousCompleted
-                                            )}{' '}
-                                            %
-                                        </Typography>
-                                    </>
-                                ) : (
-                                    <>
-                                        <FuseSvgIcon
-                                            className="text-red-500"
-                                            size={20}
-                                        >
-                                            heroicons-solid:arrow-circle-down
-                                        </FuseSvgIcon>
-                                        <Typography className="ml-4 text-md font-medium text-red-500">
-                                            {Math.abs(
-                                                currentCompleted -
-                                                    previousCompleted
-                                            )}{' '}
-                                            %
-                                        </Typography>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col">
-                        <div className="flex items-center">
-                            <div className="font-medium text-secondary leading-5">
-                                Pending
-                            </div>
-                            <Tooltip title="Average Ratio is the average ratio between Page Views and Visitors">
-                                <FuseSvgIcon
-                                    className="ml-6"
-                                    size={16}
-                                    color="disabled"
-                                >
-                                    heroicons-solid:arrow-circle-up
-                                </FuseSvgIcon>
-                            </Tooltip>
-                        </div>
-                        <div className="flex items-start mt-8">
-                            <div className="text-2xl font-bold tracking-tight leading-none">
-                                {currentPending} %
-                            </div>
-                            <div className="flex items-center ml-8">
-                                {currentPending >= previousPending ? (
-                                    <>
-                                        <FuseSvgIcon
-                                            className="text-green-500"
-                                            size={20}
-                                        >
-                                            heroicons-solid:arrow-circle-up
-                                        </FuseSvgIcon>
-                                        <Typography className="ml-4 text-md font-medium text-green-500">
-                                            {Math.abs(
-                                                currentPending - previousPending
-                                            )}{' '}
-                                            %
-                                        </Typography>
-                                    </>
-                                ) : (
-                                    <>
-                                        <FuseSvgIcon
-                                            className="text-red-500"
-                                            size={20}
-                                        >
-                                            heroicons-solid:arrow-circle-down
-                                        </FuseSvgIcon>
-                                        <Typography className="ml-4 text-md font-medium text-red-500">
-                                            {Math.abs(
-                                                currentPending - previousPending
-                                            )}{' '}
-                                            %
-                                        </Typography>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col">
-                        <div className="flex items-center">
-                            <div className="font-medium text-secondary leading-5">
                                 Received
                             </div>
                             <Tooltip title="Predicted Ratio is calculated by using historical ratio, current trends and your goal targets.">
@@ -472,6 +362,116 @@ const OrderReport = () => {
                                             {Math.abs(
                                                 currentRejected -
                                                     previousRejected
+                                            )}{' '}
+                                            %
+                                        </Typography>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col">
+                        <div className="flex items-center">
+                            <div className="font-medium text-secondary leading-5">
+                                Pending
+                            </div>
+                            <Tooltip title="Average Ratio is the average ratio between Page Views and Visitors">
+                                <FuseSvgIcon
+                                    className="ml-6"
+                                    size={16}
+                                    color="disabled"
+                                >
+                                    heroicons-solid:arrow-circle-up
+                                </FuseSvgIcon>
+                            </Tooltip>
+                        </div>
+                        <div className="flex items-start mt-8">
+                            <div className="text-2xl font-bold tracking-tight leading-none">
+                                {currentPending} %
+                            </div>
+                            <div className="flex items-center ml-8">
+                                {currentPending >= previousPending ? (
+                                    <>
+                                        <FuseSvgIcon
+                                            className="text-green-500"
+                                            size={20}
+                                        >
+                                            heroicons-solid:arrow-circle-up
+                                        </FuseSvgIcon>
+                                        <Typography className="ml-4 text-md font-medium text-green-500">
+                                            {Math.abs(
+                                                currentPending - previousPending
+                                            )}{' '}
+                                            %
+                                        </Typography>
+                                    </>
+                                ) : (
+                                    <>
+                                        <FuseSvgIcon
+                                            className="text-red-500"
+                                            size={20}
+                                        >
+                                            heroicons-solid:arrow-circle-down
+                                        </FuseSvgIcon>
+                                        <Typography className="ml-4 text-md font-medium text-red-500">
+                                            {Math.abs(
+                                                currentPending - previousPending
+                                            )}{' '}
+                                            %
+                                        </Typography>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col">
+                        <div className="flex items-center">
+                            <div className="font-medium text-secondary leading-5">
+                                Completed
+                            </div>
+                            <Tooltip title="Score is calculated by using the historical ratio between Page Views and Visitors. Best score is 1000, worst score is 0.">
+                                <FuseSvgIcon
+                                    className="ml-6"
+                                    size={16}
+                                    color="disabled"
+                                >
+                                    heroicons-solid:information-circle
+                                </FuseSvgIcon>
+                            </Tooltip>
+                        </div>
+                        <div className="flex items-start mt-8">
+                            <div className="text-2xl font-bold tracking-tight leading-none">
+                                {currentCompleted} %
+                            </div>
+                            <div className="flex items-center ml-8">
+                                {currentCompleted >= previousCompleted ? (
+                                    <>
+                                        <FuseSvgIcon
+                                            className="text-green-500"
+                                            size={20}
+                                        >
+                                            heroicons-solid:arrow-circle-up
+                                        </FuseSvgIcon>
+                                        <Typography className="ml-4 text-md font-medium text-green-500">
+                                            {Math.abs(
+                                                currentCompleted -
+                                                    previousCompleted
+                                            )}{' '}
+                                            %
+                                        </Typography>
+                                    </>
+                                ) : (
+                                    <>
+                                        <FuseSvgIcon
+                                            className="text-red-500"
+                                            size={20}
+                                        >
+                                            heroicons-solid:arrow-circle-down
+                                        </FuseSvgIcon>
+                                        <Typography className="ml-4 text-md font-medium text-red-500">
+                                            {Math.abs(
+                                                currentCompleted -
+                                                    previousCompleted
                                             )}{' '}
                                             %
                                         </Typography>

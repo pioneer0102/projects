@@ -1,6 +1,5 @@
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { Chip } from '@mui/material';
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
@@ -81,13 +80,6 @@ function ItemReport() {
                 <Typography className="text-xl md:text-2xl font-semibold tracking-tight leading-6 truncate">
                     Item Overview
                 </Typography>
-                <div className="ml-8">
-                    <Chip
-                        size="small"
-                        className="font-medium text-sm"
-                        label=" 30 days"
-                    />
-                </div>
             </div>
 
             <div className="flex flex-col flex-auto mt-24 h-192">
