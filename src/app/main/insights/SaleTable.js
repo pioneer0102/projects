@@ -11,8 +11,9 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { Box } from '@mui/material';
 import { Paper } from '@mui/material';
 import { Button } from '@mui/material';
-import SaleFilter from './searchFilter/SaleFilter';
 import Dialog from '@mui/material/Dialog';
+import format from 'date-fns/format';
+import SaleFilter from './filter/SaleFilter';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -75,7 +76,7 @@ const SaleTable = () => {
     }, [responseWarning]);
 
     return (
-        <Paper className="flex flex-col pt-16 px-16 pb-32">
+        <Paper className="flex flex-col pt-16 px-16 py-16 pb-32">
             <div className="flex flex-row items-center justify-between pb-16">
                 <Typography
                     className="mt-8 ml-16 text-2xl md:text-3xl font-semibold"
@@ -155,7 +156,10 @@ const SaleTable = () => {
                                         color="text.secondary"
                                         className="text-16 md:pt-16"
                                     >
-                                        {sale.date}
+                                        {format(
+                                            new Date(sale.date),
+                                            'MMMM d, y'
+                                        )}
                                     </Typography>
                                 </Td>
                                 <Td align="left">

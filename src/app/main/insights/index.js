@@ -1,6 +1,6 @@
 import reducer from './store';
 import withReducer from 'app/store/withReducer';
-import Report from './Report/Report';
+import Report from './report/Report';
 
 const InsightsApp = () => {
     return (

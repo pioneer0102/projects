@@ -11,7 +11,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import SaleFilter from '../searchFilter/SaleFilter';
+import SaleFilter from '../filter/SaleFilter';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import {
     selectSale,

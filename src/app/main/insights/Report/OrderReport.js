@@ -19,7 +19,7 @@ import {
     setOrderFilter
 } from '../store/orderSlice';
 
-const SaleReport = () => {
+const OrderReport = () => {
     const dispatch = useDispatch();
     const filter = useSelector(orderFilter);
     const orderData = useSelector(selectOrder);
@@ -492,4 +492,4 @@ const SaleReport = () => {
     );
 };
 
-export default SaleReport;
+export default OrderReport;

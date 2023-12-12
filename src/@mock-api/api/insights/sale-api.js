@@ -1,8 +1,44 @@
 /* eslint-disable no-redeclare */
-import mockApi from '../../mock-api.json';
 import mock from '../../mock';
 
-const saleDB = mockApi.database.examples.sale.value;
+const current = new Date();
+current.setDate(current.getDate() - 365);
+
+const name = ['John Doe', 'Lion', 'Alexandra'];
+const channel = ['DoorDash', 'Uber', 'GubHub'];
+const status = ['completed', 'pending', 'received', 'rejected'];
+const items = [
+    'TISSOT watch',
+    'Rolex watch',
+    'iOS Handphone',
+    'Android Handphone',
+    'Uniform',
+    'Dress',
+    'APPLE',
+    'HP',
+    'TOSHIBA'
+];
+const Cagetories = ['Accessory', 'Handphone', 'Clothes', 'Laptop'];
+
+let saleDB = [];
+for (let i = 0; i < 365; i++) {
+    for (let j = 0; j < Math.floor(Math.random() * (10 - 1 + 1)) + 1; j++) {
+        const item = {
+            customer: name[Math.floor(Math.random() * name.length)],
+            price: Math.floor(Math.random() * 500) + 1000,
+            channel: channel[Math.floor(Math.random() * channel.length)],
+            tax: 50,
+            tip: 30,
+            status: status[Math.floor(Math.random() * status.length)],
+            date: new Date(current),
+            item: items[Math.floor(Math.random() * items.length)],
+            category: Cagetories[Math.floor(Math.random() * Cagetories.length)],
+            itemStatus: 'active'
+        };
+        saleDB.push(item);
+    }
+    current.setDate(current.getDate() + 1);
+}
 
 mock.onPost('/api/getsaleData').reply(({ data }) => {
     const { fromDate, toDate, category, item } = JSON.parse(data);
@@ -12,10 +48,11 @@ mock.onPost('/api/getsaleData').reply(({ data }) => {
         currentDate.setDate(currentDate.getDate() - 365);
 
         for (let i = 0; i < 365; i++) {
-            var sale = 0;
+            let sale = 0;
             saleDB.forEach((order) => {
                 const orderDate = new Date(order.date);
                 if (orderDate.toDateString() === currentDate.toDateString()) {
+                    console.log('erer');
                     sale = sale + parseInt(order.price);
                 }
             });
