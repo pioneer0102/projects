@@ -1,39 +1,8 @@
-import _ from '@lodash';
+/* eslint-disable no-redeclare */
 import mockApi from '../../mock-api.json';
 import mock from '../../mock';
 
-const ordersDB = mockApi.database.examples.orders.value;
-
-// if (searchText === '' && subtotal === '' && channel === '' && status === '') {
-//     const startIndex = pagenumber * pagesize;
-//     const endIndex = (pagenumber * pagesize + pagesize);
-//     const pagedData = ordersDB.slice(startIndex, endIndex);
-//     const data = {
-//         pagedData: pagedData,
-//         dbSize: dbSize,
-//         filterSize: dbSize
-//     };
-//     return [200, data];
-// }
-// else {
-//     const filteredData = ordersDB.filter((item) => {
-//         return (
-//             (searchText === '' || item.customer.toLowerCase().includes(searchText.toLowerCase())) &&
-//             (subtotal === '' || ((priceRange[subtotal].min <= item.subtotal) && (item.subtotal <= priceRange[subtotal].max))) &&
-//             (channel === '' || item.channel === channel) &&
-//             (status === '' || item.history[0].status === status)
-//         );
-//     });
-//     const startIndex = pagenumber * pagesize || 0;
-//     const endIndex = (pagenumber * pagesize + pagesize) || filteredData.length;
-//     const pagedData = filteredData.slice(startIndex, endIndex);
-//     const data = {
-//         pagedData: pagedData,
-//         dbSize: dbSize,
-//         filterSize: filteredData.length
-//     };
-//     return [200, data];
-// }
+const saleDB = mockApi.database.examples.sale.value;
 
 mock.onPost('/api/getsaleData').reply(({ data }) => {
     const { fromDate, toDate, category, item } = JSON.parse(data);
@@ -44,12 +13,10 @@ mock.onPost('/api/getsaleData').reply(({ data }) => {
 
         for (let i = 0; i < 30; i++) {
             var sale = 0;
-            ordersDB.forEach((item) => {
-                const orderDate = new Date(
-                    item.history[item.history.length - 1].date
-                );
+            saleDB.forEach((order) => {
+                const orderDate = new Date(order.date);
                 if (orderDate.toDateString() === currentDate.toDateString()) {
-                    sale = sale + parseInt(item.subtotal);
+                    sale = sale + parseInt(order.price);
                 }
             });
             const formattedDate = currentDate.toLocaleDateString('en-US', {
@@ -57,17 +24,70 @@ mock.onPost('/api/getsaleData').reply(({ data }) => {
                 day: 'numeric',
                 year: 'numeric'
             });
+            currentDate.setDate(currentDate.getDate() + 1);
             saleArray.push({ x: formattedDate, y: sale });
         }
-        const result = {
-            saleArray: saleArray
-        };
-        return [200, result];
+
+        return [200, saleArray];
     } else {
-        const saleArray = ordersDB.forEach((order) => {
-            const orderDate = new Date(
-                order.history[item.history.length - 1].date
-            );
-        });
+        const saleArray = [];
+        if (fromDate === '' && toDate === '') {
+            const filterData = saleDB.filter((order) => {
+                return (
+                    (category === '' || order.category === category) &&
+                    (item === '' || order.item === item)
+                );
+            });
+            const currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() - 29);
+
+            for (let i = 0; i < 30; i++) {
+                var sale = 0;
+                filterData.forEach((order) => {
+                    const orderDate = new Date(order.date);
+                    if (
+                        orderDate.toDateString() === currentDate.toDateString()
+                    ) {
+                        sale = sale + parseInt(order.price);
+                    }
+                });
+                const formattedDate = currentDate.toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                currentDate.setDate(currentDate.getDate() + 1);
+                saleArray.push({ x: formattedDate, y: sale });
+            }
+            return [200, saleArray];
+        }
+        if (fromDate !== '' && toDate !== '') {
+            const filterData = saleDB.filter((order) => {
+                return (
+                    (category === '' || order.category === category) &&
+                    (item === '' || order.item === item)
+                );
+            });
+            for (
+                let i = fromDate.toDateString();
+                i < toDate.toDateString();
+                i++
+            ) {
+                var sale = 0;
+                filterData.forEach((order) => {
+                    const orderDate = new Date(order.date);
+                    if (orderDate.toDateString() === i.toDateString()) {
+                        sale = sale + parseInt(order.price);
+                    }
+                });
+                const formattedDate = i.toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                saleArray.push({ x: formattedDate, y: sale });
+            }
+            return [200, saleArray];
+        }
     }
 });

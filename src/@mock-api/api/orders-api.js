@@ -10,20 +10,26 @@ const priceRange = [
     { min: 100, max: 500 },
     { min: 500, max: 1000 },
     { min: 1000, max: 5000 },
-    { min: 5000, max: 10000 },
+    { min: 5000, max: 10000 }
 ];
 
 mock.onPost('/api/getorders').reply(({ data }) => {
-    const { searchText, subtotal, channel, status, pageNumber, pageSize } = JSON.parse(data);
+    const { searchText, subtotal, channel, status, pageNumber, pageSize } =
+        JSON.parse(data);
 
     const dbSize = ordersDB.length;
 
     const pagenumber = parseInt(pageNumber);
     const pagesize = parseInt(pageSize);
 
-    if (searchText === '' && subtotal === '' && channel === '' && status === '') {
+    if (
+        searchText === '' &&
+        subtotal === '' &&
+        channel === '' &&
+        status === ''
+    ) {
         const startIndex = pagenumber * pagesize;
-        const endIndex = (pagenumber * pagesize + pagesize);
+        const endIndex = pagenumber * pagesize + pagesize;
         const pagedData = ordersDB.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
@@ -31,18 +37,23 @@ mock.onPost('/api/getorders').reply(({ data }) => {
             filterSize: dbSize
         };
         return [200, data];
-    }
-    else {
+    } else {
         const filteredData = ordersDB.filter((item) => {
             return (
-                (searchText === '' || item.customer.toLowerCase().includes(searchText.toLowerCase())) &&
-                (subtotal === '' || ((priceRange[subtotal].min <= item.subtotal) && (item.subtotal <= priceRange[subtotal].max))) &&
+                (searchText === '' ||
+                    item.customer
+                        .toLowerCase()
+                        .includes(searchText.toLowerCase())) &&
+                (subtotal === '' ||
+                    (priceRange[subtotal].min <= item.subtotal &&
+                        item.subtotal <= priceRange[subtotal].max)) &&
                 (channel === '' || item.channel === channel) &&
                 (status === '' || item.history[0].status === status)
             );
         });
         const startIndex = pagenumber * pagesize || 0;
-        const endIndex = (pagenumber * pagesize + pagesize) || filteredData.length;
+        const endIndex =
+            pagenumber * pagesize + pagesize || filteredData.length;
         const pagedData = filteredData.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
@@ -87,8 +98,8 @@ mock.onPost('/api/updateItemStatusById').reply(({ data }) => {
     const order = _.find(ordersDB, { id: id });
     const item = _.find(order.items, { id: itemId });
     item.status = itemStatus;
-    return [200, { success: true }]
-})
+    return [200, { success: true }];
+});
 
 mock.onPost('/api/removeItem').reply(({ data }) => {
     const { orderId, itemId } = JSON.parse(data);
@@ -106,8 +117,7 @@ mock.onPost('/api/removeItem').reply(({ data }) => {
         });
         order.subtotal = subtotal;
         return [200, { success: success, subtotal: order.subtotal }];
+    } else {
+        return [200, { success: success }];
     }
-    else {
-        return [200, { success: success }]
-    }
-})
+});

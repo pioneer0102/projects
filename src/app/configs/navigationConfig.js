@@ -32,23 +32,23 @@ const navigationConfig = [
     {
         id: 'Insights',
         title: 'Insights',
-        type: 'collapse',
+        type: 'item',
         icon: 'heroicons-outline:chart-bar',
-        // url: '/insights'
-        children: [
-            {
-                id: 'Insights.Channels',
-                title: 'Channels',
-                type: 'item',
-                url: 'insights/channels'
-            },
-            {
-                id: 'Insights.Categories',
-                title: 'Categories',
-                type: 'item',
-                url: 'insights/categories'
-            }
-        ]
+        url: '/insights'
+        // children: [
+        //     {
+        //         id: 'Insights.Channels',
+        //         title: 'Channels',
+        //         type: 'item',
+        //         url: 'insights/channels'
+        //     },
+        //     {
+        //         id: 'Insights.Categories',
+        //         title: 'Categories',
+        //         type: 'item',
+        //         url: 'insights/categories'
+        //     }
+        // ]
     },
     {
         id: 'Settings',

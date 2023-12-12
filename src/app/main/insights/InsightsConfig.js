@@ -1,7 +1,6 @@
-import Channels from './channels/Channels';
-import Categories from './categories/Categories';
+import { lazy } from 'react';
 
-// const InsightsApp = lazy(() => import('./index'));
+const InsightsApp = lazy(() => import('./index'));
 
 const InsightsConfig = {
     settings: {
@@ -10,17 +9,9 @@ const InsightsConfig = {
         }
     },
     routes: [
-        // {
-        //     path: 'insights',
-        //     element: <InsightsApp />
-        // },
         {
-            path: 'insights/channels',
-            element: <Channels />
-        },
-        {
-            path: 'insights/categories',
-            element: <Categories />
+            path: 'insights',
+            element: <InsightsApp />
         }
     ]
 };

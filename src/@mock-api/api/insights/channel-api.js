@@ -1,7 +1,5 @@
-import _ from '@lodash';
 import mockApi from '../../mock-api.json';
 import mock from '../../mock';
-import format from 'date-fns/format';
 
 const ordersDB = mockApi.database.examples.orders.value;
 const channelDB = mockApi.database.examples.channel.value;
@@ -36,12 +34,14 @@ mock.onGet('/api/getchanneldata').reply(() => {
             ordersDB.forEach((item) => {
                 if (item.channel == channel.name) {
                     const orderDate = new Date(item.history[0].date);
-                    if (orderDate.toDateString() === currentDate.toDateString()) {
+                    if (
+                        orderDate.toDateString() === currentDate.toDateString()
+                    ) {
                         sale = sale + parseInt(item.subtotal);
                         order++;
                     }
                 }
-            })
+            });
             const formattedDate = currentDate.toLocaleDateString('en-US', {
                 month: 'long',
                 day: 'numeric',
@@ -49,8 +49,10 @@ mock.onGet('/api/getchanneldata').reply(() => {
             });
             saleArray[channel.name].push({ x: formattedDate, y: sale });
             orderArray[channel.name].push({ x: formattedDate, y: order });
-            saleTotalByChannel[channel.name] = saleTotalByChannel[channel.name] + sale;
-            orderTotalByChannel[channel.name] = orderTotalByChannel[channel.name] + order;
+            saleTotalByChannel[channel.name] =
+                saleTotalByChannel[channel.name] + sale;
+            orderTotalByChannel[channel.name] =
+                orderTotalByChannel[channel.name] + order;
             currentDate.setDate(currentDate.getDate() + 1);
         }
     });
@@ -59,6 +61,6 @@ mock.onGet('/api/getchanneldata').reply(() => {
         orderArray: orderArray,
         saleTotalByChannel: saleTotalByChannel,
         orderTotalByChannel: orderTotalByChannel
-    }
+    };
     return [200, result];
 });

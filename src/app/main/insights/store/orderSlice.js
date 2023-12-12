@@ -1,34 +1,38 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const orderData = createAsyncThunk(
-    'insightsApp/channel/orderData',
-    async () => {
-        const response = await axios.get('/api/getsorderData');
+export const getOrderData = createAsyncThunk(
+    'insightsApp/order/orderData',
+    async (filter) => {
+        const response = await axios.post('/api/getorderData', filter);
         return response.data;
     }
 );
 
 export const orderFilter = ({ insightsApp }) => insightsApp.order.orderFilter;
+export const selectOrder = ({ insightsApp }) => insightsApp.order.order;
 
 const orderSlice = createSlice({
     name: 'insightsApp/order',
     initialState: {
         orderFilter: {
             status: ''
-        }
+        },
+        order: []
     },
     reducers: {
         setOrderFilter: (state, action) => {
             switch (action.payload.type) {
                 case 'status':
-                    state.orderFilter.fromDate = action.payload.value;
+                    state.orderFilter.status = action.payload.value;
                     break;
             }
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(orderData.fulfilled, (state, action) => {});
+        builder.addCase(getOrderData.fulfilled, (state, action) => {
+            state.order = action.payload;
+        });
     }
 });
 
