@@ -1,5 +1,4 @@
 /* eslint-disable no-redeclare */
-import _ from '@lodash';
 import mockApi from '../../mock-api.json';
 import mock from '../../mock';
 
