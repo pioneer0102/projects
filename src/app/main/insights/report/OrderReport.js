@@ -173,7 +173,7 @@ const OrderReport = () => {
     };
 
     return (
-        <Paper className="flex flex-col shadow rounded-md mx-24 px-16 py-16 my-32">
+        <Paper className="flex flex-col shadow rounded-md px-16 py-16">
             <div className="flex items-center justify-between mx-24 mt-16 mb-0">
                 <Typography className="text-2xl md:text-3xl font-semibold tracking-tight leading-6 truncate">
                     Orders View

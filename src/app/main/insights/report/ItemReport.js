@@ -16,7 +16,7 @@ function ItemReport() {
     }, [dispatch]);
 
     const series = item;
-    const labels = ['Active', 'no-Active'];
+    const labels = ['Active', 'InActive'];
 
     const chartOptions = {
         chart: {
@@ -76,7 +76,7 @@ function ItemReport() {
     };
 
     return (
-        <Paper className="flex flex-col flex-auto shadow overflow-hidden p-24 mx-24 my-32 rounded-md">
+        <Paper className="flex flex-col flex-auto shadow overflow-hidden p-24 rounded-md">
             <div className="flex flex-col sm:flex-row items-start justify-between">
                 <Typography className="text-xl md:text-2xl font-semibold tracking-tight leading-6 truncate">
                     Item Overview

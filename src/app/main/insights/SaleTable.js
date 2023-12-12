@@ -76,10 +76,10 @@ const SaleTable = () => {
     }, [responseWarning]);
 
     return (
-        <Paper className="flex flex-col pt-16 px-16 py-16 pb-32">
-            <div className="flex flex-row items-center justify-between pb-16">
+        <Paper className="flex flex-col pt-16">
+            <div className="flex flex-row items-center justify-between px-16">
                 <Typography
-                    className="mt-8 ml-16 text-2xl md:text-3xl font-semibold"
+                    className="mt-8 text-2xl md:text-3xl font-semibold"
                     color="text.secondary"
                 >
                     Sales Overview
@@ -132,96 +132,98 @@ const SaleTable = () => {
                     </Tabs>
                 </div>
             </div>
-            <Table className="my-16 mx-16">
-                <Thead className="border-b-2">
-                    <Tr>
-                        {SaleTableHeader.map((item, index) => (
-                            <Th key={index} align={item.align}>
-                                <Typography
-                                    color="text.secondary"
-                                    className="font-bold text-20 pb-16"
-                                >
-                                    {item.label}
-                                </Typography>
-                            </Th>
-                        ))}
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    {tableData.map((sale, index) => {
-                        return (
-                            <Tr key={index}>
-                                <Td align="left">
+            <div className="px-16 py-16">
+                <Table>
+                    <Thead className="border-b-2">
+                        <Tr>
+                            {SaleTableHeader.map((item, index) => (
+                                <Th key={index} align={item.align}>
                                     <Typography
                                         color="text.secondary"
-                                        className="text-16 md:pt-16"
+                                        className="font-bold text-20 pb-16"
                                     >
-                                        {format(
-                                            new Date(sale.date),
-                                            'MMMM d, y'
-                                        )}
+                                        {item.label}
                                     </Typography>
-                                </Td>
-                                <Td align="left">
-                                    <Typography
-                                        color="text.secondary"
-                                        className="text-16 md:pt-16"
-                                    >
-                                        {sale.customer}
-                                    </Typography>
-                                </Td>
-                                <Td align="left">
-                                    <Typography
-                                        color="text.secondary"
-                                        className="text-16 md:pt-16"
-                                    >
-                                        {sale.channel}
-                                    </Typography>
-                                </Td>
-                                <Td align="left">
-                                    <Typography
-                                        color="text.secondary"
-                                        className="text-16 md:pt-16"
-                                    >
-                                        {sale.item}
-                                    </Typography>
-                                </Td>
-                                <Td align="left">
-                                    <Typography
-                                        color="text.secondary"
-                                        className="text-16 md:pt-16"
-                                    >
-                                        $ {sale.price}
-                                    </Typography>
-                                </Td>
-                            </Tr>
+                                </Th>
+                            ))}
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {tableData.map((sale, index) => {
+                            return (
+                                <Tr key={index}>
+                                    <Td align="left">
+                                        <Typography
+                                            color="text.secondary"
+                                            className="text-16 md:pt-16"
+                                        >
+                                            {format(
+                                                new Date(sale.date),
+                                                'MMMM d, y'
+                                            )}
+                                        </Typography>
+                                    </Td>
+                                    <Td align="left">
+                                        <Typography
+                                            color="text.secondary"
+                                            className="text-16 md:pt-16"
+                                        >
+                                            {sale.customer}
+                                        </Typography>
+                                    </Td>
+                                    <Td align="left">
+                                        <Typography
+                                            color="text.secondary"
+                                            className="text-16 md:pt-16"
+                                        >
+                                            {sale.channel}
+                                        </Typography>
+                                    </Td>
+                                    <Td align="left">
+                                        <Typography
+                                            color="text.secondary"
+                                            className="text-16 md:pt-16"
+                                        >
+                                            {sale.item}
+                                        </Typography>
+                                    </Td>
+                                    <Td align="left">
+                                        <Typography
+                                            color="text.secondary"
+                                            className="text-16 md:pt-16"
+                                        >
+                                            $ {sale.price}
+                                        </Typography>
+                                    </Td>
+                                </Tr>
+                            );
+                        })}
+                    </Tbody>
+                </Table>
+                <TablePagination
+                    className="flex-1 overflow-scroll mt-8"
+                    component="div"
+                    count={totalCount}
+                    rowsPerPage={tableFilter.rowsPerPage}
+                    page={tableFilter.page}
+                    backIconButtonProps={{
+                        'aria-label': 'Previous Page'
+                    }}
+                    nextIconButtonProps={{
+                        'aria-label': 'Next Page'
+                    }}
+                    onPageChange={(event, newPage) =>
+                        handlePagination('page', parseInt(newPage, 10))
+                    }
+                    onRowsPerPageChange={(event) => {
+                        handlePagination(
+                            'rowsPerPage',
+                            parseInt(event.target.value, 10)
                         );
-                    })}
-                </Tbody>
-            </Table>
-            <TablePagination
-                className="flex-1 overflow-scroll mt-8"
-                component="div"
-                count={totalCount}
-                rowsPerPage={tableFilter.rowsPerPage}
-                page={tableFilter.page}
-                backIconButtonProps={{
-                    'aria-label': 'Previous Page'
-                }}
-                nextIconButtonProps={{
-                    'aria-label': 'Next Page'
-                }}
-                onPageChange={(event, newPage) =>
-                    handlePagination('page', parseInt(newPage, 10))
-                }
-                onRowsPerPageChange={(event) => {
-                    handlePagination(
-                        'rowsPerPage',
-                        parseInt(event.target.value, 10)
-                    );
-                    handlePagination('page', 0);
-                }}
-            />
+                        handlePagination('page', 0);
+                    }}
+                />
+            </div>
             <Dialog
                 open={open}
                 onClose={handleClose}

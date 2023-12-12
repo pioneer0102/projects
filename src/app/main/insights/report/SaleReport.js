@@ -169,7 +169,7 @@ const SaleReport = () => {
                 <Paper className="shadow rounded-md py-16 px-16">
                     <div className="flex flex-row items-center justify-between">
                         <Typography
-                            className="mt-8 ml-16 text-2xl md:text-3xl font-semibold"
+                            className="mt-8 text-2xl md:text-3xl font-semibold"
                             color="text.secondary"
                         >
                             Sales Overview
