@@ -10,11 +10,12 @@ const priceRange = [
     { min: 100, max: 500 },
     { min: 500, max: 1000 },
     { min: 1000, max: 5000 },
-    { min: 5000, max: 10000 },
+    { min: 5000, max: 10000 }
 ];
 
 mock.onPost('/api/getInventory').reply(({ data }) => {
-    const { searchText, price, category, pageNumber, pageSize } = JSON.parse(data);
+    const { searchText, price, category, pageNumber, pageSize } =
+        JSON.parse(data);
 
     const dbSize = itemDB.length;
 
@@ -23,7 +24,7 @@ mock.onPost('/api/getInventory').reply(({ data }) => {
 
     if (searchText === '' && price === '' && category === '') {
         const startIndex = pagenumber * pagesize;
-        const endIndex = (pagenumber * pagesize + pagesize);
+        const endIndex = pagenumber * pagesize + pagesize;
         const pagedData = itemDB.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
@@ -31,17 +32,22 @@ mock.onPost('/api/getInventory').reply(({ data }) => {
             filterSize: dbSize
         };
         return [200, data];
-    }
-    else {
+    } else {
         const filteredData = itemDB.filter((item) => {
             return (
-                (searchText === '' || item.category.toLowerCase().includes(searchText.toLowerCase())) &&
-                (price === '' || ((priceRange[price].min <= item.price) && (item.price <= priceRange[price].max))) &&
+                (searchText === '' ||
+                    item.category
+                        .toLowerCase()
+                        .includes(searchText.toLowerCase())) &&
+                (price === '' ||
+                    (priceRange[price].min <= item.price &&
+                        item.price <= priceRange[price].max)) &&
                 (category === '' || item.category === category)
             );
         });
         const startIndex = pagenumber * pagesize || 0;
-        const endIndex = (pagenumber * pagesize + pagesize) || filteredData.length;
+        const endIndex =
+            pagenumber * pagesize + pagesize || filteredData.length;
         const pagedData = filteredData.slice(startIndex, endIndex);
         const data = {
             pagedData: pagedData,
@@ -56,10 +62,11 @@ mock.onGet('/api/getInventoryById').reply((data) => {
     const { id } = data;
     const item = _.find(itemDB, { id: parseInt(id) });
     return [200, item];
-})
+});
 
 mock.onPost('/api/addInventory').reply(({ data }) => {
-    const { active, category, image, price, quantity, tax, upc, } = JSON.parse(data);
+    const { active, category, image, price, quantity, tax, upc } =
+        JSON.parse(data);
     const newItem = {
         id: FuseUtils.generateGUID(),
         active: active,
@@ -71,11 +78,12 @@ mock.onPost('/api/addInventory').reply(({ data }) => {
         upc: upc
     };
     itemDB.push(newItem);
-    return [200, {success:true}]
+    return [200, { success: true }];
 });
 
 mock.onPost('/api/updateInventory').reply(({ data }) => {
-    const { id, active, category, image, price, quantity, tax, upc, } = JSON.parse(data);
+    const { id, active, category, image, price, quantity, tax, upc } =
+        JSON.parse(data);
     const newItem = {
         id: id,
         active: active,
@@ -87,5 +95,5 @@ mock.onPost('/api/updateInventory').reply(({ data }) => {
         upc: upc
     };
     _.assign(_.find(itemDB, { id }), newItem);
-    return [200, {success:true}]
+    return [200, { success: true }];
 });
