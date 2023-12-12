@@ -6,10 +6,10 @@ const saleDB = mockApi.database.examples.sale.value;
 
 mock.onGet('/api/getItemData').reply(() => {
     const total = saleDB.length;
-    const activeLength = saleDB.filter((sale) => {
+    const active = saleDB.filter((sale) => {
         return sale.itemStatus === 'active';
     }).length;
-    const active = Math.floor((activeLength / total) * 100);
-    const noActive = 100 - active;
-    return [200, [active, noActive]];
+    const activePercentage = Math.floor((active / total) * 100);
+    const noActivePercentage = 100 - activePercentage;
+    return [200, [activePercentage, noActivePercentage]];
 });
