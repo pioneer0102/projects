@@ -2,7 +2,7 @@
 import mock from '../../mock';
 
 const current = new Date();
-current.setDate(current.getDate() - 365);
+current.setDate(current.getDate() - 90);
 
 const name = ['John Doe', 'Lion', 'Alexandra'];
 const channel = ['DoorDash', 'Uber', 'GubHub'];
@@ -21,7 +21,7 @@ const items = [
 const Cagetories = ['Accessory', 'Handphone', 'Clothes', 'Laptop'];
 
 export const saleDB = [];
-for (let i = 0; i < 365; i++) {
+for (let i = 0; i < 90; i++) {
     for (let j = 0; j < Math.floor(Math.random() * (10 - 1 + 1)) + 1; j++) {
         const item = {
             customer: name[Math.floor(Math.random() * name.length)],
@@ -40,8 +40,7 @@ for (let i = 0; i < 365; i++) {
     current.setDate(current.getDate() + 1);
 }
 
-mock.onPost('/api/getsaleData').reply(({ data }) => {
-    const { fromDate, toDate, category, item } = JSON.parse(data);
+const processGetSaleData = async (fromDate, toDate, category, item) => {
     const saleArray = [];
     const filterData = saleDB.filter((order) => {
         return (
@@ -69,14 +68,40 @@ mock.onPost('/api/getsaleData').reply(({ data }) => {
         });
         saleArray.push({ x: formattedDate, y: sale });
     }
-    return [200, saleArray];
+
+    return saleArray;
+};
+
+mock.onPost('/api/getSaleData').reply(async ({ data }) => {
+    const { fromDate, toDate, category, item } = JSON.parse(data);
+    try {
+        const saleArray = await new Promise((resolve) => {
+            setTimeout(() => {
+                const processedResult = processGetSaleData(
+                    fromDate,
+                    toDate,
+                    category,
+                    item
+                );
+                resolve(processedResult);
+            }, 2000);
+        });
+
+        return [200, saleArray];
+    } catch (error) {
+        console.error(error);
+        return [500, 'Internal Server Error'];
+    }
 });
 
-mock.onPost('/api/getSaleTableData').reply(({ data }) => {
-    const { rowsPerPage, page, fromDate, toDate, category, item } =
-        JSON.parse(data);
-    const pageSize = parseInt(rowsPerPage);
-    const pageNumber = parseInt(page);
+const processGetSaleTableData = async (
+    pageNumber,
+    pageSize,
+    fromDate,
+    toDate,
+    category,
+    item
+) => {
     const filteredData = saleDB.filter((order) => {
         return (
             (category === '' || order.category === category) &&
@@ -84,6 +109,7 @@ mock.onPost('/api/getSaleTableData').reply(({ data }) => {
                 order.item.toLowerCase().includes(item.toLowerCase()))
         );
     });
+
     const pagedData = [];
     for (
         let i = new Date(fromDate);
@@ -104,5 +130,24 @@ mock.onPost('/api/getSaleTableData').reply(({ data }) => {
         ),
         totalCount: pagedData.length
     };
+
+    return result;
+};
+
+mock.onPost('/api/getSaleTableData').reply(async ({ data }) => {
+    const { rowsPerPage, page, fromDate, toDate, category, item } =
+        JSON.parse(data);
+    const pageSize = parseInt(rowsPerPage);
+    const pageNumber = parseInt(page);
+
+    const result = await processGetSaleTableData(
+        pageNumber,
+        pageSize,
+        fromDate,
+        toDate,
+        category,
+        item
+    );
+
     return [200, result];
 });

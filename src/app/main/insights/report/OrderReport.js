@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
@@ -12,12 +12,7 @@ import Popover from '@mui/material/Popover';
 import { Box } from '@mui/material';
 import clsx from 'clsx';
 import { Status } from '../../../model/InsightsModel';
-import {
-    getOrderData,
-    orderFilter,
-    selectOrder,
-    setOrderFilter
-} from '../store/orderSlice';
+import { orderFilter, selectOrder, setOrderFilter } from '../store/orderSlice';
 import { saleFilter } from '../store/saleSlice';
 
 const OrderReport = () => {
@@ -45,9 +40,6 @@ const OrderReport = () => {
         }
         dispatch(setOrderFilter({ type: type, value: value }));
     };
-    useEffect(() => {
-        dispatch(getOrderData({ ...filter, ...headFilter }));
-    }, [dispatch, filter, headFilter]);
 
     const currentTotal =
         orderData.completed.current +
@@ -263,7 +255,7 @@ const OrderReport = () => {
                     />
                 </div>
             </div>
-            <div className="flex items-start mt-24 mx-24">
+            <div className="flex items-start mt-16">
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-42 sm:gap-48">
                     <div className="flex flex-col">
                         <div className="flex items-center">

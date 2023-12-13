@@ -1,18 +1,12 @@
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import { useDispatch, useSelector } from 'react-redux';
-import { getItemData, selectItem } from '../store/itemSlice';
+import { useSelector } from 'react-redux';
+import { selectItem } from '../store/itemSlice';
 
 function ItemReport() {
-    const dispatch = useDispatch();
     const item = useSelector(selectItem);
-
-    useEffect(() => {
-        dispatch(getItemData());
-    }, [dispatch]);
 
     const series = item;
     const labels = ['Active', 'InActive'];
