@@ -11,11 +11,11 @@ const InvManCofig = {
     },
     routes: [
         {
-            path: 'inventory-manager',
+            path: 'item-management',
             element: <InventoryApp />
         },
         {
-            path: 'inventory-manager/:action/:id',
+            path: 'item-management/:action/:id',
             element: <InvForm />
         }
     ]

@@ -17,11 +17,11 @@ import {
     setPagenumber,
     setPagesize,
     getInventory
-} from '../store/inventorySlice';
+} from './store/inventorySlice';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { InventoryTableHeader } from 'src/app/model/InvManModel';
 import { useTranslation } from 'react-i18next';
-import styles from '../style.module.scss';
+import styles from './style.module.scss';
 
 const InvManTable = () => {
     const { t } = useTranslation();
@@ -41,13 +41,14 @@ const InvManTable = () => {
     };
 
     const {
-        data: inventory,
+        data: Inventory,
         isLoading,
         isError
     } = useQuery(['inventoryList', searchData], () => getInventory(searchData));
-    const filterSize = inventory && inventory.filterSize;
+    const dbSize = Inventory && Inventory.dbSize;
+    const filterSize = Inventory && Inventory.filterSize;
 
-    const showDetail = (id) => history.push(`/inventory-manager/edit/${id}`);
+    const showDetail = (id) => history.push(`/item-management/edit/${id}`);
 
     if (isLoading) {
         return <FuseLoading />;
@@ -63,7 +64,7 @@ const InvManTable = () => {
         );
     }
 
-    if (inventory.pagedData.length === 0) {
+    if (Inventory.pagedData.length === 0) {
         return (
             <div className="flex flex-1 items-center justify-center h-full">
                 <Typography color="text.secondary" variant="h5">
@@ -95,9 +96,9 @@ const InvManTable = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {inventory.pagedData.map((item, index) => {
+                        {Inventory.pagedData.map((item, index) => {
                             return (
-                                inventory && (
+                                Inventory && (
                                     <Tr
                                         key={index}
                                         role="button"
@@ -108,12 +109,11 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-24"
+                                                className="font-semibold text-20 md:pt-24"
                                             >
                                                 <img
                                                     src={item.image}
                                                     alt={category}
-                                                    // variant="square"
                                                     style={{
                                                         width: 150,
                                                         height: 100
@@ -124,7 +124,7 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16"
+                                                className="font-semibold text-20 md:pt-16"
                                             >
                                                 {item.name}
                                             </Typography>
@@ -132,7 +132,7 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16"
+                                                className="font-semibold text-20 md:pt-16"
                                             >
                                                 {item.category}
                                             </Typography>
@@ -140,7 +140,7 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16"
+                                                className="font-semibold text-20 md:pt-16"
                                             >
                                                 $ {item.price}
                                             </Typography>
@@ -148,7 +148,7 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16"
+                                                className="font-semibold text-20 md:pt-16"
                                             >
                                                 {item.quantity}
                                             </Typography>
@@ -156,7 +156,7 @@ const InvManTable = () => {
                                         <Td align="left">
                                             <Typography
                                                 color="text.secondary"
-                                                className="text-20 md:pt-16"
+                                                className="font-semibold text-20 md:pt-16"
                                             >
                                                 {item.active ? (
                                                     <FuseSvgIcon
@@ -186,7 +186,7 @@ const InvManTable = () => {
                         className="text-16 text-center font-medium"
                         color="text.secondary"
                     >
-                        {t('orders.total')} : {filterSize}
+                        {t('orders.total')} : {dbSize}
                     </Typography>
                     <TablePagination
                         className="flex-1 overflow-scroll mt-8"

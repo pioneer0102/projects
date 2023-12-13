@@ -4,38 +4,100 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Category, Items } from '../../../model/Global';
+import { Paper } from '@mui/material';
+import { TextField } from '@mui/material';
+import { InputAdornment } from '@mui/material';
+import { Button } from '@mui/material';
+import { Category } from '../../../model/Global';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-    saleFilter,
-    setSaleFilter,
-    selectTableFilter,
-    setTableFilter
-} from '../store/saleSlice';
+import { showMessage } from 'app/store/fuse/messageSlice';
+import { saleFilter, setSaleFilter, setRefresh } from '../store/saleSlice';
 
-const SaleFilter = (props) => {
-    const { parent } = props;
+const current = new Date();
+current.setDate(new Date(current) - 365);
+
+const SaleFilter = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const filter = useSelector(saleFilter);
-    const tableFilter = useSelector(selectTableFilter);
 
     const handleChange = (type, value) => {
-        if (parent === 'graph') {
-            dispatch(setSaleFilter({ type: type, value: value }));
+        var fromDate = '';
+        var toDate = '';
+        switch (type) {
+            case 'fromDate':
+                fromDate = value;
+                break;
+            case 'toDate':
+                toDate = value;
+                break;
         }
-        if (parent === 'table') {
-            dispatch(setTableFilter({ type: type, value: value }));
+        if (new Date(toDate) <= new Date(fromDate)) {
+            dispatch(
+                showMessage({
+                    message:
+                        'Input date correctly! From should be smaller than To',
+                    variant: 'warning'
+                })
+            );
+        } else {
+            dispatch(setSaleFilter({ type: type, value: value }));
         }
     };
 
+    const handleRefresh = () => {
+        dispatch(setRefresh());
+    };
+
     return (
-        <div className="flex flex-col items-center mx-24 pb-32 rounded-md">
-            {parent === 'graph' && (
+        <Paper className="flex md:flex-row justify-between flex-col mx-24 mb-24 px-16 py-16 rounded-md">
+            <div className="grid md:grid-cols-4 grid-cols-1 md:gap-24 gap-32 w-full mr-24">
+                <TextField
+                    label="Item"
+                    placeholder="Item"
+                    id="name"
+                    size="small"
+                    variant="outlined"
+                    value={filter.item || ''}
+                    onChange={(event) =>
+                        handleChange('item', event.target.value)
+                    }
+                    required
+                    fullWidth
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <FuseSvgIcon size={20}>
+                                    heroicons-solid:search
+                                </FuseSvgIcon>
+                            </InputAdornment>
+                        )
+                    }}
+                />
+                <FormControl size="small">
+                    <InputLabel id="select-small-label">Category</InputLabel>
+                    <Select
+                        labelId="select-small-label"
+                        id="select-small"
+                        value={filter.category || ''}
+                        label="Category"
+                        onChange={(event) =>
+                            handleChange('category', event.target.value)
+                        }
+                    >
+                        <MenuItem value="">{t('all')}</MenuItem>
+                        {Category.map((category, index) => {
+                            return (
+                                <MenuItem key={index} value={category.name}>
+                                    {category.name}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </FormControl>
                 <DatePicker
-                    className="mt-32"
                     value={filter.fromDate ? filter.fromDate : new Date()}
                     onChange={(newValue) => handleChange('fromDate', newValue)}
                     clearable
@@ -46,7 +108,7 @@ const SaleFilter = (props) => {
                             InputLabelProps: {
                                 shrink: true
                             },
-                            size: 'medium',
+                            size: 'small',
                             fullWidth: true,
                             variant: 'outlined'
                         },
@@ -62,42 +124,7 @@ const SaleFilter = (props) => {
                         )
                     }}
                 />
-            )}
-            {parent === 'table' && (
                 <DatePicker
-                    className="mt-32"
-                    value={
-                        tableFilter.fromDate ? tableFilter.fromDate : new Date()
-                    }
-                    onChange={(newValue) => handleChange('fromDate', newValue)}
-                    clearable
-                    slotProps={{
-                        textField: {
-                            id: 'fromdate',
-                            label: 'From date',
-                            InputLabelProps: {
-                                shrink: true
-                            },
-                            size: 'medium',
-                            fullWidth: true,
-                            variant: 'outlined'
-                        },
-                        actionBar: {
-                            actions: ['clear', 'today']
-                        }
-                    }}
-                    slots={{
-                        openPickerIcon: () => (
-                            <FuseSvgIcon size={20}>
-                                heroicons-solid:calendar
-                            </FuseSvgIcon>
-                        )
-                    }}
-                />
-            )}
-            {parent === 'graph' && (
-                <DatePicker
-                    className="mt-32"
                     value={filter.toDate ? filter.toDate : new Date()}
                     onChange={(newDate) => handleChange('toDate', newDate)}
                     clearable
@@ -108,7 +135,7 @@ const SaleFilter = (props) => {
                             InputLabelProps: {
                                 shrink: true
                             },
-                            size: 'medium',
+                            size: 'small',
                             fullWidth: true,
                             variant: 'outlined'
                         },
@@ -124,72 +151,24 @@ const SaleFilter = (props) => {
                         )
                     }}
                 />
-            )}
-            {parent === 'table' && (
-                <DatePicker
-                    className="mt-32"
-                    value={tableFilter.toDate ? tableFilter.toDate : new Date()}
-                    onChange={(newDate) => handleChange('toDate', newDate)}
-                    clearable
-                    slotProps={{
-                        textField: {
-                            id: 'todate',
-                            label: 'To date',
-                            InputLabelProps: {
-                                shrink: true
-                            },
-                            size: 'medium',
-                            fullWidth: true,
-                            variant: 'outlined'
-                        },
-                        actionBar: {
-                            actions: ['clear', 'today']
-                        }
-                    }}
-                    slots={{
-                        openPickerIcon: () => (
-                            <FuseSvgIcon size={20}>
-                                heroicons-solid:calendar
-                            </FuseSvgIcon>
-                        )
-                    }}
-                />
-            )}
-            <FormControl size="medium" className="mt-32 w-full">
-                <InputLabel id="select-small-label">Category</InputLabel>
-                <Select
-                    labelId="select-small-label"
-                    id="select-small"
-                    value={
-                        (parent === 'graph' && filter.category) ||
-                        (parent === 'table' && tableFilter.category) ||
-                        ''
-                    }
-                    label="Category"
-                    onChange={(event) =>
-                        handleChange('category', event.target.value)
-                    }
-                >
-                    <MenuItem value="">{t('all')}</MenuItem>
-                    {Category.map((category, index) => {
-                        return (
-                            <MenuItem key={index} value={category.name}>
-                                {category.name}
-                            </MenuItem>
-                        );
-                    })}
-                </Select>
-            </FormControl>
-            <FormControl size="medium" className="mt-32 w-full">
+            </div>
+            <Button
+                variant="contained"
+                color="inherit"
+                onClick={handleRefresh}
+                className="rounded-md"
+            >
+                <FuseSvgIcon className="text-gray-500" size={24}>
+                    material-solid:refresh
+                </FuseSvgIcon>
+                <span className="mx-4"> Refresh</span>
+            </Button>
+            {/* <FormControl size="small">
                 <InputLabel id="select-small-label">Item</InputLabel>
                 <Select
                     labelId="select-small-label"
                     id="select-small"
-                    value={
-                        (parent === 'graph' && filter.item) ||
-                        (parent === 'table' && tableFilter.item) ||
-                        ''
-                    }
+                    value={filter.item || ''}
                     label="Item"
                     onChange={(event) =>
                         handleChange('item', event.target.value)
@@ -204,8 +183,8 @@ const SaleFilter = (props) => {
                         );
                     })}
                 </Select>
-            </FormControl>
-        </div>
+            </FormControl> */}
+        </Paper>
     );
 };
 

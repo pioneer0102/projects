@@ -67,7 +67,7 @@ const InvForm = () => {
 
     const { errors } = formState;
 
-    const handleCancel = () => history.push('/inventory-manager');
+    const handleCancel = () => history.push('/item-management');
     const onSubmit = (data) => {
         const formData = {
             ...data,
@@ -79,7 +79,7 @@ const InvForm = () => {
         if (routeParams.action === 'edit') {
             dispatch(updateInventory(formData));
         }
-        history.push('/inventory-manager');
+        history.push('/item-management');
     };
     function handleChange(e) {
         // setImage(URL.createObjectURL(e.target.files[0]));
@@ -110,7 +110,7 @@ const InvForm = () => {
     return (
         <>
             <Breadcrumb
-                parentUrl="inventory-manager"
+                parentUrl="item-management"
                 parent="Inventory Manager"
                 child={
                     routeParams.action.charAt(0).toUpperCase() +

@@ -32,25 +32,22 @@ export const selectResponseGraphWarning = ({ insightsApp }) =>
 export const selectResponseTableWarning = ({ insightsApp }) =>
     insightsApp.sale.responseTableWarning;
 
+const current = new Date();
+current.setDate(current.getDate() - 365);
+
 const saleSlice = createSlice({
     name: 'insightsApp/sale',
     initialState: {
         saleFilter: {
-            fromDate: '',
-            toDate: '',
-            category: '',
-            item: ''
-        },
-        saleArray: [],
-        graphTable: true,
-        tableFilter: {
-            fromDate: '',
-            toDate: '',
+            fromDate: current,
+            toDate: new Date(),
             category: '',
             item: '',
             rowsPerPage: 10,
             page: 0
         },
+        saleArray: [],
+        graphTable: true,
         tableData: [],
         totalCount: 0,
         tabValue: 0,
@@ -72,36 +69,30 @@ const saleSlice = createSlice({
                 case 'item':
                     state.saleFilter.item = action.payload.value;
                     break;
+                case 'rowsPerPage':
+                    state.saleFilter.rowsPerPage = action.payload.value;
+                    break;
+                case 'page':
+                    state.saleFilter.page = action.payload.value;
+                    break;
             }
         },
         setGraphTable: (state, action) => {
             console.log(action.payload);
             state.graphTable = action.payload;
         },
-        setTableFilter: (state, action) => {
-            switch (action.payload.type) {
-                case 'rowsPerPage':
-                    state.tableFilter.rowsPerPage = action.payload.value;
-                    break;
-                case 'page':
-                    state.tableFilter.page = action.payload.value;
-                    break;
-                case 'fromDate':
-                    state.tableFilter.fromDate = action.payload.value;
-                    break;
-                case 'toDate':
-                    state.tableFilter.toDate = action.payload.value;
-                    break;
-                case 'category':
-                    state.tableFilter.category = action.payload.value;
-                    break;
-                case 'item':
-                    state.tableFilter.item = action.payload.value;
-                    break;
-            }
-        },
         setTabValue: (state, action) => {
             state.tabValue = action.payload;
+        },
+        setRefresh: (state) => {
+            state.saleFilter = {
+                fromDate: current,
+                toDate: new Date(),
+                category: '',
+                item: '',
+                rowsPerPage: 10,
+                page: 0
+            };
         }
     },
     extraReducers: (builder) => {
@@ -133,7 +124,7 @@ const saleSlice = createSlice({
     }
 });
 
-export const { setSaleFilter, setGraphTable, setTableFilter, setTabValue } =
+export const { setSaleFilter, setGraphTable, setTabValue, setRefresh } =
     saleSlice.actions;
 
 export default saleSlice.reducer;

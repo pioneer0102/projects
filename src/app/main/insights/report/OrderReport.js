@@ -18,10 +18,12 @@ import {
     selectOrder,
     setOrderFilter
 } from '../store/orderSlice';
+import { saleFilter } from '../store/saleSlice';
 
 const OrderReport = () => {
     const dispatch = useDispatch();
     const filter = useSelector(orderFilter);
+    const headFilter = useSelector(saleFilter);
     const orderData = useSelector(selectOrder);
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -44,8 +46,8 @@ const OrderReport = () => {
         dispatch(setOrderFilter({ type: type, value: value }));
     };
     useEffect(() => {
-        dispatch(getOrderData(filter));
-    }, [dispatch, filter]);
+        dispatch(getOrderData({ ...filter, ...headFilter }));
+    }, [dispatch, filter, headFilter]);
 
     const currentTotal =
         orderData.completed.current +
@@ -172,9 +174,14 @@ const OrderReport = () => {
         }
     };
 
+    const diffDate = Math.floor(
+        (new Date(headFilter.toDate) - new Date(headFilter.fromDate)) /
+            (1000 * 60 * 60 * 24)
+    );
+
     return (
         <Paper className="flex flex-col shadow rounded-md px-16 py-16">
-            <div className="flex items-center justify-between mx-24 mt-16 mb-0">
+            <div className="flex items-center justify-between mt-16 mb-0">
                 <Typography className="text-2xl md:text-3xl font-semibold tracking-tight leading-6 truncate">
                     Orders View
                 </Typography>
@@ -252,7 +259,7 @@ const OrderReport = () => {
                     <Chip
                         size="small"
                         className="font-medium text-sm"
-                        label=" 30 days"
+                        label={`${diffDate} days`}
                     />
                 </div>
             </div>

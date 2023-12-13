@@ -2,6 +2,7 @@ import i18next from 'i18next';
 import ar from './navigation-i18n/ar';
 import en from './navigation-i18n/en';
 import tr from './navigation-i18n/tr';
+import { authRoles } from '../auth';
 
 i18next.addResourceBundle('en', 'navigation', en);
 i18next.addResourceBundle('tr', 'navigation', tr);
@@ -13,20 +14,23 @@ const navigationConfig = [
         title: 'Partners',
         type: 'item',
         icon: 'heroicons-outline:user-group',
+        auth: authRoles.user,
         url: 'partners'
     },
     {
-        id: 'InventoryManager',
-        title: 'Inventory Manager',
+        id: 'ItemManagement',
+        title: 'Item Management',
         type: 'item',
         icon: 'heroicons-outline:shopping-cart',
-        url: 'inventory-manager'
+        auth: authRoles.admin,
+        url: 'item-management'
     },
     {
         id: 'Orders',
         title: 'Orders',
         type: 'item',
         icon: 'heroicons-outline:pencil-alt',
+        auth: authRoles.user,
         url: '/orders'
     },
     {
@@ -34,6 +38,7 @@ const navigationConfig = [
         title: 'Insights',
         type: 'item',
         icon: 'heroicons-outline:chart-bar',
+        auth: authRoles.user,
         url: '/insights'
         // children: [
         //     {
@@ -55,6 +60,7 @@ const navigationConfig = [
         title: 'Settings',
         type: 'collapse',
         icon: 'heroicons-outline:cog',
+        auth: authRoles.user,
         children: [
             {
                 id: 'Settings.UserManagement',

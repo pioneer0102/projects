@@ -5,27 +5,32 @@ import mock from '../mock';
 
 let notificationsDB = mockApi.components.examples.notifications.value;
 
-mock.onGet('/api/notifications').reply((config) => {
-  return [200, notificationsDB];
+mock.onGet('/api/notifications').reply(() => {
+    return [200, notificationsDB];
 });
 
-mock.onDelete('/api/notifications').reply((config) => {
-  notificationsDB = [];
-  return [200];
+mock.onDelete('/api/notifications').reply(() => {
+    notificationsDB = [];
+    return [200];
 });
 
 mock.onPost('/api/notifications').reply(({ data }) => {
-  const newNotification = { id: FuseUtils.generateGUID(), ...JSON.parse(data) };
+    const newNotification = {
+        id: FuseUtils.generateGUID(),
+        ...JSON.parse(data)
+    };
 
-  notificationsDB.push(newNotification);
+    notificationsDB.push(newNotification);
 
-  return [200, newNotification];
+    return [200, newNotification];
 });
 
 mock.onDelete(/\/api\/notifications\/[^/]+/).reply((config) => {
-  const { id } = config.url.match(/\/api\/notifications\/(?<id>[^/]+)/).groups;
+    const { id } = config.url.match(
+        /\/api\/notifications\/(?<id>[^/]+)/
+    ).groups;
 
-  _.remove(notificationsDB, { id });
+    _.remove(notificationsDB, { id });
 
-  return [200, id];
+    return [200, id];
 });
