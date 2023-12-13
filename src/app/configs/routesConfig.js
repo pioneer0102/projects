@@ -6,7 +6,7 @@ import SignInConfig from '../main/sign-in/SignInConfig';
 import SignUpConfig from '../main/sign-up/SignUpConfig';
 import Error404Page from '../main/404/Error404Page';
 import PartnersConfig from '../main/partners/PartnersConfig';
-import InvManCofig from '../main/inventory-manager/InvManConfig';
+import InvManCofig from '../main/item-management/InvManConfig';
 import OrdersConfig from '../main/orders/OrdersConfig';
 import InsightsConfig from '../main/insights/InsightsConfig';
 import SettingsConfig from '../main/settings/SettingsConfig';

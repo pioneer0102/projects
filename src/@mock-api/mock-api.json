@@ -43529,12 +43529,12 @@
           {
             "uuid": "XgbuVEXBU5gtSKdbQRP1Zbbby1i1",
             "from": "custom-db",
-            "password": "admin",
+            "password": "123456789",
             "role": "admin",
             "data": {
               "displayName": "Abbott Keitch",
               "photoURL": "assets/images/avatars/brian-hughes.jpg",
-              "email": "admin@fusetheme.com",
+              "email": "admin@bagdash.com",
               "settings": {
                 "layout": {},
                 "theme": {}
@@ -43549,31 +43549,14 @@
           {
             "uuid": "XgbuVEXBU6gtSKdbTYR1Zbbby1i3",
             "from": "custom-db",
-            "password": "staff",
-            "role": "staff",
+            "password": "123456789",
+            "role": "user",
             "data": {
               "displayName": "Arnold Matlock",
               "photoURL": "assets/images/avatars/Arnold.jpg",
-              "email": "staff@fusetheme.com",
+              "email": "user@bagdash.com",
               "settings": {
-                "layout": {
-                  "style": "layout2",
-                  "config": {
-                    "mode": "boxed",
-                    "scroll": "content",
-                    "navbar": {
-                      "display": true
-                    },
-                    "toolbar": {
-                      "display": true,
-                      "position": "below"
-                    },
-                    "footer": {
-                      "display": true,
-                      "style": "fixed"
-                    }
-                  }
-                },
+                "layout": {},
                 "customScrollbars": true,
                 "theme": {}
               },
