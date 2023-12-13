@@ -53,7 +53,11 @@ const InsightsApp = () => {
     return (
         <div className="flex flex-col my-24">
             <SaleFilter />
-            {!saleLoaded && !orderLoaded && !itemLoaded && (
+            {saleLoaded && orderLoaded && itemLoaded ? (
+                <div className="flex items-center justify-center flex-grow">
+                    <FuseLoading />
+                </div>
+            ) : (
                 <Grid container spacing={0}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
                         <div className="mx-16 my-16">
@@ -72,11 +76,6 @@ const InsightsApp = () => {
                         </div>
                     </Grid>
                 </Grid>
-            )}
-            {(saleLoaded || orderLoaded || itemLoaded) && (
-                <div className="flex items-center justify-center flex-grow">
-                    <FuseLoading />
-                </div>
             )}
         </div>
     );
