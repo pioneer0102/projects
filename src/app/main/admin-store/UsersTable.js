@@ -106,7 +106,7 @@ const UsersTable = () => {
                                                         className="text-gray-500"
                                                         size={20}
                                                     >
-                                                        material-solid:refresh
+                                                        heroicons-outline:key
                                                     </FuseSvgIcon>
                                                     {isSmallScreen ? null : (
                                                         <span className="mx-4 text-16">
