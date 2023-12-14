@@ -111,7 +111,7 @@ const UsersTable = () => {
                                                     {isSmallScreen ? null : (
                                                         <span className="mx-4 text-16">
                                                             {' '}
-                                                            Refresh
+                                                            Reset
                                                         </span>
                                                     )}
                                                 </Button>
