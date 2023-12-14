@@ -22,7 +22,7 @@ const navigationConfig = [
         title: 'Item Management',
         type: 'item',
         icon: 'heroicons-outline:shopping-cart',
-        auth: authRoles.admin,
+        auth: authRoles.adminAndUser,
         url: 'item-management'
     },
     {
@@ -31,15 +31,16 @@ const navigationConfig = [
         type: 'item',
         icon: 'heroicons-outline:pencil-alt',
         auth: authRoles.user,
-        url: '/orders'
+        url: 'orders'
     },
     {
         id: 'Insights',
         title: 'Insights',
         type: 'item',
-        icon: 'heroicons-outline:chart-bar',
+        // icon: 'heroicons-outline:chart-bar',
+        icon: 'material-outline:leaderboard',
         auth: authRoles.user,
-        url: '/insights'
+        url: 'insights'
         // children: [
         //     {
         //         id: 'Insights.Channels',
@@ -75,6 +76,14 @@ const navigationConfig = [
                 url: 'settings/pos-settings'
             }
         ]
+    },
+    {
+        id: 'Stores',
+        title: 'Stores',
+        type: 'item',
+        icon: 'material-outline:house',
+        auth: authRoles.admin,
+        url: 'stores'
     }
 ];
 

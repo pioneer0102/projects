@@ -21,47 +21,28 @@ mock.onPost('/api/getorders').reply(({ data }) => {
 
     const pagenumber = parseInt(pageNumber);
     const pagesize = parseInt(pageSize);
-
-    if (
-        searchText === '' &&
-        subtotal === '' &&
-        channel === '' &&
-        status === ''
-    ) {
-        const startIndex = pagenumber * pagesize;
-        const endIndex = pagenumber * pagesize + pagesize;
-        const pagedData = ordersDB.slice(startIndex, endIndex);
-        const data = {
-            pagedData: pagedData,
-            dbSize: dbSize,
-            filterSize: dbSize
-        };
-        return [200, data];
-    } else {
-        const filteredData = ordersDB.filter((item) => {
-            return (
-                (searchText === '' ||
-                    item.customer
-                        .toLowerCase()
-                        .includes(searchText.toLowerCase())) &&
-                (subtotal === '' ||
-                    (priceRange[subtotal].min <= item.subtotal &&
-                        item.subtotal <= priceRange[subtotal].max)) &&
-                (channel === '' || item.channel === channel) &&
-                (status === '' || item.history[0].status === status)
-            );
-        });
-        const startIndex = pagenumber * pagesize || 0;
-        const endIndex =
-            pagenumber * pagesize + pagesize || filteredData.length;
-        const pagedData = filteredData.slice(startIndex, endIndex);
-        const data = {
-            pagedData: pagedData,
-            dbSize: dbSize,
-            filterSize: filteredData.length
-        };
-        return [200, data];
-    }
+    const filteredData = ordersDB.filter((item) => {
+        return (
+            (searchText === '' ||
+                item.customer
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())) &&
+            (subtotal === '' ||
+                (priceRange[subtotal].min <= item.subtotal &&
+                    item.subtotal <= priceRange[subtotal].max)) &&
+            (channel === '' || item.channel === channel) &&
+            (status === '' || item.history[0].status === status)
+        );
+    });
+    const startIndex = pagenumber * pagesize || 0;
+    const endIndex = pagenumber * pagesize + pagesize || filteredData.length;
+    const pagedData = filteredData.slice(startIndex, endIndex);
+    const result = {
+        pagedData: pagedData,
+        dbSize: dbSize,
+        filterSize: filteredData.length
+    };
+    return [200, result];
 });
 
 mock.onGet('/api/getItem').reply((data) => {
@@ -106,10 +87,10 @@ mock.onPost('/api/removeItem').reply(({ data }) => {
     const order = _.find(ordersDB, { id: orderId });
     var success = false;
     const remove = _.remove(order.items, { id: itemId });
-    if (remove.length != null) {
+    if (remove.length !== null) {
         success = true;
     }
-    if (success == true) {
+    if (success === true) {
         var subtotal = 0;
         order.items.map((item) => {
             const oneItem = _.find(itemDB, { id: item.id });

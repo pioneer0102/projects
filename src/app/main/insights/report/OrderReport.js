@@ -93,7 +93,7 @@ const OrderReport = () => {
             fontFamily: 'inherit',
             foreColor: 'inherit',
             width: '100%',
-            height: '100%',
+            height: '150%',
             type: 'area',
             toolbar: {
                 show: false

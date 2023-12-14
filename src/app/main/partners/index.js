@@ -1,8 +1,16 @@
 import PartnerCard from './components/PartnerCard';
 import { Channels } from 'src/app/model/Global';
 import Grid from '@mui/system/Unstable_Grid/Grid';
+import { selectUser } from 'app/store/userSlice';
+import { useSelector } from 'react-redux';
+import history from '@history';
 
 function PartnersApp() {
+    const user = useSelector(selectUser);
+    if (user.role === 'admin') {
+        history.push('/item-management');
+        return;
+    }
     return (
         <div className="w-full p-16">
             <Grid container spacing={0}>

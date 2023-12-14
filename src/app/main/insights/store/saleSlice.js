@@ -19,6 +19,8 @@ export const getSaleTableData = createAsyncThunk(
 
 export const saleFilter = ({ insightsApp }) => insightsApp.sale.saleFilter;
 export const selectSale = ({ insightsApp }) => insightsApp.sale.saleArray;
+export const selectPieValue = ({ insightsApp }) => insightsApp.sale.pieValue;
+
 export const selectGraphTable = ({ insightsApp }) =>
     insightsApp.sale.graphTable;
 export const selectTableFilter = ({ insightsApp }) =>
@@ -43,10 +45,12 @@ const saleSlice = createSlice({
             toDate: new Date(),
             category: '',
             item: '',
+            channel: '',
             rowsPerPage: 10,
             page: 0
         },
         saleArray: [],
+        pieValue: {},
         graphTable: true,
         tableData: [],
         totalCount: 0,
@@ -76,6 +80,9 @@ const saleSlice = createSlice({
                 case 'page':
                     state.saleFilter.page = action.payload.value;
                     break;
+                case 'channel':
+                    state.saleFilter.channel = action.payload.value;
+                    break;
             }
         },
         setGraphTable: (state, action) => {
@@ -91,6 +98,7 @@ const saleSlice = createSlice({
                 toDate: new Date(),
                 category: '',
                 item: '',
+                channel: '',
                 rowsPerPage: 10,
                 page: 0
             };
@@ -109,7 +117,8 @@ const saleSlice = createSlice({
                         state.responseGraphWarning = true;
                     } else {
                         state.responseGraphWarning = false;
-                        state.saleArray = action.payload;
+                        state.saleArray = action.payload.saleArray;
+                        state.pieValue = action.payload.pieValue;
                     }
                 }
 

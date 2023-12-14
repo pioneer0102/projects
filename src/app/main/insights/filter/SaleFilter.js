@@ -4,11 +4,10 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Paper } from '@mui/material';
 import { TextField } from '@mui/material';
 import { InputAdornment } from '@mui/material';
 import { Button } from '@mui/material';
-import { Category } from '../../../model/Global';
+import { Category, Channels } from '../../../model/Global';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -64,118 +63,140 @@ const SaleFilter = () => {
     }, [filter]);
 
     return (
-        <Paper className="flex md:flex-row justify-between flex-col mx-24 px-16 py-16 rounded-md">
-            <div className="grid md:grid-cols-4 grid-cols-1 md:gap-24 gap-32 w-full mr-24">
-                <TextField
-                    label="Item"
-                    placeholder="Item"
-                    id="name"
-                    size="small"
-                    variant="outlined"
-                    value={filter.item || ''}
-                    onChange={(event) =>
-                        handleChange('item', event.target.value)
+        <div className="flex flex-col px-8 py-8">
+            {/* <div className="w-full"> */}
+            <DatePicker
+                value={fromDate ? fromDate : new Date()}
+                onChange={(newValue) => handleChange('fromDate', newValue)}
+                className="mt-32"
+                clearable
+                slotProps={{
+                    textField: {
+                        id: 'fromdate',
+                        label: 'From date',
+                        InputLabelProps: {
+                            shrink: true
+                        },
+                        size: 'small',
+                        fullWidth: true,
+                        variant: 'outlined'
+                    },
+                    actionBar: {
+                        actions: ['clear', 'today']
                     }
-                    required
-                    fullWidth
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <FuseSvgIcon size={20}>
-                                    heroicons-solid:search
-                                </FuseSvgIcon>
-                            </InputAdornment>
-                        )
-                    }}
-                />
-                <FormControl size="small">
-                    <InputLabel id="select-small-label">Category</InputLabel>
-                    <Select
-                        labelId="select-small-label"
-                        id="select-small"
-                        value={filter.category || ''}
-                        label="Category"
-                        onChange={(event) =>
-                            handleChange('category', event.target.value)
-                        }
-                    >
-                        <MenuItem value="">{t('all')}</MenuItem>
-                        {Category.map((category, index) => {
-                            return (
-                                <MenuItem key={index} value={category.name}>
-                                    {category.name}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
-                </FormControl>
-                <DatePicker
-                    value={fromDate ? fromDate : new Date()}
-                    onChange={(newValue) => handleChange('fromDate', newValue)}
-                    clearable
-                    slotProps={{
-                        textField: {
-                            id: 'fromdate',
-                            label: 'From date',
-                            InputLabelProps: {
-                                shrink: true
-                            },
-                            size: 'small',
-                            fullWidth: true,
-                            variant: 'outlined'
+                }}
+                slots={{
+                    openPickerIcon: () => (
+                        <FuseSvgIcon size={20}>
+                            heroicons-solid:calendar
+                        </FuseSvgIcon>
+                    )
+                }}
+            />
+            <DatePicker
+                value={toDate ? toDate : new Date()}
+                onChange={(newDate) => handleChange('toDate', newDate)}
+                className="mt-32"
+                clearable
+                slotProps={{
+                    textField: {
+                        id: 'todate',
+                        label: 'To date',
+                        InputLabelProps: {
+                            shrink: true
                         },
-                        actionBar: {
-                            actions: ['clear', 'today']
-                        }
-                    }}
-                    slots={{
-                        openPickerIcon: () => (
+                        size: 'small',
+                        fullWidth: true,
+                        variant: 'outlined'
+                    },
+                    actionBar: {
+                        actions: ['clear', 'today']
+                    }
+                }}
+                slots={{
+                    openPickerIcon: () => (
+                        <FuseSvgIcon size={20}>
+                            heroicons-solid:calendar
+                        </FuseSvgIcon>
+                    )
+                }}
+            />
+            <TextField
+                label="Item"
+                placeholder="Item"
+                id="name"
+                size="small"
+                variant="outlined"
+                className="mt-32"
+                value={filter.item || ''}
+                onChange={(event) => handleChange('item', event.target.value)}
+                required
+                fullWidth
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
                             <FuseSvgIcon size={20}>
-                                heroicons-solid:calendar
+                                heroicons-solid:search
                             </FuseSvgIcon>
-                        )
-                    }}
-                />
-                <DatePicker
-                    value={toDate ? toDate : new Date()}
-                    onChange={(newDate) => handleChange('toDate', newDate)}
-                    clearable
-                    slotProps={{
-                        textField: {
-                            id: 'todate',
-                            label: 'To date',
-                            InputLabelProps: {
-                                shrink: true
-                            },
-                            size: 'small',
-                            fullWidth: true,
-                            variant: 'outlined'
-                        },
-                        actionBar: {
-                            actions: ['clear', 'today']
-                        }
-                    }}
-                    slots={{
-                        openPickerIcon: () => (
-                            <FuseSvgIcon size={20}>
-                                heroicons-solid:calendar
-                            </FuseSvgIcon>
-                        )
-                    }}
-                />
-            </div>
+                        </InputAdornment>
+                    )
+                }}
+            />
+            <FormControl size="small" className="mt-32">
+                <InputLabel id="select-small-label">Category</InputLabel>
+                <Select
+                    labelId="select-small-label"
+                    id="select-small"
+                    value={filter.category || ''}
+                    label="Category"
+                    onChange={(event) =>
+                        handleChange('category', event.target.value)
+                    }
+                >
+                    <MenuItem value="">{t('all')}</MenuItem>
+                    {Category.map((category, index) => {
+                        return (
+                            <MenuItem key={index} value={category.name}>
+                                {category.name}
+                            </MenuItem>
+                        );
+                    })}
+                </Select>
+            </FormControl>
+            <FormControl size="small" className="mt-32">
+                <InputLabel id="select-small-label">Channels</InputLabel>
+                <Select
+                    labelId="select-small-label"
+                    id="select-small"
+                    value={filter.channel || ''}
+                    label="Channels"
+                    onChange={(event) =>
+                        handleChange('channel', event.target.value)
+                    }
+                >
+                    <MenuItem value="">{t('all')}</MenuItem>
+                    {Channels.map((channel, index) => {
+                        return (
+                            <MenuItem key={index} value={channel}>
+                                {channel}
+                            </MenuItem>
+                        );
+                    })}
+                </Select>
+            </FormControl>
+            {/* </div> */}
             <Button
                 variant="contained"
                 color="inherit"
                 onClick={handleRefresh}
-                className="rounded-md"
+                className="rounded-md mt-32"
             >
                 <FuseSvgIcon className="text-gray-500" size={24}>
                     material-solid:refresh
                 </FuseSvgIcon>
                 <span className="mx-4"> Refresh</span>
             </Button>
-        </Paper>
+        </div>
     );
 };
 

@@ -1,7 +1,7 @@
 import mock from '../../mock';
 import { saleDB } from './sale-api';
 
-const process = async (status, fromDate, toDate, category, item) => {
+const process = async (status, fromDate, toDate, category, item, channel) => {
     let result = null;
 
     const diffDate = Math.floor(
@@ -55,6 +55,7 @@ const process = async (status, fromDate, toDate, category, item) => {
         const filteredData = saleDB.filter((order) => {
             return (
                 (category === '' || order.category === category) &&
+                (channel === '' || order.channel === channel) &&
                 (item === '' ||
                     order.item.toLowerCase().includes(item.toLowerCase()))
             );
@@ -93,6 +94,7 @@ const process = async (status, fromDate, toDate, category, item) => {
             return (
                 (status === '' || order.status === status) &&
                 (category === '' || order.category === category) &&
+                (channel === '' || order.channel === channel) &&
                 (item === '' ||
                     order.item.toLowerCase().includes(item.toLowerCase()))
             );
@@ -129,7 +131,8 @@ const process = async (status, fromDate, toDate, category, item) => {
 };
 
 mock.onPost('/api/getOrderData').reply(async ({ data }) => {
-    const { status, fromDate, toDate, category, item } = JSON.parse(data);
+    const { status, fromDate, toDate, category, item, channel } =
+        JSON.parse(data);
     try {
         const result = await new Promise((resolve) => {
             setTimeout(() => {
@@ -138,7 +141,8 @@ mock.onPost('/api/getOrderData').reply(async ({ data }) => {
                     fromDate,
                     toDate,
                     category,
-                    item
+                    item,
+                    channel
                 );
                 resolve(processedResult);
             }, 2000);

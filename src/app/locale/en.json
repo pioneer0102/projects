@@ -17,7 +17,7 @@
         "orders": "Orders",
         "detail": "Detail",
         "subTotal": "SubTotal",
-        "noData": "There is no orders!",
+        "noData": "There are no orders!",
         "replace": "Replace",
         "cancel": "Cancel",
         "total": "Total Orders",
@@ -45,6 +45,10 @@
         "edit": "Edit",
         "delete": "Delete",
         "reset": "Reset Password"
+    },
+    "stores": {
+        "noData": "There are no Stores!",
+        "total": "Total Stores"
     },
     "haveAccount": "Don't have an account?"
 }
