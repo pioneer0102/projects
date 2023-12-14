@@ -13,8 +13,15 @@ import TaxTab from './tabs/TaxTab';
 import DepartmentTab from './tabs/DepartmentTab';
 
 import { getPos, selectPosDetail, updatePos } from '../store/posSlice';
+import { selectUser } from 'app/store/userSlice';
+import history from '@history';
 
 const PosSettings = () => {
+    const user = useSelector(selectUser);
+    if (user.role === 'admin') {
+        history.push('/item-management');
+        return;
+    }
     const { t } = useTranslation();
     const dispatch = useDispatch();
 

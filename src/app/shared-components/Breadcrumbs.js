@@ -32,7 +32,7 @@ function Breadcrumb(props) {
                 </div>
                 <Button
                     variant="contained"
-                    color="secondary"
+                    color="info"
                     className="rounded-md"
                     onClick={() => {
                         navigate(`../${parentUrl}`);

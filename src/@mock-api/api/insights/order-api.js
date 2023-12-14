@@ -1,5 +1,4 @@
 /* eslint-disable no-redeclare */
-import mockApi from '../../mock-api.json';
 import mock from '../../mock';
 import { saleDB } from './sale-api';
 
