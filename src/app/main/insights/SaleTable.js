@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { SaleTableHeader } from 'src/app/model/InsightsModel';
 import { Typography } from '@mui/material';
 import { TablePagination } from '@mui/material';
@@ -13,7 +12,6 @@ import format from 'date-fns/format';
 import {
     saleFilter,
     setSaleFilter,
-    getSaleTableData,
     selectTableData,
     selectTotalCount,
     selectTabValue,
@@ -27,9 +25,11 @@ const SaleTable = () => {
     const totalCount = useSelector(selectTotalCount);
     const tabValue = useSelector(selectTabValue);
 
-    useEffect(() => {
-        dispatch(getSaleTableData(tableFilter));
-    }, [dispatch, tableFilter]);
+    // useEffect(() => {
+    //     if (tabValue === 1) {
+    //         dispatch(getSaleTableData(tableFilter));
+    //     }
+    // }, [dispatch, tableFilter, tabValue]);
 
     const handlePagination = (type, value) => {
         dispatch(setSaleFilter({ type: type, value: value }));

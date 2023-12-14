@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getOrderData = createAsyncThunk(
     'insightsApp/order/getOrderData',
     async (filter) => {
-        const response = await axios.post('/api/getorderData', filter);
+        const response = await axios.post('/api/getOrderData', filter);
         return response.data;
     }
 );
@@ -16,6 +16,7 @@ export const tableOrder = ({ insightsApp }) => insightsApp.order.tableArray;
 const orderSlice = createSlice({
     name: 'insightsApp/order',
     initialState: {
+        orderLoaded: false,
         orderFilter: {
             status: 'all'
         },
@@ -50,10 +51,18 @@ const orderSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getOrderData.fulfilled, (state, action) => {
-            state.order = action.payload;
-            state.tableArray = action.payload.orderArray.reverse();
-        });
+        builder
+            .addCase(getOrderData.pending, (state) => {
+                state.orderLoaded = true;
+            })
+            .addCase(getOrderData.fulfilled, (state, action) => {
+                state.orderLoaded = false;
+                state.order = action.payload;
+                state.tableArray = action.payload.orderArray.reverse();
+            })
+            .addCase(getOrderData.rejected, (state) => {
+                state.orderLoaded = false;
+            });
     }
 });
 

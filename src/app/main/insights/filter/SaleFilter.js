@@ -14,36 +14,43 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { saleFilter, setSaleFilter, setRefresh } from '../store/saleSlice';
+import { useEffect, useState } from 'react';
 
 const current = new Date();
-current.setDate(new Date(current) - 365);
+current.setDate(new Date(current) - 90);
 
 const SaleFilter = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const filter = useSelector(saleFilter);
 
+    const [fromDate, setFromDate] = useState(null);
+    const [toDate, setToDate] = useState(null);
+
     const handleChange = (type, value) => {
-        var fromDate = '';
-        var toDate = '';
         switch (type) {
             case 'fromDate':
-                fromDate = value;
+                if (new Date(toDate) <= new Date(value)) {
+                    dispatch(
+                        showMessage({
+                            message:
+                                'Input date correctly! From should be smaller than To',
+                            variant: 'warning'
+                        })
+                    );
+                    return;
+                } else {
+                    setFromDate(value);
+                    dispatch(setSaleFilter({ type: type, value: value }));
+                }
                 break;
             case 'toDate':
-                toDate = value;
+                setToDate(value);
+                dispatch(setSaleFilter({ type: type, value: value }));
                 break;
-        }
-        if (new Date(toDate) <= new Date(fromDate)) {
-            dispatch(
-                showMessage({
-                    message:
-                        'Input date correctly! From should be smaller than To',
-                    variant: 'warning'
-                })
-            );
-        } else {
-            dispatch(setSaleFilter({ type: type, value: value }));
+            default:
+                dispatch(setSaleFilter({ type: type, value: value }));
+                break;
         }
     };
 
@@ -51,8 +58,13 @@ const SaleFilter = () => {
         dispatch(setRefresh());
     };
 
+    useEffect(() => {
+        setFromDate(filter.fromDate);
+        setToDate(filter.toDate);
+    }, [filter]);
+
     return (
-        <Paper className="flex md:flex-row justify-between flex-col mx-24 mb-24 px-16 py-16 rounded-md">
+        <Paper className="flex md:flex-row justify-between flex-col mx-24 px-16 py-16 rounded-md">
             <div className="grid md:grid-cols-4 grid-cols-1 md:gap-24 gap-32 w-full mr-24">
                 <TextField
                     label="Item"
@@ -98,7 +110,7 @@ const SaleFilter = () => {
                     </Select>
                 </FormControl>
                 <DatePicker
-                    value={filter.fromDate ? filter.fromDate : new Date()}
+                    value={fromDate ? fromDate : new Date()}
                     onChange={(newValue) => handleChange('fromDate', newValue)}
                     clearable
                     slotProps={{
@@ -125,7 +137,7 @@ const SaleFilter = () => {
                     }}
                 />
                 <DatePicker
-                    value={filter.toDate ? filter.toDate : new Date()}
+                    value={toDate ? toDate : new Date()}
                     onChange={(newDate) => handleChange('toDate', newDate)}
                     clearable
                     slotProps={{
@@ -163,27 +175,6 @@ const SaleFilter = () => {
                 </FuseSvgIcon>
                 <span className="mx-4"> Refresh</span>
             </Button>
-            {/* <FormControl size="small">
-                <InputLabel id="select-small-label">Item</InputLabel>
-                <Select
-                    labelId="select-small-label"
-                    id="select-small"
-                    value={filter.item || ''}
-                    label="Item"
-                    onChange={(event) =>
-                        handleChange('item', event.target.value)
-                    }
-                >
-                    <MenuItem value="">{t('all')}</MenuItem>
-                    {Items.map((item, index) => {
-                        return (
-                            <MenuItem key={index} value={item}>
-                                {item}
-                            </MenuItem>
-                        );
-                    })}
-                </Select>
-            </FormControl> */}
         </Paper>
     );
 };

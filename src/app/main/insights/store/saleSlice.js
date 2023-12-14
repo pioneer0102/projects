@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const getSaleData = createAsyncThunk(
-    'insightsApp/sale/getsaleData',
+    'insightsApp/sale/getSaleData',
     async (filter) => {
-        const response = await axios.post('/api/getsaleData', filter);
+        const response = await axios.post('/api/getSaleData', filter);
         return response.data;
     }
 );
@@ -32,14 +32,14 @@ export const selectResponseGraphWarning = ({ insightsApp }) =>
 export const selectResponseTableWarning = ({ insightsApp }) =>
     insightsApp.sale.responseTableWarning;
 
-const current = new Date();
-current.setDate(current.getDate() - 365);
+const before30Days = new Date();
+before30Days.setDate(before30Days.getDate() - 30);
 
 const saleSlice = createSlice({
     name: 'insightsApp/sale',
     initialState: {
         saleFilter: {
-            fromDate: current,
+            fromDate: before30Days,
             toDate: new Date(),
             category: '',
             item: '',
@@ -52,7 +52,8 @@ const saleSlice = createSlice({
         totalCount: 0,
         tabValue: 0,
         responseGraphWarning: false,
-        responseTableWarning: false
+        responseTableWarning: false,
+        saleLoaded: false
     },
     reducers: {
         setSaleFilter: (state, action) => {
@@ -86,7 +87,7 @@ const saleSlice = createSlice({
         },
         setRefresh: (state) => {
             state.saleFilter = {
-                fromDate: current,
+                fromDate: before30Days,
                 toDate: new Date(),
                 category: '',
                 item: '',
@@ -96,31 +97,47 @@ const saleSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getSaleData.fulfilled, (state, action) => {
-            if (action.payload.graph === 'keep') {
-                console.log(action.payload);
-            } else {
-                if (action.payload.success === 'error date') {
-                    state.responseGraphWarning = true;
+        builder
+            .addCase(getSaleData.pending, (state) => {
+                state.saleLoaded = true;
+            })
+            .addCase(getSaleData.fulfilled, (state, action) => {
+                if (action.payload.graph === 'keep') {
+                    console.log(action.payload);
                 } else {
-                    state.responseGraphWarning = false;
-                    state.saleArray = action.payload;
+                    if (action.payload.success === 'error date') {
+                        state.responseGraphWarning = true;
+                    } else {
+                        state.responseGraphWarning = false;
+                        state.saleArray = action.payload;
+                    }
                 }
-            }
-        });
-        builder.addCase(getSaleTableData.fulfilled, (state, action) => {
-            if (action.payload.table === 'keep') {
-                console.log(action.payload);
-            } else {
-                if (action.payload.success === 'error date') {
-                    state.responseTableWarning = true;
+
+                state.saleLoaded = false;
+            })
+            .addCase(getSaleData.rejected, (state) => {
+                state.saleLoaded = false;
+            })
+            .addCase(getSaleTableData.pending, (state) => {
+                state.saleLoaded = true;
+            })
+            .addCase(getSaleTableData.fulfilled, (state, action) => {
+                if (action.payload.table === 'keep') {
+                    console.log(action.payload);
                 } else {
-                    state.responseTableWarning = false;
-                    state.tableData = action.payload.pagedData;
-                    state.totalCount = action.payload.totalCount;
+                    if (action.payload.success === 'error date') {
+                        state.responseTableWarning = true;
+                    } else {
+                        state.responseTableWarning = false;
+                        state.tableData = action.payload.pagedData;
+                        state.totalCount = action.payload.totalCount;
+                    }
                 }
-            }
-        });
+                state.saleLoaded = false;
+            })
+            .addCase(getSaleTableData.rejected, (state) => {
+                state.saleLoaded = false;
+            });
     }
 });
 

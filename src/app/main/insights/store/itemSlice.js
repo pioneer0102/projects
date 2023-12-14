@@ -14,13 +14,22 @@ export const selectItem = ({ insightsApp }) => insightsApp.item.item;
 const itemSlice = createSlice({
     name: 'insightsApp/item',
     initialState: {
-        item: []
+        item: [],
+        itemLoaded: false
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getItemData.fulfilled, (state, action) => {
-            state.item = action.payload;
-        });
+        builder
+            .addCase(getItemData.pending, (state) => {
+                state.itemLoaded = true;
+            })
+            .addCase(getItemData.fulfilled, (state, action) => {
+                state.item = action.payload;
+                state.itemLoaded = false;
+            })
+            .addCase(getItemData.rejected, (state) => {
+                state.itemLoaded = false;
+            });
     }
 });
 
