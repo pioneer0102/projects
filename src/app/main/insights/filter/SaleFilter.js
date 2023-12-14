@@ -64,7 +64,7 @@ const SaleFilter = () => {
     }, [filter]);
 
     return (
-        <Paper className="flex md:flex-row justify-between flex-col mx-16 px-16 py-16 rounded-md">
+        <Paper className="flex md:flex-row justify-between flex-col mx-24 px-16 py-16 rounded-md">
             <div className="grid md:grid-cols-4 grid-cols-1 md:gap-24 gap-32 w-full mr-24">
                 <TextField
                     label="Item"
