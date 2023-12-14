@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import SaleReport from './report/SaleReport';
 import OrderReport from './report/OrderReport';
 import ItemReport from './report/ItemReport';
-import SaleFilter from './filter/SaleFilter';
+import FilterPopButton from './filter/FilterPopButton';
 import {
     getSaleData,
     getSaleTableData,
@@ -20,6 +20,7 @@ import { getItemData } from './store/itemSlice';
 import FuseLoading from '@fuse/core/FuseLoading';
 import { selectUser } from 'app/store/userSlice';
 import history from '@history';
+import ChannelReport from './report/ChannelReport';
 
 const InsightsApp = () => {
     const user = useSelector(selectUser);
@@ -44,8 +45,6 @@ const InsightsApp = () => {
         ({ insightsApp }) => insightsApp.item.itemLoaded
     );
 
-    console.log(saleLoaded, orderLoaded, itemLoaded);
-
     useEffect(() => {
         if (tabValue === 0) {
             dispatch(getSaleData(filter));
@@ -56,10 +55,18 @@ const InsightsApp = () => {
         dispatch(getOrderData({ ...orderStatus, ...filter }));
         dispatch(getItemData());
     }, [dispatch, filter, tabValue]);
+    useEffect(() => {
+        dispatch(getOrderData({ ...orderStatus, ...filter }));
+    }, [dispatch, filter, orderStatus]);
 
     return (
         <div className="flex flex-col my-24">
-            <SaleFilter />
+            <div className="flex flex-row justify-between">
+                <div></div>
+                <div>
+                    <FilterPopButton />
+                </div>
+            </div>
             {saleLoaded && orderLoaded && itemLoaded ? (
                 <div className="flex items-center justify-center flex-grow">
                     <FuseLoading />
@@ -72,14 +79,19 @@ const InsightsApp = () => {
                             {tabValue === 1 && <SaleTable />}
                         </div>
                     </Grid>
-                    <Grid item lg={8} md={8} sm={12} xs={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                         <div className="mx-24 my-16">
                             <OrderReport />
                         </div>
                     </Grid>
-                    <Grid item lg={4} md={4} sm={12} xs={12}>
+                    <Grid item lg={6} md={6} sm={6} xs={6}>
                         <div className="mx-24 my-16">
                             <ItemReport />
+                        </div>
+                    </Grid>
+                    <Grid item lg={6} md={6} sm={6} xs={6}>
+                        <div className="mx-24 my-16">
+                            <ChannelReport />
                         </div>
                     </Grid>
                 </Grid>

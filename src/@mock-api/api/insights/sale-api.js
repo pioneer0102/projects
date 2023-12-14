@@ -5,8 +5,8 @@ const current = new Date();
 current.setDate(current.getDate() - 90);
 
 const name = ['John Doe', 'Lion', 'Alexandra'];
-const channel = ['DoorDash', 'Uber', 'GubHub'];
-const status = ['completed', 'pending', 'received', 'rejected'];
+const channel = ['DoorDash', 'Uber', 'GrubHub'];
+const status = ['completed', 'pending', 'received', 'rejected', 'pickedup'];
 const items = [
     'TISSOT watch',
     'Rolex watch',
@@ -40,11 +40,18 @@ for (let i = 0; i < 90; i++) {
     current.setDate(current.getDate() + 1);
 }
 
-const processGetSaleData = async (fromDate, toDate, category, item) => {
+const processGetSaleData = async (
+    fromDate,
+    toDate,
+    category,
+    item,
+    channel
+) => {
     const saleArray = [];
     const filterData = saleDB.filter((order) => {
         return (
             (category === '' || order.category === category) &&
+            (channel === '' || order.channel === channel) &&
             (item === '' ||
                 order.item.toLowerCase().includes(item.toLowerCase()))
         );
@@ -73,7 +80,13 @@ const processGetSaleData = async (fromDate, toDate, category, item) => {
 };
 
 mock.onPost('/api/getSaleData').reply(async ({ data }) => {
-    const { fromDate, toDate, category, item } = JSON.parse(data);
+    const { fromDate, toDate, category, item, channel } = JSON.parse(data);
+    const pieValue = { doorDash: 0, uber: 0, grubHub: 0 };
+    saleDB.forEach((sale) => {
+        if (sale.channel === 'DoorDash') pieValue.doorDash++;
+        if (sale.channel === 'Uber') pieValue.uber++;
+        if (sale.channel === 'GrubHub') pieValue.grubHub++;
+    });
     try {
         const saleArray = await new Promise((resolve) => {
             setTimeout(() => {
@@ -81,13 +94,14 @@ mock.onPost('/api/getSaleData').reply(async ({ data }) => {
                     fromDate,
                     toDate,
                     category,
-                    item
+                    item,
+                    channel
                 );
                 resolve(processedResult);
             }, 2000);
         });
 
-        return [200, saleArray];
+        return [200, { saleArray: saleArray, pieValue }];
     } catch (error) {
         console.error(error);
         return [500, 'Internal Server Error'];
@@ -100,11 +114,13 @@ const processGetSaleTableData = async (
     fromDate,
     toDate,
     category,
-    item
+    item,
+    channel
 ) => {
     const filteredData = saleDB.filter((order) => {
         return (
             (category === '' || order.category === category) &&
+            (channel === '' || order.channel === channel) &&
             (item === '' ||
                 order.item.toLowerCase().includes(item.toLowerCase()))
         );
@@ -135,7 +151,7 @@ const processGetSaleTableData = async (
 };
 
 mock.onPost('/api/getSaleTableData').reply(async ({ data }) => {
-    const { rowsPerPage, page, fromDate, toDate, category, item } =
+    const { rowsPerPage, page, fromDate, toDate, category, item, channel } =
         JSON.parse(data);
     const pageSize = parseInt(rowsPerPage);
     const pageNumber = parseInt(page);
@@ -146,7 +162,8 @@ mock.onPost('/api/getSaleTableData').reply(async ({ data }) => {
         fromDate,
         toDate,
         category,
-        item
+        item,
+        channel
     );
 
     return [200, result];

@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import ReactApexChart from 'react-apexcharts';
 import { Tab, Tabs } from '@mui/material';
 import { Box } from '@mui/material';
-import { selectSale, selectTabValue, setTabValue } from '../store/saleSlice';
 import Paper from '@mui/material/Paper';
 import { Typography } from '@mui/material';
 import { selectContrastMainTheme } from 'app/store/fuse/settingsSlice';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
+import { selectSale, selectTabValue, setTabValue } from '../store/saleSlice';
 
 const SaleReport = () => {
     const dispatch = useDispatch();
