@@ -75,7 +75,7 @@ const ChannelReport = () => {
         <Paper className="flex flex-col flex-auto shadow overflow-hidden p-24 rounded-md">
             <div className="flex flex-col sm:flex-row items-start justify-between">
                 <Typography className="text-xl md:text-2xl font-semibold tracking-tight leading-6 truncate">
-                    Item Overview
+                    Sales Overview
                 </Typography>
             </div>
 
