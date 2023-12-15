@@ -129,11 +129,7 @@ const AdminStoreDetail = () => {
                     </Button>
                 </div>
             </div>
-            <Paper
-                className={
-                    'flex flex-col mx-24 my-24 px-16 md:px-40 pb-32 pt-24 rounded-md'
-                }
-            >
+            <Paper className="flex flex-col mx-24 my-16 px-16 md:px-40 pb-32 pt-24">
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-x-40">
                     <Controller
                         control={control}
@@ -256,16 +252,13 @@ const AdminStoreDetail = () => {
                     />
                 </div>
                 <Box className="flex items-center mt-32">
-                    <Button
-                        className={'ml-auto rounded-md'}
-                        onClick={handleCancel}
-                    >
+                    <Button className="ml-auto" onClick={handleCancel}>
                         {t('cancel')}
                     </Button>
                     <Button
-                        className={'ml-8 rounded-md'}
+                        className="ml-8"
                         variant="contained"
-                        color="info"
+                        color="secondary"
                         onClick={handleSubmit(onSubmit)}
                     >
                         {t('save')}

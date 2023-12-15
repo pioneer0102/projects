@@ -21,7 +21,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { grey } from '@mui/material/colors';
-import { selectUser } from 'app/store/userSlice';
 import {
     getInventoryById,
     selectInventory,
@@ -40,11 +39,6 @@ const schema = yup.object().shape({
 });
 
 const InvForm = () => {
-    const user = useSelector(selectUser);
-    if (user.role === 'admin') {
-        history.push('/item-management');
-        return;
-    }
     const [image, setImage] = useState(null);
 
     const dispatch = useDispatch();
@@ -142,7 +136,7 @@ const InvForm = () => {
                     </Button>
                 </div>
             </div>
-            <Paper className={`mx-24 my-24 px-32 py-32 ${styles.form}`}>
+            <Paper className="mx-24 my-24 px-32 py-32">
                 <div className="flex items-center justify-between">
                     <Typography
                         className={'font-bold text-32'}
@@ -367,7 +361,7 @@ const InvForm = () => {
                                     color="secondary"
                                     variant="contained"
                                     component="label"
-                                    className="mx-12 mt-32 rounded overflow-hidden cursor-pointer shadow hover:shadow-lg"
+                                    className="mx-12 mt-32 overflow-hidden cursor-pointer shadow hover:shadow-lg"
                                 >
                                     {t('inventory.upload')}
                                     <input

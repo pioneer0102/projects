@@ -1,6 +1,5 @@
 import { Tab, Tabs } from '@mui/material';
 import { Paper } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -25,11 +24,7 @@ const StoreTabs = () => {
 
     return (
         <>
-            <Paper
-                className={
-                    'flex flex-col py-24 px-16 md:px-40 my-32 mx-24 overflow-auto rounded-md shadow-none'
-                }
-            >
+            <Paper className="flex flex-col py-24 px-16 md:px-40 mt-8 mb-24 mx-24 overflow-auto">
                 <Tabs
                     value={tabValue}
                     onChange={handleChangeTab}
