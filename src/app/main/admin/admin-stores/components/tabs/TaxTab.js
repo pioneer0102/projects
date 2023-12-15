@@ -2,7 +2,6 @@ import TaxItem from './TaxItem';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';

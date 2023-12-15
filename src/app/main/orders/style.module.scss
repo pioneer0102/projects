@@ -5,19 +5,19 @@
 .paper {
     box-shadow: none;
     border-radius: 4px;
-    animation: entry 0.5s linear 1;
+    // animation: entry 0.5s linear 1;
 }
 
-@keyframes entry {
-    0% {
-        top: -20%;
-        opacity: 0.1;
-    }
+// @keyframes entry {
+//     0% {
+//         top: -20%;
+//         opacity: 0.1;
+//     }
 
-    100% {
-        top: 0%;
-    }
-}
+//     100% {
+//         top: 0%;
+//     }
+// }
 
 .backButton {
     font-size: 16px;

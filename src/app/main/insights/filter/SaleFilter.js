@@ -64,7 +64,6 @@ const SaleFilter = () => {
 
     return (
         <div className="flex flex-col px-8 py-8">
-            {/* <div className="w-full"> */}
             <DatePicker
                 value={fromDate ? fromDate : new Date()}
                 onChange={(newValue) => handleChange('fromDate', newValue)}
@@ -184,16 +183,13 @@ const SaleFilter = () => {
                     })}
                 </Select>
             </FormControl>
-            {/* </div> */}
             <Button
                 variant="contained"
-                color="inherit"
+                color="secondary"
                 onClick={handleRefresh}
-                className="rounded-md mt-32"
+                className="mt-32"
             >
-                <FuseSvgIcon className="text-gray-500" size={24}>
-                    material-solid:refresh
-                </FuseSvgIcon>
+                <FuseSvgIcon size={24}>material-solid:refresh</FuseSvgIcon>
                 <span className="mx-4"> Refresh</span>
             </Button>
         </div>

@@ -12,8 +12,6 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import { IconButton } from '@mui/material';
 import { Avatar } from '@mui/material';
-import Breadcrumb from 'app/shared-components/Breadcrumbs';
-import styles from '../../style.module.scss';
 import history from '@history';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem } from '@mui/material';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { userRole } from 'src/app/model/UserModel';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import {
     getUserById,
     initializeUser,
@@ -131,9 +130,7 @@ const UserForm = () => {
                     </Button>
                 </div>
             </div>
-            <Paper
-                className={`flex flex-col mx-24 my-24 px-40 pb-32 ${styles.form}`}
-            >
+            <Paper className="flex flex-col mx-24 my-24 py-24 px-24 overflow-auto">
                 <Controller
                     control={control}
                     name="avatar"
@@ -387,16 +384,13 @@ const UserForm = () => {
                     />
                 </div>
                 <Box className="flex items-center mt-32">
-                    <Button
-                        className={'ml-auto rounded-md'}
-                        onClick={handleCancel}
-                    >
+                    <Button className="ml-auto" onClick={handleCancel}>
                         {t('cancel')}
                     </Button>
                     <Button
-                        className={'ml-8 rounded-md'}
+                        className="ml-8"
                         variant="contained"
-                        color="info"
+                        color="secondary"
                         disabled={_.isEmpty(dirtyFields) || !isValid}
                         onClick={handleSubmit(onSubmit)}
                     >

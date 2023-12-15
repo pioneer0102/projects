@@ -1,6 +1,5 @@
 import { Tab, Tabs } from '@mui/material';
 import { Paper } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';

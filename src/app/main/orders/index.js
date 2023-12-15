@@ -1,7 +1,7 @@
 import reducer from './store';
 import OrdersTable from './components/OrdersTable';
 import withReducer from 'app/store/withReducer';
-import OrdersSearchFilter from './components/OrdersSearchFilter';
+import OrdersHeader from './components/OrdersHeader';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { selectUser } from 'app/store/userSlice';
@@ -18,7 +18,7 @@ const OrdersApp = () => {
     }
     return (
         <QueryClientProvider client={queryClient}>
-            <OrdersSearchFilter />
+            <OrdersHeader />
             <OrdersTable />
         </QueryClientProvider>
     );

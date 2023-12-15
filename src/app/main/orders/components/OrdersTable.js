@@ -31,7 +31,6 @@ import {
 import FuseLoading from '@fuse/core/FuseLoading';
 import { OrdersListHeader } from 'src/app/model/OrdersModel';
 import { useTranslation } from 'react-i18next';
-import styles from '../style.module.scss';
 
 const useStyles = makeStyles(() => ({
     popover: {
@@ -118,10 +117,7 @@ const OrdersTable = () => {
                     </Typography>
                 </div>
             ) : (
-                <Paper
-                    className={`flex flex-col py-24 px-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
-                    sx={{ boxShadow: 'none', borderRadius: 1 }}
-                >
+                <Paper className="flex flex-col py-24 px-24 my-16 mx-24 overflow-auto">
                     {orders.length === 0 ? (
                         <div className="flex flex-1 items-center justify-center h-full">
                             <Typography color="text.secondary" variant="h5">
@@ -197,7 +193,7 @@ const OrdersTable = () => {
                                                     >
                                                         <Typography
                                                             className={clsx(
-                                                                'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
+                                                                'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase rounded-full',
                                                                 item.history[0]
                                                                     .status ===
                                                                     'completed' &&
@@ -219,10 +215,6 @@ const OrdersTable = () => {
                                                                     'rejected' &&
                                                                     'bg-red-500 text-grey-100'
                                                             )}
-                                                            sx={{
-                                                                borderRadius:
-                                                                    '3px'
-                                                            }}
                                                         >
                                                             {
                                                                 item.history[0]

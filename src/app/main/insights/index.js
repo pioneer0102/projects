@@ -9,6 +9,7 @@ import SaleReport from './report/SaleReport';
 import OrderReport from './report/OrderReport';
 import ItemReport from './report/ItemReport';
 import FilterPopButton from './filter/FilterPopButton';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import {
     getSaleData,
     getSaleTableData,
@@ -21,6 +22,8 @@ import FuseLoading from '@fuse/core/FuseLoading';
 import { selectUser } from 'app/store/userSlice';
 import history from '@history';
 import ChannelReport from './report/ChannelReport';
+
+const breadCrumbs = [{ name: 'Insights', url: null }];
 
 const InsightsApp = () => {
     const user = useSelector(selectUser);
@@ -60,9 +63,9 @@ const InsightsApp = () => {
     }, [dispatch, filter, orderStatus]);
 
     return (
-        <div className="flex flex-col my-24">
-            <div className="flex flex-row justify-between">
-                <div></div>
+        <div className="flex flex-col mb-24">
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 items-center justify-between pt-24 px-24 md:px-24">
+                <Breadcrumb breadCrumbs={breadCrumbs} />
                 <div>
                     <FilterPopButton />
                 </div>
