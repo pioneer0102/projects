@@ -18,12 +18,12 @@ import {
     Avatar,
     MenuItem,
     TextField,
-    Typography,
     IconButton,
     InputAdornment
 } from '@mui/material';
 
 import { getUserById, addUser, updateUser } from './store/userSlice';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a Name'),
@@ -40,6 +40,8 @@ const UserDetail = () => {
     const user = useSelector(selectUser);
 
     const [showUpload, setShowUpload] = useState(false);
+    const [breadCrumbs, setBreadCrumbs] = useState([]);
+
     const { control, handleSubmit, reset, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema)
@@ -66,19 +68,23 @@ const UserDetail = () => {
     }, [user, reset]);
 
     useEffect(() => {
+        let crumbs = [{ name: 'User Management', url: 'admin/users' }];
+
         if (routeParams.userId === 'add') {
             dispatch(setUser({ user, id: '', name: '', url: '', role: '' }));
+            crumbs.push({ name: 'Add', url: null });
         } else {
             dispatch(getUserById(routeParams.userId));
+            crumbs.push({ name: 'Edit', url: null });
         }
+
+        setBreadCrumbs(crumbs);
     }, [dispatch, routeParams]);
 
     return (
         <div className="w-full min-h-full flex flex-col">
             <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
-                <Typography className="text-18 md:text-18 font-bold tracking-tight">
-                    User Management / Add
-                </Typography>
+                <Breadcrumb breadCrumbs={breadCrumbs} />
 
                 <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
                     <Button

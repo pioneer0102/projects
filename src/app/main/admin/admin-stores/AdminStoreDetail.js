@@ -20,7 +20,7 @@ import UserList from './components/UserList';
 import history from '@history';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -46,33 +46,14 @@ const AdminStoreDetail = () => {
     const routeParams = useParams();
     const storeDetail = useSelector(selectStore);
     const userFilter = useSelector(selectUserFilter);
-
+    const [breadCrumbs, setBreadCrumbs] = useState([]);
     const [integrations, setIntegrations] = useState([]);
 
     const { control, handleSubmit, reset, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema)
     });
-
     const { errors } = formState;
-
-    useEffect(() => {
-        if (routeParams.storeId === 'add') {
-            dispatch(initializeStore({}));
-        } else {
-            const data = {
-                id: routeParams.storeId,
-                ...userFilter
-            };
-            dispatch(getStoreById(data));
-        }
-    }, [dispatch, userFilter, routeParams]);
-
-    useEffect(() => {
-        setIntegrations(storeDetail.integrations);
-
-        reset({ ...storeDetail });
-    }, [storeDetail, reset]);
 
     const handleCancel = () => history.push('admin/stores');
     const onSubmit = (data) => {
@@ -102,13 +83,51 @@ const AdminStoreDetail = () => {
         history.push('/admin/stores');
     };
 
+    useEffect(() => {
+        let crumbs = [{ name: 'Stores', url: '/admin/stores' }];
+
+        if (routeParams.storeId === 'add') {
+            dispatch(initializeStore({}));
+            crumbs.push({ name: 'Add', url: null });
+        } else {
+            const data = {
+                id: routeParams.storeId,
+                ...userFilter
+            };
+            dispatch(getStoreById(data));
+            crumbs.push({ name: 'Edit', url: null });
+        }
+
+        setBreadCrumbs(crumbs);
+    }, [dispatch, userFilter, routeParams]);
+
+    useEffect(() => {
+        setIntegrations(storeDetail.integrations);
+
+        reset({ ...storeDetail });
+    }, [storeDetail, reset]);
+
     return (
         <>
-            <Breadcrumb
-                parentUrl="/admin/stores"
-                parent="Store"
-                child={routeParams['*']}
-            />
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+                <Breadcrumb breadCrumbs={breadCrumbs} />
+
+                <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                    <Button
+                        component={Link}
+                        to="/admin/stores"
+                        variant="contained"
+                        color="secondary"
+                        startIcon={
+                            <FuseSvgIcon size={18}>
+                                heroicons-solid:arrow-left
+                            </FuseSvgIcon>
+                        }
+                    >
+                        {t('back')}
+                    </Button>
+                </div>
+            </div>
             <Paper
                 className={
                     'flex flex-col mx-24 my-24 px-16 md:px-40 pb-32 pt-24 rounded-md'
