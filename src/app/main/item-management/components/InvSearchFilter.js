@@ -1,11 +1,10 @@
-import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
 import Input from '@mui/material/Input';
-import styles from '../style.module.scss';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
@@ -13,14 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PriceRange, Category } from 'src/app/model/InvManModel';
 import { Button } from '@mui/material';
 import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { useNavigate } from 'react-router-dom';
-
 import Dialog from '@mui/material/Dialog';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-
 import {
     selectSearchText,
     setInventorySearchText,
@@ -32,19 +28,11 @@ import {
     submit
 } from '../store/inventorySlice';
 
-const useStyles = makeStyles(() => ({
-    dialog: {
-        '& .muiltr-7en360-MuiPaper-root-MuiDialog-paper': {
-            borderRadius: '6px'
-        }
-    }
-}));
+const breadCrumbs = [{ name: 'Item Management', url: null }];
 
 const InvSearchFilter = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const classes = useStyles();
-    const navigate = useNavigate();
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -72,67 +60,65 @@ const InvSearchFilter = () => {
         setPagenumber(0);
         setDialogOpen(false);
     };
-    const handleAdd = () => {
-        navigate('/item-management/add/0');
-    };
 
     return (
-        <>
-            <Paper
-                className={`px-16 py-8 border-b-1 mt-32 mx-24 ${styles.paper}`}
-            >
-                <div className="flex md:flex-row flex-col justify-between sm:space-y-0 mt-8 -mx-8">
-                    <Box className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
-                        <FuseSvgIcon color="action" size={20}>
-                            heroicons-outline:search
-                        </FuseSvgIcon>
-                        <Input
-                            placeholder={t('search')}
-                            className="flex px-16"
-                            disableUnderline
-                            fullWidth
-                            value={searchText}
-                            onChange={(event) =>
-                                handleChange(
-                                    setInventorySearchText,
-                                    event.target.value
-                                )
-                            }
-                        />
-                    </Box>
-                    <Button
-                        variant="contained"
-                        color="inherit"
-                        onClick={handleOpenDialog}
-                        className={`mx-8 my-8 ${styles.backButton}`}
-                    >
-                        <FuseSvgIcon className="text-gray-500" size={24}>
-                            material-solid:filter_alt
-                        </FuseSvgIcon>
-                        <span className="mx-4"> {t('searchFilter')}</span>
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="info"
-                        onClick={handleAdd}
-                        className={`mx-8 my-8 ${styles.backButton}`}
-                    >
-                        <FuseSvgIcon size={24}>
-                            heroicons-solid:plus
-                        </FuseSvgIcon>
-                        <span className="mx-4">{t('add')}</span>
-                    </Button>
-                </div>
-            </Paper>
+        <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+            <Breadcrumb breadCrumbs={breadCrumbs} />
+
+            <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                <Paper className="flex items-center w-full sm:max-w-256 space-x-8 px-16 rounded-full border-1 shadow-0">
+                    <FuseSvgIcon color="disabled">
+                        heroicons-solid:search
+                    </FuseSvgIcon>
+
+                    <Input
+                        placeholder="Search items"
+                        className="flex flex-1"
+                        disableUnderline
+                        fullWidth
+                        value={searchText}
+                        inputProps={{
+                            'aria-label': 'Search'
+                        }}
+                        onChange={(event) =>
+                            handleChange(
+                                setInventorySearchText,
+                                event.target.value
+                            )
+                        }
+                    />
+                </Paper>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleOpenDialog}
+                >
+                    <FuseSvgIcon size={24}>
+                        material-solid:filter_alt
+                    </FuseSvgIcon>
+                    <span className="mx-4"> {t('searchFilter')}</span>
+                </Button>
+                <Button
+                    component={Link}
+                    to="/item-management/add/0"
+                    variant="contained"
+                    color="secondary"
+                    startIcon={
+                        <FuseSvgIcon>heroicons-outline:plus</FuseSvgIcon>
+                    }
+                >
+                    {t('add')}
+                </Button>
+            </div>
+
             <Dialog
                 open={dialogOpen}
                 onClose={handleClose}
-                className={classes.dialog}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle>
-                    <Typography className={'font-semibold text-32 mt-16 ml-8'}>
+                    <Typography className="font-semibold text-32">
                         <span>{t('searchFilter')}</span>
                     </Typography>
                 </DialogTitle>
@@ -232,12 +218,11 @@ const InvSearchFilter = () => {
                         </Select>
                     </FormControl>
                 </DialogContent>
-                <DialogActions className="mx-24 mb-24">
+                <DialogActions className="mx-24 mb-16">
                     <Button
                         variant="outline"
                         color="secondary"
                         onClick={handleClose}
-                        className={styles.backButton}
                     >
                         <span>{t('cancel')}</span>
                     </Button>
@@ -246,13 +231,12 @@ const InvSearchFilter = () => {
                         color="secondary"
                         type="submit"
                         onClick={handleSubmit}
-                        className={styles.backButton}
                     >
                         <span>{t('ok')}</span>
                     </Button>
                 </DialogActions>
             </Dialog>
-        </>
+        </div>
     );
 };
 

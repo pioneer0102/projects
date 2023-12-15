@@ -358,7 +358,7 @@ const InvForm = () => {
                         render={() => (
                             <>
                                 <Button
-                                    color="info"
+                                    color="secondary"
                                     variant="contained"
                                     component="label"
                                     className="mx-12 mt-32 rounded overflow-hidden cursor-pointer shadow hover:shadow-lg"
@@ -375,16 +375,12 @@ const InvForm = () => {
                     />
                 </div>
                 <Box className="flex items-center mt-32">
-                    <Button
-                        className={`ml-auto ${styles.backButton}`}
-                        onClick={handleCancel}
-                    >
+                    <Button className="ml-auto mr-8" onClick={handleCancel}>
                         {t('cancel')}
                     </Button>
                     <Button
-                        className={`ml-8 ${styles.backButton}`}
                         variant="contained"
-                        color="info"
+                        color="secondary"
                         onClick={handleSubmit(onSubmit)}
                     >
                         {routeParams.action === 'Add' ? t('add') : t('save')}
