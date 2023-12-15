@@ -21,7 +21,6 @@ import {
 import FuseLoading from '@fuse/core/FuseLoading';
 import { InventoryTableHeader } from 'src/app/model/InvManModel';
 import { useTranslation } from 'react-i18next';
-import styles from '../style.module.scss';
 
 const InvManTable = () => {
     const { t } = useTranslation();
@@ -75,10 +74,7 @@ const InvManTable = () => {
 
     return (
         <>
-            <Paper
-                className={`flex flex-col py-24 px-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
-                sx={{ boxShadow: 'none', borderRadius: 1 }}
-            >
+            <Paper className="flex flex-col py-24 px-24 my-16 mx-24 overflow-auto">
                 <Table>
                     <Thead className="border-b-2">
                         <Tr>
@@ -111,13 +107,9 @@ const InvManTable = () => {
                                                 className="text-20 md:pt-24"
                                             >
                                                 <img
+                                                    className="w-64 h-64 object-cover"
                                                     src={item.image}
                                                     alt={category}
-                                                    // variant="square"
-                                                    style={{
-                                                        width: 150,
-                                                        height: 100
-                                                    }}
                                                 />
                                             </Typography>
                                         </Td>

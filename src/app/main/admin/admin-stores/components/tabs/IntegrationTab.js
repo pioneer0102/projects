@@ -30,13 +30,13 @@ const IntegrationTab = (props) => {
 
     const { isValid, dirtyFields, errors } = formState;
 
-    const handleCancel = () => history.push('/partners');
+    const handleCancel = () => history.push('/admin/stores');
     const onSubmit = () => {};
 
     return (
         <>
             <div className={`mx-16 ${styles.form}`}>
-                <div className="flex flex-row justify-between">
+                <div className="flex flex-row justify-center">
                     <div className="flex self-center items-center justify-center">
                         <img
                             className={styles.logo_size}
@@ -157,14 +157,11 @@ const IntegrationTab = (props) => {
                     )}
                 />
                 <Box className="flex items-center mt-32">
-                    <Button
-                        className={'ml-auto rounded-md'}
-                        onClick={handleCancel}
-                    >
+                    <Button className="ml-auto" onClick={handleCancel}>
                         {t('cancel')}
                     </Button>
                     <Button
-                        className={'ml-8 rounded-md'}
+                        className="ml-8"
                         variant="contained"
                         color="secondary"
                         disabled={_.isEmpty(dirtyFields) || !isValid}

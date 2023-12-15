@@ -103,7 +103,7 @@ const UsersTab = () => {
 
     return (
         <>
-            <div className={'flex flex-col mt-8 mx-16 rounded-md'}>
+            <div className="flex flex-col">
                 {store.usersData.length === 0 ? (
                     <div className="flex flex-1 items-center justify-center h-full">
                         <Typography color="text.secondary" variant="h5">
@@ -113,12 +113,11 @@ const UsersTab = () => {
                 ) : (
                     <>
                         <div className="flex flex-col justify-between">
-                            <div></div>
                             <Button
-                                variant="contained"
-                                color="info"
+                                variant="outlined"
+                                color="secondary"
                                 onClick={openAddDialog}
-                                className="my-8 rounded-md self-end"
+                                className="w-full my-8 self-center mb-16"
                             >
                                 <FuseSvgIcon size={24}>
                                     heroicons-solid:plus

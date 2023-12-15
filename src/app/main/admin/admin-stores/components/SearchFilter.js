@@ -1,63 +1,60 @@
-import { Box } from '@mui/system';
-import { Paper } from '@mui/material';
 import Input from '@mui/material/Input';
+import { Link } from 'react-router-dom';
+import { Paper, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { selectFilter, setFilter } from '../store/adminStoresSlice';
+
+const breadCrumbs = [{ name: 'Stores', url: null }];
 
 const SearchFilter = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { t } = useTranslation();
     const filter = useSelector(selectFilter);
 
     const handleSearch = (type, value) => {
         dispatch(setFilter({ type: type, value: value }));
     };
-    const handleAdd = () => {
-        navigate('/admin/stores/add');
-    };
 
     return (
-        <>
-            <Paper
-                className={
-                    'px-16 py-8 border-b-1 mt-32 mx-24 rounded-md shadow-none'
-                }
-            >
-                <div className="flex md:flex-row flex-col justify-between sm:space-y-0 mt-8 -mx-8">
-                    <Box className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
-                        <FuseSvgIcon color="action" size={20}>
-                            heroicons-outline:search
-                        </FuseSvgIcon>
-                        <Input
-                            placeholder={t('search')}
-                            className="flex px-16"
-                            disableUnderline
-                            fullWidth
-                            value={filter.searchText}
-                            onChange={(event) =>
-                                handleSearch('searchText', event.target.value)
-                            }
-                        />
-                    </Box>
-                    <Button
-                        variant="contained"
-                        color="info"
-                        onClick={handleAdd}
-                        className={'mx-8 my-8 rounded-md'}
-                    >
-                        <FuseSvgIcon size={24}>
-                            heroicons-solid:plus
-                        </FuseSvgIcon>
-                        <span className="mx-4">{t('add')}</span>
-                    </Button>
-                </div>
-            </Paper>
-        </>
+        <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+            <Breadcrumb breadCrumbs={breadCrumbs} />
+
+            <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                <Paper className="flex items-center w-full sm:max-w-256 space-x-8 px-16 rounded-full border-1 shadow-0">
+                    <FuseSvgIcon color="disabled">
+                        heroicons-solid:search
+                    </FuseSvgIcon>
+
+                    <Input
+                        placeholder="Search stores"
+                        className="flex flex-1"
+                        disableUnderline
+                        fullWidth
+                        value={filter.searchText}
+                        inputProps={{
+                            'aria-label': 'Search'
+                        }}
+                        onChange={(event) =>
+                            handleSearch('searchText', event.target.value)
+                        }
+                    />
+                </Paper>
+                <Button
+                    component={Link}
+                    to="/admin/stores/add"
+                    variant="contained"
+                    color="secondary"
+                    startIcon={
+                        <FuseSvgIcon>heroicons-outline:plus</FuseSvgIcon>
+                    }
+                >
+                    {t('add')}
+                </Button>
+            </div>
+        </div>
     );
 };
 
