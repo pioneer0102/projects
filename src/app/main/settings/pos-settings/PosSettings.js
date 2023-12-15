@@ -11,10 +11,13 @@ import { showMessage } from 'app/store/fuse/messageSlice';
 import UserTab from './tabs/UserTab';
 import TaxTab from './tabs/TaxTab';
 import DepartmentTab from './tabs/DepartmentTab';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 
 import { getPos, selectPosDetail, updatePos } from '../store/posSlice';
 import { selectUser } from 'app/store/userSlice';
 import history from '@history';
+
+const breadCrumbs = [{ name: 'POS Settings', url: null }];
 
 const PosSettings = () => {
     const user = useSelector(selectUser);
@@ -48,12 +51,9 @@ const PosSettings = () => {
     };
 
     return (
-        <>
-            <Paper
-                className={
-                    'flex flex-col py-24 px-24 my-32 mx-24 overflow-auto rounded-md shadow-none'
-                }
-            >
+        <div className="pt-24 px-24 md:px-24">
+            <Breadcrumb breadCrumbs={breadCrumbs} />
+            <Paper className={'flex flex-col py-24 px-24 my-24 overflow-auto'}>
                 <Tabs
                     value={tabValue}
                     onChange={handleChangeTab}
@@ -93,9 +93,9 @@ const PosSettings = () => {
                 <div>
                     <Button
                         variant="contained"
-                        color="info"
+                        color="secondary"
                         onClick={finalSave}
-                        className="rounded-md float-right mt-16"
+                        className="float-right mt-16"
                     >
                         <FuseSvgIcon size={20}>
                             heroicons-solid:check
@@ -104,7 +104,7 @@ const PosSettings = () => {
                     </Button>
                 </div>
             </Paper>
-        </>
+        </div>
     );
 };
 

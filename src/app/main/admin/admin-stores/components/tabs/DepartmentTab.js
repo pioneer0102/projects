@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Paper from '@mui/material/Paper';
 import { IconButton } from '@mui/material';
 import DepartmentItem from './DepartmentItem';
 import TextField from '@mui/material/TextField';

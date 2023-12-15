@@ -1,7 +1,5 @@
-import { Box } from '@mui/system';
 import { Paper } from '@mui/material';
 import Input from '@mui/material/Input';
-import styles from '../style.module.scss';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { useTranslation } from 'react-i18next';
@@ -13,8 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Status, SubTotals } from 'src/app/model/OrdersModel';
 import { Channels } from 'src/app/model/Global';
 import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -28,18 +25,11 @@ import {
     setFilter
 } from '../store/ordersSlice';
 
-const useStyles = makeStyles(() => ({
-    dialog: {
-        '& .muiltr-7en360-MuiPaper-root-MuiDialog-paper': {
-            borderRadius: '6px'
-        }
-    }
-}));
+const breadCrumbs = [{ name: 'Orders', url: 'orders' }];
 
-const OrdersSearchFilter = () => {
+const OrdersHeader = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const classes = useStyles();
 
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -68,47 +58,47 @@ const OrdersSearchFilter = () => {
 
     return (
         <>
-            <Paper
-                className={`px-16 py-8 border-b-1 mt-32 mx-24 ${styles.paper}`}
-            >
-                <div className="flex md:flex-row flex-col justify-between sm:space-y-0 mt-8 -mx-8">
-                    <Box className="flex flex-auto items-center px-16 mx-8 mb-8 border-1">
-                        <FuseSvgIcon color="action" size={20}>
-                            heroicons-outline:search
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+                <Breadcrumb breadCrumbs={breadCrumbs} />
+                <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                    <Paper className="flex items-center w-full sm:max-w-256 space-x-8 px-16 rounded-full border-1 shadow-0">
+                        <FuseSvgIcon color="disabled">
+                            heroicons-solid:search
                         </FuseSvgIcon>
                         <Input
                             placeholder={t('search')}
-                            className="flex px-16"
+                            className="flex flex-1"
                             disableUnderline
                             fullWidth
                             value={filter.searchText}
+                            inputProps={{
+                                'aria-label': 'Search'
+                            }}
                             onChange={(event) =>
                                 handleChange('searchText', event.target.value)
                             }
                         />
-                    </Box>
+                    </Paper>
                     <Button
                         variant="contained"
-                        color="inherit"
+                        color="secondary"
                         onClick={handleOpenDialog}
-                        className={`mx-8 my-8 ${styles.backButton}`}
                     >
-                        <FuseSvgIcon className="text-gray-500" size={24}>
+                        <FuseSvgIcon size={24}>
                             material-solid:filter_alt
                         </FuseSvgIcon>
                         <span className="mx-4"> {t('searchFilter')}</span>
                     </Button>
                 </div>
-            </Paper>
+            </div>
             <Dialog
                 open={dialogOpen}
                 onClose={handleClose}
-                className={classes.dialog}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle>
-                    <Typography className={'font-semibold text-32 mt-16 ml-8'}>
+                    <Typography className={'font-semibold text-32'}>
                         <span>{t('searchFilter')}</span>
                     </Typography>
                 </DialogTitle>
@@ -116,7 +106,7 @@ const OrdersSearchFilter = () => {
                     className="flex flex-col"
                     sx={{ width: '450px' }}
                 >
-                    <FormControl sx={{ m: 1 }}>
+                    <FormControl className="mx-8 my-8" size="small">
                         <InputLabel
                             id="select-small-label"
                             sx={{
@@ -158,7 +148,7 @@ const OrdersSearchFilter = () => {
                             })}
                         </Select>
                     </FormControl>
-                    <FormControl sx={{ m: 1 }}>
+                    <FormControl className="mx-8 my-8" size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -200,7 +190,7 @@ const OrdersSearchFilter = () => {
                             })}
                         </Select>
                     </FormControl>
-                    <FormControl sx={{ m: 1 }}>
+                    <FormControl className="mx-8 my-8" size="small">
                         <InputLabel
                             id="demo-select-small-label"
                             sx={{
@@ -246,12 +236,11 @@ const OrdersSearchFilter = () => {
                         </Select>
                     </FormControl>
                 </DialogContent>
-                <DialogActions className="mx-24 mb-24">
+                <DialogActions className="mx-24 mb-16">
                     <Button
                         variant="outline"
                         color="secondary"
                         onClick={handleClose}
-                        className={styles.backButton}
                     >
                         <span>{t('cancel')}</span>
                     </Button>
@@ -260,7 +249,6 @@ const OrdersSearchFilter = () => {
                         color="secondary"
                         type="submit"
                         onClick={handleSubmit}
-                        className={styles.backButton}
                     >
                         <span>{t('ok')}</span>
                     </Button>
@@ -270,4 +258,4 @@ const OrdersSearchFilter = () => {
     );
 };
 
-export default OrdersSearchFilter;
+export default OrdersHeader;

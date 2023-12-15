@@ -20,7 +20,6 @@ import { useState } from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import styles from '../../style.module.scss';
 import { makeStyles } from '@mui/styles';
 import {
     selectFilter,
@@ -107,10 +106,7 @@ const UserTable = () => {
                     </Typography>
                 </div>
             ) : (
-                <Paper
-                    className={`flex flex-col pt-24 my-16 mx-24 overflow-auto  ${styles.paper}`}
-                    sx={{ boxShadow: 'none', borderRadius: 1 }}
-                >
+                <Paper className="flex flex-col pt-24 my-16 mx-24 overflow-auto">
                     {allUsers.length === 0 ? (
                         <div className="flex flex-1 items-center justify-center h-full">
                             <Typography color="text.secondary" variant="h5">
@@ -118,10 +114,7 @@ const UserTable = () => {
                             </Typography>
                         </div>
                     ) : (
-                        <Paper
-                            className={`flex flex-col my-16 mx-24 overflow-auto  ${styles.paper}`}
-                            sx={{ boxShadow: 'none', borderRadius: 1 }}
-                        >
+                        <div className="flex flex-col my-16 mx-24 overflow-auto">
                             {allUsers.length === 0 ? (
                                 <div className="flex flex-1 items-center justify-center h-full">
                                     <Typography
@@ -372,7 +365,7 @@ const UserTable = () => {
                                     </Dialog>
                                 </>
                             )}
-                        </Paper>
+                        </div>
                     )}
                 </Paper>
             )}

@@ -28,16 +28,9 @@ const FilterPopButton = () => {
 
     return (
         <div>
-            <Button
-                variant="contained"
-                color="inherit"
-                onClick={openDialog}
-                className="mx-24 mb-8 rounded-md"
-            >
-                <FuseSvgIcon className="text-gray-500" size={24}>
-                    material-solid:filter_alt
-                </FuseSvgIcon>
-                <span className="mx-4"> Filter</span>
+            <Button variant="contained" color="secondary" onClick={openDialog}>
+                <FuseSvgIcon size={24}>material-solid:filter_alt</FuseSvgIcon>
+                <span className="mx-4">Filter</span>
             </Button>
             <Dialog
                 open={dialogOpen}

@@ -161,10 +161,7 @@ const OrderDetail = () => {
                 </div>
             </div>
             <div className="flex flex-col md:flex-row">
-                <Paper
-                    className="px-8 py-24 my-24 mx-24 md:w-1/2"
-                    sx={{ boxShadow: 'none', borderRadius: 1 }}
-                >
+                <Paper className="px-8 py-24 my-24 mx-24 md:w-1/2">
                     <div className="sm:items-start mx-24">
                         <Typography
                             className="text-20 font-medium"
@@ -232,7 +229,7 @@ const OrderDetail = () => {
                                                     <TableCell align="left">
                                                         <Typography
                                                             className={clsx(
-                                                                'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
+                                                                'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase rounded-full',
                                                                 item.status ===
                                                                     'completed' &&
                                                                     'bg-green-500 text-grey-100',
@@ -259,10 +256,6 @@ const OrderDetail = () => {
                                                                     historyIndex
                                                                 )
                                                             }
-                                                            sx={{
-                                                                borderRadius:
-                                                                    '3px'
-                                                            }}
                                                         >
                                                             {item.status}
                                                             {historyIndex ===
@@ -286,66 +279,6 @@ const OrderDetail = () => {
                                                                 </FuseSvgIcon>
                                                             )}
                                                         </Typography>
-                                                        {/* <Popover
-                                                        id={id}
-                                                        open={open}
-                                                        anchorEl={anchorEl}
-                                                        onClose={handleClose}
-                                                        anchorOrigin={{
-                                                            vertical: 'bottom',
-                                                            horizontal: 'left',
-                                                        }}
-                                                    >
-                                                        <Box className='flex flex-col' sx={{ p: 1 }}
-                                                            {
-                                                                Status.map((item, indexStatus) => {
-                                                                    return (
-                                                                        <Typography
-                                                                            key={indexStatus}
-                                                                            color="text.secondary"
-                                                                            role="button"
-                                                                            className="text-14 px-8 py-2 uppercase uppercase"
-                                                                            onClick={() => handleStatusChange(item)}
-                                                                        >
-                                                                            {item}
-                                                                        </Typography>
-                                                                    )
-                                                                })
-                                                            }
-                                                            onClick={(event) =>
-                                                                handleClick(
-                                                                    event.currentTarget,
-                                                                    historyIndex
-                                                                )
-                                                            }
-                                                            sx={{
-                                                                borderRadius:
-                                                                    '3px'
-                                                            }}
-                                                        >
-                                                            {item.status}
-                                                            {historyIndex ==
-                                                                0 &&
-                                                                !open && (
-                                                                    <FuseSvgIcon
-                                                                        className="inline"
-                                                                        size={
-                                                                            20
-                                                                        }
-                                                                    >
-                                                                        heroicons-solid:chevron-down
-                                                                    </FuseSvgIcon>
-                                                                )}
-                                                            {open && (
-                                                                <FuseSvgIcon
-                                                                    className="inline"
-                                                                    size={20}
-                                                                >
-                                                                    heroicons-solid:chevron-up
-                                                                </FuseSvgIcon>
-                                                            )}
-                                                        </Box>
-                                                    </Popover> */}
                                                         <Popover
                                                             id={id}
                                                             open={open}
@@ -402,10 +335,7 @@ const OrderDetail = () => {
                     </FuseScrollbars>
                 </Paper>
 
-                <Paper
-                    className="px-8 py-24 my-24 mx-32 md:w-1/2"
-                    sx={{ boxShadow: 'none', borderRadius: 1 }}
-                >
+                <Paper className="px-8 py-24 my-24 mx-32 md:w-1/2">
                     <div className="sm:items-start mx-24">
                         <Typography
                             className="text-20 font-medium"
@@ -477,7 +407,7 @@ const OrderDetail = () => {
                                                 <TableCell align="left">
                                                     <Typography
                                                         className={clsx(
-                                                            'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase',
+                                                            'inline-flex items-center font-bold text-12 px-12 py-2 tracking-wide uppercase rounded-full',
                                                             item.status ===
                                                                 'replaced' &&
                                                                 'bg-blue-500 text-grey-100',
@@ -485,9 +415,6 @@ const OrderDetail = () => {
                                                                 'canceled' &&
                                                                 'bg-red-500 text-grey-100'
                                                         )}
-                                                        sx={{
-                                                            borderRadius: '3px'
-                                                        }}
                                                         onClick={(event) =>
                                                             handleClickItemStatus(
                                                                 event.currentTarget,
