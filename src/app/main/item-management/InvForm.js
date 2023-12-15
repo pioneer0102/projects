@@ -13,7 +13,7 @@ import { Typography } from '@mui/material';
 import styles from './style.module.scss';
 import history from '@history';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Checkbox from '@mui/material/Checkbox';
@@ -51,19 +51,27 @@ const InvForm = () => {
     const { t } = useTranslation();
     const routeParams = useParams();
     const inventory = useSelector(selectInventory);
+    const [breadCrumbs, setBreadCrumbs] = useState([]);
+
     const { control, handleSubmit, reset, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema)
     });
 
     useEffect(() => {
+        let crumbs = [{ name: 'Item Management', url: 'item-management' }];
+
         if (routeParams.action === 'edit') {
             dispatch(getInventoryById(routeParams.id));
+            crumbs.push({ name: 'Edit', url: null });
         }
         if (routeParams.action === 'add') {
             dispatch(initializeInventory({}));
             setImage(null);
+            crumbs.push({ name: 'Add', url: null });
         }
+
+        setBreadCrumbs(crumbs);
     }, [dispatch, routeParams.action, routeParams.id]);
 
     useEffect(() => {
@@ -115,15 +123,26 @@ const InvForm = () => {
 
     return (
         <>
-            <Breadcrumb
-                parentUrl="item-management"
-                parent="Inventory Manager"
-                child={
-                    routeParams.action.charAt(0).toUpperCase() +
-                    routeParams.action.slice(1)
-                }
-            />
-            <Paper className={`mx-24 my-32 px-32 py-32 ${styles.form}`}>
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+                <Breadcrumb breadCrumbs={breadCrumbs} />
+
+                <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                    <Button
+                        component={Link}
+                        to="/item-management"
+                        variant="contained"
+                        color="secondary"
+                        startIcon={
+                            <FuseSvgIcon size={18}>
+                                heroicons-solid:arrow-left
+                            </FuseSvgIcon>
+                        }
+                    >
+                        {t('back')}
+                    </Button>
+                </div>
+            </div>
+            <Paper className={`mx-24 my-24 px-32 py-32 ${styles.form}`}>
                 <div className="flex items-center justify-between">
                     <Typography
                         className={'font-bold text-32'}

@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import _ from '@lodash';
 import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
@@ -56,6 +56,11 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     }
 }));
 
+const breadCrumbs = [
+    { name: 'Partners', url: '/partners' },
+    { name: 'Integration', url: null }
+];
+
 function PartnerForm() {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
@@ -77,11 +82,25 @@ function PartnerForm() {
 
     return (
         <>
-            <Breadcrumb
-                parentUrl="partners"
-                parent="Partners"
-                child={channel}
-            />
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+                <Breadcrumb breadCrumbs={breadCrumbs} />
+
+                <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                    <Button
+                        component={Link}
+                        to="/partners"
+                        variant="contained"
+                        color="secondary"
+                        startIcon={
+                            <FuseSvgIcon size={18}>
+                                heroicons-solid:arrow-left
+                            </FuseSvgIcon>
+                        }
+                    >
+                        {t('back')}
+                    </Button>
+                </div>
+            </div>
             <Paper className={`mx-24 my-32 px-32 py-32 ${styles.form}`}>
                 <div className="flex flex-row justify-between">
                     <div className="flex self-center items-center justify-center">

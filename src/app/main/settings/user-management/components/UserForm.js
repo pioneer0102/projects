@@ -17,7 +17,7 @@ import styles from '../../style.module.scss';
 import history from '@history';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuItem } from '@mui/material';
@@ -43,6 +43,19 @@ const UserForm = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const routeParams = useParams();
+
+    let breadCrumbs = [
+        { name: 'User Management', url: '/settings/user-management' }
+    ];
+
+    if (routeParams.action === 'edit') {
+        const temp = { name: 'Edit', url: null };
+        breadCrumbs.push(temp);
+    } else if (routeParams.action === 'add') {
+        const temp = { name: 'Add', url: null };
+        breadCrumbs.push(temp);
+    }
+
     const { control, handleSubmit, reset, formState } = useForm({
         mode: 'onChange',
         resolver: yupResolver(schema)
@@ -99,16 +112,27 @@ const UserForm = () => {
 
     return (
         <>
-            <Breadcrumb
-                parentUrl="settings/user-management"
-                parent="User Management"
-                child={
-                    routeParams.action.charAt(0).toUpperCase() +
-                    routeParams.action.slice(1)
-                }
-            />
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+                <Breadcrumb breadCrumbs={breadCrumbs} />
+
+                <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                    <Button
+                        component={Link}
+                        to="/settings/user-management"
+                        variant="contained"
+                        color="secondary"
+                        startIcon={
+                            <FuseSvgIcon size={18}>
+                                heroicons-solid:arrow-left
+                            </FuseSvgIcon>
+                        }
+                    >
+                        {t('back')}
+                    </Button>
+                </div>
+            </div>
             <Paper
-                className={`flex flex-col mx-24 my-32 px-40 pb-32 ${styles.form}`}
+                className={`flex flex-col mx-24 my-24 px-40 pb-32 ${styles.form}`}
             >
                 <Controller
                     control={control}

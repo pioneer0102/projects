@@ -9,6 +9,7 @@ import './api/insights/order-api';
 import './api/insights/item-api';
 import './api/settings/pos-api';
 import './api/settings/user-api';
+import './api/admin/user-api';
 import './api/admin/stores-api';
 import history from '@history';
 import mock from './mock';

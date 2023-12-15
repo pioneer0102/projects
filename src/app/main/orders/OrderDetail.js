@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import { Button } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -44,6 +44,11 @@ import {
     removeItem,
     removeFront
 } from './store/ordersSlice';
+
+const breadCrumbs = [
+    { name: 'Orders', url: '/orders' },
+    { name: 'Detail', url: null }
+];
 
 const OrderDetail = () => {
     const user = useSelector(selectUser);
@@ -136,10 +141,28 @@ const OrderDetail = () => {
 
     return (
         <div>
-            <Breadcrumb parentUrl="Orders" parent="Orders" child="Detail" />
+            <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
+                <Breadcrumb breadCrumbs={breadCrumbs} />
+
+                <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
+                    <Button
+                        component={Link}
+                        to="/orders"
+                        variant="contained"
+                        color="secondary"
+                        startIcon={
+                            <FuseSvgIcon size={18}>
+                                heroicons-solid:arrow-left
+                            </FuseSvgIcon>
+                        }
+                    >
+                        {t('back')}
+                    </Button>
+                </div>
+            </div>
             <div className="flex flex-col md:flex-row">
                 <Paper
-                    className="px-8 py-24 my-32 mx-24 md:w-1/2"
+                    className="px-8 py-24 my-24 mx-24 md:w-1/2"
                     sx={{ boxShadow: 'none', borderRadius: 1 }}
                 >
                     <div className="sm:items-start mx-24">
@@ -380,7 +403,7 @@ const OrderDetail = () => {
                 </Paper>
 
                 <Paper
-                    className="px-8 py-24 my-32 mx-32 md:w-1/2"
+                    className="px-8 py-24 my-24 mx-32 md:w-1/2"
                     sx={{ boxShadow: 'none', borderRadius: 1 }}
                 >
                     <div className="sm:items-start mx-24">
