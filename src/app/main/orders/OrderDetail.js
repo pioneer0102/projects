@@ -32,6 +32,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
+import { selectUser } from 'app/store/userSlice';
+import history from '@history';
 
 import {
     updateStatus,
@@ -49,6 +51,11 @@ const breadCrumbs = [
 ];
 
 const OrderDetail = () => {
+    const user = useSelector(selectUser);
+    if (user.role === 'admin') {
+        history.push('/item-management');
+        return;
+    }
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const routeParams = useParams();

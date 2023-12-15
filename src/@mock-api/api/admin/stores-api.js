@@ -64,6 +64,32 @@ mock.onPost('/api/updateStore').reply(({ data }) => {
         address: address,
         integrations: integrations
     };
-    _.assign(_.find(storesDB, { id }), updateItem);
+    _.assign(_.find(storesDB, { id: parseInt(id) }), updateItem);
+    return [200, { success: true }];
+});
+
+mock.onPost('/api/updateStoreDetail').reply(({ data }) => {
+    const { type, id, detailData } = JSON.parse(data);
+    const store = _.find(storesDB, { id: parseInt(id) });
+    store[type] = detailData;
+    return [200, { success: true }];
+});
+
+mock.onPost('/api/removeUserFromDB').reply(({ data }) => {
+    const { storeId, userId } = JSON.parse(data);
+    const store = _.find(storesDB, { id: parseInt(storeId) });
+    const index = store.users.indexOf(parseInt(userId));
+    store.users.splice(index, 1);
+    return [200, { success: true }];
+});
+
+mock.onGet('/api/getAllUsers').reply(() => {
+    return [200, usersDB];
+});
+
+mock.onPost('/api/addUserDB').reply(({ data }) => {
+    const { storeId, userId } = JSON.parse(data);
+    const store = _.find(storesDB, { id: parseInt(storeId) });
+    store.users.push(userId);
     return [200, { success: true }];
 });

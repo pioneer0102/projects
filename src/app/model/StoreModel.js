@@ -35,7 +35,7 @@ const UserTableHeader = [
     {
         id: 'action',
         align: 'left',
-        label: ''
+        label: 'Action'
     }
 ];
 

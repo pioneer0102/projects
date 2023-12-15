@@ -10868,87 +10868,339 @@
                 "value": [
                     {
                         "id": 1,
-                        "name": "Costo",
+                        "name": "Costco",
                         "address": "800 Lake Dr, Issaquah, WA",
                         "integrations": ["DoorDash", "Uber", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5]
+                        "users": [1, 2, 3, 4, 5],
+                        "email": "www.costco.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 2,
                         "name": "Target",
                         "address": "655 Cheshire Rd, Lanesborough, MA 01237-9501",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        "email": "www.target.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 3,
                         "name": "Dollar Tree",
                         "address": "500 Volvo Pkwy Chesapeake, VA 23320",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        "email": "www.dollartree.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 4,
                         "name": "Walmart",
                         "address": "702 SW 8th St, Bentonville - Waze.",
                         "integrations": ["DoorDash", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        "email": "www.walmart.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 5,
                         "name": "T.J.Maxx",
                         "address": "770 Cochituate Rd, Framingham, MA 01701, USA",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5]
+                        "users": [1, 2, 3, 4, 5],
+                        "email": "www.tjmaxx.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 6,
                         "name": "Marshalls",
                         "address": "1 Worcester Rd, Framingham, MA 01701, United States",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5]
+                        "users": [1, 2, 3, 4, 5],
+                        "email": "www.marshalls.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 7,
                         "name": "Costo",
                         "address": "800 Lake Dr, Issaquah, WA",
                         "integrations": ["DoorDash", "Uber", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5]
+                        "users": [1, 2, 3, 4, 5],
+                        "email": "www.costco.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 8,
                         "name": "Target",
                         "address": "655 Cheshire Rd, Lanesborough, MA 01237-9501",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        "email": "www.target.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 9,
                         "name": "Dollar Tree",
                         "address": "500 Volvo Pkwy Chesapeake, VA 23320",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5]
+                        "users": [1, 2, 3, 4, 5],
+                        "email": "www.dollartree.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 10,
                         "name": "Walmart",
                         "address": "702 SW 8th St, Bentonville - Waze.",
                         "integrations": ["DoorDash", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5]
+                        "users": [1, 2, 3, 4, 5],
+                        "email": "www.walmart.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 11,
                         "name": "T.J.Maxx",
                         "address": "770 Cochituate Rd, Framingham, MA 01701, USA",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                        "email": "www.tjmaxx.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     },
                     {
                         "id": 12,
                         "name": "Marshalls",
                         "address": "1 Worcester Rd, Framingham, MA 01701, United States",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5]
+                        "users": [1, 2, 3, 4, 5],
+                        "email": "www.marshalls.com",
+                        "taxes": [
+                            {
+                                "name": "Sales Tax",
+                                "rate": 10
+                            },
+                            {
+                                "name": "Trash Tax",
+                                "rate": 5
+                            }
+                        ],
+                        "departments": [
+                            {
+                                "name": "clothe",
+                                "taxId": 0
+                            },
+                            {
+                                "name": "accessory",
+                                "taxId": 1
+                            }
+                        ]
                     }
                 ]
             }
