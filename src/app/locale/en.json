@@ -44,7 +44,8 @@
         "userManagement": "User Management",
         "edit": "Edit",
         "delete": "Delete",
-        "reset": "Reset Password"
+        "reset": "Reset",
+        "confirmDelete": "Are you sure to delete this User?"
     },
     "stores": {
         "noData": "There are no Stores!",
