@@ -21,6 +21,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { grey } from '@mui/material/colors';
+import { selectUser } from 'app/store/userSlice';
 import {
     getInventoryById,
     selectInventory,
@@ -39,6 +40,11 @@ const schema = yup.object().shape({
 });
 
 const InvForm = () => {
+    const user = useSelector(selectUser);
+    if (user.role === 'admin') {
+        history.push('/item-management');
+        return;
+    }
     const [image, setImage] = useState(null);
 
     const dispatch = useDispatch();

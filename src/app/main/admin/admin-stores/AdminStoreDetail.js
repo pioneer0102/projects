@@ -16,7 +16,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import UserList from './components/UserList';
+import StoreTabs from './components/StoreTabs';
 import history from '@history';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { useTranslation } from 'react-i18next';
@@ -34,7 +34,8 @@ import {
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a Name'),
-    address: yup.string().required('You must enter a Email')
+    address: yup.string().required('You must enter a Address'),
+    email: yup.string().required('You must enter a Email')
 });
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -135,7 +136,7 @@ const AdminStoreDetail = () => {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <FuseSvgIcon size={24}>
-                                                heroicons-outline:user-circle
+                                                heroicons-solid:user-circle
                                             </FuseSvgIcon>
                                         </InputAdornment>
                                     )
@@ -163,7 +164,7 @@ const AdminStoreDetail = () => {
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <FuseSvgIcon size={24}>
-                                                heroicons-outline:location-marker
+                                                heroicons-solid:location-marker
                                             </FuseSvgIcon>
                                         </InputAdornment>
                                     )
@@ -206,6 +207,34 @@ const AdminStoreDetail = () => {
                             />
                         )}
                     />
+                    <Controller
+                        control={control}
+                        name="email"
+                        defaultValue=""
+                        render={({ field }) => (
+                            <TextField
+                                className="mt-32"
+                                {...field}
+                                label="Email"
+                                placeholder="Email"
+                                id="email"
+                                error={!!errors.email}
+                                helperText={errors?.email?.message}
+                                variant="outlined"
+                                required
+                                fullWidth
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <FuseSvgIcon size={24}>
+                                                heroicons-solid:mail
+                                            </FuseSvgIcon>
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
+                        )}
+                    />
                 </div>
                 <Box className="flex items-center mt-32">
                     <Button
@@ -224,7 +253,7 @@ const AdminStoreDetail = () => {
                     </Button>
                 </Box>
             </Paper>
-            <UserList />
+            <StoreTabs />
         </>
     );
 };
