@@ -64,7 +64,11 @@ const UserTable = () => {
     });
 
     const handleChange = (type, value) => {
-        dispatch(setFilter({ type: type, value: value }));
+        if (type === 'rowsPerPage') {
+            dispatch(setFilter({ ...filter, page: 0, [type]: value }));
+        } else {
+            dispatch(setFilter({ ...filter, [type]: value }));
+        }
     };
     const handleOpenDialog = () => {
         setAnchorEl(null);
@@ -329,12 +333,6 @@ const UserTable = () => {
                                                         event.target.value,
                                                         10
                                                     )
-                                                );
-                                                dispatch(
-                                                    setFilter({
-                                                        type: 'page',
-                                                        value: 0
-                                                    })
                                                 );
                                             }}
                                         />

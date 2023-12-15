@@ -17,8 +17,7 @@ const UserSearchFilter = () => {
     const filter = useSelector(selectFilter);
 
     const handleChange = (type, value) => {
-        dispatch(setFilter({ type: type, value: value }));
-        dispatch(setFilter({ type: 'page', value: 0 }));
+        dispatch(setFilter({ ...filter, page: 0, [type]: value }));
     };
     const handleAdd = () => navigate('/settings/user-management/add/0');
 

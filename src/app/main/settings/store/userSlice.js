@@ -69,17 +69,7 @@ const userSlice = createSlice({
     }),
     reducers: {
         setFilter: (state, action) => {
-            switch (action.payload.type) {
-                case 'searchText':
-                    state.filter.searchText = action.payload.value;
-                    break;
-                case 'rowsPerPage':
-                    state.filter.rowsPerPage = action.payload.value;
-                    break;
-                case 'page':
-                    state.filter.page = action.payload.value;
-                    break;
-            }
+            state.filter = action.payload;
         },
         setUserEntityAdapter: (state, action) => {
             state.totalCount = action.payload.filterSize;
