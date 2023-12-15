@@ -18,6 +18,14 @@ const navigationConfig = [
         url: 'partners'
     },
     {
+        id: 'UserManagement',
+        title: 'User Management',
+        type: 'item',
+        icon: 'heroicons-outline:user-group',
+        auth: authRoles.admin,
+        url: 'admin/users'
+    },
+    {
         id: 'ItemManagement',
         title: 'Item Management',
         type: 'item',
@@ -83,7 +91,7 @@ const navigationConfig = [
         type: 'item',
         icon: 'material-outline:house',
         auth: authRoles.admin,
-        url: 'stores'
+        url: 'admin/stores'
     }
 ];
 

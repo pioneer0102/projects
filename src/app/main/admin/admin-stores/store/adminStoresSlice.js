@@ -33,12 +33,14 @@ export const updateStore = createAsyncThunk(
     }
 );
 
-export const selectStores = ({ storesApp }) => storesApp.stores.stores;
-export const selectFilter = ({ storesApp }) => storesApp.stores.filter;
-export const selectStore = ({ storesApp }) => storesApp.stores.store;
-export const selectUserFilter = ({ storesApp }) => storesApp.stores.userFilter;
-const storesSlice = createSlice({
-    name: 'storesApp/stores',
+export const selectStores = ({ adminStores }) => adminStores.stores.stores;
+export const selectFilter = ({ adminStores }) => adminStores.stores.filter;
+export const selectStore = ({ adminStores }) => adminStores.stores.store;
+export const selectUserFilter = ({ adminStores }) =>
+    adminStores.stores.userFilter;
+
+const adminStoresSlice = createSlice({
+    name: 'adminStores/stores',
     initialState: {
         stores: {
             pagedData: [],
@@ -115,6 +117,6 @@ const storesSlice = createSlice({
 });
 
 export const { setFilter, initializeStore, setUserFilter } =
-    storesSlice.actions;
+    adminStoresSlice.actions;
 
-export default storesSlice.reducer;
+export default adminStoresSlice.reducer;

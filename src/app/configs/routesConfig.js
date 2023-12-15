@@ -10,7 +10,8 @@ import InvManCofig from '../main/item-management/InvManConfig';
 import OrdersConfig from '../main/orders/OrdersConfig';
 import InsightsConfig from '../main/insights/InsightsConfig';
 import SettingsConfig from '../main/settings/SettingsConfig';
-import StoreConfig from '../main/admin-store/StoreConfig';
+import AdminUsersConfig from '../main/admin/users/UsersConfig';
+import AdminStoresConfig from '../main/admin/admin-stores/AdminStoresConfig';
 
 const routeConfigs = [
     SignInConfig,
@@ -20,7 +21,8 @@ const routeConfigs = [
     OrdersConfig,
     InsightsConfig,
     SettingsConfig,
-    StoreConfig
+    AdminUsersConfig,
+    AdminStoresConfig
 ];
 
 const routes = [

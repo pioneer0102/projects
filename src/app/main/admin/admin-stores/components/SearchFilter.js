@@ -6,9 +6,9 @@ import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { selectFilter, setFilter } from '../store/adminStoreSlice';
+import { selectFilter, setFilter } from '../store/adminStoresSlice';
 
-const StoresSearchFilter = () => {
+const SearchFilter = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { t } = useTranslation();
@@ -18,7 +18,7 @@ const StoresSearchFilter = () => {
         dispatch(setFilter({ type: type, value: value }));
     };
     const handleAdd = () => {
-        navigate('/stores/add/0');
+        navigate('/admin/stores/add');
     };
 
     return (
@@ -61,4 +61,4 @@ const StoresSearchFilter = () => {
     );
 };
 
-export default StoresSearchFilter;
+export default SearchFilter;

@@ -14,9 +14,9 @@ import {
     selectStores,
     selectFilter,
     setFilter
-} from '../store/adminStoreSlice';
+} from '../store/adminStoresSlice';
 
-const StoresTable = () => {
+const StoreList = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -31,7 +31,7 @@ const StoresTable = () => {
         dispatch(setFilter({ type: type, value: value }));
     };
     const handleEdit = (id) => {
-        navigate(`/stores/edit/${id}`);
+        navigate(`/admin/stores/${id}/edit`);
     };
 
     return (
@@ -147,4 +147,4 @@ const StoresTable = () => {
     );
 };
 
-export default StoresTable;
+export default StoreList;

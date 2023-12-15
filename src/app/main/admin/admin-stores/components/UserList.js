@@ -1,19 +1,24 @@
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Typography } from '@mui/material';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { Button } from '@mui/material';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Avatar from '@mui/material/Avatar';
 import { UserTableHeader } from 'src/app/model/StoreModel';
-import { selectStore } from './store/adminStoreSlice';
-import { useMediaQuery } from '@mui/material';
-import { TablePagination } from '@mui/material';
-import { selectUserFilter, setUserFilter } from './store/adminStoreSlice';
+import {
+    useMediaQuery,
+    TablePagination,
+    Button,
+    Typography
+} from '@mui/material';
+import {
+    selectUserFilter,
+    setUserFilter,
+    selectStore
+} from '../store/adminStoresSlice';
 
-const UsersTable = () => {
+const UserList = () => {
     const routeParams = useParams();
     if (routeParams.action === 'add') {
         return;
@@ -162,4 +167,4 @@ const UsersTable = () => {
     );
 };
 
-export default UsersTable;
+export default UserList;

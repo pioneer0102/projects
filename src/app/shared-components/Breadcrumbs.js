@@ -26,7 +26,7 @@ function Breadcrumb(props) {
                             {parent}
                         </Typography>
                         <Typography className="inline text-18 text-center font-medium text-pink-500">
-                            {child}
+                            {child.charAt(0).toUpperCase() + child.slice(1)}
                         </Typography>
                     </Breadcrumbs>
                 </div>

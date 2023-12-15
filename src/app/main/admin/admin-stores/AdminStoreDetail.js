@@ -16,7 +16,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Checkbox from '@mui/material/Checkbox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import UsersTable from './UsersTable';
+import UserList from './components/UserList';
 import history from '@history';
 import { showMessage } from 'app/store/fuse/messageSlice';
 import { useTranslation } from 'react-i18next';
@@ -30,7 +30,7 @@ import {
     addStore,
     updateStore,
     selectUserFilter
-} from './store/adminStoreSlice';
+} from './store/adminStoresSlice';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a Name'),
@@ -40,12 +40,12 @@ const schema = yup.object().shape({
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-const StoreForm = () => {
+const AdminStoreDetail = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const routeParams = useParams();
-    const store = useSelector(selectStore);
-    const useFilter = useSelector(selectUserFilter);
+    const storeDetail = useSelector(selectStore);
+    const userFilter = useSelector(selectUserFilter);
 
     const [integrations, setIntegrations] = useState([]);
 
@@ -54,30 +54,27 @@ const StoreForm = () => {
         resolver: yupResolver(schema)
     });
 
+    const { errors } = formState;
+
     useEffect(() => {
-        if (routeParams.action === 'edit') {
+        if (routeParams.storeId === 'add') {
+            dispatch(initializeStore({}));
+        } else {
             const data = {
-                id: routeParams.id,
-                ...useFilter
+                id: routeParams.storeId,
+                ...userFilter
             };
             dispatch(getStoreById(data));
         }
-        if (routeParams.action === 'add') {
-            dispatch(initializeStore({}));
-        }
-    }, [dispatch, useFilter.page, useFilter.rowsPerPage, routeParams]);
+    }, [dispatch, userFilter, routeParams]);
 
     useEffect(() => {
-        setIntegrations(store.integrations);
-    }, [store]);
+        setIntegrations(storeDetail.integrations);
 
-    useEffect(() => {
-        reset({ ...store });
-    }, [store, reset]);
+        reset({ ...storeDetail });
+    }, [storeDetail, reset]);
 
-    const { errors } = formState;
-
-    const handleCancel = () => history.push('/stores');
+    const handleCancel = () => history.push('admin/stores');
     const onSubmit = (data) => {
         console.log(data);
         const submitData = {
@@ -85,7 +82,7 @@ const StoreForm = () => {
             integrations: integrations
         };
         console.log(submitData);
-        if (routeParams.action === 'add') {
+        if (routeParams.storeId === 'add') {
             dispatch(addStore(submitData));
             dispatch(
                 showMessage({
@@ -93,8 +90,7 @@ const StoreForm = () => {
                     variant: 'success'
                 })
             );
-        }
-        if (routeParams.action === 'edit') {
+        } else {
             dispatch(updateStore(submitData));
             dispatch(
                 showMessage({
@@ -103,18 +99,15 @@ const StoreForm = () => {
                 })
             );
         }
-        history.push('/stores');
+        history.push('/admin/stores');
     };
 
     return (
         <>
             <Breadcrumb
-                parentUrl="stores"
+                parentUrl="/admin/stores"
                 parent="Store"
-                child={
-                    routeParams.action.charAt(0).toUpperCase() +
-                    routeParams.action.slice(1)
-                }
+                child={routeParams['*']}
             />
             <Paper
                 className={
@@ -227,13 +220,13 @@ const StoreForm = () => {
                         color="info"
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action === 'add' ? t('add') : t('save')}
+                        {t('save')}
                     </Button>
                 </Box>
             </Paper>
-            <UsersTable />
+            <UserList />
         </>
     );
 };
 
-export default withReducer('storesApp', reducer)(StoreForm);
+export default withReducer('adminStores', reducer)(AdminStoreDetail);
