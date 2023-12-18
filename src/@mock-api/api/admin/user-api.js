@@ -53,14 +53,25 @@ mock.onPost('/admin/api/addUser').reply(({ data }) => {
 mock.onPost('/admin/api/updateUser').reply(({ data }) => {
     const { id, name, email, role, phone, address, avatar } = JSON.parse(data);
 
-    _.assign(_.find(userDB, { id: parseInt(id) }), {
-        name: name,
-        email: email,
-        role: role,
-        phone: phone,
-        address: address,
-        avatar: avatar
-    });
+    const updatedUserIndex = userDB.findIndex(
+        (user) => user.id === parseInt(id)
+    );
+
+    if (updatedUserIndex !== -1) {
+        // Remove the user from the current position
+        const updatedUser = userDB.splice(updatedUserIndex, 1)[0];
+
+        // Add the updated user at the beginning
+        userDB.unshift({
+            id: updatedUser.id,
+            name: name,
+            email: email,
+            role: role,
+            phone: phone,
+            address: address,
+            avatar: avatar
+        });
+    }
 
     return [200, { success: true }];
 });
