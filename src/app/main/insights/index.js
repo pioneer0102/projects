@@ -77,7 +77,7 @@ const InsightsApp = () => {
             ) : (
                 <Grid container spacing={0}>
                     <Grid item lg={12} md={12} sm={12} xs={12}>
-                        <div className="mx-24 my-16">
+                        <div className="mx-24 my-24">
                             {tabValue === 0 && <SaleReport />}
                             {tabValue === 1 && <SaleTable />}
                         </div>

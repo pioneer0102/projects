@@ -35,7 +35,7 @@ const StoreList = () => {
 
     return (
         <>
-            <Paper className="flex flex-col py-24 px-24 my-16 mx-24 overflow-auto">
+            <Paper className="flex flex-col py-24 px-24 my-24 mx-24 overflow-auto">
                 {allStores && allStores.pagedData.length === 0 ? (
                     <div className="flex flex-1 items-center justify-center h-full">
                         <Typography color="text.secondary" variant="h5">

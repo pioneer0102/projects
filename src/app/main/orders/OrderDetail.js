@@ -336,7 +336,7 @@ const OrderDetail = () => {
                     </FuseScrollbars>
                 </Paper>
 
-                <Paper className="px-8 py-24 my-24 mx-32 md:w-1/2">
+                <Paper className="px-8 py-24 my-24 mx-24 md:w-1/2">
                     <div className="sm:items-start mx-24">
                         <Typography
                             className="text-20 font-medium"

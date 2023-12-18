@@ -128,7 +128,7 @@ const AdminStoreDetail = () => {
                     </Button>
                 </div>
             </div>
-            <Paper className="flex flex-col mx-24 my-16 px-16 md:px-40 pb-32 pt-24">
+            <Paper className="flex flex-col mx-24 my-24 px-16 md:px-40 pb-32 pt-24">
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-x-40">
                     <Controller
                         control={control}
