@@ -35,14 +35,19 @@ mock.onPost('/api/getStoreById').reply(({ data }) => {
 });
 
 mock.onPost('/api/addStore').reply(({ data }) => {
-    const { name, address, integrations } = JSON.parse(data);
+    const { name, address, integrations, email } = JSON.parse(data);
     const newItem = {
         id: storesDB.length + 1,
         name: name,
         address: address,
-        integrations: integrations
+        integrations: integrations,
+        email: email,
+        users: [],
+        pos: {},
+        taxes: [],
+        departments: []
     };
-    storesDB.push(newItem);
+    storesDB.unshift(newItem);
     return [200, { success: true }];
 });
 
@@ -55,6 +60,9 @@ mock.onPost('/api/updateStore').reply(({ data }) => {
         integrations: integrations
     };
     _.assign(_.find(storesDB, { id: parseInt(id) }), updateItem);
+    const store = _.find(storesDB, { id: parseInt(id) });
+    _.remove(storesDB, { id: parseInt(id) });
+    storesDB.unshift(store);
     return [200, { success: true }];
 });
 
