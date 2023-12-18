@@ -1,31 +1,27 @@
-import { Paper } from '@mui/material';
-import Input from '@mui/material/Input';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import { useDispatch, useSelector } from 'react-redux';
-import { Status, SubTotals } from 'src/app/model/OrdersModel';
+import { useTranslation } from 'react-i18next';
 import { Channels } from 'src/app/model/Global';
-import { Typography } from '@mui/material';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import { Button } from '@mui/material';
-
+import { Status, SubTotals } from 'src/app/model/OrdersModel';
 import {
-    setPagenumber,
-    submit,
-    selectFilter,
-    setFilter
-} from '../store/ordersSlice';
+    Paper,
+    Input,
+    Button,
+    Dialog,
+    Select,
+    MenuItem,
+    Typography,
+    InputLabel,
+    FormControl,
+    DialogTitle,
+    DialogActions,
+    DialogContent
+} from '@mui/material';
+import { setPagenumber, selectFilter, setFilter } from '../store/ordersSlice';
 
-const breadCrumbs = [{ name: 'Orders', url: 'orders' }];
+const breadCrumbs = [{ name: 'Orders', url: null }];
 
 const OrdersHeader = () => {
     const { t } = useTranslation();
@@ -36,25 +32,28 @@ const OrdersHeader = () => {
     const filter = useSelector(selectFilter);
 
     const handleChange = (type, value) => {
-        dispatch(setFilter({ type: type, value: value }));
+        dispatch(setFilter({ ...filter, [type]: value }));
         dispatch(setPagenumber(0));
     };
-    const handleOpenDialog = () => {
-        setDialogOpen(true);
-    };
-    const handleClose = () => {
+
+    const handleOpenDialog = () => setDialogOpen(true);
+    const handleClose = () => setDialogOpen(false);
+
+    const handleCancel = () => {
+        dispatch(
+            setFilter({
+                ...filter,
+                searchText: '',
+                subtotal: '',
+                channel: '',
+                status: ''
+            })
+        );
+        dispatch(setPagenumber(0));
         setDialogOpen(false);
     };
-    const handleSubmit = () => {
-        const filterData = {
-            subtotal: filter.subtotal,
-            channel: filter.channel,
-            status: filter.status
-        };
-        dispatch(submit(filterData));
-        setPagenumber(0);
-        setDialogOpen(false);
-    };
+
+    const handleOk = () => setDialogOpen(false);
 
     return (
         <>
@@ -240,7 +239,7 @@ const OrdersHeader = () => {
                     <Button
                         variant="outline"
                         color="secondary"
-                        onClick={handleClose}
+                        onClick={handleCancel}
                     >
                         <span>{t('cancel')}</span>
                     </Button>
@@ -248,7 +247,7 @@ const OrdersHeader = () => {
                         variant="contained"
                         color="secondary"
                         type="submit"
-                        onClick={handleSubmit}
+                        onClick={handleOk}
                     >
                         <span>{t('ok')}</span>
                     </Button>

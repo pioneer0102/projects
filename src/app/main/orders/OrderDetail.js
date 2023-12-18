@@ -1,40 +1,41 @@
 /* eslint-disable indent */
 import clsx from 'clsx';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import { Button } from '@mui/material';
+import reducer from './store';
+import history from '@history';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import withReducer from 'app/store/withReducer';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { selectUser } from 'app/store/userSlice';
 import { useParams, Link } from 'react-router-dom';
-import TableRow from '@mui/material/TableRow';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
+import DeleteIcon from '@mui/icons-material/Delete';
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
-import { IconButton } from '@mui/material';
+import { showMessage } from 'app/store/fuse/messageSlice';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
+import { Status, ItemStatus } from 'src/app/model/OrdersModel';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { selectTaxInfo, selectOrderInfo } from './store/ordersSlice';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import reducer from './store';
-import withReducer from 'app/store/withReducer';
 import {
     OrderDetailContentHeader,
     OrderDetailCustomHeader
 } from 'src/app/model/OrdersModel';
-import { useTranslation } from 'react-i18next';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { Typography } from '@mui/material';
-import Popover from '@mui/material/Popover';
-import { Box } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Status, ItemStatus } from 'src/app/model/OrdersModel';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import { showMessage } from 'app/store/fuse/messageSlice';
-import Breadcrumb from 'app/shared-components/Breadcrumbs';
-import { selectUser } from 'app/store/userSlice';
-import history from '@history';
-
+import {
+    Box,
+    Button,
+    Paper,
+    Table,
+    TableRow,
+    TableBody,
+    TableCell,
+    TableHead,
+    IconButton,
+    Typography,
+    Popover,
+    Dialog,
+    DialogActions,
+    DialogContent
+} from '@mui/material';
 import {
     updateStatus,
     updateItemStatus,
@@ -53,7 +54,7 @@ const breadCrumbs = [
 const OrderDetail = () => {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
-        history.push('/items');
+        history.push('/admin/users');
         return;
     }
     const dispatch = useDispatch();

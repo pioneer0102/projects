@@ -64,7 +64,7 @@ const breadCrumbs = [
 function PartnerForm() {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
-        history.push('/items');
+        history.push('/admin/users');
         return;
     }
     const routeParams = useParams();

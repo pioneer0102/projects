@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import OrderDetail from './OrderDetail';
 
-const OrdersApp = lazy(() => import('./index'));
+const Orders = lazy(() => import('./Orders'));
 
 const OrdersConfig = {
     settings: {
@@ -12,7 +12,7 @@ const OrdersConfig = {
     routes: [
         {
             path: 'orders',
-            element: <OrdersApp />
+            element: <Orders />
         },
         {
             path: 'orders/:id',

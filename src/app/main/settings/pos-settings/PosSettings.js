@@ -22,7 +22,7 @@ const breadCrumbs = [{ name: 'POS Settings', url: null }];
 const PosSettings = () => {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
-        history.push('/items');
+        history.push('/admin/users');
         return;
     }
     const { t } = useTranslation();

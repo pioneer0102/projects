@@ -60,8 +60,7 @@ export const selectChannel = ({ ordersApp }) => ordersApp.orders.channel;
 export const selectStatus = ({ ordersApp }) => ordersApp.orders.status;
 export const selectPageNumber = ({ ordersApp }) => ordersApp.orders.pageNumber;
 export const selectPageSize = ({ ordersApp }) => ordersApp.orders.pageSize;
-export const selectDbSize = ({ ordersApp }) => ordersApp.orders.dbSize;
-export const selectFilterSize = ({ ordersApp }) => ordersApp.orders.filterSize;
+export const selectTotalCount = ({ ordersApp }) => ordersApp.orders.totalCount;
 export const selectFilter = ({ ordersApp }) => ordersApp.orders.filter;
 
 export const { selectAll: selectOrders } = ordersAdapter.getSelectors(
@@ -74,44 +73,29 @@ export const selectOrderInfo = ({ ordersApp }) => ordersApp.orders.orderInfo;
 const ordersSlice = createSlice({
     name: 'ordersApp/orders',
     initialState: ordersAdapter.getInitialState({
-        pageNumber: 0,
-        pageSize: 10,
-        dbSize: 0,
         taxInfo: [],
         orderInfo: {},
         updateFlag: false,
         removeFlag: false,
         newOrderId: null,
-        filterSize: 0,
+        totalCount: 0,
         filter: {
             searchText: '',
             subtotal: '',
             channel: '',
-            status: ''
+            status: '',
+            pageNumber: 0,
+            pageSize: 10
         }
     }),
     reducers: {
         setOrders: (state, action) => {
             const data = action.payload.pagedData;
-            state.dbSize = action.payload.dbSize;
-            state.filterSize = action.payload.filterSize;
+            state.totalCount = action.payload.filterSize;
             ordersAdapter.setAll(state, data);
         },
         setFilter: (state, action) => {
-            switch (action.payload.type) {
-                case 'searchText':
-                    state.filter.searchText = action.payload.value;
-                    break;
-                case 'status':
-                    state.filter.status = action.payload.value;
-                    break;
-                case 'subtotal':
-                    state.filter.subtotal = action.payload.value;
-                    break;
-                case 'channel':
-                    state.filter.channel = action.payload.value;
-                    break;
-            }
+            state.filter = action.payload;
         },
         updateItemStatus: (state, action) => {
             state.taxInfo[action.payload.itemIndex].status =

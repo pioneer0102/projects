@@ -28,7 +28,7 @@ const breadCrumbs = [{ name: 'Insights', url: null }];
 const InsightsApp = () => {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
-        history.push('/items');
+        history.push('/admin/users');
         return;
     }
     const dispatch = useDispatch();
