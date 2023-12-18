@@ -39,7 +39,7 @@ const ItemsTable = () => {
 
     return (
         <>
-            <Paper className="flex flex-col py-24 px-24 my-16 mx-24 overflow-auto">
+            <Paper className="flex flex-col py-24 px-24 my-24 mx-24 overflow-auto">
                 <Table>
                     <Thead className="border-b-2">
                         <Tr>
