@@ -1,18 +1,18 @@
 import reducer from './store';
 import withReducer from 'app/store/withReducer';
-import InvSearchFilter from './components/InvSearchFilter';
-import InvManTable from './components/InvManTable';
+import ItemsTable from './components/ItemsTable';
+import ItemsHeader from './components/ItemsHeader';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();
 
-const InvManApp = () => {
+const Items = () => {
     return (
         <QueryClientProvider client={queryClient}>
-            <InvSearchFilter />
-            <InvManTable />
+            <ItemsHeader />
+            <ItemsTable />
         </QueryClientProvider>
     );
 };
 
-export default withReducer('inventoryApp', reducer)(InvManApp);
+export default withReducer('itemsApp', reducer)(Items);

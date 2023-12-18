@@ -12,7 +12,7 @@ const priceRange = [
     { min: 5000, max: 10000 }
 ];
 
-mock.onPost('/api/getInventory').reply(({ data }) => {
+mock.onPost('/api/getItems').reply(({ data }) => {
     const { searchText, price, category, pageNumber, pageSize } =
         JSON.parse(data);
 
@@ -41,34 +41,18 @@ mock.onPost('/api/getInventory').reply(({ data }) => {
     return [200, result];
 });
 
-mock.onGet('/api/getInventoryById').reply((data) => {
+mock.onGet('/api/getItemById').reply((data) => {
     const { id } = data;
     const item = _.find(itemDB, { id: parseInt(id) });
     return [200, item];
 });
 
-mock.onPost('/api/addInventory').reply(({ data }) => {
-    const { active, category, image, price, quantity, tax, upc } =
+mock.onPost('/api/addItem').reply(({ data }) => {
+    const { name, active, category, image, price, quantity, tax, upc } =
         JSON.parse(data);
-    const newItem = {
-        id: itemDB.length + 1,
-        active: active,
-        category: category,
-        image: image,
-        price: price,
-        quantity: quantity,
-        tax: tax,
-        upc: upc
-    };
-    itemDB.unshift(newItem);
-    return [200, { success: true }];
-});
 
-mock.onPost('/api/updateInventory').reply(({ data }) => {
-    const { id, name, active, category, image, price, quantity, tax, upc } =
-        JSON.parse(data);
-    const newItem = {
-        id: parseInt(id),
+    itemDB.unshift({
+        id: itemDB.length + 1,
         name: name,
         active: active,
         category: category,
@@ -77,7 +61,36 @@ mock.onPost('/api/updateInventory').reply(({ data }) => {
         quantity: quantity,
         tax: tax,
         upc: upc
-    };
-    _.assign(_.find(itemDB, { id }), newItem);
+    });
+
+    return [200, { success: true }];
+});
+
+mock.onPost('/api/updateItem').reply(({ data }) => {
+    const { id, name, active, category, image, price, quantity, tax, upc } =
+        JSON.parse(data);
+
+    const updatedItemIndex = itemDB.findIndex(
+        (item) => item.id === parseInt(id)
+    );
+
+    if (updatedItemIndex !== -1) {
+        // Remove the user from the current position
+        const updatedItem = itemDB.splice(updatedItemIndex, 1)[0];
+
+        // Add the updated user at the beginning
+        itemDB.unshift({
+            id: updatedItem.id,
+            name: name,
+            active: active,
+            category: category,
+            image: image,
+            price: price,
+            quantity: quantity,
+            tax: tax,
+            upc: upc
+        });
+    }
+
     return [200, { success: true }];
 });

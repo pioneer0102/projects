@@ -1,50 +1,49 @@
-import reducer from './store';
-import withReducer from 'app/store/withReducer';
-import Button from '@mui/material/Button';
 import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import Box from '@mui/system/Box';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import { Typography } from '@mui/material';
-import styles from './style.module.scss';
+import reducer from './store';
 import history from '@history';
-import { useTranslation } from 'react-i18next';
-import { useParams, Link } from 'react-router-dom';
+import Box from '@mui/system/Box';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Breadcrumb from 'app/shared-components/Breadcrumbs';
-import { showMessage } from 'app/store/fuse/messageSlice';
 import { grey } from '@mui/material/colors';
+import { useTranslation } from 'react-i18next';
+import withReducer from 'app/store/withReducer';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { useParams, Link } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { showMessage } from 'app/store/fuse/messageSlice';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import {
-    getInventoryById,
-    selectInventory,
-    initializeInventory,
-    addInventory,
-    updateInventory
-} from './store/inventorySlice';
+    Button,
+    Paper,
+    Checkbox,
+    TextField,
+    InputAdornment,
+    FormControlLabel
+} from '@mui/material';
+import {
+    getItemById,
+    selectItem,
+    addItem,
+    updateItem,
+    setItem
+} from './store/itemSlice';
 
 const schema = yup.object().shape({
     category: yup.string().required('You must enter a name'),
     price: yup.string().required('You must enter a address'),
     upc: yup.string().required('You must enter a email'),
     quantity: yup.string().required('You must enter a phone Number'),
-    // image: yup.string().required('You must select image'),
     name: yup.string().required('You must enter a name')
 });
 
-const InvForm = () => {
+const ItemDetail = () => {
     const [image, setImage] = useState(null);
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const routeParams = useParams();
-    const inventory = useSelector(selectInventory);
+    const item = useSelector(selectItem);
     const [breadCrumbs, setBreadCrumbs] = useState([]);
 
     const { control, handleSubmit, reset, formState } = useForm({
@@ -53,43 +52,59 @@ const InvForm = () => {
     });
 
     useEffect(() => {
-        let crumbs = [{ name: 'Item Management', url: 'item-management' }];
+        let crumbs = [{ name: 'Item Management', url: 'items' }];
 
-        if (routeParams.action === 'edit') {
-            dispatch(getInventoryById(routeParams.id));
-            crumbs.push({ name: 'Edit', url: null });
-        }
-        if (routeParams.action === 'add') {
-            dispatch(initializeInventory({}));
+        if (routeParams.itemId === 'add') {
+            dispatch(
+                setItem({
+                    ...item,
+                    id: '',
+                    name: '',
+                    category: '',
+                    description: '',
+                    image: null,
+                    price: '',
+                    quantity: '',
+                    tax: '',
+                    upc: ''
+                })
+            );
             setImage(null);
             crumbs.push({ name: 'Add', url: null });
+        } else {
+            dispatch(getItemById(routeParams.itemId));
+            crumbs.push({ name: 'Edit', url: null });
         }
 
         setBreadCrumbs(crumbs);
-    }, [dispatch, routeParams.action, routeParams.id]);
+    }, [dispatch, routeParams]);
 
     useEffect(() => {
-        reset({ ...inventory });
-        setImage(inventory.image);
-    }, [inventory, reset]);
+        reset({ ...item });
+        setImage(item.image);
+    }, [item, reset]);
 
     const { errors } = formState;
 
-    const handleCancel = () => history.push('/item-management');
+    const handleCancel = () => history.push('/items');
     const onSubmit = (data) => {
+        const action = routeParams.itemId === 'add' ? addItem : updateItem;
+        const successMessage =
+            routeParams.itemId === 'add'
+                ? 'Item added successfully!'
+                : 'Item updated successfully!';
+
+        console.log(data);
         const formData = {
             ...data,
             image: image
         };
-        console.log(formData);
-        if (routeParams.action === 'add') {
-            dispatch(addInventory(formData));
-        }
-        if (routeParams.action === 'edit') {
-            dispatch(updateInventory(formData));
-        }
-        history.push('/item-management');
+
+        dispatch(action(formData));
+        dispatch(showMessage({ message: successMessage, variant: 'success' }));
+        history.push('/items');
     };
+
     function handleChange(e) {
         // setImage(URL.createObjectURL(e.target.files[0]));
         console.log(e.target.files[0].type);
@@ -124,7 +139,7 @@ const InvForm = () => {
                 <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
                     <Button
                         component={Link}
-                        to="/item-management"
+                        to="/items"
                         variant="contained"
                         color="secondary"
                         startIcon={
@@ -138,36 +153,6 @@ const InvForm = () => {
                 </div>
             </div>
             <Paper className="mx-24 my-24 px-32 py-32">
-                <div className="flex items-center justify-between">
-                    <Typography
-                        className={'font-bold text-32'}
-                        color="text.secondary"
-                    >
-                        {routeParams.action.charAt(0).toUpperCase() +
-                            routeParams.action.slice(1)}{' '}
-                        Item
-                    </Typography>
-                    <Controller
-                        control={control}
-                        name="active"
-                        defaultValue={true}
-                        render={({ field }) => (
-                            <FormControlLabel
-                                label="Active"
-                                className={`self-end ${styles.backButton}`}
-                                control={
-                                    <Checkbox
-                                        color="info"
-                                        checked={field.value}
-                                        onChange={(e) =>
-                                            field.onChange(e.target.checked)
-                                        }
-                                    />
-                                }
-                            />
-                        )}
-                    />
-                </div>
                 <div className="grid grid-cols-2 gap-16">
                     <Controller
                         control={control}
@@ -332,6 +317,28 @@ const InvForm = () => {
                         )}
                     />
                 </div>
+                <div className="w-full flex my-8">
+                    <Controller
+                        control={control}
+                        name="active"
+                        defaultValue={true}
+                        render={({ field }) => (
+                            <FormControlLabel
+                                label="Active"
+                                className="ml-auto"
+                                control={
+                                    <Checkbox
+                                        color="info"
+                                        checked={field.value}
+                                        onChange={(e) =>
+                                            field.onChange(e.target.checked)
+                                        }
+                                    />
+                                }
+                            />
+                        )}
+                    />
+                </div>
                 <div className="flex flex-col items-center justify-center">
                     {image === null ? (
                         <Box
@@ -339,17 +346,14 @@ const InvForm = () => {
                                 backgroundColor: grey[300]
                             }}
                             component="label"
-                            className="flex items-center justify-center relative w-128 h-128 mx-12 mt-32 overflow-hidden cursor-pointer shadow hover:shadow-lg"
+                            className="flex items-center justify-center relative w-128 h-128 overflow-hidden cursor-pointer shadow hover:shadow-lg"
                         >
                             <FuseSvgIcon size={32} color="action">
                                 heroicons-solid:upload
                             </FuseSvgIcon>
                         </Box>
                     ) : (
-                        <img
-                            className="mt-32 w-200 h-200 object-cover"
-                            src={image}
-                        />
+                        <img className="w-128 h-128 object-cover" src={image} />
                     )}
 
                     <Controller
@@ -364,7 +368,7 @@ const InvForm = () => {
                                     component="label"
                                     className="mx-12 mt-32 overflow-hidden cursor-pointer shadow hover:shadow-lg"
                                 >
-                                    {t('inventory.upload')}
+                                    {t('item.upload')}
                                     <input
                                         className="hidden"
                                         type="file"
@@ -380,11 +384,13 @@ const InvForm = () => {
                         {t('cancel')}
                     </Button>
                     <Button
+                        className="ml-8"
                         variant="contained"
                         color="secondary"
+                        // disabled={_.isEmpty(dirtyFields) || !isValid}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action === 'add' ? t('add') : t('save')}
+                        {t('save')}
                     </Button>
                 </Box>
             </Paper>
@@ -392,4 +398,4 @@ const InvForm = () => {
     );
 };
 
-export default withReducer('inventoryApp', reducer)(InvForm);
+export default withReducer('itemsApp', reducer)(ItemDetail);

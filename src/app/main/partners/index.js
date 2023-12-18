@@ -8,7 +8,7 @@ import history from '@history';
 function PartnersApp() {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
-        history.push('/item-management');
+        history.push('/items');
         return;
     }
     return (

@@ -1,63 +1,41 @@
-import { Paper } from '@mui/material';
-import Input from '@mui/material/Input';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
-import { PriceRange, Category } from 'src/app/model/InvManModel';
-import { Button } from '@mui/material';
-import { Typography } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+import { selectFilter, setFilter } from '../store/itemSlice';
+import { PriceRange, Category } from 'src/app/model/ItemModel';
 import {
-    selectSearchText,
-    setInventorySearchText,
-    selectPrice,
-    selectCategory,
-    setInventoryPrice,
-    setInventoryCategory,
-    setPagenumber,
-    submit
-} from '../store/inventorySlice';
+    Paper,
+    Input,
+    Dialog,
+    Button,
+    Select,
+    MenuItem,
+    Typography,
+    InputLabel,
+    FormControl,
+    DialogTitle,
+    DialogActions,
+    DialogContent
+} from '@mui/material';
 
 const breadCrumbs = [{ name: 'Item Management', url: null }];
 
-const InvSearchFilter = () => {
+const ItemsHeader = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-
     const [dialogOpen, setDialogOpen] = useState(false);
+    const filter = useSelector(selectFilter);
 
-    const searchText = useSelector(selectSearchText);
-    const price = useSelector(selectPrice);
-    const category = useSelector(selectCategory);
+    const handleChange = (key, value) =>
+        dispatch(setFilter({ ...filter, pageNumber: 0, [key]: value }));
+    const handleOpenDialog = () => setDialogOpen(true);
+    const handleClose = () => setDialogOpen(false);
 
-    const handleChange = (action, value) => {
-        dispatch(action(value));
-        dispatch(setPagenumber(0));
-    };
-
-    const handleOpenDialog = () => {
-        setDialogOpen(true);
-    };
-    const handleClose = () => {
-        setDialogOpen(false);
-    };
     const handleSubmit = () => {
-        const filterData = {
-            price: price,
-            category: category
-        };
-        dispatch(submit(filterData));
-        setPagenumber(0);
+        dispatch(setFilter({ ...filter, pageNumber: 0 }));
         setDialogOpen(false);
     };
 
@@ -76,15 +54,12 @@ const InvSearchFilter = () => {
                         className="flex flex-1"
                         disableUnderline
                         fullWidth
-                        value={searchText}
+                        value={filter.searchText}
                         inputProps={{
                             'aria-label': 'Search'
                         }}
                         onChange={(event) =>
-                            handleChange(
-                                setInventorySearchText,
-                                event.target.value
-                            )
+                            handleChange('searchText', event.target.value)
                         }
                     />
                 </Paper>
@@ -100,7 +75,7 @@ const InvSearchFilter = () => {
                 </Button>
                 <Button
                     component={Link}
-                    to="/item-management/add/0"
+                    to="/items/add"
                     variant="contained"
                     color="secondary"
                     startIcon={
@@ -135,13 +110,13 @@ const InvSearchFilter = () => {
                                 }
                             }}
                         >
-                            {t('inventory.priceRange')}
+                            {t('item.priceRange')}
                         </InputLabel>
                         <Select
                             labelId="select-small-label"
                             id="select-small"
-                            value={price}
-                            label={t('inventory.priceRange')}
+                            value={filter.price}
+                            label={t('item.priceRange')}
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
                                     borderColor: '#e2e8f0'
@@ -155,10 +130,7 @@ const InvSearchFilter = () => {
                                 }
                             }}
                             onChange={(event) =>
-                                handleChange(
-                                    setInventoryPrice,
-                                    event.target.value
-                                )
+                                handleChange('price', event.target.value)
                             }
                         >
                             <MenuItem value="">{t('none')}</MenuItem>
@@ -181,13 +153,13 @@ const InvSearchFilter = () => {
                                 }
                             }}
                         >
-                            {t('inventory.category')}
+                            {t('item.category')}
                         </InputLabel>
                         <Select
                             labelId="demo-select-small-label"
                             id="demo-select-small"
-                            value={category}
-                            label={t('inventory.category')}
+                            value={filter.category}
+                            label={t('item.category')}
                             sx={{
                                 '.MuiOutlinedInput-notchedOutline': {
                                     borderColor: '#e2e8f0'
@@ -201,10 +173,7 @@ const InvSearchFilter = () => {
                                 }
                             }}
                             onChange={(event) =>
-                                handleChange(
-                                    setInventoryCategory,
-                                    event.target.value
-                                )
+                                handleChange('category', event.target.value)
                             }
                         >
                             <MenuItem value="">{t('none')}</MenuItem>
@@ -240,4 +209,4 @@ const InvSearchFilter = () => {
     );
 };
 
-export default InvSearchFilter;
+export default ItemsHeader;

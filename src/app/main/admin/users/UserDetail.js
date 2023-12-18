@@ -2,7 +2,6 @@ import _ from '@lodash';
 import * as yup from 'yup';
 import history from '@history';
 import Box from '@mui/system/Box';
-import Paper from '@mui/material/Paper';
 import { useTranslation } from 'react-i18next';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import React, { useEffect, useState } from 'react';
@@ -10,10 +9,20 @@ import { useParams, Link } from 'react-router-dom';
 import { userRole } from 'src/app/model/UserModel';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUser, setUser } from './store/userSlice';
 import { showMessage } from 'app/store/fuse/messageSlice';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import {
+    setUser,
+    addUser,
+    setFilter,
+    updateUser,
+    selectUser,
+    getUserById,
+    selectFilter
+} from './store/userSlice';
+import {
+    Paper,
     Button,
     Avatar,
     MenuItem,
@@ -21,9 +30,6 @@ import {
     IconButton,
     InputAdornment
 } from '@mui/material';
-
-import { getUserById, addUser, updateUser } from './store/userSlice';
-import Breadcrumb from 'app/shared-components/Breadcrumbs';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a Name'),
@@ -38,6 +44,7 @@ const UserDetail = () => {
     const { t } = useTranslation();
     const routeParams = useParams();
     const user = useSelector(selectUser);
+    const filter = useSelector(selectFilter);
 
     const [showUpload, setShowUpload] = useState(false);
     const [breadCrumbs, setBreadCrumbs] = useState([]);
@@ -60,6 +67,7 @@ const UserDetail = () => {
 
         dispatch(action(data));
         dispatch(showMessage({ message: successMessage, variant: 'success' }));
+        dispatch(setFilter({ ...filter, page: 0 }));
         history.push('/admin/users');
     };
 
@@ -366,7 +374,7 @@ const UserDetail = () => {
                         disabled={_.isEmpty(dirtyFields) || !isValid}
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action === 'add' ? t('add') : t('save')}
+                        {t('save')}
                     </Button>
                 </Box>
             </Paper>

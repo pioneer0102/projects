@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { setFilter, selectFilter } from '../store/userSlice';
 
-const breadCrumbs = [{ name: 'User Management', url: 'admin/users' }];
+const breadCrumbs = [{ name: 'User Management', url: null }];
 
 const UsersHeader = () => {
     const { t } = useTranslation();
