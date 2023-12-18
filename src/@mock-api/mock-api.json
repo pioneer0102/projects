@@ -10871,8 +10871,103 @@
                         "name": "Costco",
                         "address": "800 Lake Dr, Issaquah, WA",
                         "integrations": ["DoorDash", "Uber", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5],
                         "email": "www.costco.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -10899,8 +10994,147 @@
                         "name": "Target",
                         "address": "655 Cheshire Rd, Lanesborough, MA 01237-9501",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                         "email": "www.target.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -10927,8 +11161,147 @@
                         "name": "Dollar Tree",
                         "address": "500 Volvo Pkwy Chesapeake, VA 23320",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                         "email": "www.dollartree.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -10955,8 +11328,147 @@
                         "name": "Walmart",
                         "address": "702 SW 8th St, Bentonville - Waze.",
                         "integrations": ["DoorDash", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                         "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -10983,8 +11495,147 @@
                         "name": "T.J.Maxx",
                         "address": "770 Cochituate Rd, Framingham, MA 01701, USA",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5],
-                        "email": "www.tjmaxx.com",
+                        "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -11011,8 +11662,147 @@
                         "name": "Marshalls",
                         "address": "1 Worcester Rd, Framingham, MA 01701, United States",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5],
-                        "email": "www.marshalls.com",
+                        "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -11039,8 +11829,147 @@
                         "name": "Costo",
                         "address": "800 Lake Dr, Issaquah, WA",
                         "integrations": ["DoorDash", "Uber", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5],
-                        "email": "www.costco.com",
+                        "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -11067,8 +11996,147 @@
                         "name": "Target",
                         "address": "655 Cheshire Rd, Lanesborough, MA 01237-9501",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                        "email": "www.target.com",
+                        "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -11095,8 +12163,147 @@
                         "name": "Dollar Tree",
                         "address": "500 Volvo Pkwy Chesapeake, VA 23320",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5],
-                        "email": "www.dollartree.com",
+                        "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -11123,8 +12330,147 @@
                         "name": "Walmart",
                         "address": "702 SW 8th St, Bentonville - Waze.",
                         "integrations": ["DoorDash", "GrubHub"],
-                        "users": [1, 2, 3, 4, 5],
                         "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -11151,8 +12497,147 @@
                         "name": "T.J.Maxx",
                         "address": "770 Cochituate Rd, Framingham, MA 01701, USA",
                         "integrations": ["DoorDash", "Uber"],
-                        "users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-                        "email": "www.tjmaxx.com",
+                        "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
@@ -11179,8 +12664,147 @@
                         "name": "Marshalls",
                         "address": "1 Worcester Rd, Framingham, MA 01701, United States",
                         "integrations": ["DoorDash"],
-                        "users": [1, 2, 3, 4, 5],
-                        "email": "www.marshalls.com",
+                        "email": "www.walmart.com",
+                        "pos": {
+                            "type": "Desktop POS System",
+                            "userName": "John Dae",
+                            "password": "123456",
+                            "url": "http://example01.pos.com"
+                        },
+                        "users": [
+                            {
+                                "id": 1,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 2,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 3,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 4,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 5,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 6,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 7,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 8,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            }
+                        ],
                         "taxes": [
                             {
                                 "name": "Sales Tax",
