@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { Typography } from '@mui/material';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
@@ -11,7 +11,6 @@ import { StoreTableHeader } from 'src/app/model/StoreModel';
 import styles from '../style.module.scss';
 import {
     getAllStores,
-    selectStores,
     selectFilter,
     setFilter
 } from '../store/adminStoresSlice';
@@ -20,12 +19,12 @@ const StoreList = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const stores = useSelector(selectStores);
     const filter = useSelector(selectFilter);
 
-    useEffect(() => {
-        dispatch(getAllStores(filter));
-    }, [dispatch, filter]);
+    const { data: allStores } = useQuery(['allStores', filter], () =>
+        getAllStores(filter)
+    );
+    const totalCount = allStores ? allStores.totalCount : 0;
 
     const handlePage = (type, value) => {
         dispatch(setFilter({ type: type, value: value }));
@@ -37,7 +36,7 @@ const StoreList = () => {
     return (
         <>
             <Paper className="flex flex-col py-24 px-24 my-16 mx-24 overflow-auto">
-                {stores.pagedData.length === 0 ? (
+                {allStores && allStores.pagedData.length === 0 ? (
                     <div className="flex flex-1 items-center justify-center h-full">
                         <Typography color="text.secondary" variant="h5">
                             {t('stores.noData')}
@@ -61,47 +60,55 @@ const StoreList = () => {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {stores.pagedData.map((item, index) => {
-                                    return (
-                                        <Tr
-                                            key={index}
-                                            role="button"
-                                            onClick={() => handleEdit(item.id)}
-                                        >
-                                            <Td align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="text-16 md:pt-16"
-                                                >
-                                                    {item.name}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left">
-                                                <Typography
-                                                    color="text.secondary"
-                                                    className="text-16 md:pt-16"
-                                                >
-                                                    {item.address}
-                                                </Typography>
-                                            </Td>
-                                            <Td align="left">
-                                                {item.integrations.map(
-                                                    (integration, index) => {
-                                                        return (
-                                                            <Typography
-                                                                key={index}
-                                                                color="text.secondary"
-                                                                className={`inline font-semibold text-16  mr-8 md:pt-16 ${styles[integration]}`}
-                                                            >
-                                                                {integration}
-                                                            </Typography>
-                                                        );
-                                                    }
-                                                )}
-                                            </Td>
-                                        </Tr>
-                                    );
-                                })}
+                                {allStores &&
+                                    allStores.pagedData.map((item, index) => {
+                                        return (
+                                            <Tr
+                                                key={index}
+                                                role="button"
+                                                onClick={() =>
+                                                    handleEdit(item.id)
+                                                }
+                                            >
+                                                <Td align="left">
+                                                    <Typography
+                                                        color="text.secondary"
+                                                        className="text-16 md:pt-16"
+                                                    >
+                                                        {item.name}
+                                                    </Typography>
+                                                </Td>
+                                                <Td align="left">
+                                                    <Typography
+                                                        color="text.secondary"
+                                                        className="text-16 md:pt-16"
+                                                    >
+                                                        {item.address}
+                                                    </Typography>
+                                                </Td>
+                                                <Td align="left">
+                                                    {item.integrations.map(
+                                                        (
+                                                            integration,
+                                                            index
+                                                        ) => {
+                                                            return (
+                                                                <Typography
+                                                                    key={index}
+                                                                    color="text.secondary"
+                                                                    className={`inline font-semibold text-16  mr-8 md:pt-16 ${styles[integration]}`}
+                                                                >
+                                                                    {
+                                                                        integration
+                                                                    }
+                                                                </Typography>
+                                                            );
+                                                        }
+                                                    )}
+                                                </Td>
+                                            </Tr>
+                                        );
+                                    })}
                             </Tbody>
                         </Table>
                         <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
@@ -109,12 +116,12 @@ const StoreList = () => {
                                 className="text-18 text-center font-medium"
                                 color="text.secondary"
                             >
-                                {t('stores.total')} : {stores.totalCount}
+                                {t('stores.total')} : {totalCount}
                             </Typography>
                             <TablePagination
                                 className="flex-1 overflow-scroll mt-8"
                                 component="div"
-                                count={stores.totalCount}
+                                count={totalCount}
                                 rowsPerPage={filter.rowsPerPage}
                                 page={filter.page}
                                 backIconButtonProps={{

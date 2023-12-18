@@ -5,6 +5,9 @@ import { selectUser } from 'app/store/userSlice';
 import { useSelector } from 'react-redux';
 import history from '@history';
 import SearchFilter from './components/SearchFilter';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const AdminStores = () => {
     const user = useSelector(selectUser);
@@ -14,10 +17,10 @@ const AdminStores = () => {
     }
 
     return (
-        <div>
+        <QueryClientProvider client={queryClient}>
             <SearchFilter />
             <StoreList />
-        </div>
+        </QueryClientProvider>
     );
 };
 
