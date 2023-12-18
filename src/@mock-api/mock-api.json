@@ -10966,6 +10966,50 @@
                                 "email": "fernandoferrira@gmail.com",
                                 "phone": "+1-990-457-2106",
                                 "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
+                            },
+                            {
+                                "id": 9,
+                                "name": "John Doe",
+                                "url": "http://example01.pos.com",
+                                "role": "store owner",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-01.jpg",
+                                "email": "johndoe@gmail.com",
+                                "phone": "+1-202-555-0175",
+                                "address": "100 Menahan Street, Snyderville, Kansas, PO1006"
+                            },
+                            {
+                                "id": 10,
+                                "name": "Danyil Balko",
+                                "url": "http://example02.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-02.jpg",
+                                "email": "danyilbalko@gmail.com",
+                                "phone": "+1-943-511-2203",
+                                "address": "197 Marconi Place, Welda, Delaware, PO6061"
+                            },
+                            {
+                                "id": 11,
+                                "name": "Alejandro Gonjaless",
+                                "url": "http://example03.pos.com",
+                                "role": "employee",
+                                "password": "123456",
+                                "avatar": "assets/images/avatars/male-03.jpg",
+                                "email": "alejandrogonjaless@gmail.com",
+                                "phone": "+1-838-562-2769",
+                                "address": "112 Tillary Street, Camptown, Vermont, PO8827"
+                            },
+                            {
+                                "id": 12,
+                                "name": "Fernando Ferrira",
+                                "url": "http://example03.pos.com",
+                                "role": "store owner",
+                                "password": "456789",
+                                "avatar": "assets/images/avatars/male-04.jpg",
+                                "email": "fernandoferrira@gmail.com",
+                                "phone": "+1-990-457-2106",
+                                "address": "137 Bridge Street, Sisquoc, District Of Columbia, PO4105"
                             }
                         ],
                         "taxes": [

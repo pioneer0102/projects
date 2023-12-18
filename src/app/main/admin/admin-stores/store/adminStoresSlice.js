@@ -1,14 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import _ from 'lodash';
 
-export const getAllStores = createAsyncThunk(
-    'storesApp/stores/getAllStores',
-    async (filter) => {
-        const response = await axios.post('/api/getAllStores', filter);
-        return response.data;
-    }
-);
+export const getAllStores = async (filter) => {
+    const response = await axios.post('/api/getAllStores', filter);
+    return response.data;
+};
 
 export const getStoreById = createAsyncThunk(
     'storesApp/stores/getStoreById',
@@ -43,10 +39,15 @@ export const updateStoreDetail = createAsyncThunk(
     }
 );
 
-export const removeUserFromDB = createAsyncThunk(
-    'storesApp/stores/removeUserFromDB',
+export const getUsersinStore = async (data) => {
+    const response = await axios.post('/api/getUsersinStore', data);
+    return response.data;
+};
+
+export const removeUserinStore = createAsyncThunk(
+    'storesApp/stores/removeUserinStore',
     async (data) => {
-        const response = await axios.post('/api/removeUserFromDB', data);
+        const response = await axios.post('/api/removeUserinStore', data);
         return response.data;
     }
 );
@@ -67,36 +68,36 @@ export const updateUserinStore = createAsyncThunk(
     }
 );
 
-export const modifyPos = createAsyncThunk(
-    'storesApp/stores/modifyPos',
+export const updataPos = createAsyncThunk(
+    'storesApp/stores/updataPos',
     async (data) => {
-        const response = await axios.post('/api/modifyPos', data);
+        const response = await axios.post('/api/updataPos', data);
         return response.data;
     }
 );
 
-export const selectStores = ({ adminStores }) => adminStores.stores.stores;
 export const selectFilter = ({ adminStores }) => adminStores.stores.filter;
 export const selectStore = ({ adminStores }) => adminStores.stores.store;
 export const selectUserFilter = ({ adminStores }) =>
     adminStores.stores.userFilter;
+export const selectUsersInStore = ({ adminStores }) =>
+    adminStores.stores.usersInStore;
 
 const adminStoresSlice = createSlice({
     name: 'adminStores/stores',
     initialState: {
-        stores: {
-            pagedData: [],
-            totalCount: 0
-        },
         store: {
             name: '',
             address: '',
             integrations: [],
             email: '',
             pos: {},
-            users: [],
             taxes: [],
             departments: []
+        },
+        usersInStore: {
+            pagedUsers: [],
+            totalUsers: 0
         },
         filter: {
             searchText: '',
@@ -136,17 +137,11 @@ const adminStoresSlice = createSlice({
             };
         },
         setUserFilter: (state, action) => {
-            switch (action.payload.type) {
-                case 'searchText':
-                    state.userFilter.searchText = action.payload.value;
-                    break;
-                case 'rowsPerPage':
-                    state.userFilter.rowsPerPage = action.payload.value;
-                    break;
-                case 'page':
-                    state.userFilter.page = action.payload.value;
-                    break;
-            }
+            state.userFilter = action.payload;
+        },
+        setUsersInStore: (state, action) => {
+            state.usersInStore.pagedUsers = action.payload.pagedUsers;
+            state.usersInStore.totalUsers = action.payload.totalUsers;
         },
         setFormdata: (state, action) => {
             switch (action.payload.type) {
@@ -193,12 +188,12 @@ const adminStoresSlice = createSlice({
                     state.store.departments = temp;
                     break;
             }
+        },
+        modifyPos: (state, action) => {
+            state.store.pos = action.payload;
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getAllStores.fulfilled, (state, action) => {
-            state.stores = action.payload;
-        });
         builder.addCase(getStoreById.fulfilled, (state, action) => {
             state.store = action.payload;
         });
@@ -212,20 +207,16 @@ const adminStoresSlice = createSlice({
             console.log(action.payload);
         });
         builder.addCase(addUserinStore.fulfilled, (state, action) => {
-            state.store.users.push(action.payload);
+            console.log(action.payload);
         });
         builder.addCase(updateUserinStore.fulfilled, (state, action) => {
-            const { id, ...updatedUserData } = action.payload;
-            _.assign(
-                _.find(state.store.users, { id: parseInt(id) }),
-                updatedUserData
-            );
+            console.log(action.payload);
         });
-        builder.addCase(removeUserFromDB.fulfilled, (state, action) => {
-            _.remove(state.store.users, { id: action.payload.userId });
+        builder.addCase(removeUserinStore.fulfilled, (state, action) => {
+            console.log(action.payload);
         });
-        builder.addCase(modifyPos.fulfilled, (state, action) => {
-            state.store.pos[action.payload.type] = action.payload.value;
+        builder.addCase(updataPos.fulfilled, (state, action) => {
+            console.log(action.payload);
         });
     }
 });
@@ -236,7 +227,9 @@ export const {
     setUserFilter,
     setFormdata,
     update,
-    remove
+    remove,
+    setUsersInStore,
+    modifyPos
 } = adminStoresSlice.actions;
 
 export default adminStoresSlice.reducer;

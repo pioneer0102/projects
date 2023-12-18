@@ -34,7 +34,7 @@ const schema = yup.object().shape({
     price: yup.string().required('You must enter a address'),
     upc: yup.string().required('You must enter a email'),
     quantity: yup.string().required('You must enter a phone Number'),
-    image: yup.string().required('You must select image'),
+    // image: yup.string().required('You must select image'),
     name: yup.string().required('You must enter a name')
 });
 
@@ -81,6 +81,7 @@ const InvForm = () => {
             ...data,
             image: image
         };
+        console.log(formData);
         if (routeParams.action === 'add') {
             dispatch(addInventory(formData));
         }
@@ -383,7 +384,7 @@ const InvForm = () => {
                         color="secondary"
                         onClick={handleSubmit(onSubmit)}
                     >
-                        {routeParams.action === 'Add' ? t('add') : t('save')}
+                        {routeParams.action === 'add' ? t('add') : t('save')}
                     </Button>
                 </Box>
             </Paper>

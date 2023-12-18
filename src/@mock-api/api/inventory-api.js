@@ -60,15 +60,16 @@ mock.onPost('/api/addInventory').reply(({ data }) => {
         tax: tax,
         upc: upc
     };
-    itemDB.push(newItem);
+    itemDB.unshift(newItem);
     return [200, { success: true }];
 });
 
 mock.onPost('/api/updateInventory').reply(({ data }) => {
-    const { id, active, category, image, price, quantity, tax, upc } =
+    const { id, name, active, category, image, price, quantity, tax, upc } =
         JSON.parse(data);
     const newItem = {
         id: parseInt(id),
+        name: name,
         active: active,
         category: category,
         image: image,
