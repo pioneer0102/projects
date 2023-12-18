@@ -29,20 +29,9 @@ mock.onPost('/api/getAllStores').reply(({ data }) => {
 });
 
 mock.onPost('/api/getStoreById').reply(({ data }) => {
-    const { id, rowsPerPage, page } = JSON.parse(data);
-    const pageSize = parseInt(rowsPerPage);
-    const pageNumber = parseInt(page);
-    const store = _.find(storesDB, { id: parseInt(id) });
-    const pagedUsers = store.users.slice(
-        pageSize * pageNumber,
-        pageSize * pageNumber + pageSize
-    );
-    const result = {
-        ...store,
-        users: pagedUsers,
-        totalUser: store.users.length
-    };
-    return [200, result];
+    const { id } = JSON.parse(data);
+    const { users, ...store } = _.find(storesDB, { id: parseInt(id) });
+    return [200, store];
 });
 
 mock.onPost('/api/addStore').reply(({ data }) => {
@@ -76,7 +65,30 @@ mock.onPost('/api/updateStoreDetail').reply(({ data }) => {
     return [200, { success: true }];
 });
 
-mock.onPost('/api/removeUserFromDB').reply(({ data }) => {
+mock.onPost('/api/getUsersinStore').reply(({ data }) => {
+    const { storeId, searchText, rowsPerPage, page } = JSON.parse(data);
+    const store = _.find(storesDB, { id: parseInt(storeId) });
+    const pageSize = parseInt(rowsPerPage);
+    const pageNumber = parseInt(page);
+    const filteredUsers = store.users.filter((user) => {
+        return (
+            searchText === '' ||
+            user.name.toLowerCase().includes(searchText.toLowerCase())
+        );
+    });
+    const totalUsers = filteredUsers.length;
+    const pagedUsers = filteredUsers.slice(
+        pageSize * pageNumber,
+        pageSize * pageNumber + pageSize
+    );
+    const result = {
+        totalUsers: totalUsers,
+        pagedUsers: pagedUsers
+    };
+    return [200, result];
+});
+
+mock.onPost('/api/removeUserinStore').reply(({ data }) => {
     const { storeId, userId } = JSON.parse(data);
     const store = _.find(storesDB, { id: parseInt(storeId) });
     _.remove(store.users, { id: parseInt(userId) });
@@ -94,7 +106,7 @@ mock.onPost('/api/addUserinStore').reply(({ data }) => {
         phone: phone,
         address: address
     };
-    store.users.push(newUser);
+    store.users.unshift(newUser);
     return [200, newUser];
 });
 
@@ -111,16 +123,21 @@ mock.onPost('/api/updateUserinStore').reply(({ data }) => {
         address: address
     };
     _.assign(_.find(store.users, { id: parseInt(id) }), updateUser);
+    const user = _.find(store.users, { id: parseInt(id) });
+    _.remove(store.users, { id: parseInt(id) });
+    store.users.unshift(user);
     return [200, _.find(store.users, { id: parseInt(id) })];
 });
 
-mock.onPost('/api/modifyPos').reply(({ data }) => {
-    const { storeId, type, value } = JSON.parse(data);
+mock.onPost('/api/updataPos').reply(({ data }) => {
+    const { storeId, type, userName, password, url } = JSON.parse(data);
     const store = _.find(storesDB, { id: parseInt(storeId) });
-    store.pos[type] = value;
-    const result = {
+    const updatedPos = {
         type: type,
-        value: value
+        userName: userName,
+        password: password,
+        url: url
     };
-    return [200, result];
+    store.pos = updatedPos;
+    return [200, updatedPos];
 });

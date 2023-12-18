@@ -3,7 +3,7 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Avatar from '@mui/material/Avatar';
-import { IconButton } from '@mui/material';
+import { IconButton, Input } from '@mui/material';
 import { Popover } from '@mui/material';
 import { Box } from '@mui/material';
 import { MoreHoriz } from '@mui/icons-material';
@@ -13,14 +13,19 @@ import DialogContent from '@mui/material/DialogContent';
 import { UserTableHeader } from 'src/app/model/StoreModel';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from 'react-query';
 import { makeStyles } from '@mui/styles';
 import { TablePagination, Button, Typography } from '@mui/material';
 import ModifyUserDialog from './ModifyUserDialog';
+import { showMessage } from 'app/store/fuse/messageSlice';
 import {
     selectUserFilter,
     setUserFilter,
     selectStore,
-    removeUserFromDB
+    removeUserinStore,
+    getUsersinStore,
+    setUsersInStore,
+    selectUsersInStore
 } from '../../store/adminStoresSlice';
 
 const useStyles = makeStyles(() => ({
@@ -38,14 +43,36 @@ const UsersTab = () => {
     const { t } = useTranslation();
     const store = useSelector(selectStore);
     const userFilter = useSelector(selectUserFilter);
+    const usersInStore = useSelector(selectUsersInStore);
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [openDialog, setOpenDialog] = useState(false);
     const [userDialog, setUserDialog] = useState(false);
     const [userId, setUserId] = useState(null);
 
-    const handlePagination = (type, value) => {
-        dispatch(setUserFilter({ type: type, value: value }));
+    const { isLoading, refetch } = useQuery(
+        ['usersInStore', userFilter, store.id],
+        async () => {
+            try {
+                const data = {
+                    storeId: store.id,
+                    ...userFilter
+                };
+                const result = await getUsersinStore(data);
+                dispatch(setUsersInStore(result));
+                return result;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    );
+
+    const handleUserFilter = (type, value) => {
+        if (type === 'page') {
+            dispatch(setUserFilter({ ...userFilter, [type]: value }));
+        } else {
+            dispatch(setUserFilter({ ...userFilter, page: 0, [type]: value }));
+        }
     };
     const handleOpenDialog = () => {
         setAnchorEl(null);
@@ -67,7 +94,15 @@ const UsersTab = () => {
             storeId: store.id,
             userId: userId
         };
-        dispatch(removeUserFromDB(data));
+        dispatch(removeUserinStore(data));
+        dispatch(setUserFilter({ ...userFilter, page: 0 }));
+        refetch();
+        dispatch(
+            showMessage({
+                message: 'User added successfully!',
+                variant: 'success'
+            })
+        );
     };
 
     const popOpen = Boolean(anchorEl);
@@ -89,20 +124,45 @@ const UsersTab = () => {
     return (
         <>
             <div className="flex flex-col">
-                <div className="flex flex-col justify-between">
-                    <Button
-                        variant="outlined"
-                        color="secondary"
-                        onClick={addUser}
-                        className="w-full my-8 self-center mb-16"
-                    >
-                        <FuseSvgIcon size={24}>
-                            heroicons-solid:plus
-                        </FuseSvgIcon>
-                        <span className="mx-4">{t('add')}</span>
-                    </Button>
+                <div className="flex flex-row justify-between mb-16">
+                    <div></div>
+                    <div className="flex flex-row space-y-16 sm:space-y-0 self-end space-x-16">
+                        <div className="flex w-full items-center sm:max-w-256 space-x-8 px-16 rounded-full border-1 shadow-0">
+                            <FuseSvgIcon color="disabled">
+                                heroicons-solid:search
+                            </FuseSvgIcon>
+
+                            <Input
+                                placeholder="Search"
+                                className="flex flex-1"
+                                disableUnderline
+                                fullWidth
+                                value={userFilter.searchText}
+                                inputProps={{
+                                    'aria-label': 'Search'
+                                }}
+                                onChange={(event) =>
+                                    handleUserFilter(
+                                        'searchText',
+                                        event.target.value
+                                    )
+                                }
+                            />
+                        </div>
+                        <Button
+                            variant="outlined"
+                            color="secondary"
+                            onClick={addUser}
+                            className="my-8 mb-16"
+                        >
+                            <FuseSvgIcon size={24}>
+                                heroicons-solid:plus
+                            </FuseSvgIcon>
+                            <span className="mx-4">{t('add')}</span>
+                        </Button>
+                    </div>
                 </div>
-                {store.users.length === 0 ? (
+                {usersInStore.pagedUsers.length === 0 ? (
                     <div className="flex flex-col items-center my-16">
                         <Typography color="text.secondary" variant="h5">
                             There are no Users
@@ -125,111 +185,127 @@ const UsersTab = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {store.users.map((user, index) => {
-                                return (
-                                    <Tr key={index} role="button">
-                                        <Td align="left" className="md:pt-16">
-                                            <Avatar
-                                                alt={user.name}
-                                                src={user.avatar}
-                                            />
-                                        </Td>
-                                        <Td align="left" className="md:pt-16">
-                                            <Typography
-                                                color="text.secondary"
-                                                className="text-12 md:text-16"
+                            {!isLoading &&
+                                usersInStore.pagedUsers.map((user, index) => {
+                                    return (
+                                        <Tr key={index} role="button">
+                                            <Td
+                                                align="left"
+                                                className="md:pt-16"
                                             >
-                                                {user.name}
-                                            </Typography>
-                                        </Td>
-                                        <Td align="left" className="md:pt-16">
-                                            <Typography
-                                                color="text.secondary"
-                                                className="text-12 md:text-16"
+                                                <Avatar
+                                                    alt={user.name}
+                                                    src={user.avatar}
+                                                />
+                                            </Td>
+                                            <Td
+                                                align="left"
+                                                className="md:pt-16"
                                             >
-                                                {user.email}
-                                            </Typography>
-                                        </Td>
-                                        <Td align="left" className="md:pt-16">
-                                            <IconButton
-                                                aria-describedby={id}
-                                                onClick={(event) =>
-                                                    handleAction(event, user.id)
-                                                }
+                                                <Typography
+                                                    color="text.secondary"
+                                                    className="text-12 md:text-16"
+                                                >
+                                                    {user.name}
+                                                </Typography>
+                                            </Td>
+                                            <Td
+                                                align="left"
+                                                className="md:pt-16"
                                             >
-                                                <MoreHoriz />
-                                            </IconButton>
-                                            <Popover
-                                                id={id}
-                                                open={popOpen}
-                                                anchorEl={anchorEl}
-                                                onClose={handleActionClose}
-                                                className={classes.popover}
-                                                anchorOrigin={{
-                                                    vertical: 'bottom',
-                                                    horizontal: 'left'
-                                                }}
+                                                <Typography
+                                                    color="text.secondary"
+                                                    className="text-12 md:text-16"
+                                                >
+                                                    {user.email}
+                                                </Typography>
+                                            </Td>
+                                            <Td
+                                                align="left"
+                                                className="md:pt-16"
                                             >
-                                                <Box
-                                                    className="flex flex-col"
-                                                    sx={{
-                                                        p: 1
+                                                <IconButton
+                                                    aria-describedby={id}
+                                                    onClick={(event) =>
+                                                        handleAction(
+                                                            event,
+                                                            user.id
+                                                        )
+                                                    }
+                                                >
+                                                    <MoreHoriz />
+                                                </IconButton>
+                                                <Popover
+                                                    id={id}
+                                                    open={popOpen}
+                                                    anchorEl={anchorEl}
+                                                    onClose={handleActionClose}
+                                                    className={classes.popover}
+                                                    anchorOrigin={{
+                                                        vertical: 'bottom',
+                                                        horizontal: 'left'
                                                     }}
                                                 >
-                                                    <Button
-                                                        className="text-grey-500 justify-start"
-                                                        onClick={() =>
-                                                            editUser()
-                                                        }
+                                                    <Box
+                                                        className="flex flex-col"
+                                                        sx={{
+                                                            p: 1
+                                                        }}
                                                     >
-                                                        <FuseSvgIcon
-                                                            size={20}
-                                                            color="action"
+                                                        <Button
+                                                            className="text-grey-500 justify-start"
+                                                            onClick={() =>
+                                                                editUser()
+                                                            }
                                                         >
-                                                            heroicons-solid:pencil
-                                                        </FuseSvgIcon>
-                                                        <span className="mx-8">
-                                                            Edit
-                                                        </span>
-                                                    </Button>
-                                                    <Button
-                                                        className="text-grey-500 justify-start"
-                                                        onClick={
-                                                            handleActionClose
-                                                        }
-                                                    >
-                                                        <FuseSvgIcon
-                                                            size={20}
-                                                            color="action"
+                                                            <FuseSvgIcon
+                                                                size={20}
+                                                                color="action"
+                                                            >
+                                                                heroicons-solid:pencil
+                                                            </FuseSvgIcon>
+                                                            <span className="mx-8">
+                                                                Edit
+                                                            </span>
+                                                        </Button>
+                                                        <Button
+                                                            className="text-grey-500 justify-start"
+                                                            onClick={
+                                                                handleActionClose
+                                                            }
                                                         >
-                                                            heroicons-solid:key
-                                                        </FuseSvgIcon>
-                                                        <span className="mx-8">
-                                                            Reset Password
-                                                        </span>
-                                                    </Button>
-                                                    <Button
-                                                        className="text-grey-500 justify-start"
-                                                        onClick={() =>
-                                                            handleOpenDialog()
-                                                        }
-                                                    >
-                                                        <FuseSvgIcon
-                                                            size={20}
-                                                            color="action"
+                                                            <FuseSvgIcon
+                                                                size={20}
+                                                                color="action"
+                                                            >
+                                                                heroicons-solid:key
+                                                            </FuseSvgIcon>
+                                                            <span className="mx-8">
+                                                                Reset Password
+                                                            </span>
+                                                        </Button>
+                                                        <Button
+                                                            className="text-grey-500 justify-start"
+                                                            onClick={() =>
+                                                                handleOpenDialog()
+                                                            }
                                                         >
-                                                            heroicons-solid:trash
-                                                        </FuseSvgIcon>
-                                                        <span className="mx-8">
-                                                            Remove
-                                                        </span>
-                                                    </Button>
-                                                </Box>
-                                            </Popover>
-                                        </Td>
-                                    </Tr>
-                                );
-                            })}
+                                                            <FuseSvgIcon
+                                                                size={20}
+                                                                color="action"
+                                                            >
+                                                                heroicons-solid:trash
+                                                            </FuseSvgIcon>
+                                                            <span className="mx-8">
+                                                                Remove
+                                                            </span>
+                                                        </Button>
+                                                    </Box>
+                                                </Popover>
+                                            </Td>
+                                        </Tr>
+                                    );
+                                })}
                         </Tbody>
                     </Table>
                 )}
@@ -238,12 +314,12 @@ const UsersTab = () => {
                         className="text-18 text-center font-medium"
                         color="text.secondary"
                     >
-                        Total Users: {store.totalUser}
+                        Total Users: {usersInStore.totalUsers}
                     </Typography>
                     <TablePagination
                         className="flex-1 overflow-scroll mt-8"
                         component="div"
-                        count={store.totalUser}
+                        count={usersInStore.totalUsers}
                         rowsPerPage={userFilter.rowsPerPage}
                         page={userFilter.page}
                         backIconButtonProps={{
@@ -253,11 +329,10 @@ const UsersTab = () => {
                             'aria-label': 'Next Page'
                         }}
                         onPageChange={(event, newPage) =>
-                            handlePagination('page', parseInt(newPage, 10))
+                            handleUserFilter('page', parseInt(newPage, 10))
                         }
                         onRowsPerPageChange={(event) => {
-                            handlePagination('rowsPerPage', event.target.value);
-                            handlePagination('page', 0);
+                            handleUserFilter('rowsPerPage', event.target.value);
                         }}
                     />
                 </div>
@@ -278,7 +353,6 @@ const UsersTab = () => {
                                 variant="outline"
                                 color="secondary"
                                 onClick={handleCloseDialog}
-                                className="rounded-md"
                             >
                                 <span>{t('cancel')}</span>
                             </Button>
@@ -286,7 +360,6 @@ const UsersTab = () => {
                                 variant="contained"
                                 color="secondary"
                                 onClick={removeUser}
-                                className="rounded-md"
                             >
                                 <span>{t('ok')}</span>
                             </Button>
@@ -297,6 +370,7 @@ const UsersTab = () => {
                     open={userDialog}
                     onClose={handleCloseUserDialog}
                     userId={userId}
+                    refetch={refetch}
                 />
             </div>
         </>

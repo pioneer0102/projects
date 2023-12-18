@@ -28,9 +28,11 @@ import {
     initializeStore,
     selectStore,
     addStore,
-    updateStore,
-    selectUserFilter
+    updateStore
 } from './store/adminStoresSlice';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a Name'),
@@ -46,7 +48,7 @@ const AdminStoreDetail = () => {
     const { t } = useTranslation();
     const routeParams = useParams();
     const storeDetail = useSelector(selectStore);
-    const userFilter = useSelector(selectUserFilter);
+
     const [breadCrumbs, setBreadCrumbs] = useState([]);
     const [integrations, setIntegrations] = useState([]);
 
@@ -58,12 +60,10 @@ const AdminStoreDetail = () => {
 
     const handleCancel = () => history.push('admin/stores');
     const onSubmit = (data) => {
-        console.log(data);
         const submitData = {
             ...data,
             integrations: integrations
         };
-        console.log(submitData);
         if (routeParams.storeId === 'add') {
             dispatch(addStore(submitData));
             dispatch(
@@ -92,24 +92,23 @@ const AdminStoreDetail = () => {
             crumbs.push({ name: 'Add', url: null });
         } else {
             const data = {
-                id: routeParams.storeId,
-                ...userFilter
+                id: routeParams.storeId
             };
             dispatch(getStoreById(data));
             crumbs.push({ name: 'Edit', url: null });
         }
 
         setBreadCrumbs(crumbs);
-    }, [dispatch, userFilter, routeParams]);
+    }, [dispatch, routeParams]);
 
     useEffect(() => {
-        setIntegrations(storeDetail.integrations);
+        setIntegrations([...storeDetail.integrations]);
 
         reset({ ...storeDetail });
     }, [storeDetail, reset]);
 
     return (
-        <>
+        <QueryClientProvider client={queryClient}>
             <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 w-full items-center justify-between pt-24 px-24 md:px-24">
                 <Breadcrumb breadCrumbs={breadCrumbs} />
 
@@ -194,11 +193,7 @@ const AdminStoreDetail = () => {
                         id="checkboxes-tags-demo"
                         value={integrations}
                         onChange={(event, newValue) => {
-                            var array = [];
-                            newValue.map((item) => {
-                                array.push(item);
-                            });
-                            setIntegrations(array);
+                            setIntegrations([...newValue]);
                         }}
                         options={Channels}
                         disableCloseOnSelect
@@ -266,7 +261,7 @@ const AdminStoreDetail = () => {
                 </Box>
             </Paper>
             <StoreTabs />
-        </>
+        </QueryClientProvider>
     );
 };
 

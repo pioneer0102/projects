@@ -11,6 +11,7 @@ import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { selectStore } from '../../store/adminStoresSlice';
 import _ from '@lodash';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { showMessage } from 'app/store/fuse/messageSlice';
 import {
     Button,
     Box,
@@ -21,7 +22,10 @@ import {
 } from '@mui/material';
 import {
     addUserinStore,
-    updateUserinStore
+    updateUserinStore,
+    selectUserFilter,
+    setUserFilter,
+    selectUsersInStore
 } from '../../store/adminStoresSlice';
 
 const schema = yup.object().shape({
@@ -30,12 +34,14 @@ const schema = yup.object().shape({
 });
 
 const ModifyUserDialog = (props) => {
-    const { open, onClose, userId } = props;
+    const { open, onClose, userId, refetch } = props;
     const dispatch = useDispatch();
+    const { t } = useTranslation();
+    const userFilter = useSelector(selectUserFilter);
+    const usersInStore = useSelector(selectUsersInStore);
+
     const [user, setUser] = useState(null);
     const [action, setAction] = useState(null);
-
-    const { t } = useTranslation();
     const [showUpload, setShowUpload] = useState(false);
     const { control, handleSubmit, reset, formState } = useForm({
         mode: 'onChange',
@@ -45,7 +51,7 @@ const ModifyUserDialog = (props) => {
     const store = useSelector(selectStore);
     useEffect(() => {
         if (userId !== null) {
-            const user = _.find(store.users, {
+            const user = _.find(usersInStore.pagedUsers, {
                 id: parseInt(userId)
             });
             setUser(user);
@@ -54,12 +60,14 @@ const ModifyUserDialog = (props) => {
             const user = {
                 avatar: '',
                 name: '',
-                email: ''
+                email: '',
+                phone: '',
+                address: ''
             };
             setUser(user);
             setAction('add');
         }
-    }, [userId]);
+    }, [userId, usersInStore]);
     useEffect(() => {
         reset({ ...user });
     }, [user, reset]);
@@ -73,9 +81,25 @@ const ModifyUserDialog = (props) => {
         };
         if (action === 'add') {
             dispatch(addUserinStore(usersData));
+            dispatch(setUserFilter({ ...userFilter, page: 0 }));
+            refetch();
+            dispatch(
+                showMessage({
+                    message: 'User added successfully!',
+                    variant: 'success'
+                })
+            );
         }
         if (action === 'edit') {
             dispatch(updateUserinStore(usersData));
+            dispatch(setUserFilter({ ...userFilter, page: 0 }));
+            refetch();
+            dispatch(
+                showMessage({
+                    message: 'User updated successfully!',
+                    variant: 'success'
+                })
+            );
         }
         onClose();
     };
@@ -89,9 +113,7 @@ const ModifyUserDialog = (props) => {
             aria-describedby="alert-dialog-description"
         >
             <div className="md:p-16 sm:p-0">
-                <DialogTitle id="scroll-dialog-title">
-                    You can modify user here.
-                </DialogTitle>
+                <DialogTitle id="scroll-dialog-title"></DialogTitle>
                 <DialogContent>
                     <div className="flex flex-col overflow-auto">
                         <Controller
@@ -103,7 +125,7 @@ const ModifyUserDialog = (props) => {
                                         borderWidth: 4,
                                         borderStyle: 'solid'
                                     }}
-                                    className="relative self-center flex items-center justify-center w-128 h-128 rounded-full overflow-hidden mt-32"
+                                    className="relative self-center flex items-center justify-center w-128 h-128 rounded-full overflow-hidden"
                                     onMouseOver={() => handleUpload(true)}
                                     onMouseOut={() => handleUpload(false)}
                                 >
