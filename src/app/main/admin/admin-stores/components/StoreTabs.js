@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { Tab, Tabs, Paper } from '@mui/material';
 
 import UsersTab from './tabs/UsersTab';
@@ -12,11 +11,7 @@ import IntegrationTab from './tabs/IntegrationTab';
 import { selectStore } from '../store/adminStoresSlice';
 
 const StoreTabs = () => {
-    const routeParams = useParams();
     const storeDetail = useSelector(selectStore);
-    if (routeParams.storeId === 'add') {
-        return;
-    }
     const [tabValue, setTabValue] = useState(0);
 
     const handleChangeTab = (event, value) => {

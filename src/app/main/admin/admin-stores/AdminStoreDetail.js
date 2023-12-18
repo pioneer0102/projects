@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next';
 import StoreTabs from './components/StoreTabs';
 import withReducer from 'app/store/withReducer';
 import { Channels } from 'src/app/model/Global';
+import { selectUser } from 'app/store/userSlice';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { useParams, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
@@ -45,6 +46,11 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const AdminStoreDetail = () => {
+    const user = useSelector(selectUser);
+    if (user.role === 'user') {
+        history.push('/partners');
+        return;
+    }
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const routeParams = useParams();
@@ -261,7 +267,7 @@ const AdminStoreDetail = () => {
                     </Button>
                 </Box>
             </Paper>
-            <StoreTabs />
+            {routeParams.storeId !== 'add' && <StoreTabs />}
         </QueryClientProvider>
     );
 };
