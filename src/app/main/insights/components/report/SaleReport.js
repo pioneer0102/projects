@@ -1,13 +1,9 @@
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
 import ReactApexChart from 'react-apexcharts';
-import { Tab, Tabs } from '@mui/material';
-import { Box } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
-import { selectContrastMainTheme } from 'app/store/fuse/settingsSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider, useTheme } from '@mui/material/styles';
-import { selectSale, selectTabValue, setTabValue } from '../store/saleSlice';
+import { Typography, Paper, Box, Tab, Tabs } from '@mui/material';
+import { selectContrastMainTheme } from 'app/store/fuse/settingsSlice';
+import { selectSale, selectTabValue, setTabValue } from '../../store/saleSlice';
 
 const SaleReport = () => {
     const dispatch = useDispatch();
@@ -126,7 +122,7 @@ const SaleReport = () => {
     return (
         <>
             <ThemeProvider theme={contrastTheme}>
-                <Paper className="shadow rounded-md py-16 px-16">
+                <Paper className="shadow py-16 px-16">
                     <div className="flex flex-row items-center justify-between">
                         <Typography
                             className="mt-8 text-2xl md:text-3xl font-semibold"

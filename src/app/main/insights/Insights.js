@@ -1,36 +1,36 @@
 import reducer from './store';
-import withReducer from 'app/store/withReducer';
-import SaleTable from './SaleTable';
-import Grid from '@mui/material/Grid';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import history from '@history';
 import { useEffect } from 'react';
-import SaleReport from './report/SaleReport';
-import OrderReport from './report/OrderReport';
-import ItemReport from './report/ItemReport';
-import FilterPopButton from './filter/FilterPopButton';
+import Grid from '@mui/material/Grid';
+import SaleTable from './components/SaleTable';
+import withReducer from 'app/store/withReducer';
+import FuseLoading from '@fuse/core/FuseLoading';
+import { useSelector, useDispatch } from 'react-redux';
+import ItemReport from './components/report/ItemReport';
+import SaleReport from './components/report/SaleReport';
+import InsightsHeader from './components/InsightsHeader';
+import OrderReport from './components/report/OrderReport';
+import ChannelReport from './components/report/ChannelReport';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
+import { getItemData } from './store/itemSlice';
+import { selectUser } from 'app/store/userSlice';
+import { getOrderData, orderFilter } from './store/orderSlice';
 import {
     getSaleData,
     getSaleTableData,
     saleFilter,
     selectTabValue
 } from './store/saleSlice';
-import { getOrderData, orderFilter } from './store/orderSlice';
-import { getItemData } from './store/itemSlice';
-import FuseLoading from '@fuse/core/FuseLoading';
-import { selectUser } from 'app/store/userSlice';
-import history from '@history';
-import ChannelReport from './report/ChannelReport';
 
 const breadCrumbs = [{ name: 'Insights', url: null }];
 
-const InsightsApp = () => {
+const Insights = () => {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
         history.push('/admin/users');
         return;
     }
+
     const dispatch = useDispatch();
     const filter = useSelector(saleFilter);
     const orderStatus = useSelector(orderFilter);
@@ -58,6 +58,7 @@ const InsightsApp = () => {
         dispatch(getOrderData({ ...orderStatus, ...filter }));
         dispatch(getItemData());
     }, [dispatch, filter, tabValue]);
+
     useEffect(() => {
         dispatch(getOrderData({ ...orderStatus, ...filter }));
     }, [dispatch, filter, orderStatus]);
@@ -67,7 +68,7 @@ const InsightsApp = () => {
             <div className="flex flex-col sm:flex-row space-y-16 sm:space-y-0 items-center justify-between pt-24 px-24 md:px-24">
                 <Breadcrumb breadCrumbs={breadCrumbs} />
                 <div>
-                    <FilterPopButton />
+                    <InsightsHeader />
                 </div>
             </div>
             {saleLoaded && orderLoaded && itemLoaded ? (
@@ -103,4 +104,4 @@ const InsightsApp = () => {
     );
 };
 
-export default withReducer('insightsApp', reducer)(InsightsApp);
+export default withReducer('insightsApp', reducer)(Insights);

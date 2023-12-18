@@ -1,24 +1,24 @@
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DatePicker } from '@mui/x-date-pickers';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import { TextField } from '@mui/material';
-import { InputAdornment } from '@mui/material';
-import { Button } from '@mui/material';
-import { Category, Channels } from '../../../model/Global';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 import { showMessage } from 'app/store/fuse/messageSlice';
-import { saleFilter, setSaleFilter, setRefresh } from '../store/saleSlice';
-import { useEffect, useState } from 'react';
+import { Category, Channels } from '../../../model/Global';
+import { saleFilter, setSaleFilter } from '../store/saleSlice';
+import {
+    InputAdornment,
+    TextField,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select
+} from '@mui/material';
 
 const current = new Date();
 current.setDate(new Date(current) - 90);
 
-const SaleFilter = () => {
+const FilterDialog = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const filter = useSelector(saleFilter);
@@ -53,17 +53,13 @@ const SaleFilter = () => {
         }
     };
 
-    const handleRefresh = () => {
-        dispatch(setRefresh());
-    };
-
     useEffect(() => {
         setFromDate(filter.fromDate);
         setToDate(filter.toDate);
     }, [filter]);
 
     return (
-        <div className="flex flex-col px-8 py-8">
+        <div className="flex flex-col px-8">
             <DatePicker
                 value={fromDate ? fromDate : new Date()}
                 onChange={(newValue) => handleChange('fromDate', newValue)}
@@ -183,17 +179,8 @@ const SaleFilter = () => {
                     })}
                 </Select>
             </FormControl>
-            <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleRefresh}
-                className="mt-32"
-            >
-                <FuseSvgIcon size={24}>material-solid:refresh</FuseSvgIcon>
-                <span className="mx-4"> Refresh</span>
-            </Button>
         </div>
     );
 };
 
-export default SaleFilter;
+export default FilterDialog;

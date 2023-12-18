@@ -43,9 +43,7 @@ const UserForm = () => {
     const { t } = useTranslation();
     const routeParams = useParams();
 
-    let breadCrumbs = [
-        { name: 'User Management', url: '/settings/user-management' }
-    ];
+    let breadCrumbs = [{ name: 'User Management', url: '/settings/users' }];
 
     if (routeParams.action === 'edit') {
         const temp = { name: 'Edit', url: null };
@@ -79,7 +77,7 @@ const UserForm = () => {
 
     const { isValid, dirtyFields, errors } = formState;
 
-    const handleCancel = () => history.push('/settings/user-management');
+    const handleCancel = () => history.push('/settings/users');
     const onSubmit = (data) => {
         console.log(data);
         if (routeParams.action === 'add') {
@@ -100,7 +98,7 @@ const UserForm = () => {
                 })
             );
         }
-        history.push('/settings/user-management');
+        history.push('/settings/users');
     };
     const handleUploadShow = () => {
         setShow(true);
@@ -117,7 +115,7 @@ const UserForm = () => {
                 <div className="flex flex-col w-full sm:w-auto sm:flex-row space-y-16 sm:space-y-0 flex-1 items-center justify-end space-x-8">
                     <Button
                         component={Link}
-                        to="/settings/user-management"
+                        to="/settings/users"
                         variant="contained"
                         color="secondary"
                         startIcon={

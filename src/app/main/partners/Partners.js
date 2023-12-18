@@ -5,7 +5,7 @@ import { selectUser } from 'app/store/userSlice';
 import { useSelector } from 'react-redux';
 import history from '@history';
 
-function PartnersApp() {
+function Partners() {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
         history.push('/admin/users');
@@ -24,4 +24,4 @@ function PartnersApp() {
     );
 }
 
-export default PartnersApp;
+export default Partners;

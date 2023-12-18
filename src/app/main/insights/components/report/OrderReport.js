@@ -1,19 +1,17 @@
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
-import Paper from '@mui/material/Paper';
-import Chip from '@mui/material/Chip';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import { Typography } from '@mui/material';
-import { Tooltip } from '@mui/material';
-import { green } from '@mui/material/colors';
-import Popover from '@mui/material/Popover';
-import { Box } from '@mui/material';
 import clsx from 'clsx';
-import { Status } from '../../../model/InsightsModel';
-import { orderFilter, selectOrder, setOrderFilter } from '../store/orderSlice';
-import { saleFilter } from '../store/saleSlice';
+import { useState } from 'react';
+import { green } from '@mui/material/colors';
+import ReactApexChart from 'react-apexcharts';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { useSelector, useDispatch } from 'react-redux';
+import { Status } from '../../../../model/InsightsModel';
+import { Typography, Paper, Chip, Tooltip, Popover, Box } from '@mui/material';
+import {
+    orderFilter,
+    selectOrder,
+    setOrderFilter
+} from '../../store/orderSlice';
+import { saleFilter } from '../../store/saleSlice';
 
 const OrderReport = () => {
     const dispatch = useDispatch();
@@ -172,7 +170,7 @@ const OrderReport = () => {
     );
 
     return (
-        <Paper className="flex flex-col shadow rounded-md px-16 py-16">
+        <Paper className="flex flex-col shadow px-16 py-16">
             <div className="flex items-center justify-between mt-16 mb-0">
                 <Typography className="text-2xl md:text-3xl font-semibold tracking-tight leading-6 truncate">
                     Orders View

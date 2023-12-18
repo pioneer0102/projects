@@ -78,16 +78,17 @@ const itemSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getItemById.fulfilled, (state, action) => {
-            state.itemById = action.payload;
-            console.log(action.payload);
-        });
-        builder.addCase(addItem.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
-        builder.addCase(updateItem.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
+        builder
+            .addCase(getItemById.fulfilled, (state, action) => {
+                state.itemById = action.payload;
+                console.log(action.payload);
+            })
+            .addCase(addItem.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(updateItem.fulfilled, (state, action) => {
+                console.log(action.payload);
+            });
     }
 });
 

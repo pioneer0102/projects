@@ -1,28 +1,29 @@
-import reducer from './store';
-import withReducer from 'app/store/withReducer';
-import Button from '@mui/material/Button';
 import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
-import { useState } from 'react';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import Box from '@mui/system/Box';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import Breadcrumb from 'app/shared-components/Breadcrumbs';
-import { Channels } from 'src/app/model/Global';
-import Autocomplete from '@mui/material/Autocomplete';
-import Checkbox from '@mui/material/Checkbox';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import StoreTabs from './components/StoreTabs';
+import reducer from './store';
 import history from '@history';
-import { showMessage } from 'app/store/fuse/messageSlice';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import StoreTabs from './components/StoreTabs';
+import withReducer from 'app/store/withReducer';
+import { Channels } from 'src/app/model/Global';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import { useParams, Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { showMessage } from 'app/store/fuse/messageSlice';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import {
+    Checkbox,
+    Autocomplete,
+    InputAdornment,
+    TextField,
+    Paper,
+    Box,
+    Button
+} from '@mui/material';
 import {
     getStoreById,
     initializeStore,

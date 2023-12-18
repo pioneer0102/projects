@@ -1,13 +1,9 @@
-import { combineReducers } from '@reduxjs/toolkit';
-import channel from './channelSlice';
-import category from './categorySlice';
+import item from './itemSlice';
 import sale from './saleSlice';
 import order from './orderSlice';
-import item from './itemSlice';
+import { combineReducers } from '@reduxjs/toolkit';
 
 const reducer = combineReducers({
-    channel,
-    category,
     sale,
     order,
     item

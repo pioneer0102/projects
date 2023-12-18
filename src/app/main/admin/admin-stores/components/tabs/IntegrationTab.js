@@ -1,17 +1,19 @@
-import Button from '@mui/material/Button';
 import _ from '@lodash';
 import * as yup from 'yup';
+import history from '@history';
+import styles from '../../style.module.scss';
+import { useTranslation } from 'react-i18next';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { logoSrc } from 'src/app/model/PartnerModel';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import Box from '@mui/system/Box';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import { Typography } from '@mui/material';
-import styles from '../../style.module.scss';
-import { logoSrc } from 'src/app/model/PartnerModel';
-import history from '@history';
-import { useTranslation } from 'react-i18next';
+import {
+    Typography,
+    Button,
+    TextField,
+    InputAdornment,
+    Box
+} from '@mui/material';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a name'),

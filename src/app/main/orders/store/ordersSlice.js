@@ -169,17 +169,18 @@ const ordersSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getItem.fulfilled, (state, action) => {
-            state.taxInfo = action.payload.taxInfo;
-            state.orderInfo = action.payload.orderInfo;
-        });
-        builder.addCase(updateStatusById.fulfilled, (state, action) => {
-            state.updateFlag = action.payload.success;
-        });
-        builder.addCase(removeItem.fulfilled, (state, action) => {
-            state.removeFlag = action.payload.success;
-            state.orderInfo.subtotal = action.payload.subtotal;
-        });
+        builder
+            .addCase(getItem.fulfilled, (state, action) => {
+                state.taxInfo = action.payload.taxInfo;
+                state.orderInfo = action.payload.orderInfo;
+            })
+            .addCase(updateStatusById.fulfilled, (state, action) => {
+                state.updateFlag = action.payload.success;
+            })
+            .addCase(removeItem.fulfilled, (state, action) => {
+                state.removeFlag = action.payload.success;
+                state.orderInfo.subtotal = action.payload.subtotal;
+            });
     }
 });
 

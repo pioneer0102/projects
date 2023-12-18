@@ -1,15 +1,16 @@
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/material';
-import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
-import { selectItem } from '../store/itemSlice';
+import ReactApexChart from 'react-apexcharts';
+import { Box, Typography, Paper } from '@mui/material';
+import { selectPieValue } from '../../store/saleSlice';
 
-function ItemReport() {
-    const item = useSelector(selectItem);
-
-    const series = item;
-    const labels = ['Active', 'InActive'];
+const ChannelReport = () => {
+    const sale = useSelector(selectPieValue);
+    const total = sale.doorDash + sale.uber + sale.grubHub;
+    const doorDash = Math.floor((sale.doorDash / total) * 100);
+    const uber = Math.floor((sale.uber / total) * 100);
+    const grubHub = Math.floor((sale.grubHub / total) * 100);
+    const series = [doorDash, uber, grubHub];
+    const labels = ['DoorDash', 'Uber', 'GrubHub'];
 
     const chartOptions = {
         chart: {
@@ -28,7 +29,7 @@ function ItemReport() {
                 enabled: true
             }
         },
-        colors: ['#3182CE', '#63B3ED'],
+        colors: ['#63B3ED', '#B794F4', '#4FD1C5'],
         plotOptions: {
             pie: {
                 customScale: 0.9,
@@ -69,10 +70,10 @@ function ItemReport() {
     };
 
     return (
-        <Paper className="flex flex-col flex-auto shadow overflow-hidden p-24 rounded-md">
+        <Paper className="flex flex-col flex-auto shadow overflow-hidden p-24">
             <div className="flex flex-col sm:flex-row items-start justify-between">
                 <Typography className="text-xl md:text-2xl font-semibold tracking-tight leading-6 truncate">
-                    Item Overview
+                    Sales Overview
                 </Typography>
             </div>
 
@@ -111,6 +112,6 @@ function ItemReport() {
             </div>
         </Paper>
     );
-}
+};
 
-export default ItemReport;
+export default ChannelReport;

@@ -1,14 +1,10 @@
-import { useEffect, useState } from 'react';
-import { IconButton } from '@mui/material';
 import DepartmentItem from './DepartmentItem';
-import TextField from '@mui/material/TextField';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from '@mui/system/Unstable_Grid/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import MenuItem from '@mui/material/MenuItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { IconButton, MenuItem, TextField, InputAdornment } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import {
     selectStore,

@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-const InsightsApp = lazy(() => import('./index'));
+const Insights = lazy(() => import('./Insights'));
 
 const InsightsConfig = {
     settings: {
@@ -11,7 +11,7 @@ const InsightsConfig = {
     routes: [
         {
             path: 'insights',
-            element: <InsightsApp />
+            element: <Insights />
         }
     ]
 };

@@ -1,10 +1,10 @@
-import withReducer from 'app/store/withReducer';
-import reducer from './store';
-import StoreList from './components/StoreList';
-import { selectUser } from 'app/store/userSlice';
-import { useSelector } from 'react-redux';
 import history from '@history';
-import SearchFilter from './components/SearchFilter';
+import reducer from './store';
+import { useSelector } from 'react-redux';
+import withReducer from 'app/store/withReducer';
+import { selectUser } from 'app/store/userSlice';
+import StoresTable from './components/StoresTable';
+import StoresHeader from './components/StoresHeader';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();
@@ -18,8 +18,8 @@ const AdminStores = () => {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <SearchFilter />
-            <StoreList />
+            <StoresHeader />
+            <StoresTable />
         </QueryClientProvider>
     );
 };

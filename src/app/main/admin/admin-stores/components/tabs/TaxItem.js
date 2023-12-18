@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import { IconButton } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from '@mui/system/Unstable_Grid/Grid';
+import { IconButton, TextField, InputAdornment } from '@mui/material';
 
 const TaxItem = ({ index, value, handleEdit, handleRemove }) => {
     const [tax, setTax] = useState({ name: '', rate: 0 });

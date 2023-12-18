@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import { IconButton } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from '@mui/system/Unstable_Grid/Grid';
-import { selectStore } from '../../store/adminStoresSlice';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import MenuItem from '@mui/material/MenuItem';
+import { IconButton, TextField, InputAdornment, MenuItem } from '@mui/material';
+import { selectStore } from '../../store/adminStoresSlice';
 
 const DepartmentItem = ({ index, value, handleEdit, handleRemove }) => {
     const { t } = useTranslation();

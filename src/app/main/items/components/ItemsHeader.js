@@ -33,6 +33,10 @@ const ItemsHeader = () => {
         dispatch(setFilter({ ...filter, pageNumber: 0, [key]: value }));
     const handleOpenDialog = () => setDialogOpen(true);
     const handleClose = () => setDialogOpen(false);
+    const handleCancel = () => {
+        dispatch(setFilter({ ...filter, price: '', category: '' }));
+        setDialogOpen(false);
+    };
 
     const handleSubmit = () => {
         dispatch(setFilter({ ...filter, pageNumber: 0 }));
@@ -191,7 +195,7 @@ const ItemsHeader = () => {
                     <Button
                         variant="outline"
                         color="secondary"
-                        onClick={handleClose}
+                        onClick={handleCancel}
                     >
                         <span>{t('cancel')}</span>
                     </Button>

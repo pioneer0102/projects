@@ -1,21 +1,19 @@
-import Paper from '@mui/material/Paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useQuery } from 'react-query';
+import styles from '../style.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { Typography } from '@mui/material';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { TablePagination } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
 import { StoreTableHeader } from 'src/app/model/StoreModel';
-import styles from '../style.module.scss';
+import { TablePagination, Paper, Typography } from '@mui/material';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import {
     getAllStores,
     selectFilter,
     setFilter
 } from '../store/adminStoresSlice';
 
-const StoreList = () => {
+const StoresTable = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -149,4 +147,4 @@ const StoreList = () => {
     );
 };
 
-export default StoreList;
+export default StoresTable;
