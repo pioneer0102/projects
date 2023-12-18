@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import PartnerForm from './PartnerForm';
 
-const PartnersApp = lazy(() => import('./index'));
+const Partners = lazy(() => import('./Partners'));
 
 const PartnersConfig = {
     settings: {
@@ -28,7 +28,7 @@ const PartnersConfig = {
     routes: [
         {
             path: 'partners',
-            element: <PartnersApp />
+            element: <Partners />
         },
         {
             path: 'partners/:either/:channel',

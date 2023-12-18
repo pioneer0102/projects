@@ -1,14 +1,16 @@
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { SaleTableHeader } from 'src/app/model/InsightsModel';
-import { Typography } from '@mui/material';
-import { TablePagination } from '@mui/material';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { Tab, Tabs } from '@mui/material';
-import { Box } from '@mui/material';
-import { Paper } from '@mui/material';
 import format from 'date-fns/format';
+import { useSelector, useDispatch } from 'react-redux';
+import { SaleTableHeader } from 'src/app/model/InsightsModel';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import {
+    Paper,
+    Typography,
+    TablePagination,
+    Tab,
+    Tabs,
+    Box
+} from '@mui/material';
 import {
     saleFilter,
     setSaleFilter,
@@ -16,7 +18,7 @@ import {
     selectTotalCount,
     selectTabValue,
     setTabValue
-} from './store/saleSlice';
+} from '../store/saleSlice';
 
 const SaleTable = () => {
     const dispatch = useDispatch();
@@ -24,12 +26,6 @@ const SaleTable = () => {
     const tableData = useSelector(selectTableData);
     const totalCount = useSelector(selectTotalCount);
     const tabValue = useSelector(selectTabValue);
-
-    // useEffect(() => {
-    //     if (tabValue === 1) {
-    //         dispatch(getSaleTableData(tableFilter));
-    //     }
-    // }, [dispatch, tableFilter, tabValue]);
 
     const handlePagination = (type, value) => {
         dispatch(setSaleFilter({ type: type, value: value }));

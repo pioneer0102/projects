@@ -1,12 +1,14 @@
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import MenuItem from '@mui/material/MenuItem';
-import { Box, Button } from '@mui/material';
 import { posType } from 'src/app/model/PosModel';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    Box,
+    Button,
+    TextField,
+    InputAdornment,
+    MenuItem
+} from '@mui/material';
 import {
     selectStore,
     modifyPos,

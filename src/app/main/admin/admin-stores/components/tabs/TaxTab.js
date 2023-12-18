@@ -1,13 +1,10 @@
 import TaxItem from './TaxItem';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { IconButton } from '@mui/material';
-import TextField from '@mui/material/TextField';
+import { useParams } from 'react-router-dom';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import Grid from '@mui/system/Unstable_Grid/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { IconButton, TextField, InputAdornment } from '@mui/material';
 import {
     selectStore,
     update,

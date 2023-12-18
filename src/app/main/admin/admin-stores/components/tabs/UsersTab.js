@@ -1,23 +1,28 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import Avatar from '@mui/material/Avatar';
-import { IconButton, Input } from '@mui/material';
-import { Popover } from '@mui/material';
-import { Box } from '@mui/material';
-import { MoreHoriz } from '@mui/icons-material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import { UserTableHeader } from 'src/app/model/StoreModel';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { makeStyles } from '@mui/styles';
-import { TablePagination, Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { MoreHoriz } from '@mui/icons-material';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
 import ModifyUserDialog from './ModifyUserDialog';
+import { useSelector, useDispatch } from 'react-redux';
 import { showMessage } from 'app/store/fuse/messageSlice';
+import { UserTableHeader } from 'src/app/model/StoreModel';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import {
+    IconButton,
+    Input,
+    Avatar,
+    Popover,
+    Box,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    TablePagination,
+    Button,
+    Typography
+} from '@mui/material';
 import {
     selectUserFilter,
     setUserFilter,
@@ -99,7 +104,7 @@ const UsersTab = () => {
         refetch();
         dispatch(
             showMessage({
-                message: 'User added successfully!',
+                message: 'User removed successfully!',
                 variant: 'success'
             })
         );

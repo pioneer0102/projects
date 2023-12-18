@@ -194,30 +194,31 @@ const adminStoresSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getStoreById.fulfilled, (state, action) => {
-            state.store = action.payload;
-        });
-        builder.addCase(addStore.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
-        builder.addCase(updateStore.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
-        builder.addCase(updateStoreDetail.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
-        builder.addCase(addUserinStore.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
-        builder.addCase(updateUserinStore.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
-        builder.addCase(removeUserinStore.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
-        builder.addCase(updataPos.fulfilled, (state, action) => {
-            console.log(action.payload);
-        });
+        builder
+            .addCase(getStoreById.fulfilled, (state, action) => {
+                state.store = action.payload;
+            })
+            .addCase(addStore.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(updateStore.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(updateStoreDetail.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(addUserinStore.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(updateUserinStore.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(removeUserinStore.fulfilled, (state, action) => {
+                console.log(action.payload);
+            })
+            .addCase(updataPos.fulfilled, (state, action) => {
+                console.log(action.payload);
+            });
     }
 });
 

@@ -20,7 +20,7 @@ const UserHeader = () => {
     const handleChange = (type, value) => {
         dispatch(setFilter({ ...filter, page: 0, [type]: value }));
     };
-    const handleAdd = () => navigate('/settings/user-management/add/0');
+    const handleAdd = () => navigate('/settings/users/add/0');
 
     return (
         <>

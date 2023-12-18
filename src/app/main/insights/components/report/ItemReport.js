@@ -1,18 +1,13 @@
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import { Box } from '@mui/material';
-import ReactApexChart from 'react-apexcharts';
 import { useSelector } from 'react-redux';
-import { selectPieValue } from '../store/saleSlice';
+import ReactApexChart from 'react-apexcharts';
+import { selectItem } from '../../store/itemSlice';
+import { Box, Typography, Paper } from '@mui/material';
 
-const ChannelReport = () => {
-    const sale = useSelector(selectPieValue);
-    const total = sale.doorDash + sale.uber + sale.grubHub;
-    const doorDash = Math.floor((sale.doorDash / total) * 100);
-    const uber = Math.floor((sale.uber / total) * 100);
-    const grubHub = Math.floor((sale.grubHub / total) * 100);
-    const series = [doorDash, uber, grubHub];
-    const labels = ['DoorDash', 'Uber', 'GrubHub'];
+function ItemReport() {
+    const item = useSelector(selectItem);
+
+    const series = item;
+    const labels = ['Active', 'InActive'];
 
     const chartOptions = {
         chart: {
@@ -31,7 +26,7 @@ const ChannelReport = () => {
                 enabled: true
             }
         },
-        colors: ['#63B3ED', '#B794F4', '#4FD1C5'],
+        colors: ['#3182CE', '#63B3ED'],
         plotOptions: {
             pie: {
                 customScale: 0.9,
@@ -72,10 +67,10 @@ const ChannelReport = () => {
     };
 
     return (
-        <Paper className="flex flex-col flex-auto shadow overflow-hidden p-24 rounded-md">
+        <Paper className="flex flex-col flex-auto shadow overflow-hidden p-24">
             <div className="flex flex-col sm:flex-row items-start justify-between">
                 <Typography className="text-xl md:text-2xl font-semibold tracking-tight leading-6 truncate">
-                    Sales Overview
+                    Item Overview
                 </Typography>
             </div>
 
@@ -114,6 +109,6 @@ const ChannelReport = () => {
             </div>
         </Paper>
     );
-};
+}
 
-export default ChannelReport;
+export default ItemReport;

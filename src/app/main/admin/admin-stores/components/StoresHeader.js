@@ -1,15 +1,14 @@
-import Input from '@mui/material/Input';
 import { Link } from 'react-router-dom';
-import { Paper, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { Paper, Button, Input } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { selectFilter, setFilter } from '../store/adminStoresSlice';
 
 const breadCrumbs = [{ name: 'Stores', url: null }];
 
-const SearchFilter = () => {
+const StoresHeader = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     const filter = useSelector(selectFilter);
@@ -58,4 +57,4 @@ const SearchFilter = () => {
     );
 };
 
-export default SearchFilter;
+export default StoresHeader;

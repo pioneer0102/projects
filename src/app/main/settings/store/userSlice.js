@@ -85,19 +85,20 @@ const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(getUserById.fulfilled, (state, action) => {
-            state.user = action.payload;
-        });
-        builder.addCase(addUser.fulfilled, (state, action) => {
-            state.actionStatus = action.payload.success;
-        });
-        builder.addCase(updateUser.fulfilled, (state, action) => {
-            state.actionStatus = action.payload.success;
-        });
-        builder.addCase(deleteUser.fulfilled, (state, action) => {
-            userAdapter.removeOne(state, action.payload.id);
-            state.totalCount = state.totalCount - 1;
-        });
+        builder
+            .addCase(getUserById.fulfilled, (state, action) => {
+                state.user = action.payload;
+            })
+            .addCase(addUser.fulfilled, (state, action) => {
+                state.actionStatus = action.payload.success;
+            })
+            .addCase(updateUser.fulfilled, (state, action) => {
+                state.actionStatus = action.payload.success;
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                userAdapter.removeOne(state, action.payload.id);
+                state.totalCount = state.totalCount - 1;
+            });
     }
 });
 

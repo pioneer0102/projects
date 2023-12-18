@@ -53,14 +53,17 @@ const UserTable = () => {
     const allUsers = useSelector(selectAllUsers);
     const totalCount = useSelector(selectTotalCount);
 
-    const { isLoading, isError } = useQuery(['allUsers', filter], async () => {
-        try {
-            const result = await getAllUsers(filter);
-            dispatch(setUserEntityAdapter(result));
-        } catch (error) {
-            console.log(error);
+    const { isLoading, isError, refetch } = useQuery(
+        ['allUsers', filter],
+        async () => {
+            try {
+                const result = await getAllUsers(filter);
+                dispatch(setUserEntityAdapter(result));
+            } catch (error) {
+                console.log(error);
+            }
         }
-    });
+    );
 
     const handleChange = (type, value) => {
         if (type === 'rowsPerPage') {
@@ -78,11 +81,12 @@ const UserTable = () => {
     };
     const editUser = () => {
         setAnchorEl(null);
-        history.push(`/settings/user-management/edit/${selectedId}`);
+        history.push(`/settings/users/edit/${selectedId}`);
     };
     const removeUser = () => {
         dispatch(deleteUser(selectedId));
         setOpenDialog(false);
+        refetch();
     };
     const handleAction = (event, id) => {
         setAnchorEl(event.currentTarget);
@@ -348,7 +352,6 @@ const UserTable = () => {
                                                     variant="outline"
                                                     color="secondary"
                                                     onClick={handleCloseDialog}
-                                                    className="rounded-md"
                                                 >
                                                     <span>{t('cancel')}</span>
                                                 </Button>
@@ -356,7 +359,6 @@ const UserTable = () => {
                                                     variant="contained"
                                                     color="secondary"
                                                     onClick={removeUser}
-                                                    className="rounded-md"
                                                 >
                                                     <span>{t('ok')}</span>
                                                 </Button>

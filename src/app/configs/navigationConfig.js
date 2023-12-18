@@ -75,13 +75,13 @@ const navigationConfig = [
                 id: 'Settings.UserManagement',
                 title: 'User Management',
                 type: 'item',
-                url: 'settings/user-management'
+                url: 'settings/users'
             },
             {
                 id: 'Insights.PosSettings',
                 title: 'POS Settings',
                 type: 'item',
-                url: 'settings/pos-settings'
+                url: 'settings/pos'
             }
         ]
     },
