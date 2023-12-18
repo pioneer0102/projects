@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import UsersTab from './tabs/UsersTab';
+import PosTab from './tabs/PosTab';
 import TaxTab from './tabs/TaxTab';
 import DepartmentTab from './tabs/DepartmentTab';
 import IntegrationTab from './tabs/IntegrationTab';
@@ -41,6 +42,10 @@ const StoreTabs = () => {
                     />
                     <Tab
                         className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12 mb-8"
+                        label="POS"
+                    />
+                    <Tab
+                        className="text-14 font-semibold min-h-40 min-w-64 mx-4 px-12 mb-8"
                         label="Tax"
                     />
                     <Tab
@@ -63,10 +68,14 @@ const StoreTabs = () => {
                     </div>
 
                     <div className={tabValue !== 1 ? 'hidden' : ''}>
-                        <TaxTab />
+                        <PosTab />
                     </div>
 
                     <div className={tabValue !== 2 ? 'hidden' : ''}>
+                        <TaxTab />
+                    </div>
+
+                    <div className={tabValue !== 3 ? 'hidden' : ''}>
                         <DepartmentTab />
                     </div>
                     {storeDetail.integrations.map((integration, index) => {
@@ -74,7 +83,7 @@ const StoreTabs = () => {
                             <div
                                 key={index}
                                 className={
-                                    tabValue !== 3 + index ? 'hidden' : ''
+                                    tabValue !== 4 + index ? 'hidden' : ''
                                 }
                             >
                                 <IntegrationTab channel={integration} />
