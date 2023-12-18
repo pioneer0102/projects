@@ -1,76 +1,41 @@
 import history from '@history';
 import { useQuery } from 'react-query';
-import Paper from '@mui/material/Paper';
 import { useDispatch } from 'react-redux';
-import { Typography } from '@mui/material';
-import { TablePagination } from '@mui/material';
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
-import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
-import {
-    selectSearchText,
-    selectPrice,
-    selectCategory,
-    selectPageNumber,
-    selectPageSize,
-    setPagenumber,
-    setPagesize,
-    getInventory
-} from '../store/inventorySlice';
-import FuseLoading from '@fuse/core/FuseLoading';
-import { InventoryTableHeader } from 'src/app/model/InvManModel';
 import { useTranslation } from 'react-i18next';
+import FuseLoading from '@fuse/core/FuseLoading';
+import FuseSvgIcon from '@fuse/core/FuseSvgIcon';
+import { ItemsTableHeader } from 'src/app/model/ItemModel';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { Paper, Typography, TablePagination } from '@mui/material';
+import {
+    getItems,
+    setFilter,
+    selectFilter,
+    setItemAdapter,
+    selectAllItems,
+    selectTotalCount
+} from '../store/itemSlice';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 
-const InvManTable = () => {
+const ItemsTable = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
-    const searchText = useSelector(selectSearchText);
-    const price = useSelector(selectPrice);
-    const category = useSelector(selectCategory);
-    const pageNumber = useSelector(selectPageNumber);
-    const pageSize = useSelector(selectPageSize);
 
-    const searchData = {
-        searchText: searchText,
-        price: price,
-        category: category,
-        pageNumber: pageNumber,
-        pageSize: pageSize
-    };
+    const filter = useSelector(selectFilter);
+    const items = useSelector(selectAllItems);
+    const totalCount = useSelector(selectTotalCount);
 
-    const {
-        data: inventory,
-        isLoading,
-        isError
-    } = useQuery(['inventoryList', searchData], () => getInventory(searchData));
-    const filterSize = inventory && inventory.filterSize;
+    const { isLoading, isError } = useQuery(['itemList', filter], async () => {
+        try {
+            const result = await getItems(filter);
+            dispatch(setItemAdapter(result));
+        } catch (error) {
+            console.log(error);
+        }
+    });
 
-    const showDetail = (id) => history.push(`/item-management/edit/${id}`);
-
-    if (isLoading) {
-        return <FuseLoading />;
-    }
-
-    if (isError) {
-        return (
-            <div className="flex flex-1 items-center justify-center h-full">
-                <Typography color="text.secondary" variant="h5">
-                    {t('orders.noData')}
-                </Typography>
-            </div>
-        );
-    }
-
-    if (inventory.pagedData.length === 0) {
-        return (
-            <div className="flex flex-1 items-center justify-center h-full">
-                <Typography color="text.secondary" variant="h5">
-                    {t('orders.noData')}
-                </Typography>
-            </div>
-        );
-    }
+    const showDetail = (id) => history.push(`/items/${id}/edit`);
 
     return (
         <>
@@ -78,7 +43,7 @@ const InvManTable = () => {
                 <Table>
                     <Thead className="border-b-2">
                         <Tr>
-                            {InventoryTableHeader.map((item, index) => (
+                            {ItemsTableHeader.map((item, index) => (
                                 <Th key={index} align={item.align}>
                                     <Typography
                                         color="text.secondary"
@@ -91,9 +56,11 @@ const InvManTable = () => {
                         </Tr>
                     </Thead>
                     <Tbody>
-                        {inventory.pagedData.map((item, index) => {
-                            return (
-                                inventory && (
+                        {!isLoading &&
+                            !isError &&
+                            items.length > 0 &&
+                            items.map((item, index) => {
+                                return (
                                     <Tr
                                         key={index}
                                         role="button"
@@ -109,7 +76,7 @@ const InvManTable = () => {
                                                 <img
                                                     className="w-64 h-64 object-cover"
                                                     src={item.image}
-                                                    alt={category}
+                                                    alt={filter.category}
                                                 />
                                             </Typography>
                                         </Td>
@@ -168,40 +135,62 @@ const InvManTable = () => {
                                             </Typography>
                                         </Td>
                                     </Tr>
-                                )
-                            );
-                        })}
+                                );
+                            })}
                     </Tbody>
                 </Table>
-                <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
-                    <Typography
-                        className="text-16 text-center font-medium"
-                        color="text.secondary"
-                    >
-                        {t('orders.total')} : {filterSize}
-                    </Typography>
-                    <TablePagination
-                        className="flex-1 overflow-scroll mt-8"
-                        component="div"
-                        count={filterSize}
-                        rowsPerPage={pageSize}
-                        page={pageNumber}
-                        backIconButtonProps={{ 'aria-label': 'Previous Page' }}
-                        nextIconButtonProps={{ 'aria-label': 'Next Page' }}
-                        onPageChange={(event, newPage) =>
-                            dispatch(setPagenumber(parseInt(newPage, 10)))
-                        }
-                        onRowsPerPageChange={(event) => {
-                            dispatch(
-                                setPagesize(parseInt(event.target.value, 10))
-                            );
-                            dispatch(setPagenumber(0));
-                        }}
-                    />
-                </div>
+                {items.length > 0 && (
+                    <div className="flex md:flex-row flex-col items-center border-t-2 mt-16">
+                        <Typography
+                            className="text-16 text-center font-medium"
+                            color="text.secondary"
+                        >
+                            {t('orders.total')} : {totalCount}
+                        </Typography>
+                        <TablePagination
+                            className="flex-1 overflow-scroll mt-8"
+                            component="div"
+                            count={totalCount}
+                            rowsPerPage={filter.pageSize}
+                            page={filter.pageNumber}
+                            backIconButtonProps={{
+                                'aria-label': 'Previous Page'
+                            }}
+                            nextIconButtonProps={{ 'aria-label': 'Next Page' }}
+                            onPageChange={(event, newPage) =>
+                                dispatch(
+                                    setFilter({
+                                        ...filter,
+                                        pageNumber: newPage
+                                    })
+                                )
+                            }
+                            onRowsPerPageChange={(event) => {
+                                dispatch(
+                                    setFilter({
+                                        ...filter,
+                                        pageNumber: 0,
+                                        pageSize: event.target.value
+                                    })
+                                );
+                            }}
+                        />
+                    </div>
+                )}
+                {isLoading ? (
+                    <FuseLoading />
+                ) : isError || items.length === 0 ? (
+                    <div className="flex flex-1 items-center justify-center h-full py-24">
+                        <Typography color="text.secondary" variant="h5">
+                            {t('noData')}
+                        </Typography>
+                    </div>
+                ) : (
+                    <></>
+                )}
             </Paper>
         </>
     );
 };
 
-export default InvManTable;
+export default ItemsTable;

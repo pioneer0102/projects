@@ -31,7 +31,7 @@ const navigationConfig = [
         type: 'item',
         icon: 'heroicons-outline:shopping-cart',
         auth: authRoles.adminAndUser,
-        url: 'item-management'
+        url: 'items'
     },
     {
         id: 'Orders',

@@ -7,8 +7,8 @@ const userDB = mockApi.database.examples.user.value;
 mock.onPost('/admin/api/getUsers').reply(({ data }) => {
     const { searchText, rowsPerPage, page } = JSON.parse(data);
 
-    const pagesize = parseInt(rowsPerPage);
-    const pagenumber = parseInt(page);
+    const pageSize = parseInt(rowsPerPage);
+    const pageNumber = parseInt(page);
 
     const filteredData = userDB.filter((item) => {
         return (
@@ -17,9 +17,10 @@ mock.onPost('/admin/api/getUsers').reply(({ data }) => {
         );
     });
 
-    const startIndex = pagenumber * pagesize || 0;
-    const endIndex = pagenumber * pagesize + pagesize || filteredData.length;
+    const startIndex = pageNumber * pageSize || 0;
+    const endIndex = pageNumber * pageSize + pageSize || filteredData.length;
     const pagedData = filteredData.slice(startIndex, endIndex);
+
     const result = {
         pagedData: pagedData,
         filterSize: filteredData.length

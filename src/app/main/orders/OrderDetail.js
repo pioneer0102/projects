@@ -53,7 +53,7 @@ const breadCrumbs = [
 const OrderDetail = () => {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
-        history.push('/item-management');
+        history.push('/items');
         return;
     }
     const dispatch = useDispatch();

@@ -10,13 +10,16 @@ import { userRole } from 'src/app/model/UserModel';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { showMessage } from 'app/store/fuse/messageSlice';
+import Breadcrumb from 'app/shared-components/Breadcrumbs';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import {
-    selectUser,
     setUser,
-    getUserById,
     addUser,
-    updateUser
+    setFilter,
+    updateUser,
+    selectUser,
+    getUserById,
+    selectFilter
 } from './store/userSlice';
 import {
     Paper,
@@ -27,8 +30,6 @@ import {
     IconButton,
     InputAdornment
 } from '@mui/material';
-
-import Breadcrumb from 'app/shared-components/Breadcrumbs';
 
 const schema = yup.object().shape({
     name: yup.string().required('You must enter a Name'),
@@ -43,6 +44,7 @@ const UserDetail = () => {
     const { t } = useTranslation();
     const routeParams = useParams();
     const user = useSelector(selectUser);
+    const filter = useSelector(selectFilter);
 
     const [showUpload, setShowUpload] = useState(false);
     const [breadCrumbs, setBreadCrumbs] = useState([]);
@@ -65,6 +67,7 @@ const UserDetail = () => {
 
         dispatch(action(data));
         dispatch(showMessage({ message: successMessage, variant: 'success' }));
+        dispatch(setFilter({ ...filter, page: 0 }));
         history.push('/admin/users');
     };
 

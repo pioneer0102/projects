@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 const UserManagement = () => {
     const user = useSelector(selectUser);
     if (user.role === 'admin') {
-        history.push('/item-management');
+        history.push('/items');
         return;
     }
     return (

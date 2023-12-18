@@ -1,7 +1,7 @@
 import './api/auth-api';
 import './api/notifications-api';
 import './api/orders-api';
-import './api/inventory-api';
+import './api/item-api';
 import './api/insights/channel-api';
 import './api/insights/category-api';
 import './api/insights/sale-api';

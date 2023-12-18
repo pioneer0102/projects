@@ -8,7 +8,7 @@ const PriceRange = [
 
 const Category = ['Clothes', 'Accessory', 'Handphone', 'Laptop'];
 
-const InventoryTableHeader = [
+const ItemsTableHeader = [
     {
         id: 'image',
         align: 'left',
@@ -41,4 +41,4 @@ const InventoryTableHeader = [
     }
 ];
 
-export { PriceRange, Category, InventoryTableHeader };
+export { PriceRange, Category, ItemsTableHeader };
